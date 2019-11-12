@@ -3,7 +3,7 @@
  */
 // import device from './device';
 // import { stringify } from '@/utils/base';
-import { loadJs } from './dLoad'
+import { loadJs } from '@dwdjs/utils'
 // import axios from 'axios';
 
 // import fetch from '@dwdjs/utils';
