@@ -82,12 +82,28 @@ $t = .1s;
     //     transform: translate3d(0, -60px, 0);
     //   }
     // }
+
+    // https://segmentfault.com/a/1190000008013566
+    // stylus 只提供了一个for/in进行循环:
+    for i in 1 2 3 4 5 6 7 8 9 {
+      &:nth-of-type({i}) {
+        z-index: 1;
+        transition-delay: i*$t;
+        transform: translate3d(0, -60px, 0);
+      }
+    }
   }
   &.active {
     .share-dropdown-menu-wrapper {
       z-index: 1;
     }
     .share-dropdown-menu-item {
+      for i in 1 2 3 4 5 6 7 8 9 {
+         &:nth-of-type({i}) {
+          transition-delay: (9 - i)*$t;
+          transform: translate3d(0, (i - 1)*60px, 0);
+        }
+      }
       // @for $i from 1 through $n {
       //   &:nth-of-type(#{$i}) {
       //    transition-delay: ($n - $i)*$t;

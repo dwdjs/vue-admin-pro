@@ -265,7 +265,7 @@ export default {
 </style>
 
 <style lang="stylus">
-//reset element css of el-icon-close
+// reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
     .el-icon-close {

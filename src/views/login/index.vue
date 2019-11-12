@@ -146,7 +146,7 @@ export default {
           }
           console.log('login')
           this.$store
-            .dispatch('Login', userInfo)
+            .dispatch('user/Login', userInfo)
             .then(() => {
               this.loading = false
               debugger

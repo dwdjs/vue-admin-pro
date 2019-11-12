@@ -112,7 +112,7 @@ export default {
       })
     },
     closeAllTags() {
-      this.$store.dispatch('delAllViews')
+      this.$store.dispatch('tagsView/delAllViews')
       this.$router.push('/')
     },
     openMenu(tag, e) {
