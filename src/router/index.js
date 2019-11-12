@@ -10,7 +10,7 @@ import {
 const _import =
   process.env.NODE_ENV === 'production'
     ? file => () =>
-        import(/* webpackChunkName: "x-[index]" */ '@/views/' + file + '.vue')
+        import(/* webpackChunkName: "[request]" */ '@/views/' + file + '.vue')
     : file => require('@/views/' + file + '.vue').default
 
 // in development-env not use lazy-loading,

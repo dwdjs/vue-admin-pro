@@ -39,22 +39,24 @@ module.exports = {
     if (!__DEV__) {
       // 为生产环境修改配置...
       // plugins.push(new InlineManifestWebpackPlugin())
-      if (qnConfig.domain) {
-        plugins.push(
-          // 七牛
-          new QiniuPlugin({
-            prefix: qnConfig.prefix,
-            ACCESS_KEY: qnConfig.ak,
-            SECRET_KEY: qnConfig.sk,
-            bucket: qnConfig.bucket,
-            path: qnConfig.path,
-          })
-        )
-      }
-      config.plugins = [{
-        ...config.plugins,
-        ...plugins,
-      }]
+
+      // 使用七牛报错
+      // if (qnConfig.domain) {
+      //   plugins.push(
+      //     // 七牛
+      //     new QiniuPlugin({
+      //       prefix: qnConfig.prefix,
+      //       ACCESS_KEY: qnConfig.ak,
+      //       SECRET_KEY: qnConfig.sk,
+      //       bucket: qnConfig.bucket,
+      //       path: qnConfig.path,
+      //     })
+      //   )
+      // }
+      // config.plugins = [{
+      //   ...plugins,
+      //   ...config.plugins,
+      // }]
     }
   },
   chainWebpack: config => {
@@ -153,10 +155,19 @@ module.exports = {
   // dll 方案, 使用 vue-cli-plugin-dll
   pluginOptions: {
     dll: {
-      entry: ['vue', 'vue-router', 'vuex', 'axios', 'element-ui', 'nprogress'],
+      // 单入口
+      // entry: ['vue', 'vue-router', 'vuex', 'axios', 'element-ui', 'nprogress'],
+      // 多入口
+      entry: {
+        vue: ['vue', 'vue-router', 'vuex', 'axios', 'vue-lazyload'], // core-js
+        ui: ['element-ui', 'nprogress'],
+        xlsx: ['xlsx'],
+        echarts: ['echarts'],
+        mockjs: ['mockjs'],
+      },
       output: path.join(__dirname, './public/dll'),
       // 只在生产环境加入 webpack.DllReferencePlugin 插件
-      open: __PROD__,
+      open: true, // __PROD__,
       inject: true,
     },
   },
