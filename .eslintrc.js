@@ -1,79 +1,93 @@
 module.exports = {
   root: true,
+  parser: 'vue-eslint-parser',
   parserOptions: {
     parser: 'babel-eslint',
+    sourceType: 'module',
+    ecmaVersion: 2019,
   },
   env: {
     node: true,
-    browser: true,
   },
-  // extending airbnb config and config derived from eslint-config-prettier
-  // https://www.npmjs.com/package/@vue/eslint-config-prettier
-  // 检测rules 冲突: eslint --print-config . | eslint-config-prettier-check
-  // extends: ['plugin:vue/essential', '@vue/prettier'],
-  extends: ['plugin:vue/essential'],
-  // plugins: ['prettier', 'vue'],
-  // plugins: ['prettier', 'react'],
+  extends: [
+    'plugin:vue/recommended',
+  ],
+  plugins: [
+    'import',
+    'vue',
+  ],
   globals: {
     window: false,
+    document: false,
     expect: true,
     sinon: true,
     Blob: false,
     URL: false,
     isNaN: false,
   },
-  // https://cn.eslint.org/docs/4.0.0/rules/
+  overrides: [
+    {
+      files: ['**/__tests__/*.{j,t}s?(x)'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
   rules: {
-    // prettier.config.js or .prettierrc.js
-    // https://prettier.io/docs/en/options.html
-    // https://segmentfault.com/a/1190000012909159
-    // 'prettier/prettier': [
+    // https://yepbug.com/2018/08/28/what-is-the-benefit-of-prefer-default-export/
+    // https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/README.md
+    'import/prefer-default-export': 'off', // 输出只有一个变量时使用 export default
+    // 因为 mac 系统默认不区分大小写, 所以建议使用全小写, 包含文件名 文件夹名 组件名(html 特性也不区分大小写)
+    'vue/name-property-casing': ['error', 'PascalCase'], // 'PascalCase' |'kebab-case'
+    'vue/max-attributes-per-line': ['error', {
+      'singleline': 4,
+      'multiline': {
+        'max': 1,
+        'allowFirstLine': false,
+      },
+    }],
+    'vue/multiline-html-element-content-newline': 'off',
+    'vue/no-v-html': 'off',
+    'vue/no-template-shadow': 'off', // temp
+    'vue/order-in-components': 'off', // temp
+    'vue/require-default-prop': 'off',
+    // 'vue/no-unused-components': '1',
+    'vue/singleline-html-element-content-newline': 'off',
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'ignore',
+      },
+    ],
+    // 'max-len': [
     //   'error',
     //   {
-    //     // printWidth: 100,
-    //     singleQuote: true,
-    //     jsxBracketSameLine: true, // 是否多行JSX元素最后一行的末尾添加 > or 新起一行
-    //     trailingComma: 'es5', // none es5 or all
-    //     // arrowParens: 'avoid', // avoid or always 箭头函数是否总是加圆括号
-    //     proseWrap: 'always', // 当超出print width就折行
-    //     // parser: 'flow',
-    //     // semi: false,
-    //     // semicolons: true,
-    //     // bracketSpacing: true, // 花括号内部前后有空格
+    //     code: 120,
+    //     ignoreUrls: true,
+    //     ignorePattern: true,
     //   },
     // ],
-    // 'comma-dangle': [
-    //   'error',
-    //   {
-    //     arrays: 'always-multiline',
-    //     objects: 'always-multiline',
-    //     imports: 'always-multiline',
-    //     exports: 'always-multiline',
-    //     functions: 'ignore',
-    //   },
-    // ],
-    // "max-len": ["error", {
-    //   "code": 120,
-    //   "ignoreUrls": true,
-    //   "ignorePattern": true,
-    // }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-else-return': 'off',
     'no-mixed-operators': 'off',
-    // 'no-multi-spaces': [
-    //   'error',
-    //   {
-    //     ignoreEOLComments: true,
-    //   },
-    // ],
-    // 'no-multiple-empty-lines': [
-    //   'error',
-    //   {
-    //     max: 2,
-    //     maxEOF: 1,
-    //   },
-    // ],
+    'no-multi-spaces': [
+      'error',
+      {
+        ignoreEOLComments: true,
+      },
+    ],
+    'no-multiple-empty-lines': [
+      'error',
+      {
+        max: 2,
+        maxEOF: 1,
+      },
+    ],
     'no-nested-ternary': 'off',
     'no-param-reassign': 'off',
     'no-plusplus': [
@@ -99,6 +113,7 @@ module.exports = {
       },
     ],
     'no-trailing-spaces': 'off',
+    'no-underscore-dangle': 'off',
     'no-unused-expressions': [
       'error',
       {
@@ -107,31 +122,37 @@ module.exports = {
         allowTaggedTemplates: true,
       },
     ],
-    'no-unused-vars': [
-      'error',
-      {
-        vars: 'all',
-        args: 'none',
-        caughtErrors: 'none',
-        ignoreRestSiblings: false,
-      },
-    ],
+    'no-unused-vars': 'off',
+    // 'no-unused-vars': [
+    //   'error',
+    //   {
+    //     vars: 'all',
+    //     // args: 'after-used',
+    //     args: 'none',
+    //     caughtErrors: 'none',
+    //     ignoreRestSiblings: true,
+    //   },
+    // ],
     'no-use-before-define': 'off',
     'no-useless-escape': 'off',
     'prefer-template': 'off',
     'prefer-arrow-callback': 'off',
-    // "quotes": ["error", "single", {
-    //   "avoidEscape": true,
-    //   "allowTemplateLiterals": true,
-    // }],
+    'quotes': ['error', 'single', {
+      'avoidEscape': true,
+      'allowTemplateLiterals': true,
+    }],
     'require-yield': [1],
-    // 'space-before-function-paren': [
-    //   'error',
-    //   {
-    //     anonymous: 'always',
-    //     named: 'ignore',
-    //     asyncArrow: 'ignore',
-    //   },
-    // ],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'ignore',
+        asyncArrow: 'ignore',
+      },
+    ],
+    semi: ['error', 'never'],
+    'func-names': 'off',
+    'consistent-return': 'off',
   },
-};
+
+}

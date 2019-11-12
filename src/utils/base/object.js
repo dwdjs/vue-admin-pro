@@ -6,7 +6,7 @@
  * @returns
  */
 
-import { isObject } from './is';
+import { isObject } from './is'
 
 /**
  * 获取对象值
@@ -16,17 +16,17 @@ import { isObject } from './is';
  * @returns Array
  */
 export function values(obj = []) {
-  let tempArray = [];
+  let tempArray = []
   if (isObject(obj)) {
     for (let key in obj) {
-      tempArray.push(obj[key]);
+      tempArray.push(obj[key])
     }
   }
-  return tempArray;
+  return tempArray
 }
 
 const objectUtil = {
   values,
-};
+}
 
-export default objectUtil;
+export default objectUtil

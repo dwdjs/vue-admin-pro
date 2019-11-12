@@ -1,11 +1,11 @@
-import './waves.css';
+import './waves.css'
 
 export default {
   bind(el, binding) {
     el.addEventListener(
       'click',
       e => {
-        const customOpts = Object.assign({}, binding.value);
+        const customOpts = Object.assign({}, binding.value)
         const opts = Object.assign(
           {
             ele: el, // 波纹作用元素
@@ -14,50 +14,50 @@ export default {
             color: 'rgba(0, 0, 0, 0.15)', // 波纹颜色
           },
           customOpts
-        );
-        const target = opts.ele;
+        )
+        const target = opts.ele
         if (target) {
-          target.style.position = 'relative';
-          target.style.overflow = 'hidden';
-          const rect = target.getBoundingClientRect();
-          let ripple = target.querySelector('.waves-ripple');
+          target.style.position = 'relative'
+          target.style.overflow = 'hidden'
+          const rect = target.getBoundingClientRect()
+          let ripple = target.querySelector('.waves-ripple')
           if (!ripple) {
-            ripple = document.createElement('span');
-            ripple.className = 'waves-ripple';
-            const width = Math.max(rect.width, rect.height) + 'px';
-            ripple.style.height = width;
-            ripple.style.height = width;
-            target.appendChild(ripple);
+            ripple = document.createElement('span')
+            ripple.className = 'waves-ripple'
+            const width = Math.max(rect.width, rect.height) + 'px'
+            ripple.style.height = width
+            ripple.style.height = width
+            target.appendChild(ripple)
           } else {
-            ripple.className = 'waves-ripple';
+            ripple.className = 'waves-ripple'
           }
           switch (opts.type) {
             case 'center':
               ripple.style.top =
-                rect.height / 2 - ripple.offsetHeight / 2 + 'px';
+                rect.height / 2 - ripple.offsetHeight / 2 + 'px'
               ripple.style.left =
-                rect.width / 2 - ripple.offsetWidth / 2 + 'px';
-              break;
+                rect.width / 2 - ripple.offsetWidth / 2 + 'px'
+              break
             default:
               ripple.style.top =
                 e.pageY -
                 rect.top -
                 ripple.offsetHeight / 2 -
                 document.body.scrollTop +
-                'px';
+                'px'
               ripple.style.left =
                 e.pageX -
                 rect.left -
                 ripple.offsetWidth / 2 -
                 document.body.scrollLeft +
-                'px';
+                'px'
           }
-          ripple.style.backgroundColor = opts.color;
-          ripple.className = 'waves-ripple z-active';
-          return false;
+          ripple.style.backgroundColor = opts.color
+          ripple.className = 'waves-ripple z-active'
+          return false
         }
       },
       false
-    );
+    )
   },
-};
+}

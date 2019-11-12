@@ -1,9 +1,9 @@
-export * from './is';
+export * from './is'
 
-export * from './string';
+export * from './string'
 
-export * from './array';
+export * from './array'
 
-export * from './date';
+export * from './date'
 
-export * from './object';
+export * from './object'

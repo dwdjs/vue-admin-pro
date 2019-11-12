@@ -5,38 +5,38 @@
       <el-form :model="dataForm" :inline="true">
         <el-form-item label="">
           <el-input
+            v-model="dataForm.keywords"
             placeholder="搜索关键字"
             width="200"
             class="filter-item"
-            @keyup.enter.native="handleFilter"
-            v-model="dataForm.keywords"
             clearable
-          ></el-input>
+            @keyup.enter.native="handleFilter"
+          />
         </el-form-item>
         <el-button
+          v-waves
           class="filter-item"
           type="primary"
-          v-waves
           icon="el-icon-search"
           @click="handleFilter"
-          >搜索</el-button
+        >搜索</el-button
         >
         <el-button
           class="filter-item"
           style="margin-left: 10px;"
-          @click="handleAddOrUpdate()"
           type="success"
           icon="el-icon-edit"
-          >新增</el-button
+          @click="handleAddOrUpdate()"
+        >新增</el-button
         >
         <!-- <el-button type="danger" @click="handleDelete()" :disabled="dataListSelections.length <= 0">批量删除</el-button> -->
       </el-form>
     </div>
 
     <el-table
+      v-loading="dataListLoading"
       :key="tableKey"
       :data="dataList"
-      v-loading="dataListLoading"
       element-loading-text="给我一点时间"
       border
       highlight-current-row
@@ -54,30 +54,26 @@
         align="center"
         width="80"
         label="ID"
-      >
-      </el-table-column>
+      />
       <table-tree-column
         prop="name"
         header-align="center"
-        treeKey="id"
+        tree-key="id"
         width="180"
         label="部门名称"
-      >
-      </table-tree-column>
+      />
       <el-table-column
         prop="address"
         header-align="center"
         width="200"
         label="部门地址"
-      >
-      </el-table-column>
+      />
       <el-table-column
         prop="url"
         header-align="center"
         width="200"
         label="部门网址"
-      >
-      </el-table-column>
+      />
       <!-- <el-table-column
         prop="parentName"
         header-align="center"
@@ -101,8 +97,7 @@
         align="center"
         width="80"
         label="排序"
-      >
-      </el-table-column>
+      />
       <el-table-column
         fixed="right"
         header-align="center"
@@ -115,13 +110,13 @@
             type="primary"
             size="mini"
             @click="handleAddOrUpdate(scope.row)"
-            >编辑</el-button
+          >编辑</el-button
           >
           <el-button
             type="danger"
             size="mini"
             @click="handleDelete(scope.row.id)"
-            >删除</el-button
+          >删除</el-button
           >
         </template>
       </el-table-column>
@@ -145,28 +140,27 @@
       v-if="addOrUpdateVisible"
       ref="addOrUpdate"
       @refreshDataList="getDataList"
-    >
-    </add-or-update>
+    />
   </div>
 </template>
 
 <script>
-import api from '@/api';
-// import { copy } from 'kit-qs';
-import waves from '@/directive/waves'; // 水波纹指令
-import { treeDataTranslate } from '@/utils';
-import TableTreeColumn from '@/components/TableTreeColumn';
-import AddOrUpdate from './dept-add-or-update';
+import api from '@/api'
+// import { copy } from '@dwdjs/utils';
+import waves from '@/directive/waves' // 水波纹指令
+import { treeDataTranslate } from '@/utils'
+import TableTreeColumn from '@/components/TableTreeColumn'
+import AddOrUpdate from './dept-add-or-update'
 
 const modelApi = {
   add: api.addDept,
   del: api.delDept,
   edit: api.updateDept,
   list: api.getDept,
-};
+}
 
 export default {
-  name: 'org_dept',
+  name: 'OrgDept',
   components: {
     [TableTreeColumn.name]: TableTreeColumn,
     AddOrUpdate,
@@ -194,17 +188,17 @@ export default {
       // },
       // // 要展开的行，数值的元素是row的key值
       // expands: [1],
-    };
+    }
   },
   filters: {},
   computed: {},
   created() {
-    this.getDataList();
+    this.getDataList()
   },
   mounted() {},
   methods: {
     getDataList() {
-      this.dataListLoading = true;
+      this.dataListLoading = true
       modelApi.list(
         {
           ...this.dataForm,
@@ -212,8 +206,8 @@ export default {
           // size: this.pageLimit,
         },
         res => {
-          this.dataListLoading = false;
-          this.dataList = treeDataTranslate(res.data);
+          this.dataListLoading = false
+          this.dataList = treeDataTranslate(res.data)
 
           // 在这里你想初始化的时候展开哪一行都可以了
           // debugger
@@ -221,37 +215,37 @@ export default {
           // this.totalCount = res.data.total
         },
         err => {}
-      );
+      )
     },
     handleFilter() {
       // this.pageIndex = 1
-      this.getDataList();
+      this.getDataList()
     },
     handleSizeChange(val) {
       // this.pageLimit = val
-      this.getDataList();
+      this.getDataList()
     },
     handleCurrentChange(val) {
       // this.pageIndex = val
-      this.getDataList();
+      this.getDataList()
     },
     // 多选
     handleSelectionChange(val) {
-      this.dataListSelections = val;
+      this.dataListSelections = val
     },
     /* eslint dot-notation: 0 */
     handleAddOrUpdate(id) {
-      this.addOrUpdateVisible = true;
+      this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(id);
-      });
+        this.$refs.addOrUpdate.init(id)
+      })
     },
     handleDelete(id) {
       // 删除是危险动作，至少要气泡提示
       // const ids = id ? [id] : this.dataListSelections.map((item) => {
       //   return item.id
       // });
-      const ids = id ? [id] : [];
+      const ids = id ? [id] : []
       modelApi.del(
         {
           ids,
@@ -262,9 +256,9 @@ export default {
             message: '删除成功',
             type: 'success',
             duration: 2000,
-          });
+          })
 
-          this.getDataList();
+          this.getDataList()
           // const index = this.dataList.indexOf({
 
           // })
@@ -274,12 +268,12 @@ export default {
           this.$message({
             message: '删除失败',
             type: 'danger',
-          });
+          })
         }
-      );
+      )
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped></style>

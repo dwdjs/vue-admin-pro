@@ -1,12 +1,12 @@
 <template>
-  <div :class="className" :style="{ height: height, width: width }"></div>
+  <div :class="className" :style="{ height: height, width: width }"/>
 </template>
 
 <script>
-import echarts from 'echarts';
-import { debounce } from '@/utils';
+import echarts from 'echarts'
+import { debounce } from '@/utils'
 
-require('echarts/theme/macarons'); // echarts theme
+require('echarts/theme/macarons') // echarts theme
 
 export default {
   props: {
@@ -33,43 +33,43 @@ export default {
   data() {
     return {
       chart: null,
-    };
+    }
   },
   /* eslint no-underscore-dangle: 0 */
   mounted() {
-    this.initChart();
+    this.initChart()
     if (this.autoResize) {
       this.__resizeHanlder = debounce(() => {
         if (this.chart) {
-          this.chart.resize();
+          this.chart.resize()
         }
-      }, 100);
-      window.addEventListener('resize', this.__resizeHanlder);
+      }, 100)
+      window.addEventListener('resize', this.__resizeHanlder)
     }
 
     // 监听侧边栏的变化
-    const sidebarElm = document.getElementsByClassName('sidebar-container')[0];
-    sidebarElm.addEventListener('transitionend', this.__resizeHanlder);
+    const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
+    sidebarElm.addEventListener('transitionend', this.__resizeHanlder)
   },
   beforeDestroy() {
     if (!this.chart) {
-      return;
+      return
     }
     if (this.autoResize) {
-      window.removeEventListener('resize', this.__resizeHanlder);
+      window.removeEventListener('resize', this.__resizeHanlder)
     }
 
-    const sidebarElm = document.getElementsByClassName('sidebar-container')[0];
-    sidebarElm.removeEventListener('transitionend', this.__resizeHanlder);
+    const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
+    sidebarElm.removeEventListener('transitionend', this.__resizeHanlder)
 
-    this.chart.dispose();
-    this.chart = null;
+    this.chart.dispose()
+    this.chart = null
   },
   watch: {
     chartData: {
       deep: true,
       handler(val) {
-        this.setOptions(val);
+        this.setOptions(val)
       },
     },
   },
@@ -144,12 +144,12 @@ export default {
             animationEasing: 'quadraticOut',
           },
         ],
-      });
+      })
     },
     initChart() {
-      this.chart = echarts.init(this.$el, 'macarons');
-      this.setOptions(this.chartData);
+      this.chart = echarts.init(this.$el, 'macarons')
+      this.setOptions(this.chartData)
     },
   },
-};
+}
 </script>

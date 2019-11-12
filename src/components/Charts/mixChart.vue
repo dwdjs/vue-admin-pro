@@ -3,11 +3,11 @@
     :class="className"
     :id="id"
     :style="{ height: height, width: width }"
-  ></div>
+  />
 </template>
 
 <script>
-import echarts from 'echarts';
+import echarts from 'echarts'
 
 export default {
   props: {
@@ -31,29 +31,29 @@ export default {
   data() {
     return {
       chart: null,
-    };
+    }
   },
   mounted() {
-    this.initChart();
-    this.chart = null;
+    this.initChart()
+    this.chart = null
   },
   beforeDestroy() {
     if (!this.chart) {
-      return;
+      return
     }
-    this.chart.dispose();
-    this.chart = null;
+    this.chart.dispose()
+    this.chart = null
   },
   methods: {
     initChart() {
-      this.chart = echarts.init(document.getElementById(this.id));
-      const xData = (function() {
-        const data = [];
+      this.chart = echarts.init(document.getElementById(this.id))
+      const xData = (function () {
+        const data = []
         for (let i = 1; i < 13; i++) {
-          data.push(i + 'month');
+          data.push(i + 'month')
         }
-        return data;
-      })();
+        return data
+      })()
       this.chart.setOption({
         backgroundColor: '#344b58',
         title: {
@@ -183,7 +183,7 @@ export default {
                   },
                   position: 'insideTop',
                   formatter(p) {
-                    return p.value > 0 ? p.value : '';
+                    return p.value > 0 ? p.value : ''
                   },
                 },
               },
@@ -216,7 +216,7 @@ export default {
                   show: true,
                   position: 'top',
                   formatter(p) {
-                    return p.value > 0 ? p.value : '';
+                    return p.value > 0 ? p.value : ''
                   },
                 },
               },
@@ -250,7 +250,7 @@ export default {
                   show: true,
                   position: 'top',
                   formatter(p) {
-                    return p.value > 0 ? p.value : '';
+                    return p.value > 0 ? p.value : ''
                   },
                 },
               },
@@ -271,8 +271,8 @@ export default {
             ],
           },
         ],
-      });
+      })
     },
   },
-};
+}
 </script>

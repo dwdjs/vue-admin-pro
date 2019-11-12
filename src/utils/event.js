@@ -1,20 +1,20 @@
 // import { isServer } from './';
 
-const isServer = false;
+const isServer = false
 /* eslint import/no-mutable-exports: 0 */
-export let supportsPassive = false;
+export let supportsPassive = false
 
 if (!isServer) {
   try {
-    const opts = {};
+    const opts = {}
     Object.defineProperty(opts, 'passive', {
       /* eslint getter-return: 0 */
       get() {
         /* istanbul ignore next */
-        supportsPassive = true;
+        supportsPassive = true
       },
-    });
-    window.addEventListener('test-passive', null, opts);
+    })
+    window.addEventListener('test-passive', null, opts)
   } catch (e) {
     // do nothing
   }
@@ -26,9 +26,9 @@ export function on(target, event, handler, passive = false) {
       event,
       handler,
       supportsPassive ? { capture: false, passive } : false
-    );
+    )
 }
 
 export function off(target, event, handler) {
-  !isServer && target.removeEventListener(event, handler);
+  !isServer && target.removeEventListener(event, handler)
 }

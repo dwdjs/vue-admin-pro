@@ -1,32 +1,34 @@
 <template>
   <div class="json-editor">
-    <textarea ref="textarea"></textarea>
+    <textarea ref="textarea"/>
   </div>
 </template>
 
 <script>
-import CodeMirror from 'codemirror';
-import 'codemirror/addon/lint/lint.css';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/rubyblue.css';
-require('script-loader!jsonlint');
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/addon/lint/lint';
-import 'codemirror/addon/lint/json-lint';
+import CodeMirror from 'codemirror'
+import 'codemirror/addon/lint/lint.css'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/rubyblue.css'
+require('script-loader!jsonlint')
+import 'codemirror/mode/javascript/javascript'
+import 'codemirror/addon/lint/lint'
+import 'codemirror/addon/lint/json-lint'
 
 export default {
-  name: 'jsonEditor',
+  name: 'JsonEditor',
   data() {
     return {
       jsonEditor: false,
-    };
+    }
   },
-  props: ['value'],
+  props: {
+    value: String,
+  },
   watch: {
     value(value) {
-      const editor_value = this.jsonEditor.getValue();
+      const editor_value = this.jsonEditor.getValue()
       if (value !== editor_value) {
-        this.jsonEditor.setValue(JSON.stringify(this.value, null, 2));
+        this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
       }
     },
   },
@@ -37,20 +39,20 @@ export default {
       gutters: ['CodeMirror-lint-markers'],
       theme: 'rubyblue',
       lint: true,
-    });
+    })
 
-    this.jsonEditor.setValue(JSON.stringify(this.value, null, 2));
+    this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
     this.jsonEditor.on('change', cm => {
-      this.$emit('changed', cm.getValue());
-      this.$emit('input', cm.getValue());
-    });
+      this.$emit('changed', cm.getValue())
+      this.$emit('input', cm.getValue())
+    })
   },
   methods: {
     getValue() {
-      return this.jsonEditor.getValue();
+      return this.jsonEditor.getValue()
     },
   },
-};
+}
 </script>
 
 <style>

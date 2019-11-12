@@ -4,44 +4,44 @@
       <el-form :model="dataForm" :inline="true">
         <el-form-item label="">
           <el-input
+            v-model="dataForm.keywords"
             placeholder="搜索关键字"
             width="200"
             class="filter-item"
-            @keyup.enter.native="handleFilter"
-            v-model="dataForm.keywords"
             clearable
-          ></el-input>
+            @keyup.enter.native="handleFilter"
+          />
         </el-form-item>
         <el-button
+          v-waves
           class="filter-item"
           type="primary"
-          v-waves
           icon="el-icon-search"
           @click="handleFilter"
-          >搜索</el-button
+        >搜索</el-button
         >
         <el-button
           class="filter-item"
           style="margin-left: 10px;"
-          @click="handleAddOrUpdate()"
           type="success"
           icon="el-icon-edit"
-          >上传文件</el-button
+          @click="handleAddOrUpdate()"
+        >上传文件</el-button
         >
         <!-- <el-button class="filter-item" style="margin-left: 10px;" @click="handleConfig" type="primary" icon="el-icon-edit">云存储配置</el-button> -->
         <el-button
+          :disabled="dataListSelections.length <= 0"
           type="danger"
           @click="handleDelete()"
-          :disabled="dataListSelections.length <= 0"
-          >批量删除</el-button
+        >批量删除</el-button
         >
       </el-form>
     </div>
 
     <el-table
+      v-loading="dataListLoading"
       :key="tableKey"
       :data="dataList"
-      v-loading="dataListLoading"
       element-loading-text="给我一点时间"
       border
       highlight-current-row
@@ -52,8 +52,7 @@
         header-align="center"
         align="center"
         width="50"
-      >
-      </el-table-column>
+      />
       <!-- <el-table-column
         prop="id"
         header-align="center"
@@ -66,16 +65,14 @@
         header-align="center"
         align="center"
         label="URL地址"
-      >
-      </el-table-column>
+      />
       <el-table-column
         prop="createDate"
         header-align="center"
         align="center"
         width="180"
         label="创建时间"
-      >
-      </el-table-column>
+      />
       <el-table-column
         fixed="right"
         header-align="center"
@@ -85,8 +82,11 @@
       >
         <template slot-scope="scope">
           <!-- <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button> -->
-          <el-button type="danger" size="mini" @click="handleDelete(scope.row)"
-            >删除</el-button
+          <el-button 
+            type="danger" 
+            size="mini" 
+            @click="handleDelete(scope.row)"
+          >删除</el-button
           >
         </template>
       </el-table-column>
@@ -94,16 +94,15 @@
 
     <div class="pagination-container" style="margin-top: 16px;">
       <el-pagination
-        background
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
         :current-page="pageIndex"
         :page-size="pageLimit"
         :total="totalCount"
         :page-sizes="[10, 20, 50, 100]"
+        background
         layout="total, sizes, prev, pager, next, jumper"
-      >
-      </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
     </div>
 
     <!-- 弹窗, 云存储配置 -->
@@ -113,16 +112,16 @@
       v-if="addOrUpdateVisible"
       ref="addOrUpdate"
       @refreshDataList="getDataList"
-    ></oss-upload>
+    />
   </div>
 </template>
 
 <script>
-import api from '@/api';
-// import { copy } from 'kit-qs';
-import waves from '@/directive/waves'; // 水波纹指令
-import OssConfig from './oss-config';
-import OssUpload from './oss-upload';
+import api from '@/api'
+// import { copy } from '@dwdjs/utils';
+import waves from '@/directive/waves' // 水波纹指令
+import OssConfig from './oss-config'
+import OssUpload from './oss-upload'
 
 const modelApi = {
   getAccessToken: api.getAccessToken,
@@ -130,7 +129,7 @@ const modelApi = {
   add: api.addFile,
   // edit: api.updateUser,
   del: api.delFile,
-};
+}
 
 // const roles = [
 //   { id: 1, value: 'admin' },
@@ -146,7 +145,7 @@ const modelApi = {
 // }, {})
 
 export default {
-  name: 'sys_oss',
+  name: 'SysOss',
   components: {
     OssConfig,
     OssUpload,
@@ -170,16 +169,16 @@ export default {
       dataListSelections: [],
       addOrUpdateVisible: false,
       configVisible: false,
-    };
+    }
   },
   filters: {},
   created() {
     // activated() {
-    this.getDataList();
+    this.getDataList()
   },
   methods: {
     getDataList() {
-      this.dataListLoading = true;
+      this.dataListLoading = true
       modelApi.list(
         {
           ...this.dataForm,
@@ -187,53 +186,53 @@ export default {
           size: this.pageLimit,
         },
         res => {
-          this.dataListLoading = false;
-          this.dataList = res.data.list;
-          this.totalCount = res.data.total;
+          this.dataListLoading = false
+          this.dataList = res.data.list
+          this.totalCount = res.data.total
         },
         err => {}
-      );
+      )
     },
     handleFilter() {
-      this.pageIndex = 1;
-      this.getDataList();
+      this.pageIndex = 1
+      this.getDataList()
     },
     handleSizeChange(val) {
-      this.pageLimit = val;
-      this.getDataList();
+      this.pageLimit = val
+      this.getDataList()
     },
     handleCurrentChange(val) {
-      this.pageIndex = val;
-      this.getDataList();
+      this.pageIndex = val
+      this.getDataList()
     },
     // 多选
     handleSelectionChange(val) {
-      this.dataListSelections = val;
+      this.dataListSelections = val
     },
     // 云存储配置
     handleConfig() {
-      this.configVisible = true;
+      this.configVisible = true
       this.$nextTick(() => {
-        this.$refs.config.init();
-      });
+        this.$refs.config.init()
+      })
     },
     /* eslint dot-notation: 0 */
     handleAddOrUpdate(id) {
-      this.addOrUpdateVisible = true;
+      this.addOrUpdateVisible = true
       this.$nextTick(() => {
         // this.$refs.upload.init(id)
-        this.$refs.addOrUpdate.init(id);
-      });
+        this.$refs.addOrUpdate.init(id)
+      })
     },
     updateItem(data, type) {
       if (type === 'add') {
-        this.dataList.unshift(data);
+        this.dataList.unshift(data)
       } else {
         for (const v of this.dataList) {
           if (v.id === data.id) {
-            const index = this.dataList.indexOf(v);
-            this.dataList.splice(index, 1, data);
-            break;
+            const index = this.dataList.indexOf(v)
+            this.dataList.splice(index, 1, data)
+            break
           }
         }
       }
@@ -244,8 +243,8 @@ export default {
       const ids = id
         ? [id]
         : this.dataListSelections.map(item => {
-            return item.id;
-          });
+            return item.id
+          })
       this.$confirm(
         `确定对[id=${ids.join(',')}]进行[${id ? '删除' : '批量删除'}]操作?`,
         '提示',
@@ -267,9 +266,9 @@ export default {
                 type: 'success',
                 duration: 1500,
                 onClose: () => {
-                  this.getDataList();
+                  this.getDataList()
                 },
-              });
+              })
 
               // const index = this.dataList.indexOf({
 
@@ -280,14 +279,14 @@ export default {
               this.$message({
                 message: '删除失败',
                 type: 'danger',
-              });
+              })
             }
-          );
+          )
         })
-        .catch(() => {});
+        .catch(() => {})
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped></style>

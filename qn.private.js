@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 // AccessKey/SecretKey
 const ASKey = {
@@ -12,10 +12,10 @@ const ASKey = {
     ak: '***REMOVED***',
     sk: '***REMOVED***',
   },
-};
+}
 
 // 使用 old, 这里执行上传七牛时报 { error: 'bad token' } 错误
-const curASKey = ASKey['new'];
+const curASKey = ASKey['new']
 
 module.exports = {
   // cdn资源合一
@@ -67,4 +67,4 @@ module.exports = {
     domain: 'https://img1.iqianggou.com/',
     path: '', // [hash]
   },
-};
+}

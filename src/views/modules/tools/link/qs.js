@@ -1,15 +1,15 @@
 // https://github.com/unshiftio/querystringify/blob/master/index.js
 
-const has = Object.prototype.hasOwnProperty;
+const has = Object.prototype.hasOwnProperty
 
 export function decode(input) {
-  return decodeURIComponent(input.replace(/\+/g, ' '));
+  return decodeURIComponent(input.replace(/\+/g, ' '))
 }
 
 export function parse(query) {
-  const parser = /([^=?&]+)=?([^&]*)/g;
-  const result = {};
-  let part;
+  const parser = /([^=?&]+)=?([^&]*)/g
+  const result = {}
+  let part
 
   for (
     ;
@@ -17,13 +17,13 @@ export function parse(query) {
     result[decode(part[1])] = decode(part[2])
   );
 
-  return result;
+  return result
 }
 
 // parse('id=123');
 
 export function stringify(obj, prefix = '?') {
-  const pairs = [];
+  const pairs = []
 
   //
   // Optionally prefix with a '?' if needed
@@ -32,11 +32,11 @@ export function stringify(obj, prefix = '?') {
 
   for (var key in obj) {
     if (has.call(obj, key) && ![undefined, null, ''].includes(obj[key])) {
-      pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+      pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
     }
   }
 
-  return pairs.length ? prefix + pairs.join('&') : '';
+  return pairs.length ? prefix + pairs.join('&') : ''
 }
 
 // function stringify(params = {}) {

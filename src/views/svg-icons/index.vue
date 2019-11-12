@@ -4,7 +4,7 @@
       <a
         href="https://panjiachen.github.io/vue-element-admin-site/#/icon"
         target="_blank"
-        >Add and use
+      >Add and use
       </a>
     </p>
     <div class="icons-wrapper">
@@ -18,7 +18,7 @@
             {{ generateIconCode(item) }}
           </div>
           <div class="icon-item">
-            <icon-svg class-name="disabled" :icon-class="item" />
+            <icon-svg :icon-class="item" class-name="disabled" />
             <span>{{ item }}</span>
           </div>
         </el-tooltip>
@@ -28,31 +28,31 @@
 </template>
 
 <script>
-import icons from './generateIconsView';
-import clipboard from '@/utils/clipboard';
+import icons from './generateIconsView'
+import clipboard from '@/utils/clipboard'
 
 export default {
-  name: 'icons',
+  name: 'Icons',
   data() {
     return {
       iconsMap: [],
-    };
+    }
   },
   mounted() {
     const iconsMap = icons.state.iconsMap.map(i => {
-      return i.default.id.split('-')[1];
-    });
-    this.iconsMap = iconsMap;
+      return i.default.id.split('-')[1]
+    })
+    this.iconsMap = iconsMap
   },
   methods: {
     generateIconCode(symbol) {
-      return `<icon-svg icon-class="${symbol}" />`;
+      return `<icon-svg icon-class="${symbol}" />`
     },
     handleClipboard(text, event) {
-      clipboard(text, event);
+      clipboard(text, event)
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

@@ -1,13 +1,13 @@
 <template>
   <a
+    :class="{ 'is-selected': $parent.value === id }"
     class="vue-tab-item"
     @click="$parent.$emit('tab-click', id, $event)"
-    :class="{ 'is-selected': $parent.value === id }"
   >
     <div class="item-icon">
-      <slot name="icon"></slot>
+      <slot name="icon"/>
     </div>
-    <div class="item-text"><slot></slot></div>
+    <div class="item-text"><slot/></div>
   </a>
 </template>
 
@@ -31,7 +31,7 @@
  */
 export default {
   // 数据应以对象形式传入，点击时返回当前数据
-  name: 'vue-tab-item',
+  name: 'VueTabItem',
 
   props: {
     id: [Number, String],
@@ -40,7 +40,7 @@ export default {
     selectedIconPath: String,
     text: String,
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

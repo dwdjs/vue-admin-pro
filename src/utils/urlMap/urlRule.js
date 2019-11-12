@@ -54,35 +54,35 @@ const h5MsfToSchemaMsf = {
     isTab: false,
     params: {},
   },
-};
+}
 
 // 逆向转换映射规则
 function reverseRules(rule) {
-  const targetRules = {};
-  const { hasOwnProperty } = Object.prototype;
+  const targetRules = {}
+  const { hasOwnProperty } = Object.prototype
   for (const key in rule) {
     if (hasOwnProperty.call(rule, key)) {
-      const item = rule[key];
+      const item = rule[key]
       targetRules[item.target] = {
         target: key,
         params: {},
-      };
+      }
       for (const key2 in item.params) {
         if (hasOwnProperty.call(item.params, key2)) {
-          const param = item.params[key2];
-          targetRules[item.target].params[param] = key2;
+          const param = item.params[key2]
+          targetRules[item.target].params[param] = key2
         }
       }
     }
   }
-  return targetRules;
+  return targetRules
 }
 
-const schemaMsfToH5Msf = reverseRules(h5MsfToSchemaMsf);
+const schemaMsfToH5Msf = reverseRules(h5MsfToSchemaMsf)
 
 const urlRules = {
   h5MsfToSchemaMsf,
   schemaMsfToH5Msf,
-};
+}
 
-export default urlRules;
+export default urlRules

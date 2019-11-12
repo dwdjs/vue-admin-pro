@@ -1,7 +1,7 @@
 <template>
   <div class="vue-pull-scroll view-scroll">
     <div class="vue-pull-refresh__track">
-      <div class="vue-pull-refresh__head"></div>
+      <div class="vue-pull-refresh__head"/>
       <div class="vue-pull-list">
         <slot />
         <!-- <div class="van-list__loading" v-show="pullLoading">
@@ -10,11 +10,11 @@
           </slot>
         </div> -->
         <div class="pull-loading-status">
-          <div class="pull-loading flex-center" v-show="pullLoading">
-            <mt-spinner type="fading-circle" :size="24"></mt-spinner>
+          <div v-show="pullLoading" class="pull-loading flex-center">
+            <!-- <mt-spinner type="fading-circle" :size="24"></mt-spinner> -->
             <div class="pull-loading-tip">{{ loadingTip }}</div>
           </div>
-          <div class="pull-finished" v-if="finished">{{ finishedTip }}</div>
+          <div v-if="finished" class="pull-finished">{{ finishedTip }}</div>
         </div>
       </div>
     </div>
@@ -22,17 +22,17 @@
 </template>
 
 <script>
-import VueTypes from 'vue-types';
-import scroll from '@/utils/scroll';
-import { on, off } from '@/utils/event';
-import { debounce } from '@/utils';
-import { Spinner } from 'mint-ui';
+import VueTypes from 'vue-types'
+import scroll from '@/utils/scroll'
+import { on, off } from '@/utils/event'
+import { debounce } from '@/utils'
+// import { Spinner } from 'mint-ui';
 
 export default {
-  name: 'vue-scroll',
+  name: 'VueScroll',
 
   components: {
-    [Spinner.name]: Spinner,
+    // [Spinner.name]: Spinner,
   },
 
   props: {
@@ -52,7 +52,7 @@ export default {
     return {
       // loading: false,
       // loadingTip: '加载中',
-    };
+    }
   },
 
   computed: {
@@ -67,26 +67,26 @@ export default {
   },
 
   mounted() {
-    this.scroller = scroll.getScrollEventTarget(this.$el);
-    this.handler(true);
+    this.scroller = scroll.getScrollEventTarget(this.$el)
+    this.handler(true)
 
     if (this.immediateCheck) {
-      this.$nextTick(this.onScroll);
+      this.$nextTick(this.onScroll)
     }
   },
 
   destroyed() {
-    this.handler(false);
+    this.handler(false)
   },
 
   activated() {
     /* istanbul ignore next */
-    this.handler(true);
+    this.handler(true)
   },
 
   deactivated() {
     /* istanbul ignore next */
-    this.handler(false);
+    this.handler(false)
   },
 
   watch: {
@@ -103,41 +103,41 @@ export default {
     onScroll() {
       // console.log('onscroll')
       if (this.pullLoading || this.finished) {
-        return;
+        return
       }
 
-      const el = this.$el;
-      const { scroller, offset } = this;
-      const visibleHeight = scroll.getVisibleHeight(scroller);
+      const el = this.$el
+      const { scroller, offset } = this
+      const visibleHeight = scroll.getVisibleHeight(scroller)
 
       /* istanbul ignore next */
       if (!visibleHeight) {
-        return;
+        return
       }
 
-      const scrollTop = scroll.getScrollTop(scroller);
-      const targetBottom = scrollTop + visibleHeight;
+      const scrollTop = scroll.getScrollTop(scroller)
+      const targetBottom = scrollTop + visibleHeight
 
-      let reachBottom = false;
+      let reachBottom = false
       // const reachBottom = scrollHeight - (scrollTop + visibleHeight|clientHeight) < offset
 
       /* istanbul ignore next */
       if (el === scroller) {
-        reachBottom = scroller.scrollHeight - targetBottom < offset;
+        reachBottom = scroller.scrollHeight - targetBottom < offset
       } else {
         const elBottom =
           scroll.getElementTop(el) -
           scroll.getElementTop(scroller) +
-          scroll.getVisibleHeight(el);
-        reachBottom = elBottom - visibleHeight < offset;
+          scroll.getVisibleHeight(el)
+        reachBottom = elBottom - visibleHeight < offset
       }
 
       // console.log(reachBottom)
       /* istanbul ignore else */
       if (reachBottom) {
         // console.log('onScrollToLower')
-        this.$emit('input', true);
-        this.$emit('onScrollToLower');
+        this.$emit('input', true)
+        this.$emit('onScrollToLower')
       }
     },
 
@@ -155,12 +155,12 @@ export default {
           this.scroller,
           'scroll',
           debounce(this.onScroll, 200)
-        );
+        )
         // (bind ? on : off)(window, 'scroll', this.onScroll)
       }
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

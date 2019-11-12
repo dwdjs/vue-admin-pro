@@ -1,23 +1,23 @@
 <!-- 文件上传 -->
 <template>
   <el-dialog
-    title="上传文件"
     :close-on-click-modal="false"
-    @close="handleClose"
     :visible.sync="visible"
+    title="上传文件"
+    @close="handleClose"
   >
     <el-upload
-      drag
       :action="url"
       :before-upload="handleBeforeUpload"
       :on-success="handleSuccess"
-      multiple
       :file-list="fileList"
+      drag
+      multiple
       style="text-align: center;"
     >
-      <i class="el-icon-upload"></i>
+      <i class="el-icon-upload"/>
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">
+      <div slot="tip" class="el-upload__tip">
         只支持jpg、png、gif格式的图片！
       </div>
     </el-upload>
@@ -25,15 +25,15 @@
 </template>
 
 <script>
-import api from '@/api';
-// import { copy } from 'kit-qs';
+import api from '@/api'
+// import { copy } from '@dwdjs/utils';
 
 const modelApi = {
   add: api.addFile,
-};
+}
 
 export default {
-  name: 'oss-upload',
+  name: 'OssUpload',
   data() {
     return {
       visible: false,
@@ -41,7 +41,7 @@ export default {
       num: 0,
       successNum: 0,
       fileList: [],
-    };
+    }
   },
   methods: {
     init(id) {
@@ -50,17 +50,17 @@ export default {
       // }, (err) => {
 
       // });
-      this.url = 'https://dapi.cloudai.net/oss/upload';
+      this.url = 'https://dapi.cloudai.net/oss/upload'
       // this.fileList.push({
       //   file:
       // })
-      console.log(modelApi);
+      console.log(modelApi)
       // modelApi.add({}, (res) => {
       // }, (err) => {
 
       // })
       // this.url = this.$http.adornUrl(`/sys/oss/upload?token=${this.$cookie.get('token')}`)
-      this.visible = true;
+      this.visible = true
     },
     // 上传之前
     handleBeforeUpload(file) {
@@ -70,15 +70,15 @@ export default {
         file.type !== 'image/png' &&
         file.type !== 'image/gif'
       ) {
-        this.$message.error('只支持jpg、png、gif格式的图片！');
-        return false;
+        this.$message.error('只支持jpg、png、gif格式的图片！')
+        return false
       }
-      this.num++;
+      this.num++
     },
     // 上传成功
     handleSuccess(response, file, fileList) {
-      this.fileList = fileList;
-      this.successNum++;
+      this.fileList = fileList
+      this.successNum++
       if (response && response.code === 0) {
         if (this.num === this.successNum) {
           this.$confirm('操作成功, 是否继续操作?', '提示', {
@@ -86,18 +86,18 @@ export default {
             cancelButtonText: '取消',
             type: 'warning',
           }).catch(() => {
-            this.visible = false;
-          });
+            this.visible = false
+          })
         }
       } else {
-        this.$message.error(response.msg);
+        this.$message.error(response.msg)
       }
     },
     // 弹窗关闭时
     handleClose() {
-      this.fileList = [];
-      this.$emit('refreshDataList');
+      this.fileList = []
+      this.$emit('refreshDataList')
     },
   },
-};
+}
 </script>

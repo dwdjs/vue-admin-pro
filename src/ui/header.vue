@@ -1,12 +1,12 @@
 <template>
-  <div class="vue-header" :class="{ 'is-fixed': fixed }">
-    <div class="header-left"><slot name="left"></slot></div>
+  <div :class="{ 'is-fixed': fixed }" class="vue-header">
+    <div class="header-left"><slot name="left"/></div>
     <div class="header-center">
       <slot
-        ><h3 class="header-title">{{ title }}</h3></slot
+      ><h3 class="header-title">{{ title }}</h3></slot
       >
     </div>
-    <div class="header-right"><slot name="right"></slot></div>
+    <div class="header-right"><slot name="right"/></div>
   </div>
 </template>
 
@@ -26,7 +26,7 @@
  * </vue-header>
  */
 export default {
-  name: 'vue-header',
+  name: 'VueHeader',
 
   props: {
     fixed: Boolean,
@@ -38,10 +38,10 @@ export default {
 
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event);
+      console.log(tab, event)
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

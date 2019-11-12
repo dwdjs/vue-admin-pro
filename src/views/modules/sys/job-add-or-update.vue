@@ -5,26 +5,26 @@
     :visible.sync="visible"
   >
     <el-form
-      label-width="80px"
+      ref="dataForm"
       :model="dataForm"
       :rules="dataRule"
+      label-width="80px"
       @keyup.enter.native="dataFormSubmit()"
-      ref="dataForm"
     >
       <el-form-item label="名称" prop="name">
-        <el-input v-model="dataForm.name" placeholder="名称"></el-input>
+        <el-input v-model="dataForm.name" placeholder="名称"/>
       </el-form-item>
       <el-form-item label="方法名称" prop="method">
-        <el-input v-model="dataForm.method" placeholder="方法名称"></el-input>
+        <el-input v-model="dataForm.method" placeholder="方法名称"/>
       </el-form-item>
       <el-form-item label="参数" prop="params">
-        <el-input v-model="dataForm.params" placeholder="参数"></el-input>
+        <el-input v-model="dataForm.params" placeholder="参数"/>
       </el-form-item>
       <el-form-item label="表达式" prop="cron">
-        <el-input v-model="dataForm.cron" placeholder="表达式"></el-input>
+        <el-input v-model="dataForm.cron" placeholder="表达式"/>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="dataForm.remark" placeholder="备注"></el-input>
+        <el-input v-model="dataForm.remark" placeholder="备注"/>
       </el-form-item>
       <el-form-item label="是否禁用" size="mini" prop="state">
         <el-radio-group v-model="dataForm.state">
@@ -41,12 +41,12 @@
 </template>
 
 <script>
-import api from '@/api';
+import api from '@/api'
 
 const modelApi = {
   add: api.addJob,
   edit: api.updateJob,
-};
+}
 
 const defaultInfo = {
   id: undefined,
@@ -59,7 +59,7 @@ const defaultInfo = {
   state: 0,
   // 0准备 1运行中 2已暂定 3已终止
   // status: 0,
-};
+}
 
 export default {
   data() {
@@ -70,38 +70,38 @@ export default {
         ...defaultInfo,
       },
       dataRule: {},
-    };
+    }
   },
   methods: {
     resetDataForm() {
       this.dataForm = {
         ...defaultInfo,
-      };
+      }
     },
     init(row = {}) {
-      this.resetDataForm();
-      this.dataForm.id = row.id || 0;
+      this.resetDataForm()
+      this.dataForm.id = row.id || 0
 
-      this.visible = true;
+      this.visible = true
       this.$nextTick(() => {
-        this.$refs['dataForm'].resetFields();
-        Object.assign(this.dataForm, row);
-      });
+        this.$refs['dataForm'].resetFields()
+        Object.assign(this.dataForm, row)
+      })
     },
     // 表单提交
     dataFormSubmit() {
-      console.log(this.dataForm);
-      const isAdd = !this.dataForm.id;
+      console.log(this.dataForm)
+      const isAdd = !this.dataForm.id
       this.$refs['dataForm'].validate(valid => {
-        console.log(this.dataForm);
+        console.log(this.dataForm)
         if (valid) {
-          const type = isAdd ? 'add' : 'edit';
+          const type = isAdd ? 'add' : 'edit'
           modelApi[type](
             {
               ...this.dataForm,
             },
             res => {
-              this.visible = false;
+              this.visible = false
               // Object.assign(this.dataForm, res.data);
               // this.dataList.unshift(this.dataForm)
               this.$notify({
@@ -109,14 +109,14 @@ export default {
                 message: isAdd ? '创建成功' : '编辑成功',
                 type: 'success',
                 duration: 2000,
-              });
-              this.$emit('refreshDataList');
+              })
+              this.$emit('refreshDataList')
             },
             err => {}
-          );
+          )
         }
-      });
+      })
     },
   },
-};
+}
 </script>

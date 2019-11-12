@@ -1,27 +1,27 @@
 // 微信 JSSDK
-import device from '@/utils/device';
-import env from '@/config/env';
-import api from '@/api';
+import device from '@/utils/device'
+import env from '@/config/env'
+import api from '@/api'
 // 存在 mini 循环引用
 // import mini from '@/utils/mini';
-import { wxappId } from '@/config';
-import { loadJs } from '@/utils/dLoad';
+import { wxappId } from '@/config'
+import { loadJs } from '@/utils/dLoad'
 // 要用远程url，太小就被 base64 了
 // import logo from '~assert/img/logo-large.png'
-console.log(api);
+console.log(api)
 // console.log(mini);
-const { location } = window;
-let isConfigReady = false;
+const { location } = window
+let isConfigReady = false
 
-const fnListCaches = [];
-const isFunction = fn => typeof fn === 'function';
+const fnListCaches = []
+const isFunction = fn => typeof fn === 'function'
 
-console.log('load wechat jsbridge');
+console.log('load wechat jsbridge')
 
 function runReadyFn() {
-  console.log('runReadyFn');
+  console.log('runReadyFn')
   for (let i = 0, len = fnListCaches.length; i < len; i++) {
-    fnListCaches[i](window.wx);
+    fnListCaches[i](window.wx)
   }
 }
 
@@ -76,14 +76,14 @@ const apiList = [
   'addCard',
   'chooseCard',
   'openCard',
-];
+]
 
 function jssdkConfig(data) {
   // 关于html5-History模式在微信浏览器内的问题 https://github.com/vuejs/vue-router/issues/481
-  console.log('enter wx.config');
-  if (isConfigReady || !device.wechat) return;
-  const { wx } = window;
-  console.log('wx.config start');
+  console.log('enter wx.config')
+  if (isConfigReady || !device.wechat) return
+  const { wx } = window
+  console.log('wx.config start')
   wx.config({
     // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     debug: data.debug || false,
@@ -96,11 +96,11 @@ function jssdkConfig(data) {
       'checkJsApi',
       ...apiList,
     ],
-  });
+  })
 
   wx.ready(() => {
-    isConfigReady = true;
-    console.info('ok: wechat ready');
+    isConfigReady = true
+    console.info('ok: wechat ready')
     // 隐藏菜单
     wx.hideMenuItems({
       // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
@@ -110,8 +110,8 @@ function jssdkConfig(data) {
         'menuItem:share:QZone',
         'menuItem:share:email',
       ],
-    });
-    runReadyFn();
+    })
+    runReadyFn()
     // 验证api
     // wx.checkJsApi({
     //   jsApiList: [
@@ -124,52 +124,52 @@ function jssdkConfig(data) {
     //     console.log('checkJsApi:fail', err);
     //   },
     // });
-  });
+  })
 
   wx.error(res => {
-    isConfigReady = false;
-    console.info('error: wechat ready');
+    isConfigReady = false
+    console.info('error: wechat ready')
     // runReadyFn();
-  });
+  })
 }
 
 const wechat = {
   init(initFn) {
     // 如果不是微信，不操作
     if (!device.wechat) {
-      console.info('非微信环境，无视 wx JSSDK');
-      return false;
+      console.info('非微信环境，无视 wx JSSDK')
+      return false
     }
 
-    if (isConfigReady) return;
+    if (isConfigReady) return
 
     if (isFunction(initFn)) {
       // 这里传入 ajax 函数，配置 jssdk
-      initFn(jssdkConfig);
+      initFn(jssdkConfig)
     }
     // jssdkConfig 后直接调用一次 runReadyFn
   },
   config() {
-    return isConfigReady;
+    return isConfigReady
   },
   jsBridgeReady: jsBridgeReady,
   ready(callback) {
-    if (!device.wechat || !isFunction(callback)) return;
+    if (!device.wechat || !isFunction(callback)) return
 
     // 微信自带ready方法，也有事件队列
     if (!isConfigReady) {
-      fnListCaches.push(callback);
+      fnListCaches.push(callback)
     } else {
-      callback && callback(window.wx);
+      callback && callback(window.wx)
     }
   },
   showShare(data = {}) {
-    console.warn('你需要制作引导分享页面');
+    console.warn('你需要制作引导分享页面')
   },
   setShare(opts = {}) {
-    console.warn('[setShare]', opts);
+    console.warn('[setShare]', opts)
     // alert(JSON.stringify(opts));
-    const { defaultShareInfo = {} } = env;
+    const { defaultShareInfo = {} } = env
     const shareData = {
       ...env.defaultShareInfo,
       title: opts.title || defaultShareInfo.title,
@@ -179,12 +179,12 @@ const wechat = {
       trigger(res) {
         // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
         // alert('用户点击发送给朋友');
-        opts.trigger && opts.trigger(res);
+        opts.trigger && opts.trigger(res)
       },
       success(res) {
         // TODO 此处貌似有个服务器端请求，需要告知服务器端分享了
         if (opts.success) {
-          opts.success(res);
+          opts.success(res)
         } else {
           // 全局设定分享成功回调
           // self.trackEvent('share', self.pageName);
@@ -192,32 +192,32 @@ const wechat = {
       },
       cancel(res) {
         // alert('已取消');
-        opts.cancel && opts.cancel(res);
+        opts.cancel && opts.cancel(res)
       },
       fail(res) {
         // alert(JSON.stringify(res));
-        opts.fail && opts.fail(res);
+        opts.fail && opts.fail(res)
       },
-    };
+    }
     wechat.ready(wx => {
-      console.info('ready', wx);
+      console.info('ready', wx)
       // alert('ready');
-      console.warn(shareData);
+      console.warn(shareData)
       // 即将被废弃
-      wx.onMenuShareAppMessage(shareData); // 分享给朋友
-      wx.onMenuShareTimeline(shareData); // 分享到朋友圈
-      wx.onMenuShareQQ(shareData); // 分享到QQ
+      wx.onMenuShareAppMessage(shareData) // 分享给朋友
+      wx.onMenuShareTimeline(shareData) // 分享到朋友圈
+      wx.onMenuShareQQ(shareData) // 分享到QQ
 
       // !! ios 新版本微信需要调用新的api
       // 自定义“分享给朋友”及“分享到QQ”按钮的分享内容（1.4.0）
-      wx.updateAppMessageShareData(shareData);
+      wx.updateAppMessageShareData(shareData)
       // 自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容（1.4.0）
-      wx.updateTimelineShareData(shareData);
+      wx.updateTimelineShareData(shareData)
 
-      wx.onMenuShareWeibo(shareData); // 分享到微博
-    });
+      wx.onMenuShareWeibo(shareData) // 分享到微博
+    })
   },
-};
+}
 
 // 针对单页面应用，只需注册 loadUrl
 /**
@@ -231,15 +231,15 @@ const wechat = {
  */
 
 function jssdkInit() {
-  console.info('wechat jssdk init');
+  console.info('wechat jssdk init')
   // if (!wechat.config()) {
-  console.log('isWxLoad', isWxLoad);
+  console.log('isWxLoad', isWxLoad)
   // alert(isWxLoad);
   if (isWxLoad) {
-    isConfigReady = false;
+    isConfigReady = false
     wechat.init(callback => {
-      const loadUrl = location.href.split('#')[0];
-      console.warn('[注册的是]' + loadUrl);
+      const loadUrl = location.href.split('#')[0]
+      console.warn('[注册的是]' + loadUrl)
 
       // var mini = require('@/utils/mini').default;
       // mini.showToast('注册的是:' + loadUrl);
@@ -249,39 +249,39 @@ function jssdkInit() {
           url: loadUrl,
         },
         res => {
-          console.log('wechat getSign ok');
+          console.log('wechat getSign ok')
           callback({
             ...res.data,
             debug: env.debug,
-          });
+          })
         },
         err => {
           // isConfigReady = false;
-          console.log('wechat getSign err');
+          console.log('wechat getSign err')
           // do nothing
         }
-      );
-    });
+      )
+    })
   }
 }
 
-let isWxLoad = false;
+let isWxLoad = false
 function jsBridgeReady(msg) {
-  console.log('__wxjs_environment:', window.__wxjs_environment);
+  console.log('__wxjs_environment:', window.__wxjs_environment)
   /**
    * 微信网页内  __wxjs_environment == 'browser'
    * 微信小程序 web-view 内网页 __wxjs_environment == 'miniprogram'
    */
   if (!device.wechat) {
-    return;
+    return
   }
 
   /* eslint no-alert: 0 */
   // alert(msg || 'ready')
-  console.info('wechat jsbridge ready');
-  console.info('window.WeixinJSBridge && window.wx');
-  console.log(JSON.stringify(window.WeixinJSBridge));
-  console.log(JSON.stringify(window.wx));
+  console.info('wechat jsbridge ready')
+  console.info('window.WeixinJSBridge && window.wx')
+  console.log(JSON.stringify(window.WeixinJSBridge))
+  console.log(JSON.stringify(window.wx))
 
   if (env.debug && !env.isEnv('prod')) {
     // console.log(mini);
@@ -290,18 +290,18 @@ function jsBridgeReady(msg) {
   //
   if (!isWxLoad) {
     // jssdk 中会使用 WeixinJSBridge 变量，所以放在ready之后加载最保险
-    const wxJSSDKUrl = 'https://res.wx.qq.com/open/js/jweixin-1.4.0.js';
+    const wxJSSDKUrl = 'https://res.wx.qq.com/open/js/jweixin-1.4.0.js'
     loadJs(wxJSSDKUrl, {
       async: true,
       onload() {
-        console.log('wechat jssdk loaded');
-        console.log(window.wx);
-        isWxLoad = true;
-        jssdkInit();
+        console.log('wechat jssdk loaded')
+        console.log(window.wx)
+        isWxLoad = true
+        jssdkInit()
       },
-    });
+    })
   } else {
-    jssdkInit();
+    jssdkInit()
   }
 }
 
@@ -316,10 +316,10 @@ function jsBridgeReady(msg) {
 // if (window.WeixinJSBridge || window.WeixinJSBridge.invoke) {
 if (device.iphone) {
   if (typeof window.WeixinJSBridge === 'undefined') {
-    jsBridgeReady('window.WeixinJSBridge');
+    jsBridgeReady('window.WeixinJSBridge')
   } else {
-    document.addEventListener('WeixinJSBridgeReady', jsBridgeReady, false);
+    document.addEventListener('WeixinJSBridgeReady', jsBridgeReady, false)
   }
 }
 
-export default wechat;
+export default wechat

@@ -1,2 +1,2 @@
-export * from './urlType';
-export * from './getTargetUrl';
+export * from './urlType'
+export * from './getTargetUrl'

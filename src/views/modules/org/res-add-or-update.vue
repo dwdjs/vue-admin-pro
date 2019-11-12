@@ -5,45 +5,45 @@
     :visible.sync="visible"
   >
     <el-form
-      label-width="80px"
+      ref="dataForm"
       :model="dataForm"
       :rules="dataRule"
+      label-width="80px"
       @keyup.enter.native="dataFormSubmit()"
-      ref="dataForm"
     >
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="dataForm.username" placeholder="登录帐号"></el-input>
+        <el-input v-model="dataForm.username" placeholder="登录帐号"/>
       </el-form-item>
       <el-form-item
+        :class="{ 'is-required': !dataForm.id }"
         label="密码"
         prop="password"
-        :class="{ 'is-required': !dataForm.id }"
       >
         <el-input
           v-model="dataForm.password"
           type="password"
           placeholder="密码"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item
+        :class="{ 'is-required': !dataForm.id }"
         label="确认密码"
         prop="comfirmPassword"
-        :class="{ 'is-required': !dataForm.id }"
       >
         <el-input
           v-model="dataForm.comfirmPassword"
           type="password"
           placeholder="确认密码"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
+        <el-input v-model="dataForm.email" placeholder="邮箱"/>
       </el-form-item>
       <el-form-item label="手机号" prop="mobile">
-        <el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
+        <el-input v-model="dataForm.mobile" placeholder="手机号"/>
       </el-form-item>
       <el-form-item label="备注" prop="description">
-        <el-input v-model="dataForm.description"></el-input>
+        <el-input v-model="dataForm.description"/>
       </el-form-item>
       <!-- <el-form-item label="角色" size="mini" prop="roleIdList">
         <el-checkbox-group v-model="dataForm.roleIdList">
@@ -71,13 +71,13 @@
 </template>
 
 <script>
-import { isEmail, isMobile } from '@/utils/validate';
-import api from '@/api';
+import { isEmail, isMobile } from '@/utils/validate'
+import api from '@/api'
 
 const modelApi = {
   add: api.addUser,
   edit: api.updateUser,
-};
+}
 
 const defaultInfo = {
   id: undefined,
@@ -90,40 +90,40 @@ const defaultInfo = {
   mobile: '',
   description: '',
   state: 0,
-};
+}
 
 export default {
   data() {
     const validatePassword = (rule, value, callback) => {
       if (!this.dataForm.id && !/\S/.test(value)) {
-        callback(new Error('密码不能为空'));
+        callback(new Error('密码不能为空'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const validateComfirmPassword = (rule, value, callback) => {
       if (!this.dataForm.id && !/\S/.test(value)) {
-        callback(new Error('确认密码不能为空'));
+        callback(new Error('确认密码不能为空'))
       } else if (this.dataForm.password !== value) {
-        callback(new Error('确认密码与密码输入不一致'));
+        callback(new Error('确认密码与密码输入不一致'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const validateEmail = (rule, value, callback) => {
       if (!isEmail(value)) {
-        callback(new Error('邮箱格式错误'));
+        callback(new Error('邮箱格式错误'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const validateMobile = (rule, value, callback) => {
       if (!isMobile(value)) {
-        callback(new Error('手机号格式错误'));
+        callback(new Error('手机号格式错误'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       visible: false,
       roleList: [],
@@ -147,39 +147,39 @@ export default {
           { validator: validateMobile, trigger: 'blur' },
         ],
       },
-    };
+    }
   },
   methods: {
     resetDataForm() {
       this.dataForm = {
         ...defaultInfo,
-      };
+      }
     },
     init(row = {}) {
-      this.resetDataForm();
+      this.resetDataForm()
       // if (row && row.password) row.password = '';
       // this.dataForm.id = row.id;
 
-      this.visible = true;
+      this.visible = true
       this.$nextTick(() => {
-        this.$refs['dataForm'].resetFields();
-        Object.assign(this.dataForm, row);
-      });
+        this.$refs['dataForm'].resetFields()
+        Object.assign(this.dataForm, row)
+      })
     },
     // 表单提交
     dataFormSubmit() {
-      console.log(this.dataForm);
-      const isAdd = !this.dataForm.id;
+      console.log(this.dataForm)
+      const isAdd = !this.dataForm.id
       this.$refs['dataForm'].validate(valid => {
-        console.log(this.dataForm);
+        console.log(this.dataForm)
         if (valid) {
-          const type = isAdd ? 'add' : 'edit';
+          const type = isAdd ? 'add' : 'edit'
           modelApi[type](
             {
               ...this.dataForm,
             },
             res => {
-              this.visible = false;
+              this.visible = false
               // Object.assign(this.dataForm, res.data);
               // this.dataList.unshift(this.dataForm)
               this.$notify({
@@ -187,14 +187,14 @@ export default {
                 message: isAdd ? '创建成功' : '编辑成功',
                 type: 'success',
                 duration: 2000,
-              });
-              this.$emit('refreshDataList');
+              })
+              this.$emit('refreshDataList')
             },
             err => {}
-          );
+          )
         }
-      });
+      })
     },
   },
-};
+}
 </script>

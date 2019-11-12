@@ -8,11 +8,15 @@
       <icon-svg class-name="international-icon" icon-class="language" />
     </div>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item command="zh" :disabled="language === 'zh'"
-        >中文</el-dropdown-item
+      <el-dropdown-item 
+        :disabled="language === 'zh'" 
+        command="zh"
+      >中文</el-dropdown-item
       >
-      <el-dropdown-item command="en" :disabled="language === 'en'"
-        >English</el-dropdown-item
+      <el-dropdown-item 
+        :disabled="language === 'en'" 
+        command="en"
+      >English</el-dropdown-item
       >
     </el-dropdown-menu>
   </el-dropdown>
@@ -22,21 +26,21 @@
 export default {
   computed: {
     language() {
-      return this.$store.getters.language;
+      return this.$store.getters.language
     },
   },
   methods: {
     handleSetLanguage(lang) {
-      this.$i18n.locale = lang;
-      this.$store.dispatch('setLanguage', lang);
-      const tip = this.$t('navbar.setLanguageTip');
+      this.$i18n.locale = lang
+      this.$store.dispatch('setLanguage', lang)
+      const tip = this.$t('navbar.setLanguageTip')
       this.$message({
         message: tip,
         type: 'success',
-      });
+      })
     },
   },
-};
+}
 </script>
 
 <style scoped>

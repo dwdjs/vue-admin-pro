@@ -6,7 +6,7 @@
  */
 
 // 当前站点判断
-import env from '@/config/env';
+import env from '@/config/env'
 
 const types = {
   currentH5Site: env.regBaseUrl,
@@ -21,19 +21,19 @@ const types = {
   tel: /^tel:/i,
   // 领优惠券
   jsCoupon: /javascript\:tpBridge.getCoupon\(\'(.*?)\'\)/,
-};
+}
 
 // 注意匹配顺序，topic必须在h5之前
 export function getUrlType(url) {
-  if (types['currentH5Site'].test(url)) return 'currentH5Site';
-  if (types['schemaMsf'].test(url)) return 'schemaMsf';
-  if (types['miniapp'].test(url)) return 'miniapp';
-  if (types['alipays'].test(url)) return 'alipays';
-  if (types['h5Topic'].test(url)) return 'h5Topic';
-  if (types['h5'].test(url)) return 'h5';
-  if (types['tel'].test(url)) return 'tel';
-  if (types['jsCoupon'].test(url)) return 'jsCoupon';
-  return 'other';
+  if (types['currentH5Site'].test(url)) return 'currentH5Site'
+  if (types['schemaMsf'].test(url)) return 'schemaMsf'
+  if (types['miniapp'].test(url)) return 'miniapp'
+  if (types['alipays'].test(url)) return 'alipays'
+  if (types['h5Topic'].test(url)) return 'h5Topic'
+  if (types['h5'].test(url)) return 'h5'
+  if (types['tel'].test(url)) return 'tel'
+  if (types['jsCoupon'].test(url)) return 'jsCoupon'
+  return 'other'
 }
 
-export default getUrlType;
+export default getUrlType

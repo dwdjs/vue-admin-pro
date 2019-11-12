@@ -1,11 +1,11 @@
 <template>
-  <div class="vue-image-crop-upload" v-show="show">
+  <div v-show="show" class="vue-image-crop-upload">
     <div class="vicp-wrap">
       <div class="vicp-close" @click="off">
-        <i class="vicp-icon4"></i>
+        <i class="vicp-icon4"/>
       </div>
 
-      <div class="vicp-step1" v-show="step == 1">
+      <div v-show="step == 1" class="vicp-step1">
         <div
           class="vicp-drop-area"
           @dragleave="preventDefault"
@@ -14,35 +14,36 @@
           @click="handleClick"
           @drop="handleChange"
         >
-          <i class="vicp-icon1" v-show="loading != 1">
-            <i class="vicp-icon1-arrow"></i>
-            <i class="vicp-icon1-body"></i>
-            <i class="vicp-icon1-bottom"></i>
+          <i v-show="loading != 1" class="vicp-icon1">
+            <i class="vicp-icon1-arrow"/>
+            <i class="vicp-icon1-body"/>
+            <i class="vicp-icon1-bottom"/>
           </i>
-          <span class="vicp-hint" v-show="loading !== 1">{{ lang.hint }}</span>
-          <span class="vicp-no-supported-hint" v-show="!isSupported">{{
+          <span v-show="loading !== 1" class="vicp-hint">{{ lang.hint }}</span>
+          <span v-show="!isSupported" class="vicp-no-supported-hint">{{
             lang.noSupported
           }}</span>
           <input
-            type="file"
             v-show="false"
-            @change="handleChange"
             ref="fileinput"
-          />
+            type="file"
+            @change="handleChange"
+          >
         </div>
-        <div class="vicp-error" v-show="hasError">
-          <i class="vicp-icon2"></i> {{ errorMsg }}
+        <div v-show="hasError" class="vicp-error">
+          <i class="vicp-icon2"/> {{ errorMsg }}
         </div>
         <div class="vicp-operate">
           <a @click="off" @mousedown="ripple">{{ lang.btn.off }}</a>
         </div>
       </div>
 
-      <div class="vicp-step2" v-if="step == 2">
+      <div v-if="step == 2" class="vicp-step2">
         <div class="vicp-crop">
-          <div class="vicp-crop-left" v-show="true">
+          <div v-show="true" class="vicp-crop-left">
             <div class="vicp-img-container">
               <img
+                ref="img"
                 :src="sourceImgUrl"
                 :style="sourceImgStyle"
                 class="vicp-img"
@@ -58,52 +59,51 @@
                 @mousemove="imgMove"
                 @mouseup="createImg"
                 @mouseout="createImg"
-                ref="img"
+              >
+              <div
+                :style="sourceImgShadeStyle"
+                class="vicp-img-shade vicp-img-shade-1"
               />
               <div
-                class="vicp-img-shade vicp-img-shade-1"
                 :style="sourceImgShadeStyle"
-              ></div>
-              <div
                 class="vicp-img-shade vicp-img-shade-2"
-                :style="sourceImgShadeStyle"
-              ></div>
+              />
             </div>
             <div class="vicp-range">
               <input
-                type="range"
                 :value="scale.range"
+                type="range"
                 step="1"
                 min="0"
                 max="100"
                 @change="zoomChange"
-              />
+              >
               <i
+                class="vicp-icon5"
                 @mousedown="startZoomSub"
                 @mouseout="endZoomSub"
                 @mouseup="endZoomSub"
-                class="vicp-icon5"
-              ></i>
+              />
               <i
+                class="vicp-icon6"
                 @mousedown="startZoomAdd"
                 @mouseout="endZoomAdd"
                 @mouseup="endZoomAdd"
-                class="vicp-icon6"
-              ></i>
+              />
             </div>
           </div>
-          <div class="vicp-crop-right" v-show="true">
+          <div v-show="true" class="vicp-crop-right">
             <div class="vicp-preview">
               <div class="vicp-preview-item">
-                <img :src="createImgUrl" :style="previewStyle" />
+                <img :src="createImgUrl" :style="previewStyle" >
                 <span>{{ lang.preview }}</span>
               </div>
               <div class="vicp-preview-item">
                 <img
+                  v-if="!noCircle"
                   :src="createImgUrl"
                   :style="previewStyle"
-                  v-if="!noCircle"
-                />
+                >
                 <span>{{ lang.preview }}</span>
               </div>
             </div>
@@ -117,23 +117,23 @@
         </div>
       </div>
 
-      <div class="vicp-step3" v-if="step == 3">
+      <div v-if="step == 3" class="vicp-step3">
         <div class="vicp-upload">
-          <span class="vicp-loading" v-show="loading === 1">{{
+          <span v-show="loading === 1" class="vicp-loading">{{
             lang.loading
           }}</span>
           <div class="vicp-progress-wrap">
             <span
-              class="vicp-progress"
               v-show="loading === 1"
               :style="progressStyle"
-            ></span>
+              class="vicp-progress"
+            />
           </div>
-          <div class="vicp-error" v-show="hasError">
-            <i class="vicp-icon2"></i> {{ errorMsg }}
+          <div v-show="hasError" class="vicp-error">
+            <i class="vicp-icon2"/> {{ errorMsg }}
           </div>
-          <div class="vicp-success" v-show="loading === 2">
-            <i class="vicp-icon3"></i> {{ lang.success }}
+          <div v-show="loading === 2" class="vicp-success">
+            <i class="vicp-icon3"/> {{ lang.success }}
           </div>
         </div>
         <div class="vicp-operate">
@@ -143,10 +143,10 @@
       </div>
       <canvas
         v-show="false"
+        ref="canvas"
         :width="width"
         :height="height"
-        ref="canvas"
-      ></canvas>
+      />
     </div>
   </div>
 </template>

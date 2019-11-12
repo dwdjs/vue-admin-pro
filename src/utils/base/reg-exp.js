@@ -11,7 +11,7 @@ const RegExps = {
   httpUrl: /^https+:\/\//,
   english: /^[A-Za-z]+$/,
   zip: /^[1-9]\d{5}$/,
-};
+}
 
 /**
  * 判断是否符合正则规则
@@ -22,12 +22,12 @@ const RegExps = {
  * @returns boolean
  */
 export function isAgreeRegExp(text, type, reg) {
-  const tempRegExp = reg || RegExps[type];
+  const tempRegExp = reg || RegExps[type]
   if (tempRegExp) {
-    return tempRegExp.test(text);
+    return tempRegExp.test(text)
   }
 }
 
 export default {
   isAgreeRegExp,
-};
+}

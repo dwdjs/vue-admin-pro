@@ -1,33 +1,34 @@
 <template>
   <div class="dashboard-editor-container">
     <div class=" clearfix">
-      <pan-thumb style="float: left" :image="avatar">
+      <pan-thumb :image="avatar" style="float: left">
         Your roles:
-        <span class="pan-info-roles" :key="item" v-for="item in roles">{{
+        <span v-for="item in roles" :key="item" class="pan-info-roles">{{
           item
         }}</span>
       </pan-thumb>
       <!-- <github-corner></github-corner> -->
       <div class="info-container">
         <span class="display_name">{{ name }}</span>
-        <span style="font-size:20px;padding-top:20px;display:inline-block;"
-          >editor : dashboard</span
+        <span 
+          style="font-size:20px;padding-top:20px;display:inline-block;"
+        >editor : dashboard</span
         >
       </div>
     </div>
     <div>
-      <img class="emptyGif" :src="emptyGif" />
+      <img :src="emptyGif" class="emptyGif" >
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import PanThumb from '@/components/PanThumb';
+import { mapGetters } from 'vuex'
+import PanThumb from '@/components/PanThumb'
 // import GithubCorner from '@/components/GithubCorner'
 
 export default {
-  name: 'dashboard-editor',
+  name: 'DashboardEditor',
   components: {
     PanThumb,
     // GithubCorner,
@@ -36,12 +37,12 @@ export default {
     return {
       emptyGif:
         'https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3',
-    };
+    }
   },
   computed: {
     ...mapGetters(['name', 'avatar', 'roles']),
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

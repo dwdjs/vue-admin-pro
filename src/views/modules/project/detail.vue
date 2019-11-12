@@ -5,38 +5,38 @@
       {{ !dataForm.id ? '新增' : '修改' }}
     </div>
     <el-form
-      label-width="120px"
+      ref="dataForm"
       :model="dataForm"
       :rules="dataRule"
+      label-width="120px"
       @keyup.enter.native="dataFormSubmit()"
-      ref="dataForm"
     >
       <el-form-item label="项目名称" prop="name">
-        <el-input v-model="dataForm.name" placeholder="项目名称"></el-input>
+        <el-input v-model="dataForm.name" placeholder="项目名称"/>
       </el-form-item>
       <el-form-item label="项目关键字" prop="keyWord">
         <el-input
           v-model="dataForm.keyWord"
           placeholder="项目关键字"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="项目分类" prop="category">
-        <el-input v-model="dataForm.category" placeholder="项目分类"></el-input>
+        <el-input v-model="dataForm.category" placeholder="项目分类"/>
       </el-form-item>
       <el-form-item label="项目创建者" prop="creatorId">
         <el-input
           v-model="dataForm.creatorId"
           placeholder="项目创建者"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="项目负责人" prop="ownerId">
         <el-input
           v-model="dataForm.ownerId"
           placeholder="项目负责人"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="描述" prop="description">
-        <el-input v-model="dataForm.description" placeholder="描述"></el-input>
+        <el-input v-model="dataForm.description" placeholder="描述"/>
       </el-form-item>
       <!-- <el-form-item label="状态" size="mini" prop="state">
         <el-radio-group v-model="dataForm.state">
@@ -60,10 +60,10 @@
 </template>
 
 <script>
-import api from '@/api';
-// import { copy } from 'kit-qs';
-import waves from '@/directive/waves'; // 水波纹指令
-import AddOrUpdate from './proj-add-or-update';
+import api from '@/api'
+// import { copy } from '@dwdjs/utils';
+import waves from '@/directive/waves' // 水波纹指令
+import AddOrUpdate from './proj-add-or-update'
 
 const modelApi = {
   list: api.getProject,
@@ -71,7 +71,7 @@ const modelApi = {
   edit: api.updateProject,
   del: api.delProject,
   detail: api.getProjectDetail,
-};
+}
 
 // const roles = [
 //   { id: 1, value: 'admin' },
@@ -87,7 +87,7 @@ const modelApi = {
 // }, {})
 
 export default {
-  name: 'project_proj',
+  name: 'ProjectProj',
   components: {
     AddOrUpdate,
   },
@@ -108,15 +108,15 @@ export default {
       dataListLoading: true,
       dataListSelections: [],
       addOrUpdateVisible: false,
-    };
+    }
   },
   filters: {},
   created() {
-    this.getDataList();
+    this.getDataList()
   },
   methods: {
     getDataList() {
-      this.dataListLoading = true;
+      this.dataListLoading = true
       // this.dataListLoading = false
       modelApi.list(
         {
@@ -125,46 +125,46 @@ export default {
           size: this.pageLimit,
         },
         res => {
-          this.dataListLoading = false;
-          this.dataList = res.data.list;
-          this.totalCount = res.data.total;
+          this.dataListLoading = false
+          this.dataList = res.data.list
+          this.totalCount = res.data.total
         },
         err => {}
-      );
+      )
     },
     handleFilter() {
-      this.pageIndex = 1;
-      this.getDataList();
+      this.pageIndex = 1
+      this.getDataList()
     },
     handleSizeChange(val) {
-      this.pageLimit = val;
-      this.getDataList();
+      this.pageLimit = val
+      this.getDataList()
     },
     handleCurrentChange(val) {
-      this.pageIndex = val;
-      this.getDataList();
+      this.pageIndex = val
+      this.getDataList()
     },
     // 多选
     handleSelectionChange(val) {
-      this.dataListSelections = val;
+      this.dataListSelections = val
     },
     /* eslint dot-notation: 0 */
     handleAddOrUpdate(id) {
-      this.addOrUpdateVisible = true;
+      this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(id);
+        this.$refs.addOrUpdate.init(id)
         // this.$refs['dataForm'].clearValidate()
-      });
+      })
     },
     updateItem(data, type) {
       if (type === 'add') {
-        this.dataList.unshift(data);
+        this.dataList.unshift(data)
       } else {
         for (const v of this.dataList) {
           if (v.id === data.id) {
-            const index = this.dataList.indexOf(v);
-            this.dataList.splice(index, 1, data);
-            break;
+            const index = this.dataList.indexOf(v)
+            this.dataList.splice(index, 1, data)
+            break
           }
         }
       }
@@ -202,8 +202,8 @@ export default {
       const ids = id
         ? [id]
         : this.dataListSelections.map(item => {
-            return item.id;
-          });
+            return item.id
+          })
       modelApi.del(
         {
           ids,
@@ -214,9 +214,9 @@ export default {
             message: '删除成功',
             type: 'success',
             duration: 2000,
-          });
+          })
 
-          this.getDataList();
+          this.getDataList()
           // const index = this.dataList.indexOf({
 
           // })
@@ -226,12 +226,12 @@ export default {
           this.$message({
             message: '删除失败',
             type: 'danger',
-          });
+          })
         }
-      );
+      )
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped></style>

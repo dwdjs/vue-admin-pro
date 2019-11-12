@@ -13,16 +13,16 @@
  * @returns 'key=val&key1=val1'
  */
 export function stringify(params = {}) {
-  const temp = params;
-  const arr = [];
+  const temp = params
+  const arr = []
   for (const key in params) {
     if (!temp[key]) {
-      delete temp[key];
+      delete temp[key]
     } else {
-      arr.push(`${key}=${temp[key]}`);
+      arr.push(`${key}=${temp[key]}`)
     }
   }
-  return arr.join('&');
+  return arr.join('&')
 }
 
 /**
@@ -34,12 +34,12 @@ export function stringify(params = {}) {
  * @returns string
  */
 export function trim(str = '', isGlobal = false) {
-  let result;
-  result = str.replace(/(^\s+)|(\s+$)/g, '');
+  let result
+  result = str.replace(/(^\s+)|(\s+$)/g, '')
   if (isGlobal) {
-    result = result.replace(/\s/g, '');
+    result = result.replace(/\s/g, '')
   }
-  return result;
+  return result
 }
 
 /**
@@ -52,12 +52,12 @@ export function trim(str = '', isGlobal = false) {
  */
 export function getQueryString(url, name) {
   if (!url) {
-    return null;
+    return null
   }
-  const reg = new RegExp('(^|)' + name + '=([^&]*)');
-  const r = url.match(reg);
-  if (r != null) return unescape(r[2]); // 因为 unescape 已经废弃，建议使用 decodeURI或者decodeURIComponent 替代本方法。
-  return null;
+  const reg = new RegExp('(^|)' + name + '=([^&]*)')
+  const r = url.match(reg)
+  if (r != null) return unescape(r[2]) // 因为 unescape 已经废弃，建议使用 decodeURI或者decodeURIComponent 替代本方法。
+  return null
 }
 
 /**
@@ -69,24 +69,24 @@ export function getQueryString(url, name) {
  */
 export function replaceSPM(url, spm) {
   if (!url) {
-    return null;
+    return null
   }
-  const reg = new RegExp('(^|)spm=([^&]*)');
-  const r = url.match(reg);
+  const reg = new RegExp('(^|)spm=([^&]*)')
+  const r = url.match(reg)
   if (r != null) {
-    let old = unescape(r[0]);
+    let old = unescape(r[0])
     if (old) {
-      return url.replace(old, 'spm=' + spm);
+      return url.replace(old, 'spm=' + spm)
     }
   }
   if (url.indexOf('spm=') < 0) {
     if (url.indexOf('?') > 0) {
-      url += url + '&spm=' + spm;
+      url += url + '&spm=' + spm
     } else {
-      url += url + '?spm=' + spm;
+      url += url + '?spm=' + spm
     }
   }
-  return url;
+  return url
 }
 
 /**
@@ -97,11 +97,11 @@ export function replaceSPM(url, spm) {
  * @returns string
  */
 export function urlfix(url, paramsUrl = '') {
-  let fixUrl = url;
+  let fixUrl = url
   if (paramsUrl) {
-    fixUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + paramsUrl;
+    fixUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + paramsUrl
   }
-  return fixUrl;
+  return fixUrl
 }
 
 /**
@@ -113,9 +113,9 @@ export function urlfix(url, paramsUrl = '') {
  */
 export function addPoint(value, length) {
   if (value.length > length) {
-    return value.substr(0, length - 1) + '...';
+    return value.substr(0, length - 1) + '...'
   } else {
-    return value;
+    return value
   }
 }
 
@@ -127,21 +127,21 @@ export function addPoint(value, length) {
  */
 export function regImgs(html = '', isGlobal) {
   // 匹配图片（g表示匹配所有结果i表示区分大小写）
-  const imgReg = new RegExp('<img.*?(?:>|/>)', isGlobal ? 'ig' : 'i');
+  const imgReg = new RegExp('<img.*?(?:>|/>)', isGlobal ? 'ig' : 'i')
   // 匹配src属性
-  const srcReg = /src=['"]?([^'"]*)['"]?/i;
-  const arr = html.match(imgReg);
-  const result = [];
+  const srcReg = /src=['"]?([^'"]*)['"]?/i
+  const arr = html.match(imgReg)
+  const result = []
   for (let i = 0; i < arr.length; i++) {
-    const src = arr[i].match(srcReg);
+    const src = arr[i].match(srcReg)
     // 获取图片地址
     if (src[1]) {
-      result.push(src[1]);
+      result.push(src[1])
       // alert('已匹配的图片地址'+(i+1)+'：'+src[1]);
     }
   }
 
-  return result;
+  return result
 }
 
 const stringUtil = {
@@ -152,6 +152,6 @@ const stringUtil = {
   urlfix,
   addPoint,
   regImgs,
-};
+}
 
-export default stringUtil;
+export default stringUtil

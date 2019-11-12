@@ -13,14 +13,14 @@
  * @returns Object
  */
 export function arrayToObject(arr = [], key) {
-  let tempObj = {};
-  let tempKey = 0;
+  let tempObj = {}
+  let tempKey = 0
   arr.forEach(item => {
-    let currKey = key ? item[key] : tempKey;
-    tempObj[currKey] = item;
-    tempKey++;
-  });
-  return tempObj;
+    let currKey = key ? item[key] : tempKey
+    tempObj[currKey] = item
+    tempKey++
+  })
+  return tempObj
 }
 
 /**
@@ -33,16 +33,16 @@ export function arrayToObject(arr = [], key) {
  */
 export function arrayToHeavy(tempArray = [], key) {
   if (key) {
-    const obj = {};
+    const obj = {}
     const newArray = tempArray.reduce((cur, next) => {
       if (next && !obj[next[key]]) {
-        obj[next[key]] = true && cur.push(next);
+        obj[next[key]] = true && cur.push(next)
       }
-      return cur;
-    }, []);
-    return newArray;
+      return cur
+    }, [])
+    return newArray
   } else {
-    return [...new Set(tempArray)];
+    return [...new Set(tempArray)]
   }
 }
 
@@ -57,7 +57,7 @@ export function arrayToHeavy(tempArray = [], key) {
  * @returns array
  */
 export function map(arr, key) {
-  return arr.map(item => item[key]);
+  return arr.map(item => item[key])
 }
 
 // 构建数据映射
@@ -79,20 +79,20 @@ export function mapTo(arr, options = {}) {
   return arr.map(item => {
     // 如果是函数，处理数据
     if (typeof options === 'function') {
-      return options(item);
+      return options(item)
     }
     for (const key in options) {
       // 建议渲染使用数据，简单处理映射，大的运算可以后处理，如点击事件等
       if (typeof options[key] === 'string') {
         // 如果是字符串，做映射
         /* eslint no-param-reassign: 0 */
-        item[options[key]] = item[key];
+        item[options[key]] = item[key]
       } else if (typeof options[key] === 'function') {
-        return options[key](item);
+        return options[key](item)
       }
     }
-    return item;
-  });
+    return item
+  })
 }
 
 const arrayUtil = {
@@ -100,6 +100,6 @@ const arrayUtil = {
   arrayToHeavy,
   map,
   mapTo,
-};
+}
 
-export default arrayUtil;
+export default arrayUtil

@@ -3,10 +3,10 @@
     <el-form :inline="true" :model="queryForm">
       <el-form-item label="">
         <el-input
-          placeholder="姓名或账户"
           v-model="queryForm.title"
+          placeholder="姓名或账户"
           @keyup.enter.native="paginate(1)"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="paginate(1)">搜索</el-button>
@@ -14,8 +14,8 @@
       </el-form-item>
     </el-form>
     <el-table
-      :data="list"
       v-loading.body="listLoading"
+      :data="list"
       element-loading-text="Loading"
       header-row-class-name="el-table-head"
       border
@@ -32,13 +32,13 @@
         label="Title"
         prop="title"
         min-width="200"
-      ></el-table-column>
-      <el-table-column label="Author" prop="author"></el-table-column>
+      />
+      <el-table-column label="Author" prop="author"/>
       <el-table-column
         label="Pageviews"
         prop="pageviews"
         width="110"
-      ></el-table-column>
+      />
       <el-table-column
         class-name="status-col"
         label="Status"
@@ -58,7 +58,7 @@
         width="130"
       >
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
+          <i class="el-icon-time"/>
           <span>{{ scope.row.display_time }}</span>
         </template>
       </el-table-column>
@@ -69,16 +69,16 @@
               type="text"
               size="small"
               @click.prevent.stop="onUpdate(scope.row.id, scope.row.channel)"
-              >编辑</el-button
+            >编辑</el-button
             >
           </router-link>
           <!-- <el-button type="text" size="small" @click="onChangeStatus(scope.row.id, scope.row.status)">{{scope.row.status ? '下线' : '上线' }}</el-button> -->
           <el-button
+            :disabled="!!scope.row.status"
             type="text"
             size="small"
             @click="onRemove(scope.row.id)"
-            :disabled="!!scope.row.status"
-            >删除</el-button
+          >删除</el-button
           >
         </template>
       </el-table-column>
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { getTableList } from '@/api/old/table';
+import { getTableList } from '@/api/old/table'
 
 export default {
   data() {
@@ -102,7 +102,7 @@ export default {
         per_page: 20, // 固定不变
         total: 0,
       },
-    };
+    }
   },
   filters: {
     statusFilter(status) {
@@ -110,35 +110,35 @@ export default {
         published: 'success',
         draft: 'gray',
         deleted: 'danger',
-      };
-      return statusMap[status];
+      }
+      return statusMap[status]
     },
   },
   created() {
-    this.fetchData();
+    this.fetchData()
   },
   methods: {
     fetchData() {
-      this.listLoading = true;
+      this.listLoading = true
       getTableList({
         ...this.listQuery,
       }).then(res => {
-        this.list = res.data.items;
-        this.listLoading = false;
-      });
+        this.list = res.data.items
+        this.listLoading = false
+      })
     },
     paginate(num) {
       // console.log(num);
-      getTableList(num);
+      getTableList(num)
     },
     addUser() {
       // 添加用户
     },
     onUpdate(...rest) {
-      console.log(rest);
+      console.log(rest)
     },
     onChangeStatus(...rest) {
-      console.log(rest);
+      console.log(rest)
     },
     onRemove(id) {
       this.$confirm('确认删除该专题?', '提示', {
@@ -147,9 +147,9 @@ export default {
         type: 'warning',
       })
         .then(() => {
-          this.onDelete(id);
+          this.onDelete(id)
         })
-        .catch(() => {});
+        .catch(() => {})
     },
     onDelete(id) {
       this.$api
@@ -158,11 +158,11 @@ export default {
           this.$message({
             message: '专题删除成功',
             type: 'success',
-          });
-          this.paginate(this.pagination.current_page);
+          })
+          this.paginate(this.pagination.current_page)
         })
-        .catch(err => {});
+        .catch(err => {})
     },
   },
-};
+}
 </script>

@@ -5,38 +5,38 @@
       <el-form :model="dataForm" :inline="true">
         <el-form-item label="">
           <el-input
+            v-model="dataForm.keywords"
             placeholder="搜索关键字"
             width="200"
             class="filter-item"
-            @keyup.enter.native="handleFilter"
-            v-model="dataForm.keywords"
             clearable
-          ></el-input>
+            @keyup.enter.native="handleFilter"
+          />
         </el-form-item>
         <el-button
+          v-waves
           class="filter-item"
           type="primary"
-          v-waves
           icon="el-icon-search"
           @click="handleFilter"
-          >搜索</el-button
+        >搜索</el-button
         >
         <el-button
           class="filter-item"
           style="margin-left: 10px;"
-          @click="handleAddOrUpdate()"
           type="success"
           icon="el-icon-edit"
-          >新增</el-button
+          @click="handleAddOrUpdate()"
+        >新增</el-button
         >
         <!-- <el-button type="danger" @click="handleDelete()" :disabled="dataListSelections.length <= 0">批量删除</el-button> -->
       </el-form>
     </div>
 
     <el-table
+      v-loading="dataListLoading"
       :key="tableKey"
       :data="dataList"
-      v-loading="dataListLoading"
       element-loading-text="给我一点时间"
       border
       highlight-current-row
@@ -58,11 +58,10 @@
       <table-tree-column
         prop="name"
         header-align="center"
-        treeKey="id"
+        tree-key="id"
         width="180"
         label="名称"
-      >
-      </table-tree-column>
+      />
       <!-- <el-table-column
         prop="parentName"
         header-align="center"
@@ -72,17 +71,23 @@
       </el-table-column> -->
       <el-table-column header-align="center" align="center" label="图标">
         <template slot-scope="scope">
-          <icon-svg :icon-class="scope.row.icon || 'menu'"></icon-svg>
+          <icon-svg :icon-class="scope.row.icon || 'menu'"/>
         </template>
       </el-table-column>
       <el-table-column header-align="center" align="center" label="类型">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.type === '0'" size="small">目录</el-tag>
-          <el-tag v-else-if="scope.row.type === '1'" size="small" type="success"
-            >菜单</el-tag
+          <el-tag 
+            v-else-if="scope.row.type === '1'" 
+            size="small" 
+            type="success"
+          >菜单</el-tag
           >
-          <el-tag v-else-if="scope.row.type === '2'" size="small" type="info"
-            >按钮</el-tag
+          <el-tag 
+            v-else-if="scope.row.type === '2'" 
+            size="small" 
+            type="info"
+          >按钮</el-tag
           >
         </template>
       </el-table-column>
@@ -91,12 +96,11 @@
         header-align="center"
         align="center"
         label="排序号"
-      >
-      </el-table-column>
+      />
       <el-table-column
+        :show-overflow-tooltip="true"
         header-align="center"
         width="200"
-        :show-overflow-tooltip="true"
         label="菜单URL"
       >
         <template slot-scope="scope">
@@ -105,20 +109,22 @@
       </el-table-column>
       <el-table-column header-align="center" align="center" label="可见">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.visible" size="small" type="success"
-            >显示</el-tag
+          <el-tag 
+            v-if="scope.row.visible" 
+            size="small" 
+            type="success"
+          >显示</el-tag
           >
           <el-tag v-else size="small" type="info">隐藏</el-tag>
         </template>
       </el-table-column>
       <el-table-column
+        :show-overflow-tooltip="true"
         prop="permCode"
         header-align="center"
         width="150"
-        :show-overflow-tooltip="true"
         label="授权标识"
-      >
-      </el-table-column>
+      />
       <el-table-column
         fixed="right"
         header-align="center"
@@ -131,13 +137,13 @@
             type="primary"
             size="mini"
             @click="handleAddOrUpdate(scope.row)"
-            >编辑</el-button
+          >编辑</el-button
           >
           <el-button
             type="danger"
             size="mini"
             @click="handleDelete(scope.row.id)"
-            >删除</el-button
+          >删除</el-button
           >
         </template>
       </el-table-column>
@@ -161,31 +167,30 @@
       v-if="addOrUpdateVisible"
       ref="addOrUpdate"
       @refreshDataList="getDataList"
-    >
-    </add-or-update>
+    />
   </div>
 </template>
 
 <script>
-import api from '@/api';
-// import { copy } from 'kit-qs';
-import waves from '@/directive/waves'; // 水波纹指令
+import api from '@/api'
+// import { copy } from '@dwdjs/utils';
+import waves from '@/directive/waves' // 水波纹指令
 import {
   // menuLevel,
   treeDataTranslate,
-} from '@/utils';
-import TableTreeColumn from '@/components/TableTreeColumn';
-import AddOrUpdate from './menu-add-or-update';
+} from '@/utils'
+import TableTreeColumn from '@/components/TableTreeColumn'
+import AddOrUpdate from './menu-add-or-update'
 
 const modelApi = {
   add: api.addAuth,
   del: api.delAuth,
   edit: api.updateAuth,
   list: api.getAuth,
-};
+}
 
 export default {
-  name: 'sys_menu',
+  name: 'SysMenu',
   components: {
     [TableTreeColumn.name]: TableTreeColumn,
     AddOrUpdate,
@@ -207,11 +212,11 @@ export default {
       dataListLoading: true,
       dataListSelections: [],
       addOrUpdateVisible: false,
-    };
+    }
   },
   filters: {},
   created() {
-    this.getDataList();
+    this.getDataList()
     // api.getMenu({}, (res) => {
     //   console.log(res);
     // }, (err) => {
@@ -220,7 +225,7 @@ export default {
   },
   methods: {
     getDataList() {
-      this.dataListLoading = true;
+      this.dataListLoading = true
       modelApi.list(
         {
           ...this.dataForm,
@@ -228,42 +233,42 @@ export default {
           // size: this.pageLimit,
         },
         res => {
-          this.dataListLoading = false;
-          this.dataList = treeDataTranslate(res.data);
+          this.dataListLoading = false
+          this.dataList = treeDataTranslate(res.data)
           // this.totalCount = res.data.total
         },
         err => {}
-      );
+      )
     },
     handleFilter() {
       // this.pageIndex = 1
-      this.getDataList();
+      this.getDataList()
     },
     handleSizeChange(val) {
       // this.pageLimit = val
-      this.getDataList();
+      this.getDataList()
     },
     handleCurrentChange(val) {
       // this.pageIndex = val
-      this.getDataList();
+      this.getDataList()
     },
     // 多选
     handleSelectionChange(val) {
-      this.dataListSelections = val;
+      this.dataListSelections = val
     },
     /* eslint dot-notation: 0 */
     handleAddOrUpdate(id) {
-      this.addOrUpdateVisible = true;
+      this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(id);
-      });
+        this.$refs.addOrUpdate.init(id)
+      })
     },
     handleDelete(id) {
       // 删除是危险动作，至少要气泡提示
       // const ids = id ? [id] : this.dataListSelections.map((item) => {
       //   return item.id
       // });
-      const ids = id ? [id] : [];
+      const ids = id ? [id] : []
       modelApi.del(
         {
           ids,
@@ -274,9 +279,9 @@ export default {
             message: '删除成功',
             type: 'success',
             duration: 2000,
-          });
+          })
 
-          this.getDataList();
+          this.getDataList()
           // const index = this.dataList.indexOf({
 
           // })
@@ -286,12 +291,12 @@ export default {
           this.$message({
             message: '删除失败',
             type: 'danger',
-          });
+          })
         }
-      );
+      )
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped></style>

@@ -3,7 +3,7 @@
 const defaultPage = {
   label: '自定义(无数据默认跳首页)',
   value: '',
-};
+}
 
 const commonTopPages = [
   {
@@ -19,7 +19,7 @@ const commonTopPages = [
     label: '购物车 shopping-cart',
     value: 'shopping-cart',
   },
-];
+]
 
 const commonBottomPages = [
   {
@@ -38,7 +38,7 @@ const commonBottomPages = [
     label: '客服页 service',
     value: 'service',
   },
-];
+]
 
 const hsqPages = [
   {
@@ -83,7 +83,7 @@ const hsqPages = [
     label: '抽奖团列表 lottery-list',
     value: 'lottery-list',
   },
-];
+]
 
 const h5Pages = [
   defaultPage,
@@ -94,7 +94,7 @@ const h5Pages = [
     value: 'detail',
   },
   ...commonBottomPages,
-];
+]
 
 const miniPages = [
   defaultPage,
@@ -119,7 +119,7 @@ const miniPages = [
     disabled: true,
   },
   ...commonBottomPages,
-];
+]
 
 const otherMiniApp = [
   {
@@ -129,7 +129,7 @@ const otherMiniApp = [
     type: 'mini',
     children: [defaultPage],
   },
-];
+]
 const aliappList = [
   ...otherMiniApp,
   {
@@ -165,7 +165,7 @@ const aliappList = [
     disabled: true,
     children: [...miniPages],
   },
-];
+]
 const wxappList = [
   ...otherMiniApp,
   {
@@ -202,7 +202,7 @@ const wxappList = [
       },
     ],
   },
-];
+]
 
 export default {
   short: {},
@@ -317,7 +317,7 @@ export default {
     ],
     toList: [...wxappList],
   },
-};
+}
 
 // export default {
 //   h5: {

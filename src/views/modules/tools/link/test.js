@@ -1,7 +1,7 @@
-import { MiniLink, miniRules } from './index';
+import { MiniLink, miniRules } from './index'
 
-const aliapp = new MiniLink(miniRules.aliapp);
-const wxapp = new MiniLink(miniRules.wxapp);
+const aliapp = new MiniLink(miniRules.aliapp)
+const wxapp = new MiniLink(miniRules.wxapp)
 
 const link1 = aliapp
   .input({
@@ -11,7 +11,7 @@ const link1 = aliapp
     bizParams: { spm: 'xxx' },
     webviewUrl: 'https://topic.doweidu.com?id=xxx',
   })
-  .mini();
+  .mini()
 const link2 = wxapp
   .input({
     appid: '123456',
@@ -20,21 +20,21 @@ const link2 = wxapp
     bizParams: { spm: 'xxx' },
     webviewUrl: 'https://topic.doweidu.com?id=xxx',
   })
-  .mini();
+  .mini()
 
-console.log(link1.toString());
+console.log(link1.toString())
 
-console.log(link1.alipays().toString());
+console.log(link1.alipays().toString())
 console.log(
   link1
     .alipays()
     .sms()
     .toString()
-);
+)
 
-console.log();
+console.log()
 
-console.log(link2.toString());
-console.log(link2.mp().toString());
-console.log(link2.tweet().toString());
-console.log(link2.ad().toString());
+console.log(link2.toString())
+console.log(link2.mp().toString())
+console.log(link2.tweet().toString())
+console.log(link2.ad().toString())

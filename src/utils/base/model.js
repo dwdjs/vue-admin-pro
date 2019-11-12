@@ -1,4 +1,4 @@
-import { isArray, isObject, isString, isNumber } from './is';
+import { isArray, isObject, isString, isNumber } from './is'
 
 /**
  * 获取对象
@@ -9,12 +9,12 @@ import { isArray, isObject, isString, isNumber } from './is';
 export function getModel(obj, key) {
   if (obj && obj[key]) {
     if (isObject(obj[key])) {
-      return obj[key];
+      return obj[key]
     } else {
-      return null;
+      return null
     }
   }
-  return null;
+  return null
 }
 /**
  * 获取数组
@@ -25,12 +25,12 @@ export function getModel(obj, key) {
 export function getArray(obj, key) {
   if (obj && obj[key]) {
     if (isArray(obj[key])) {
-      return obj[key];
+      return obj[key]
     } else {
-      return new Array(obj[key]);
+      return new Array(obj[key])
     }
   }
-  return [];
+  return []
 }
 /**
  * 获取字符串直接用来页面展示
@@ -41,12 +41,12 @@ export function getArray(obj, key) {
 export function getString(obj, key) {
   if (obj && obj[key]) {
     if (isString(obj[key])) {
-      return obj[key];
+      return obj[key]
     } else {
-      return obj[key] + '';
+      return obj[key] + ''
     }
   } else {
-    return '';
+    return ''
   }
 }
 /**
@@ -57,9 +57,9 @@ export function getString(obj, key) {
  */
 export function getBoolean(obj, key) {
   if (obj && obj[key] && obj[key] === '0') {
-    return true;
+    return true
   } else {
-    return false;
+    return false
   }
 }
 
@@ -72,16 +72,16 @@ export function getBoolean(obj, key) {
 export function getInt(obj, key) {
   if (obj && obj[key]) {
     if (isNumber(obj[key])) {
-      return obj[key];
+      return obj[key]
     } else {
-      const temp = parseInt(obj[key], 10);
+      const temp = parseInt(obj[key], 10)
       if (temp === 'NaN') {
-        return 0;
+        return 0
       }
-      return temp;
+      return temp
     }
   } else {
-    return 0;
+    return 0
   }
 }
 /**
@@ -93,17 +93,17 @@ export function getInt(obj, key) {
 export function getNumber(obj, key) {
   if (obj && obj[key]) {
     if (isNumber(obj[key])) {
-      return obj[key];
+      return obj[key]
     } else {
-      const temp = parseFloat(obj[key]);
+      const temp = parseFloat(obj[key])
       if (temp === 'NaN') {
-        return 0;
+        return 0
       } else {
-        return temp;
+        return temp
       }
     }
   } else {
-    return 0;
+    return 0
   }
 }
 // 获取价格进行直接显示
@@ -113,30 +113,30 @@ export function getNumber(obj, key) {
  * @param {string} key
  */
 export function getPrice(obj, key) {
-  const price = getNumber(obj, key);
+  const price = getNumber(obj, key)
   if (typeof price === 'string') {
-    return price;
+    return price
   }
-  return getPriceValue(price);
+  return getPriceValue(price)
 }
 
 export function getPriceValue(value) {
   if (value) {
-    value = value.toFixed(2) + '';
+    value = value.toFixed(2) + ''
 
-    let endStr = value.substr(value.length - 3, value.length);
+    let endStr = value.substr(value.length - 3, value.length)
     if (endStr === '.00') {
-      value = value.substr(0, value.length - 3);
+      value = value.substr(0, value.length - 3)
     }
-    endStr = value.substr(value.length - 1, value.length);
+    endStr = value.substr(value.length - 1, value.length)
     if (endStr === '0') {
-      const pos = value.lastIndexOf('.');
+      const pos = value.lastIndexOf('.')
       if (pos > 0 && pos + 3 === value.length) {
-        value = value.substr(0, value.length - 1);
+        value = value.substr(0, value.length - 1)
       }
     }
-    return value;
+    return value
   } else {
-    return '0';
+    return '0'
   }
 }

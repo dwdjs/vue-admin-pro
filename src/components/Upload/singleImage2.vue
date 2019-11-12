@@ -1,22 +1,22 @@
 <template>
   <div class="singleImageUpload2 upload-container">
     <el-upload
-      class="image-uploader"
       :data="dataObj"
-      drag
       :multiple="false"
       :show-file-list="false"
-      action="https://httpbin.org/post"
       :on-success="handleImageScucess"
+      class="image-uploader"
+      drag
+      action="https://httpbin.org/post"
     >
-      <i class="el-icon-upload"></i>
+      <i class="el-icon-upload"/>
       <div class="el-upload__text">Drag或<em>点击上传</em></div>
     </el-upload>
     <div v-show="imageUrl.length > 0" class="image-preview">
-      <div class="image-preview-wrapper" v-show="imageUrl.length > 1">
-        <img :src="imageUrl" />
+      <div v-show="imageUrl.length > 1" class="image-preview-wrapper">
+        <img :src="imageUrl" >
         <div class="image-preview-action">
-          <i @click="rmImage" class="el-icon-delete"></i>
+          <i class="el-icon-delete" @click="rmImage"/>
         </div>
       </div>
     </div>
@@ -24,55 +24,55 @@
 </template>
 
 <script>
-import { getToken } from '@/api/old/qiniu';
+import { getToken } from '@/api/old/qiniu'
 
 export default {
-  name: 'singleImageUpload2',
+  name: 'SingleImageUpload2',
   props: {
     value: String,
   },
   computed: {
     imageUrl() {
-      return this.value;
+      return this.value
     },
   },
   data() {
     return {
       tempUrl: '',
       dataObj: { token: '', key: '' },
-    };
+    }
   },
   methods: {
     rmImage() {
-      this.emitInput('');
+      this.emitInput('')
     },
     emitInput(val) {
-      this.$emit('input', val);
+      this.$emit('input', val)
     },
     handleImageScucess() {
-      this.emitInput(this.tempUrl);
+      this.emitInput(this.tempUrl)
     },
     beforeUpload() {
-      const that = this;
+      const that = this
       return new Promise((resolve, reject) => {
         getToken()
           .then(res => {
-            const key = res.data.qiniu_key;
-            const token = res.data.qiniu_token;
-            that.data.dataObj.token = token;
-            that.data.dataObj.key = key;
-            this.tempUrl = res.data.qiniu_url;
-            resolve(true);
+            const key = res.data.qiniu_key
+            const token = res.data.qiniu_token
+            that.data.dataObj.token = token
+            that.data.dataObj.key = key
+            this.tempUrl = res.data.qiniu_url
+            resolve(true)
           })
           .catch(err => {
-            console.log(err);
+            console.log(err)
             /* eslint prefer-promise-reject-errors: 0 */
-            reject(false);
-          });
-      });
+            reject(false)
+          })
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

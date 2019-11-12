@@ -1,4 +1,4 @@
-import { copy } from 'kit-qs';
+import { copy } from '@dwdjs/utils'
 
 /**
  * API 命名规则
@@ -7,8 +7,8 @@ import { copy } from 'kit-qs';
  * - 假数据增加 fake 前缀
  * - 便捷易用大于规则，程序是给人看的
  */
-let params = {};
-let reqHeaders = {};
+let params = {}
+let reqHeaders = {}
 
 // api 列表
 // TODO: 可提升性能，可以书写配置文件，但编译后（prod模式）直接为结果而无需再次计算得出
@@ -107,36 +107,36 @@ export const modelApis = {
   delTask: 'POST /trackTask/delete',
   updateTask: 'POST /trackTask/update',
   getTaskDetail: '/trackTask/detail',
-};
+}
 
 export const commonParams = {
   init(data) {
-    params = copy(data);
+    params = copy(data)
   },
   set(obj) {
-    Object.assign(params, obj);
+    Object.assign(params, obj)
   },
   get(key) {
-    return key ? copy(params[key]) : copy(params);
+    return key ? copy(params[key]) : copy(params)
   },
-};
+}
 
 export const headers = {
   init(data) {
-    reqHeaders = copy(data);
+    reqHeaders = copy(data)
   },
   set(obj) {
-    Object.assign(reqHeaders, obj);
+    Object.assign(reqHeaders, obj)
   },
   get(key) {
-    return key ? copy(reqHeaders[key]) : copy(reqHeaders);
+    return key ? copy(reqHeaders[key]) : copy(reqHeaders)
   },
-};
+}
 
 const apiConfig = {
   modelApis,
   commonParams,
   headers,
-};
+}
 
-export default apiConfig;
+export default apiConfig

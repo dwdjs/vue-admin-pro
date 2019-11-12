@@ -1,4 +1,4 @@
-import { param2Obj } from '@/utils';
+import { param2Obj } from '@/utils'
 
 // const localLogin = {
 //   admin: {
@@ -124,22 +124,22 @@ const apiLogin = {
   errno: 0,
   logid: 99,
   timestamp: 1540022369,
-};
+}
 
 // const userMap = {};
 
 export default {
   login: config => {
     // const { username } = JSON.parse(config.body);
-    return apiLogin;
+    return apiLogin
   },
   getUserInfo: config => {
-    console.log(config);
-    const { token } = param2Obj(config.url);
+    console.log(config)
+    const { token } = param2Obj(config.url)
     if (token) {
-      return apiLogin;
+      return apiLogin
     } else {
-      return false;
+      return false
     }
   },
   logout: () => {
@@ -149,6 +149,6 @@ export default {
       errno: 0,
       logid: 99,
       timestamp: 1539757407445,
-    };
+    }
   },
-};
+}

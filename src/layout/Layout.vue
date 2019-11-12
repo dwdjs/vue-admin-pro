@@ -1,38 +1,38 @@
 <template>
   <div
-    class="app-wrapper"
     v-loading.fullscreen.lock="loading"
-    element-loading-text="拼命加载中"
     :class="classObj"
+    class="app-wrapper"
+    element-loading-text="拼命加载中"
   >
     <template v-if="!loading">
       <div
-        class="drawer-bg"
         v-if="device === 'mobile' && sidebar.opened"
+        class="drawer-bg"
         @click="handleClickOutside"
-      ></div>
+      />
       <!-- <div class="kit-sidebar">
 
         <div class="kit-sidebar__body">
         </div>
       </div> -->
-      <sidebar class="sidebar-container"></sidebar>
+      <sidebar class="sidebar-container"/>
       <section class="main-container">
-        <navbar></navbar>
-        <tags-view></tags-view>
-        <app-main></app-main>
+        <navbar/>
+        <tags-view/>
+        <app-main/>
       </section>
     </template>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain, TagsView } from './components';
-import ResizeMixin from './mixin/ResizeHandler';
+import { Navbar, Sidebar, AppMain, TagsView } from './components'
+import ResizeMixin from './mixin/ResizeHandler'
 // import api from '@/api';
 
 export default {
-  name: 'layout',
+  name: 'Layout',
   components: {
     Navbar,
     Sidebar,
@@ -43,39 +43,39 @@ export default {
   data() {
     return {
       loading: true,
-    };
+    }
   },
   computed: {
     sidebar() {
-      return this.$store.state.app.sidebar;
+      return this.$store.state.app.sidebar
     },
     device() {
-      return this.$store.state.app.device;
+      return this.$store.state.app.device
     },
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile',
-      };
+      }
     },
   },
   created() {
-    this.getUserInfo();
+    this.getUserInfo()
   },
   methods: {
     handleClickOutside() {
-      this.$store.dispatch('closeSideBar', { withoutAnimation: false });
+      this.$store.dispatch('closeSideBar', { withoutAnimation: false })
     },
     // 获取当前管理员信息
     getUserInfo() {
       // api.getUserInfo()
       setTimeout(() => {
-        this.loading = false;
-      }, 300);
+        this.loading = false
+      }, 300)
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

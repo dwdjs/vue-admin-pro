@@ -1,49 +1,49 @@
-import device from '@/utils/device';
-import env from '@/config/env';
-import mini from '@/utils/mini';
+import device from '@/utils/device'
+import env from '@/config/env'
+import mini from '@/utils/mini'
 
 // https://myjsapi.alipay.com/jsapi/h5app-lifecycle.html
 // alipays://platformapi/startapp?appId=20000067&url=http%3A%2F%2Fm.taobao.com
-const { location } = window;
-let isBridgeReady = false;
-const fnListCaches = [];
-const isFunction = fn => typeof fn === 'function';
+const { location } = window
+let isBridgeReady = false
+const fnListCaches = []
+const isFunction = fn => typeof fn === 'function'
 
-console.log('load alipay jsbridge');
+console.log('load alipay jsbridge')
 
 function runReadyFn(jb) {
   for (let i = 0, len = fnListCaches.length; i < len; i++) {
-    fnListCaches[i](jb);
+    fnListCaches[i](jb)
   }
 }
 
 function jsBridgeReady() {
-  isBridgeReady = true;
+  isBridgeReady = true
   // 如果 jsbridge 已经注入则直接调用
-  console.info('alipay jsbridge ready');
+  console.info('alipay jsbridge ready')
   if (env.debug && !env.isEnv('prod')) {
-    mini.showToast('alipay jsbridge ready');
+    mini.showToast('alipay jsbridge ready')
   }
-  runReadyFn(window.AlipayJSBridge);
+  runReadyFn(window.AlipayJSBridge)
 }
 
 if (device.alipay) {
   if (window.AlipayJSBridge) {
-    jsBridgeReady && jsBridgeReady();
+    jsBridgeReady && jsBridgeReady()
   } else {
     // 如果没有注入则监听注入的事件
-    document.addEventListener('AlipayJSBridgeReady', jsBridgeReady, false);
+    document.addEventListener('AlipayJSBridgeReady', jsBridgeReady, false)
   }
 }
 
 const bridge = {
   ready(callback) {
-    if (!device.alipay || !isFunction(callback)) return;
+    if (!device.alipay || !isFunction(callback)) return
 
     if (!isBridgeReady) {
-      fnListCaches.push(callback);
+      fnListCaches.push(callback)
     } else {
-      callback && callback(window.AlipayJSBridge);
+      callback && callback(window.AlipayJSBridge)
     }
   },
 
@@ -51,14 +51,14 @@ const bridge = {
     bridge.ready(AlipayJSBridge => {
       AlipayJSBridge.call('setTitle', {
         title,
-      });
-    });
+      })
+    })
   },
 
   hideOptionMenu() {
     bridge.ready(AlipayJSBridge => {
-      AlipayJSBridge.call('hideOptionMenu');
-    });
+      AlipayJSBridge.call('hideOptionMenu')
+    })
   },
 
   // https://myjsapi.alipay.com/jsapi/native/start-share.html
@@ -71,8 +71,8 @@ const bridge = {
           // 点击了标题栏右边按钮
         },
         false
-      );
-    });
+      )
+    })
   },
 
   // 发起分享
@@ -82,7 +82,7 @@ const bridge = {
       content = '',
       imageUrl = '',
       url = location.href,
-    } = opts;
+    } = opts
     bridge.ready(AlipayJSBridge => {
       AlipayJSBridge.call(
         'startShare',
@@ -103,7 +103,7 @@ const bridge = {
           ],
         },
         data => {
-          console.log('当前用户点击的分享渠道名为：' + data.channelName);
+          console.log('当前用户点击的分享渠道名为：' + data.channelName)
           // 通过onlySelectChannel屏蔽掉自动分享功能后，自行调用shareToChannel接口进行单独分享
           AlipayJSBridge.call(
             'shareToChannel',
@@ -133,13 +133,13 @@ const bridge = {
               },
             },
             result => {
-              console.log(result);
+              console.log(result)
             }
-          );
+          )
         }
-      );
-    });
+      )
+    })
   },
-};
+}
 
-export default bridge;
+export default bridge
