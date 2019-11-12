@@ -11,7 +11,7 @@ import api from '@/api'
 import {
   // storage,
   session,
-} from '@/utils/storage'
+} from '@dwdjs/utils'
 
 // 主入口路由(需嵌套上左右整体布局)
 // const mainRoutes = {

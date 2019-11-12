@@ -5,7 +5,7 @@ import { isURL } from '@/utils/validate'
 import {
   // storage,
   session,
-} from '@/utils/storage'
+} from '@dwdjs/utils'
 
 const _import =
   process.env.NODE_ENV === 'production'

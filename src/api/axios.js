@@ -1,6 +1,5 @@
 import env from '@/config/env'
-import { storage } from '@/utils/storage'
-import { compact } from '@/utils'
+import { compactObject, storage } from '@dwdjs/utils'
 import { modelApis, commonParams, headers } from '@/api/api.config'
 import request from '@/api/request/axios'
 
@@ -15,7 +14,7 @@ const isMock = false
 
 // function request(url, options, success, fail) {
 //   const originUrl = regHttp.test(url) ? url : `${apiBaseUrl}${url}`;
-//   return _request(originUrl, compact(options), success, fail);
+//   return _request(originUrl, compactObject(options), success, fail);
 // }
 
 // 仅限本地调试支持
@@ -72,7 +71,7 @@ const apiList = Object.keys(modelApis).reduce((api, key) => {
     const originUrl = regHttp.test(url)
       ? url
       : `${env.scheme}//${apiBaseUrl}${url}`
-    const temp = compact(Object.assign({}, commonParams.get(), params))
+    const temp = compactObject(Object.assign({}, commonParams.get(), params))
     const header = headers.get()
     return request({
       url: originUrl,

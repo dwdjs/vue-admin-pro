@@ -1,7 +1,9 @@
 import api from '@/api'
-import { storage } from '@/utils/storage'
-// import cookie from '@/utils/cookie';
-import { isEmptyObj } from '@/utils/is'
+import {
+  // cookie,
+  storage,
+  isEmptyObject,
+} from '@dwdjs/utils'
 
 let userInfo = storage.get('userInfo') || {}
 
@@ -22,7 +24,7 @@ const user = {
   mutations: {
     // 全量更新
     SET_USERINFO: (state, data = {}) => {
-      if (isEmptyObj(data)) {
+      if (isEmptyObject(data)) {
         state.userInfo = {}
         state.logged = false
         storage.remove('userInfo')

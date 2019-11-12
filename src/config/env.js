@@ -2,8 +2,7 @@
 import debug from '@/config/debug'
 // import device from '@/utils/device';
 // import mini from '@/utils/mini';
-import { storage } from '@/utils/storage'
-import { uuid } from '@/utils'
+import { uuid, storage } from '@dwdjs/utils'
 
 const version = process.env.VUE_APP_VERSION
 const debugInfo = storage.get('debugInfo') || {

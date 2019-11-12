@@ -1,6 +1,5 @@
-import { stringify } from '@dwdjs/utils'
+import { stringify, storage } from '@dwdjs/utils'
 import env from '@/config/env'
-import { storage } from '@/utils/storage'
 import { modelApis, commonParams, headers } from '@/api/api.config'
 import _request from '@/api/request/fetch'
 // import mini from '@/utils/mini';
