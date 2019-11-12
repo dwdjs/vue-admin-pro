@@ -10,7 +10,8 @@ module.exports = {
   // extending airbnb config and config derived from eslint-config-prettier
   // https://www.npmjs.com/package/@vue/eslint-config-prettier
   // 检测rules 冲突: eslint --print-config . | eslint-config-prettier-check
-  extends: ['plugin:vue/essential', '@vue/prettier'],
+  // extends: ['plugin:vue/essential', '@vue/prettier'],
+  extends: ['plugin:vue/essential'],
   // plugins: ['prettier', 'vue'],
   // plugins: ['prettier', 'react'],
   globals: {
@@ -26,21 +27,21 @@ module.exports = {
     // prettier.config.js or .prettierrc.js
     // https://prettier.io/docs/en/options.html
     // https://segmentfault.com/a/1190000012909159
-    'prettier/prettier': [
-      'error',
-      {
-        // printWidth: 100,
-        singleQuote: true,
-        jsxBracketSameLine: true, // 是否多行JSX元素最后一行的末尾添加 > or 新起一行
-        trailingComma: 'es5', // none es5 or all
-        // arrowParens: 'avoid', // avoid or always 箭头函数是否总是加圆括号
-        proseWrap: 'always', // 当超出print width就折行
-        // parser: 'flow',
-        // semi: false,
-        // semicolons: true,
-        // bracketSpacing: true, // 花括号内部前后有空格
-      },
-    ],
+    // 'prettier/prettier': [
+    //   'error',
+    //   {
+    //     // printWidth: 100,
+    //     singleQuote: true,
+    //     jsxBracketSameLine: true, // 是否多行JSX元素最后一行的末尾添加 > or 新起一行
+    //     trailingComma: 'es5', // none es5 or all
+    //     // arrowParens: 'avoid', // avoid or always 箭头函数是否总是加圆括号
+    //     proseWrap: 'always', // 当超出print width就折行
+    //     // parser: 'flow',
+    //     // semi: false,
+    //     // semicolons: true,
+    //     // bracketSpacing: true, // 花括号内部前后有空格
+    //   },
+    // ],
     // 'comma-dangle': [
     //   'error',
     //   {
