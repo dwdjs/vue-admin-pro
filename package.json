@@ -1,6 +1,6 @@
 {
-  "name": "admin-x",
-  "version": "0.0.3",
+  "name": "vue-admin-pro",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
