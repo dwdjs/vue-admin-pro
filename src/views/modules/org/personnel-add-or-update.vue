@@ -5,14 +5,14 @@
     :visible.sync="visible"
   >
     <el-form
-      label-width="80px"
+      ref="dataForm"
       :model="dataForm"
       :rules="dataRule"
+      label-width="80px"
       @keyup.enter.native="dataFormSubmit()"
-      ref="dataForm"
     >
       <el-form-item label="姓名" prop="username">
-        <el-input v-model="dataForm.username" placeholder="姓名"></el-input>
+        <el-input v-model="dataForm.username" placeholder="姓名"/>
       </el-form-item>
       <el-form-item label="性别" size="mini" prop="gender">
         <el-radio-group v-model="dataForm.gender">
@@ -21,10 +21,10 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
+        <el-input v-model="dataForm.email" placeholder="邮箱"/>
       </el-form-item>
       <el-form-item label="手机号" prop="mobile">
-        <el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
+        <el-input v-model="dataForm.mobile" placeholder="手机号"/>
       </el-form-item>
       <!-- <el-form-item label="密码" prop="password" :class="{ 'is-required': !dataForm.id }">
         <el-input v-model="dataForm.password" type="password" placeholder="密码"></el-input>
@@ -39,31 +39,30 @@
           trigger="click"
         >
           <el-tree
+            ref="menuListTree"
             :data="menuList"
             :props="menuListTreeProps"
-            node-key="id"
-            ref="menuListTree"
-            accordion
-            @current-change="handleMenuListTreeCurrentChange"
             :default-expand-all="false"
             :highlight-current="true"
             :expand-on-click-node="false"
-          >
-          </el-tree>
+            node-key="id"
+            accordion
+            @current-change="handleMenuListTreeCurrentChange"
+          />
         </el-popover>
         <el-input
-          v-model="dataForm.deptName"
           v-popover:menuListPopover
+          v-model="dataForm.deptName"
           :readonly="true"
           placeholder="点击选择所属部门"
           class="menu-list__input"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="学历" prop="education">
-        <el-input v-model="dataForm.education" placeholder="学历"></el-input>
+        <el-input v-model="dataForm.education" placeholder="学历"/>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="dataForm.remark"></el-input>
+        <el-input v-model="dataForm.remark"/>
       </el-form-item>
       <!-- <el-form-item label="角色" size="mini" prop="roleIdList">
         <el-checkbox-group v-model="dataForm.roleIdList">
@@ -91,15 +90,15 @@
 </template>
 
 <script>
-import { isEmail, isMobile } from '@/utils/validate';
-import { treeDataTranslate } from '@/utils';
-import api from '@/api';
+import { isEmail, isMobile } from '@/utils/validate'
+import { treeDataTranslate } from '@/utils'
+import api from '@/api'
 
 const modelApi = {
   add: api.addPersonal,
   edit: api.updatePersonal,
   list: api.getDept,
-};
+}
 
 const defaultInfo = {
   id: undefined,
@@ -113,7 +112,7 @@ const defaultInfo = {
   remark: '',
   // avatar: '',
   state: 0,
-};
+}
 
 export default {
   data() {
@@ -135,18 +134,18 @@ export default {
     // }
     const validateEmail = (rule, value, callback) => {
       if (!isEmail(value)) {
-        callback(new Error('邮箱格式错误'));
+        callback(new Error('邮箱格式错误'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const validateMobile = (rule, value, callback) => {
       if (!isMobile(value)) {
-        callback(new Error('手机号格式错误'));
+        callback(new Error('手机号格式错误'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       visible: false,
       roleList: [],
@@ -183,7 +182,7 @@ export default {
         label: 'name',
         children: 'children',
       },
-    };
+    }
   },
   // filters: {
   //   sexFilter(value) {
@@ -195,66 +194,66 @@ export default {
     resetDataForm() {
       this.dataForm = {
         ...defaultInfo,
-      };
+      }
     },
     init(row = {}) {
-      this.resetDataForm();
+      this.resetDataForm()
       // if (row && row.password) row.password = '';
-      this.dataForm.id = row.id || 0;
+      this.dataForm.id = row.id || 0
 
       modelApi.list(
         {
           // type: 1,
         },
         res => {
-          this.menuList = treeDataTranslate(res.data);
-          this.visible = true;
+          this.menuList = treeDataTranslate(res.data)
+          this.visible = true
           this.$nextTick(() => {
-            this.$refs['dataForm'].resetFields();
-            Object.assign(this.dataForm, row);
+            this.$refs['dataForm'].resetFields()
+            Object.assign(this.dataForm, row)
             if (!this.dataForm.id) {
               // 新增
-              this.menuListTreeSetCurrentNode();
+              this.menuListTreeSetCurrentNode()
             } else {
               // 修改
               // Object.assign(this.dataForm, row);
               // this.dataForm.type = Number(row.type)
-              this.menuListTreeSetCurrentNode();
+              this.menuListTreeSetCurrentNode()
             }
-          });
+          })
         },
         err => {}
-      );
+      )
     },
     // 菜单树选中
     handleMenuListTreeCurrentChange(data, node) {
-      this.dataForm.deptId = data.id;
-      this.dataForm.deptName = data.name;
+      this.dataForm.deptId = data.id
+      this.dataForm.deptName = data.name
     },
     // 菜单树设置当前选中节点
     menuListTreeSetCurrentNode() {
-      this.$refs.menuListTree.setCurrentKey(this.dataForm.parentId);
+      this.$refs.menuListTree.setCurrentKey(this.dataForm.parentId)
       // const aa = this.$refs.menuListTree.getCurrentNode();
       // console.log(aa);
       // debugger
       this.dataForm.deptName = (this.$refs.menuListTree.getCurrentNode() || {})[
         'name'
-      ];
+      ]
     },
     // 表单提交
     dataFormSubmit() {
-      console.log(this.dataForm);
-      const isAdd = !this.dataForm.id;
+      console.log(this.dataForm)
+      const isAdd = !this.dataForm.id
       this.$refs['dataForm'].validate(valid => {
-        console.log(this.dataForm);
+        console.log(this.dataForm)
         if (valid) {
-          const type = isAdd ? 'add' : 'edit';
+          const type = isAdd ? 'add' : 'edit'
           modelApi[type](
             {
               ...this.dataForm,
             },
             res => {
-              this.visible = false;
+              this.visible = false
               // Object.assign(this.dataForm, res.data);
               // this.dataList.unshift(this.dataForm)
               this.$notify({
@@ -262,16 +261,16 @@ export default {
                 message: isAdd ? '创建成功' : '编辑成功',
                 type: 'success',
                 duration: 2000,
-              });
-              this.$emit('refreshDataList');
+              })
+              this.$emit('refreshDataList')
             },
             err => {}
-          );
+          )
         }
-      });
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="stylus">

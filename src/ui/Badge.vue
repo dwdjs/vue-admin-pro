@@ -1,13 +1,13 @@
 <template>
-  <span class="badge" :class="{ [`${this.position}`]: !!this.position }">
-    <slot></slot>
+  <span :class="{ [`${position}`]: !!position }" class="badge">
+    <slot/>
     <sup
       v-if="text"
       v-show="!hidden && text"
       :class="classes"
       :style="styles"
       @click="onClick"
-      >{{ badgeText }}</sup
+    >{{ badgeText }}</sup
     >
   </span>
 </template>
@@ -41,7 +41,7 @@
  * <Badge bg="blue" text="new">content</Badge>
  **/
 
-import PropTypes from 'vue-types';
+import PropTypes from 'vue-types'
 
 export default {
   name: 'Badge',
@@ -63,13 +63,13 @@ export default {
 
   beforeCreate() {
     if (!this.$parent.badges) {
-      this.$parent.badges = [];
+      this.$parent.badges = []
     }
-    this.$parent.badges.push(this);
+    this.$parent.badges.push(this)
   },
 
   ready() {
-    console.log(this.text);
+    console.log(this.text)
   },
 
   filters: {
@@ -80,25 +80,25 @@ export default {
 
   computed: {
     badgeText() {
-      const { text, max } = this.$props;
-      const overflowCount = Number(max);
-      const textNum = Number(text);
+      const { text, max } = this.$props
+      const overflowCount = Number(max)
+      const textNum = Number(text)
       // text 展示的数字或文案，当为数字时候，大于 max 时显示为 ${max}+，为 0 时隐藏
       // return (typeof text === 'number' && text > max) ? `${max}+` : text;
       // /* eslint no-self-compare: 0 */
       return !Number.isNaN(textNum) && text > overflowCount
         ? `${overflowCount}+`
-        : text;
+        : text
     },
     styles() {
       return [
         this.color ? { backgroundColor: this.color } : {},
         this.textColor ? { color: this.textColor } : {},
-      ];
+      ]
     },
     classes() {
-      const parent = this.$parent;
-      const { prefixCls, status, shape, dot } = this.$props;
+      const parent = this.$parent
+      const { prefixCls, status, shape, dot } = this.$props
       return {
         [`${prefixCls}-text`]: true,
         'is-dot': dot,
@@ -106,16 +106,16 @@ export default {
         [`${prefixCls}-${status}`]: status,
         [`is-${shape}`]: !dot && shape,
         [`is-selected`]: parent.badges.indexOf(this) === parent.activeKey,
-      };
+      }
     },
   },
 
   methods: {
     onClick() {
-      this.$emit('click', this.$parent.badges.indexOf(this));
+      this.$emit('click', this.$parent.badges.indexOf(this))
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

@@ -1,55 +1,55 @@
 <template>
   <div class="social-signup-container">
     <div class="sign-btn" @click="wechatHandleClick('wechat')">
-      <span class="wx-svg-container"
-        ><icon-svg icon-class="wechat" class="icon"></icon-svg
-      ></span>
+      <span 
+        class="wx-svg-container"
+      ><icon-svg icon-class="wechat" class="icon"/></span>
       微信
     </div>
     <div class="sign-btn" @click="tencentHandleClick('tencent')">
-      <span class="qq-svg-container"
-        ><icon-svg icon-class="qq" class="icon"></icon-svg
-      ></span>
+      <span 
+        class="qq-svg-container"
+      ><icon-svg icon-class="qq" class="icon"/></span>
       QQ
     </div>
   </div>
 </template>
 
 <script>
-import openWindow from '@/utils/openWindow';
+import openWindow from '@/utils/openWindow'
 
 export default {
-  name: 'social-signin',
+  name: 'SocialSignin',
   methods: {
     wechatHandleClick(thirdpart) {
-      this.$store.commit('SET_AUTH_TYPE', thirdpart);
-      const appid = 'xxxxx';
+      this.$store.commit('SET_AUTH_TYPE', thirdpart)
+      const appid = 'xxxxx'
       const redirectUri = encodeURIComponent(
         'xxx/redirect?redirect=' + window.location.origin + '/authredirect'
-      );
+      )
       const url =
         'https://open.weixin.qq.com/connect/qrconnect?appid=' +
         appid +
         '&redirect_uri=' +
         redirectUri +
-        '&response_type=code&scope=snsapi_login#wechat_redirect';
-      openWindow(url, thirdpart, 540, 540);
+        '&response_type=code&scope=snsapi_login#wechat_redirect'
+      openWindow(url, thirdpart, 540, 540)
     },
     tencentHandleClick(thirdpart) {
-      this.$store.commit('SET_AUTH_TYPE', thirdpart);
-      const clientId = 'xxxxx';
+      this.$store.commit('SET_AUTH_TYPE', thirdpart)
+      const clientId = 'xxxxx'
       const redirectUri = encodeURIComponent(
         'xxx/redirect?redirect=' + window.location.origin + '/authredirect'
-      );
+      )
       const url =
         'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' +
         clientId +
         '&redirect_uri=' +
-        redirectUri;
-      openWindow(url, thirdpart, 540, 540);
+        redirectUri
+      openWindow(url, thirdpart, 540, 540)
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

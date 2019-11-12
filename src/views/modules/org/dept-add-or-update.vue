@@ -5,11 +5,11 @@
     :visible.sync="visible"
   >
     <el-form
-      label-width="100px"
+      ref="dataForm"
       :model="dataForm"
       :rules="dataRule"
+      label-width="100px"
       @keyup.enter.native="dataFormSubmit()"
-      ref="dataForm"
     >
       <el-form-item label="上级部门" prop="parentName">
         <el-popover
@@ -18,48 +18,47 @@
           trigger="click"
         >
           <el-tree
+            ref="menuListTree"
             :data="menuList"
             :props="menuListTreeProps"
-            node-key="id"
-            ref="menuListTree"
-            accordion
-            @current-change="handleMenuListTreeCurrentChange"
             :default-expand-all="false"
             :highlight-current="true"
             :expand-on-click-node="false"
-          >
-          </el-tree>
+            node-key="id"
+            accordion
+            @current-change="handleMenuListTreeCurrentChange"
+          />
         </el-popover>
         <el-input
-          v-model="dataForm.parentName"
           v-popover:menuListPopover
+          v-model="dataForm.parentName"
           :readonly="true"
           placeholder="点击选择上级菜单"
           class="menu-list__input"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="部门名称" prop="name">
-        <el-input v-model="dataForm.name" placeholder="部门名称"></el-input>
+        <el-input v-model="dataForm.name" placeholder="部门名称"/>
       </el-form-item>
       <el-form-item label="部门地址" prop="address">
-        <el-input v-model="dataForm.address" placeholder="部门地址"></el-input>
+        <el-input v-model="dataForm.address" placeholder="部门地址"/>
       </el-form-item>
       <el-form-item label="部门网址" prop="url">
-        <el-input v-model="dataForm.url" placeholder="部门网址"></el-input>
+        <el-input v-model="dataForm.url" placeholder="部门网址"/>
       </el-form-item>
       <el-form-item label="部门职责" prop="scope">
-        <el-input v-model="dataForm.scope" placeholder="部门职责"></el-input>
+        <el-input v-model="dataForm.scope" placeholder="部门职责"/>
       </el-form-item>
       <el-form-item label="部门负责人" prop="leader">
-        <el-input v-model="dataForm.leader" placeholder="部门负责人"></el-input>
+        <el-input v-model="dataForm.leader" placeholder="部门负责人"/>
       </el-form-item>
       <el-form-item label="排序" prop="position">
         <el-input-number
           v-model="dataForm.position"
-          controls-position="right"
           :min="0"
+          controls-position="right"
           label="排序"
-        ></el-input-number>
+        />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -70,15 +69,15 @@
 </template>
 
 <script>
-import { treeDataTranslate } from '@/utils';
-import api from '@/api';
+import { treeDataTranslate } from '@/utils'
+import api from '@/api'
 // import Icon from '@/icons'
 
 const modelApi = {
   add: api.addDept,
   edit: api.updateDept,
   list: api.getDept,
-};
+}
 
 const defaultInfo = {
   id: undefined,
@@ -90,11 +89,11 @@ const defaultInfo = {
   leader: '0',
   scope: '',
   position: 0,
-};
+}
 
 export default {
   data() {
-    // const validateUrl = (rule, value, callback) => {
+    // const validURL = (rule, value, callback) => {
     //   if (value && !/\S/.test(value)) {
     //     callback(new Error('网站URL不能为空'))
     //   } else {
@@ -115,7 +114,7 @@ export default {
           { required: true, message: '上级部门不能为空', trigger: 'change' },
         ],
         // url: [
-        //   { validator: validateUrl, trigger: 'blur' },
+        //   { validator: validURL, trigger: 'blur' },
         // ],
       },
       menuList: [],
@@ -123,18 +122,18 @@ export default {
         label: 'name',
         children: 'children',
       },
-    };
+    }
   },
   created() {},
   methods: {
     resetDataForm() {
       this.dataForm = {
         ...defaultInfo,
-      };
+      }
     },
     init(row = {}) {
-      this.resetDataForm();
-      this.dataForm.id = row.id || 0;
+      this.resetDataForm()
+      this.dataForm.id = row.id || 0
 
       // if (!this.dataForm.id) {
       //   // 新增
@@ -156,52 +155,52 @@ export default {
           //   name: '一级菜单',
           //   children: treeDataTranslate(res.data.list),
           // }];
-          this.menuList = treeDataTranslate(res.data);
+          this.menuList = treeDataTranslate(res.data)
           // this.totalCount = res.data.total
-          this.visible = true;
+          this.visible = true
           this.$nextTick(() => {
-            this.$refs['dataForm'].resetFields();
-            Object.assign(this.dataForm, row);
+            this.$refs['dataForm'].resetFields()
+            Object.assign(this.dataForm, row)
             if (!this.dataForm.id) {
               // 新增
-              this.menuListTreeSetCurrentNode();
+              this.menuListTreeSetCurrentNode()
             } else {
               // 修改
               // Object.assign(this.dataForm, row);
               // this.dataForm.type = Number(row.type)
-              this.menuListTreeSetCurrentNode();
+              this.menuListTreeSetCurrentNode()
             }
-          });
+          })
         },
         err => {}
-      );
+      )
     },
     // 菜单树选中
     handleMenuListTreeCurrentChange(data, node) {
-      this.dataForm.parentId = data.id;
-      this.dataForm.parentName = data.name;
+      this.dataForm.parentId = data.id
+      this.dataForm.parentName = data.name
     },
     // 菜单树设置当前选中节点
     menuListTreeSetCurrentNode() {
-      this.$refs.menuListTree.setCurrentKey(this.dataForm.parentId);
+      this.$refs.menuListTree.setCurrentKey(this.dataForm.parentId)
       this.dataForm.parentName = (this.$refs.menuListTree.getCurrentNode() ||
-        {})['name'];
+        {})['name']
     },
     // 表单提交
     dataFormSubmit() {
-      console.log(this.dataForm);
-      const isAdd = !this.dataForm.id;
+      console.log(this.dataForm)
+      const isAdd = !this.dataForm.id
       this.$refs['dataForm'].validate(valid => {
-        console.log(this.dataForm);
+        console.log(this.dataForm)
         if (valid) {
-          const type = isAdd ? 'add' : 'edit';
+          const type = isAdd ? 'add' : 'edit'
           // this.dataForm.type = 'menu';
           modelApi[type](
             {
               ...this.dataForm,
             },
             res => {
-              this.visible = false;
+              this.visible = false
               // Object.assign(this.dataForm, res.data);
               // this.dataList.unshift(this.dataForm)
               this.$notify({
@@ -209,16 +208,16 @@ export default {
                 message: isAdd ? '创建成功' : '编辑成功',
                 type: 'success',
                 duration: 2000,
-              });
-              this.$emit('refreshDataList');
+              })
+              this.$emit('refreshDataList')
             },
             err => {}
-          );
+          )
         }
-      });
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="stylus">

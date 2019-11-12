@@ -1,7 +1,7 @@
 <template>
   <div class="tab-container">
     <el-tag>mounted times ：{{ createdTimes }}</el-tag>
-    <el-tabs style="margin-top:15px;" v-model="activeName" type="border-card">
+    <el-tabs v-model="activeName" style="margin-top:15px;" type="border-card">
       <el-tab-pane
         v-for="item in tabMapOptions"
         :label="item.label"
@@ -13,7 +13,7 @@
             v-if="activeName == item.key"
             :type="item.key"
             @create="showCreatedTimes"
-          ></tab-pane>
+          />
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import tabPane from './components/tabPane';
+import tabPane from './components/tabPane'
 
 export default {
-  name: 'tab',
+  name: 'Tab',
   components: { tabPane },
   data() {
     return {
@@ -36,14 +36,14 @@ export default {
       ],
       activeName: 'CN',
       createdTimes: 0,
-    };
+    }
   },
   methods: {
     showCreatedTimes() {
-      this.createdTimes = this.createdTimes + 1;
+      this.createdTimes = this.createdTimes + 1
     },
   },
-};
+}
 </script>
 
 <style scoped>

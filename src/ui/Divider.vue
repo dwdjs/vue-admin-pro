@@ -16,7 +16,7 @@
  * @example
  * <vue-divider :line=1 :lineWidth=10 gap="10 20">xxx</vue-divider>
  */
-import VueTypes from 'vue-types';
+import VueTypes from 'vue-types'
 
 export default {
   name: 'VueDivider',
@@ -43,32 +43,32 @@ export default {
       lineWidth,
       size,
       type,
-    } = this.$props;
+    } = this.$props
 
-    const $content = content || this.$slots.default;
+    const $content = content || this.$slots.default
     const wrapCls = {
       [`${prefixCls}`]: true,
       [`${prefixCls}-${type}`]: type,
-    };
+    }
 
     const lineStyle = {
       transform: `scaleY(${line})`,
       backgroundColor: lineColor,
-    };
-    if (lineWidth) {
-      lineStyle.width = `${lineWidth / 100}rem`;
     }
-    const leftPad = { ...lineStyle };
-    const rightPad = { ...lineStyle };
+    if (lineWidth) {
+      lineStyle.width = `${lineWidth / 100}rem`
+    }
+    const leftPad = { ...lineStyle }
+    const rightPad = { ...lineStyle }
     if (gap) {
       // 间距 1、4为间隔线外间距 2、3为间隔线内间距
       const [pad1, pad2 = pad1, pad3 = pad2, pad4 = pad1] = gap.split(
         /\s*,\s*| +/
-      );
-      leftPad.marginLeft = `${pad1 / 100}rem`;
-      leftPad.marginRight = `${pad2 / 100}rem`;
-      rightPad.marginLeft = `${pad3 / 100}rem`;
-      rightPad.marginRight = `${pad4 / 100}rem`;
+      )
+      leftPad.marginLeft = `${pad1 / 100}rem`
+      leftPad.marginRight = `${pad2 / 100}rem`
+      rightPad.marginLeft = `${pad3 / 100}rem`
+      rightPad.marginRight = `${pad4 / 100}rem`
     }
 
     return (
@@ -81,9 +81,9 @@ export default {
         </div>
         <div class={`${prefixCls}-right`} style={rightPad} />
       </div>
-    );
+    )
   },
-};
+}
 </script>
 
 <style lang="stylus" scope>

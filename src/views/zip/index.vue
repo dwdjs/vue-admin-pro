@@ -2,22 +2,22 @@
   <div class="app-container">
     <!-- $t is vue-i18n global function to translate lang -->
     <el-input
-      style="width:300px;"
       :placeholder="$t('zip.placeholder')"
-      prefix-icon="el-icon-document"
       v-model="filename"
-    ></el-input>
+      style="width:300px;"
+      prefix-icon="el-icon-document"
+    />
     <el-button
+      :loading="downloadLoading"
       style="margin-bottom:20px;"
       type="primary"
       icon="document"
       @click="handleDownload"
-      :loading="downloadLoading"
-      >{{ $t('zip.export') }} zip</el-button
+    >{{ $t('zip.export') }} zip</el-button
     >
     <el-table
-      :data="list"
       v-loading.body="listLoading"
+      :data="list"
       element-loading-text="拼命加载中"
       border
       fit
@@ -45,7 +45,7 @@
       </el-table-column>
       <el-table-column align="center" label="Date" width="220">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
+          <i class="el-icon-time"/>
           <span>{{ scope.row.display_time }}</span>
         </template>
       </el-table-column>
@@ -54,31 +54,31 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/old/article';
+import { fetchList } from '@/api/old/article'
 
 export default {
-  name: 'exportZip',
+  name: 'ExportZip',
   data() {
     return {
       list: null,
       listLoading: true,
       downloadLoading: false,
       filename: '',
-    };
+    }
   },
   created() {
-    this.fetchData();
+    this.fetchData()
   },
   methods: {
     fetchData() {
-      this.listLoading = true;
+      this.listLoading = true
       fetchList().then(res => {
-        this.list = res.data.items;
-        this.listLoading = false;
-      });
+        this.list = res.data.items
+        this.listLoading = false
+      })
     },
     handleDownload() {
-      this.downloadLoading = true;
+      this.downloadLoading = true
       // import('@/vendor/Export2Zip').then((zip) => {
       //   const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
       //   const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
@@ -89,8 +89,8 @@ export default {
       // })
     },
     formatJson(filterVal, jsonData) {
-      return jsonData.map(v => filterVal.map(j => v[j]));
+      return jsonData.map(v => filterVal.map(j => v[j]))
     },
   },
-};
+}
 </script>

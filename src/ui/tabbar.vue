@@ -1,6 +1,6 @@
 <template>
-  <div class="vue-tabbar" :class="{ 'is-fixed': fixed }">
-    <slot></slot>
+  <div :class="{ 'is-fixed': fixed }" class="vue-tabbar">
+    <slot/>
   </div>
 </template>
 
@@ -28,19 +28,19 @@
  * </vue-tabbar>
  */
 export default {
-  name: 'vue-tabbar',
+  name: 'VueTabbar',
 
   props: {
     fixed: Boolean,
-    value: {},
+    value: Object,
   },
 
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event);
+      console.log(tab, event)
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

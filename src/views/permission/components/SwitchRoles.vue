@@ -5,8 +5,8 @@
     </div>
     {{ $t('permission.switchRoles') }}：
     <el-radio-group v-model="switchRoles">
-      <el-radio-button label="editor"></el-radio-button>
-      <el-radio-button label="admin"></el-radio-button>
+      <el-radio-button label="editor"/>
+      <el-radio-button label="admin"/>
     </el-radio-group>
   </div>
 </template>
@@ -15,18 +15,18 @@
 export default {
   computed: {
     roles() {
-      return this.$store.getters.roles;
+      return this.$store.getters.roles
     },
     switchRoles: {
       get() {
-        return this.roles[0];
+        return this.roles[0]
       },
       set(val) {
-        this.$store.dispatch('ChangeRoles', val).then(() => {
-          this.$emit('change');
-        });
+        this.$store.dispatch('user/ChangeRoles', val).then(() => {
+          this.$emit('change')
+        })
       },
     },
   },
-};
+}
 </script>

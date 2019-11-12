@@ -1,22 +1,22 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <hamburger
+      :toggle-click="toggleSideBar"
+      :is-active="sidebar.opened"
       class="hamburger-container"
-      :toggleClick="toggleSideBar"
-      :isActive="sidebar.opened"
-    ></hamburger>
+    />
 
-    <breadcrumb class="breadcrumb-container"></breadcrumb>
+    <breadcrumb class="breadcrumb-container"/>
 
     <div class="right-menu">
-      <error-log class="errLog-container right-menu-item"></error-log>
+      <error-log class="errLog-container right-menu-item"/>
 
       <el-tooltip
-        effect="dark"
         :content="$t('navbar.screenfull')"
+        effect="dark"
         placement="bottom"
       >
-        <screenfull class="screenfull right-menu-item"></screenfull>
+        <screenfull class="screenfull right-menu-item"/>
       </el-tooltip>
 
       <!-- <lang-select class="international right-menu-item"></lang-select> -->
@@ -28,12 +28,12 @@
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
           <img
-            class="user-avatar"
             v-if="avatar"
             :src="avatar + '?imageView2/1/w/80/h/80'"
-          />
+            class="user-avatar"
+          >
           <span :v-else="avatar">{{ name || '管理员' }}</span>
-          <i class="el-icon-caret-bottom"></i>
+          <i class="el-icon-caret-bottom"/>
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
@@ -48,7 +48,7 @@
           </a> -->
           <!-- <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item> -->
           <el-dropdown-item divided>
-            <span @click="logout" style="display:block;">{{
+            <span style="display:block;" @click="logout">{{
               $t('navbar.logOut')
             }}</span>
           </el-dropdown-item>
@@ -59,13 +59,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import Breadcrumb from '@/components/Breadcrumb';
-import Hamburger from '@/components/Hamburger';
-import ErrorLog from '@/components/ErrorLog';
-import Screenfull from '@/components/Screenfull';
-import LangSelect from '@/components/LangSelect';
-import ThemePicker from '@/components/ThemePicker';
+import { mapGetters } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb'
+import Hamburger from '@/components/Hamburger'
+import ErrorLog from '@/components/ErrorLog'
+import Screenfull from '@/components/Screenfull'
+import LangSelect from '@/components/LangSelect'
+import ThemePicker from '@/components/ThemePicker'
 
 export default {
   components: {
@@ -81,16 +81,16 @@ export default {
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch('toggleSideBar');
+      this.$store.dispatch('app/toggleSideBar')
     },
     logout() {
-      this.$store.dispatch('Logout').then(() => {
+      this.$store.dispatch('user/Logout').then(() => {
         // 为了重新实例化vue-router对象 避免bug
-        window.location.reload();
-      });
+        window.location.reload()
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

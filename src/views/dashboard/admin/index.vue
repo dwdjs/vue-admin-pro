@@ -69,10 +69,10 @@ const lineChartData = {
     expectedData: [130, 140, 141, 142, 145, 150, 160],
     actualData: [120, 82, 91, 154, 162, 140, 130],
   },
-};
+}
 
 export default {
-  name: 'dashboard-admin',
+  name: 'DashboardAdmin',
   components: {
     // GithubCorner,
     // PanelGroup,
@@ -87,14 +87,14 @@ export default {
   data() {
     return {
       lineChartData: lineChartData.newVisitis,
-    };
+    }
   },
   methods: {
     handleSetLineChartData(type) {
-      this.lineChartData = lineChartData[type];
+      this.lineChartData = lineChartData[type]
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

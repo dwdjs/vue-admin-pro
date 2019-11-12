@@ -3,10 +3,10 @@
     <el-form :inline="true" :model="queryForm">
       <el-form-item label="">
         <el-input
-          placeholder="姓名或账户"
           v-model="queryForm.title"
+          placeholder="姓名或账户"
           @keyup.enter.native="paginate(1)"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="paginate(1)">搜索</el-button>
@@ -14,8 +14,8 @@
       </el-form-item>
     </el-form>
     <el-table
-      :data="list"
       v-loading.body="listLoading"
+      :data="list"
       element-loading-text="Loading"
       header-row-class-name="el-table-head"
       border
@@ -28,8 +28,8 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <el-table-column label="姓名" prop="name"></el-table-column>
-      <el-table-column label="账户" prop="account"></el-table-column>
+      <el-table-column label="姓名" prop="name"/>
+      <el-table-column label="账户" prop="account"/>
       <el-table-column label="性别" width="110">
         <template slot-scope="scope">
           <span>{{ scope.row.sex | sexFilter }}</span>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import api from '@/api';
+import api from '@/api'
 // import { getAccountList } from '@/api/old/table'
 
 export default {
@@ -78,12 +78,12 @@ export default {
         per_page: 20, // 固定不变
         total: 0,
       },
-    };
+    }
   },
   filters: {
     sexFilter(value) {
-      const sexMap = ['未知', '男', '女'];
-      return sexMap[value];
+      const sexMap = ['未知', '男', '女']
+      return sexMap[value]
     },
     statusFilter(status) {
       const statusMap = {
@@ -94,23 +94,23 @@ export default {
         manager: 'danger',
         general: 'primary',
         anonymous: 'gray',
-      };
-      return statusMap[status];
+      }
+      return statusMap[status]
     },
   },
   created() {
-    this.fetchData();
+    this.fetchData()
   },
   methods: {
     fetchData() {
-      this.listLoading = true;
+      this.listLoading = true
       api.getUser(
         {},
         res => {
-          console.log(res);
+          console.log(res)
         },
         err => {}
-      );
+      )
       // getAccountList({
       //   ...this.listQuery,
       // }).then((res) => {
@@ -126,10 +126,10 @@ export default {
       // 添加用户
     },
     onUpdate(...rest) {
-      console.log(rest);
+      console.log(rest)
     },
     onChangeStatus(...rest) {
-      console.log(rest);
+      console.log(rest)
     },
     onRemove(id) {
       this.$confirm('确认删除该用户?', '提示', {
@@ -138,9 +138,9 @@ export default {
         type: 'warning',
       })
         .then(() => {
-          this.onDelete(id);
+          this.onDelete(id)
         })
-        .catch(() => {});
+        .catch(() => {})
     },
     onDelete(id) {
       // this.$api.removeZt({ id }).then((res) => {
@@ -153,5 +153,5 @@ export default {
       // })
     },
   },
-};
+}
 </script>

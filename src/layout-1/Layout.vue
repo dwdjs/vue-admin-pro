@@ -1,39 +1,39 @@
 <!-- 基础模板 -->
 <template>
   <section
-    class="layout-base"
     :class="{ 'is-header': isShowHeader, 'is-tabbar': isShowTabBar }"
+    class="layout-base"
   >
     <cm-header
       v-if="isShowHeader"
-      class="layout-header"
-      :class="{ show: isShowHeader }"
       slot="header"
-      absolute
+      :class="{ show: isShowHeader }"
       :title="title"
-    ></cm-header>
+      class="layout-header"
+      absolute
+    />
     <transition :name="transition">
       <keep-alive :include="$store.getters.keepAliveList">
         <div class="router-container">
           <router-view
-            class="router-view page-container"
             id="rootContainer"
-          ></router-view>
+            class="router-view page-container"
+          />
         </div>
       </keep-alive>
     </transition>
     <tabbar
       v-if="isShowTabBar"
-      class="layout-tabbar"
-      :class="{ show: isShowTabBar }"
       slot="bottom"
+      :class="{ show: isShowTabBar }"
       :value="tabbarVal"
-    ></tabbar>
+      class="layout-tabbar"
+    />
     <ShareShade
       v-if="!ismsf"
-      :showShareShade="showShareMask"
+      :show-share-shade="showShareMask"
       @click.native="$store.dispatch('setShareMask', false)"
-    ></ShareShade>
+    />
   </section>
 </template>
 
@@ -48,11 +48,11 @@ import {
   // mapActions,
   mapState,
   // mapGetters,
-} from 'vuex';
-import device from '@/utils/device';
-import { Header, ViewBox } from '@/ui';
-import TabBar from '@/components/tabbar.vue';
-import ShareShade from '@/components/ShareShade';
+} from 'vuex'
+import device from '@/utils/device'
+import { Header, ViewBox } from '@/ui'
+import TabBar from '@/components/tabbar.vue'
+import ShareShade from '@/components/ShareShade'
 // console.log(device);
 const hideHeader = [
   'index',
@@ -63,8 +63,8 @@ const hideHeader = [
   'setup',
   'shopsearch',
   'login',
-];
-const showTabBar = ['index', 'shop', 'message', 'profile'];
+]
+const showTabBar = ['index', 'shop', 'message', 'profile']
 export default {
   name: 'Layout',
   props: {
@@ -82,7 +82,7 @@ export default {
       // tabbarVal: 'index',
       // isMsf
       ismsf: device.msf, // 是否是蜜
-    };
+    }
   },
   computed: {
     ...mapState({
@@ -95,32 +95,32 @@ export default {
     // 是否显示header
     isShowHeader() {
       if (device.msf) {
-        return false;
+        return false
       }
       if (hideHeader.indexOf(this.name) > -1) {
-        return false;
+        return false
       }
-      return true;
+      return true
     },
     // 是否显示tabbar
     isShowTabBar() {
       if (device.msf) {
-        return false;
+        return false
       }
       if (showTabBar.indexOf(this.name) > -1) {
-        return true;
+        return true
       }
-      return false;
+      return false
     },
     tabbarVal() {
       if (showTabBar.indexOf(this.name) > -1) {
-        return this.name;
+        return this.name
       }
-      return 'index';
+      return 'index'
     },
     // header
     title() {
-      return (this.route.meta && this.route.meta.title) || '';
+      return (this.route.meta && this.route.meta.title) || ''
     },
   },
   // watch $route 决定使用哪种过渡
@@ -141,7 +141,7 @@ export default {
       // }
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

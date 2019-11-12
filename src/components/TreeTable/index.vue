@@ -4,46 +4,48 @@
       <template slot-scope="scope">
         <span
           v-for="space in scope.row._level"
-          class="ms-tree-space"
           :key="space"
-        ></span>
+          class="ms-tree-space"
+        />
         <span
-          class="tree-ctrl"
           v-if="iconShow(0, scope.row)"
+          class="tree-ctrl"
           @click="toggleExpanded(scope.$index)"
         >
-          <i v-if="!scope.row._expanded" class="el-icon-plus"></i>
-          <i v-else class="el-icon-minus"></i>
+          <i v-if="!scope.row._expanded" class="el-icon-plus"/>
+          <i v-else class="el-icon-minus"/>
         </span>
         {{ scope.$index }}
       </template>
     </el-table-column>
     <el-table-column
-      v-else
       v-for="(column, index) in columns"
+      v-else
       :key="column.value"
       :label="column.text"
       :width="column.width"
     >
       <template slot-scope="scope">
+        <template v-if="index === 0">
+          <span
+
+            v-for="space in scope.row._level"
+            :key="space"
+            class="ms-tree-space"
+          />
+        </template>
         <span
-          v-if="index === 0"
-          v-for="space in scope.row._level"
-          class="ms-tree-space"
-          :key="space"
-        ></span>
-        <span
-          class="tree-ctrl"
           v-if="iconShow(index, scope.row)"
+          class="tree-ctrl"
           @click="toggleExpanded(scope.$index)"
         >
-          <i v-if="!scope.row._expanded" class="el-icon-plus"></i>
-          <i v-else class="el-icon-minus"></i>
+          <i v-if="!scope.row._expanded" class="el-icon-plus"/>
+          <i v-else class="el-icon-minus"/>
         </span>
         {{ scope.row[column.value] }}
       </template>
     </el-table-column>
-    <slot></slot>
+    <slot/>
   </el-table>
 </template>
 
@@ -52,10 +54,10 @@
   Auth: Lei.j1ang
   Created: 2018/1/19-13:59
 */
-import treeToArray from './eval';
+import treeToArray from './eval'
 
 export default {
-  name: 'treeTable',
+  name: 'TreeTable',
   props: {
     data: {
       type: [Array, Object],
@@ -75,18 +77,18 @@ export default {
   computed: {
     // 格式化数据源
     formatData() {
-      let tmp;
+      let tmp
       if (!Array.isArray(this.data)) {
-        tmp = [this.data];
+        tmp = [this.data]
       } else {
-        tmp = this.data;
+        tmp = this.data
       }
-      const func = this.evalFunc || treeToArray;
+      const func = this.evalFunc || treeToArray
       const args = this.evalArgs
         ? Array.concat([tmp, this.expandAll], this.evalArgs)
-        : [tmp, this.expandAll];
+        : [tmp, this.expandAll]
       /* eslint prefer-spread: 0 */
-      return func.apply(null, args);
+      return func.apply(null, args)
     },
   },
   methods: {
@@ -94,23 +96,23 @@ export default {
     showRow(row) {
       const show = row.row.parent
         ? row.row.parent._expanded && row.row.parent._show
-        : true;
-      row.row._show = show;
+        : true
+      row.row._show = show
       return show
         ? 'animation:treeTableShow 1s;-webkit-animation:treeTableShow 1s;'
-        : 'display:none;';
+        : 'display:none;'
     },
     // 切换下级是否展开
     toggleExpanded(trIndex) {
-      const record = this.formatData[trIndex];
-      record._expanded = !record._expanded;
+      const record = this.formatData[trIndex]
+      record._expanded = !record._expanded
     },
     // 图标显示
     iconShow(index, record) {
-      return index === 0 && record.children && record.children.length > 0;
+      return index === 0 && record.children && record.children.length > 0
     },
   },
-};
+}
 </script>
 <style>
 @keyframes treeTableShow {

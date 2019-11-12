@@ -1,19 +1,19 @@
 <template>
   <div class="app-container">
     <el-input
-      placeholder="Filter keyword"
       v-model="filterText"
+      placeholder="Filter keyword"
       style="margin-bottom:30px;"
-    ></el-input>
+    />
 
     <el-tree
-      class="filter-tree"
+      ref="tree2"
       :data="data2"
       :props="defaultProps"
-      default-expand-all
       :filter-node-method="filterNode"
-      ref="tree2"
-    ></el-tree>
+      class="filter-tree"
+      default-expand-all
+    />
   </div>
 </template>
 
@@ -21,14 +21,14 @@
 export default {
   watch: {
     filterText(val) {
-      this.$refs.tree2.filter(val);
+      this.$refs.tree2.filter(val)
     },
   },
 
   methods: {
     filterNode(value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
+      if (!value) return true
+      return data.label.indexOf(value) !== -1
     },
   },
 
@@ -89,7 +89,7 @@ export default {
         children: 'children',
         label: 'label',
       },
-    };
+    }
   },
-};
+}
 </script>

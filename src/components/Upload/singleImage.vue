@@ -1,22 +1,24 @@
 <template>
   <div class="upload-container">
     <el-upload
-      class="image-uploader"
       :data="dataObj"
-      drag
       :multiple="false"
       :show-file-list="false"
+      :on-success="handleImageSuccess"
+      class="image-uploader"
+      drag
       action="https://httpbin.org/post"
-      :on-success="handleImageScucess"
     >
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+      <i class="el-icon-upload" />
+      <div class="el-upload__text">
+        将文件拖到此处，或<em>点击上传</em>
+      </div>
     </el-upload>
     <div class="image-preview">
-      <div class="image-preview-wrapper" v-show="imageUrl.length > 1">
-        <img :src="imageUrl + '?imageView2/1/w/200/h/200'" />
+      <div v-show="imageUrl.length>1" class="image-preview-wrapper">
+        <img :src="imageUrl+'?imageView2/1/w/200/h/200'">
         <div class="image-preview-action">
-          <i @click="rmImage" class="el-icon-delete"></i>
+          <i class="el-icon-delete" @click="rmImage" />
         </div>
       </div>
     </div>
@@ -24,56 +26,58 @@
 </template>
 
 <script>
-// 预览效果见付费文章
-import { getToken } from '@/api/old/qiniu';
+import { getToken } from '@/api/qiniu'
 
 export default {
-  name: 'singleImageUpload',
+  name: 'SingleImageUpload',
   props: {
-    value: String,
-  },
-  computed: {
-    imageUrl() {
-      return this.value;
+    value: {
+      type: String,
+      default: '',
     },
   },
   data() {
     return {
       tempUrl: '',
       dataObj: { token: '', key: '' },
-    };
+    }
+  },
+  computed: {
+    imageUrl() {
+      return this.value
+    },
   },
   methods: {
     rmImage() {
-      this.emitInput('');
+      this.emitInput('')
     },
     emitInput(val) {
-      this.$emit('input', val);
+      this.$emit('input', val)
     },
-    handleImageScucess() {
-      this.emitInput(this.tempUrl);
+    handleImageSuccess() {
+      this.emitInput(this.tempUrl)
     },
     beforeUpload() {
-      const that = this;
+      const that = this
       return new Promise((resolve, reject) => {
         getToken()
           .then(res => {
-            const key = res.data.qiniu_key;
-            const token = res.data.qiniu_token;
-            that.data.dataObj.token = token;
-            that.data.dataObj.key = key;
-            this.tempUrl = res.data.qiniu_url;
-            resolve(true);
+            const key = res.data.qiniu_key
+            const token = res.data.qiniu_token
+            that.data.dataObj.token = token
+            that.data.dataObj.key = key
+            this.tempUrl = res.data.qiniu_url
+            resolve(true)
           })
           .catch(err => {
-            console.log(err);
+            console.log(err)
             /* eslint prefer-promise-reject-errors: 0 */
-            reject(false);
-          });
-      });
+            reject(false)
+          })
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

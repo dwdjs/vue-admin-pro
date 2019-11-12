@@ -5,21 +5,21 @@
         <router-link
           :to="{ name: 'dashboard' }"
           class="kit-sidebar__brand-lg"
-          >{{ `${site.title}${site.desc}` }}</router-link
+        >{{ `${site.title}${site.desc}` }}</router-link
         >
         <router-link
           :to="{ name: 'dashboard' }"
           class="kit-sidebar__brand-mini"
-          >{{ site.title }}</router-link
+        >{{ site.title }}</router-link
         >
       </h1>
     </div>
-    <el-scrollbar class="kit-sidebar__body" wrapClass="scrollbar-wrapper">
+    <el-scrollbar class="kit-sidebar__body" wrap-class="scrollbar-wrapper">
       <el-menu
-        mode="vertical"
         :show-timeout="200"
         :default-active="$route.path"
         :collapse="isCollapse"
+        mode="vertical"
         background-color="#304156"
         text-color="#bfcbd9"
         active-text-color="#409EFF"
@@ -29,16 +29,15 @@
           :key="route.name"
           :item="route"
           :base-path="route.path"
-        >
-        </sidebar-item>
+        />
       </el-menu>
     </el-scrollbar>
   </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import SidebarItem from './SidebarItem';
+import { mapGetters } from 'vuex'
+import SidebarItem from './SidebarItem'
 // import api from '@/api';
 
 export default {
@@ -51,7 +50,7 @@ export default {
       'site',
     ]),
     isCollapse() {
-      return !this.sidebar.opened;
+      return !this.sidebar.opened
     },
   },
   created() {
@@ -60,7 +59,7 @@ export default {
     // }, (err) => {
     // })
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

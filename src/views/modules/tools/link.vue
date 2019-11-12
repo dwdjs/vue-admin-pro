@@ -10,22 +10,21 @@
     <div class="fr link-parse">
       <h4>链接解析</h4>
       <el-input
-        type="textarea"
         :rows="9"
-        placeholder="请输入内容"
         v-model="textarea"
-      >
-      </el-input>
+        type="textarea"
+        placeholder="请输入内容"
+      />
       <p>解析如下：{{ linkCheckTip }}</p>
       <div class="content">
         <pre class="parse-code">{{ parseTextarea }}</pre>
       </div>
     </div>
-    <el-form ref="form" class="pr" :model="form" label-width="120px">
-      <el-form-item class="qrcode" v-show="qrcode">
+    <el-form ref="form" :model="form" class="pr" label-width="120px">
+      <el-form-item v-show="qrcode" class="qrcode">
         <div class="output">
           <div class="output-item">
-            <img :src="qrcode" width="160" height="100%" alt="" />
+            <img :src="qrcode" width="160" height="100%" alt="" >
           </div>
         </div>
       </el-form-item>
@@ -37,7 +36,7 @@
           <a
             class="red"
             href="http://bi.doweidu.com/#/manage/spm?show_add=1&is_miniapp=1"
-            >去新站点
+          >去新站点
           </a>
         </p>
       </el-form-item>
@@ -73,12 +72,12 @@
           placeholder="请选择"
         >
           <el-option
+            v-for="(item, index) in fromList"
             :label="item.label"
             :value="item.value"
             :disabled="item.disabled"
             :key="index"
-            v-for="(item, index) in fromList"
-          ></el-option>
+          />
         </el-select>
       </el-form-item>
       <!-- <el-form-item label="跳转到哪里">
@@ -112,9 +111,9 @@
       -->
       <el-form-item v-show="show('toApp')" label="跳转到哪里">
         <el-input
-          placeholder="请输入 appid=xxx"
           v-model="form.toAppIdString"
           :disabled="!!form.toAppId"
+          placeholder="请输入 appid=xxx"
           class="input-with-select"
         >
           <!-- <el-cascader
@@ -126,14 +125,14 @@
             placeholder="请选择"
           >
           </el-cascader> -->
-          <el-select v-model="form.toAppId" slot="prepend" placeholder="请选择">
+          <el-select slot="prepend" v-model="form.toAppId" placeholder="请选择">
             <el-option
+              v-for="(item, index) in toList"
               :label="item.label"
               :value="item.value"
               :disabled="item.disabled"
               :key="index"
-              v-for="(item, index) in toList"
-            ></el-option>
+            />
           </el-select>
         </el-input>
       </el-form-item>
@@ -144,51 +143,47 @@
           class="input-with-select"
         >
           <el-select
-            v-model="form.pageName"
             slot="prepend"
+            v-model="form.pageName"
             placeholder="请选择"
           >
             <el-option
+              v-for="(item, index) in pageList"
               :label="item.label"
               :value="item.value"
               :disabled="item.disabled"
               :key="index"
-              v-for="(item, index) in pageList"
-            ></el-option>
+            />
           </el-select>
         </el-input>
       </el-form-item>
       <el-form-item v-show="show('pageQuery')" label="页面参数">
         <el-input
-          placeholder="如需要参数，请输入页面参数 如 id=xxx topic_code=xxx"
           v-model="form.pageQueryString"
+          placeholder="如需要参数，请输入页面参数 如 id=xxx topic_code=xxx"
           class="input"
-        >
-        </el-input>
+        />
       </el-form-item>
       <el-form-item v-show="show('httpsUrl')" label="https链接">
         <el-input
-          placeholder="如: https://topic.doweidu.com/?id=6633dc9c5148b8d7a5057bc85d80c922"
           v-model="form.httpsUrl"
+          placeholder="如: https://topic.doweidu.com/?id=6633dc9c5148b8d7a5057bc85d80c922"
           class="input"
-        >
-        </el-input>
+        />
       </el-form-item>
       <el-form-item v-show="show('bizParams')" label="统计参数">
         <el-input
-          placeholder="请输入渠道统计参数 如 spm=xxx&channel_id=xxx"
           v-model="form.bizParamsString"
+          placeholder="请输入渠道统计参数 如 spm=xxx&channel_id=xxx"
           class="input"
-        >
-        </el-input>
+        />
       </el-form-item>
       <el-form-item v-show="show('extraData')" label="扩展参数">
         <el-input
-          placeholder="其他小程序引流，可能需要扩展参数 extraData，格式同 spm=xxx&channel_id=xxx"
           v-model="form.extraDataString"
+          placeholder="其他小程序引流，可能需要扩展参数 extraData，格式同 spm=xxx&channel_id=xxx"
           class="input"
-        >
-        </el-input>
+        />
       </el-form-item>
       <!-- <el-form-item label="开关" v-show="show('shorUrl')">
         <label class="inline-item">
@@ -202,9 +197,9 @@
             class="output-item"
             style="white-space: pre; color: red;"
             v-html="form.tip"
-          ></div>
+          />
         </div>
-        <div class="output" v-show="show('shorUrl')">
+        <div v-show="show('shorUrl')" class="output">
           <el-button class="mtb10" type="primary" @click="onSubmit">
             使用短链接
           </el-button>
@@ -213,7 +208,7 @@
           </div>
           <div class="output-item">{{ shortTargetUrl }}</div> -->
           <!-- <div class="output-item" v-show="shortUrl">短链接地址：</div> -->
-          <div class="output-item" :title="shortTargetUrl">{{ shortUrl }}</div>
+          <div :title="shortTargetUrl" class="output-item">{{ shortUrl }}</div>
         </div>
       </el-form-item>
 
@@ -235,13 +230,13 @@
 <script>
 // import { ajax } from '@/utils/request';
 // import base64 from '@/utils/base64';
-import axios from 'axios';
-import config from './link/config.js';
-import { stringify, parse, MiniLink, miniRules } from './link/index';
+import axios from 'axios'
+import config from './link/config.js'
+import { stringify, parse, MiniLink, miniRules } from './link/index'
 
 // const aliapp = new MiniLink(miniRules.aliapp);
 // const wxapp = new MiniLink(miniRules.wxapp);
-let link = () => {};
+let link = () => {}
 
 // https://short.doweidu.com/yourls-api.php?signature=468b913cc6&action=shorturl&url=https%3A%2F%2Fdoweidu.com%3Fa%3Db%26c%3Dd&format=json
 
@@ -257,11 +252,11 @@ const defaultData = {
   extraDataString: '',
   tip: '',
   // output: '',
-};
+}
 
 function isValidUrl(url) {
-  const pattern = /^(?:(?:https?):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
-  return !!pattern.test(url);
+  const pattern = /^(?:(?:https?):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i
+  return !!pattern.test(url)
 }
 
 export default {
@@ -281,53 +276,53 @@ export default {
       textarea: '',
       // 'alipays://platformapi/startapp?appId=2019032563719067&page=pages%2findex&query=source%3d%e5%a5%bd%e9%a3%9f%e6%9c%9f',
       // 'alipays://platformapi/startApp?appId=2017112000051610&page=pages%2Ftopic%2Ftopic%3Furl%3Dhttps%253A%252F%252Ftopic.doweidu.com%252F%253Fid%253D6633dc9c5148b8d7a5057bc85d80c922&query=spm%3D123%26channel_id%3D456',
-    };
+    }
   },
   computed: {
     linkCheckTip() {
-      return '';
+      return ''
       // if (this.textarea === '') return;
       // return '(暂未支持正确性校验)';
     },
     fromList() {
-      return config[this.minitype].fromList;
+      return config[this.minitype].fromList
     },
     toList() {
-      return config[this.minitype].toList;
+      return config[this.minitype].toList
     },
     pathnameTip() {
-      let tipPath = 'xxx';
+      let tipPath = 'xxx'
       if (this.minitype !== 'h5') {
-        tipPath = `pages/xxx/xxx`;
+        tipPath = `pages/xxx/xxx`
       }
-      return `请输入 ${tipPath}，无数据默认跳首页`;
+      return `请输入 ${tipPath}，无数据默认跳首页`
     },
     pageList() {
-      const { toAppId } = this.form;
-      const { toList = [] } = this;
-      const toApp = toList.find(item => item.value === toAppId) || {};
+      const { toAppId } = this.form
+      const { toList = [] } = this
+      const toApp = toList.find(item => item.value === toAppId) || {}
       /* eslint vue/no-side-effects-in-computed-properties: 0 */
       // this.toApp = toApp;
-      let pageList = toApp.children || [];
+      let pageList = toApp.children || []
       // console.log(pageList);
-      return pageList;
+      return pageList
     },
     appData() {
-      const { minitype, form, fromList = [], toList = [] } = this;
+      const { minitype, form, fromList = [], toList = [] } = this
       const fromApp =
-        fromList.find(item => item.value === this.form.fromAppValue) || {};
-      const toApp = toList.find(item => item.value === this.form.toAppId) || {};
-      let linkType = fromApp.type;
-      const pageQuery = parse(form.pageQueryString.trim());
-      const bizParams = parse(form.bizParamsString.trim());
-      const extraData = parse(form.extraDataString.trim());
+        fromList.find(item => item.value === this.form.fromAppValue) || {}
+      const toApp = toList.find(item => item.value === this.form.toAppId) || {}
+      let linkType = fromApp.type
+      const pageQuery = parse(form.pageQueryString.trim())
+      const bizParams = parse(form.bizParamsString.trim())
+      const extraData = parse(form.extraDataString.trim())
       const appId =
-        form.toAppId || (parse(form.toAppIdString).appid || '').trim();
+        form.toAppId || (parse(form.toAppIdString).appid || '').trim()
       // 确定链接生成类型
       if (fromApp.type === toApp.type && fromApp.value !== toApp.value) {
-        linkType = 'miniapp';
+        linkType = 'miniapp'
       } else if (minitype === 'h5') {
-        linkType = 'https';
+        linkType = 'https'
       }
       const data = {
         minitype,
@@ -341,12 +336,12 @@ export default {
         linkType,
         fromApp,
         toApp,
-      };
+      }
       // if (form.useShortUrl && form.httpsUrl) {
       //   data.shortUrl = '';
       // }
-      console.log(data);
-      return data;
+      console.log(data)
+      return data
     },
     parseTextarea() {
       // 提取必要数据
@@ -355,50 +350,50 @@ export default {
       // alipays://platformapi/startApp?appId=2017112000051610&page=pages%2Ftopic%2Ftopic%3Furl%3Dhttps%253A%252F%252Ftopic.doweidu.com%252F%253Fid%253D6633dc9c5148b8d7a5057bc85d80c922&query=spm%3D123%26channel_id%3D456
 
       //  alipays://platformapi/startApp?appId=2017112000051610&page=pages%2Fdetail%2Fdetail%3Fid%3D123&query=spm%3D456%26channel_id%3Dhuabei
-      const textarea = this.textarea.trim() || '';
-      const result = {};
+      const textarea = this.textarea.trim() || ''
+      const result = {}
       if (textarea) {
-        this.qrcode = textarea;
+        this.qrcode = textarea
       }
-      let temp = parse(textarea);
+      let temp = parse(textarea)
       if (/^https:\/\/ds\.alipay\.com\//.test(textarea)) {
-        const schemeArr = temp.scheme.split('?');
-        temp = parse(schemeArr[1]);
+        const schemeArr = temp.scheme.split('?')
+        temp = parse(schemeArr[1])
         Object.assign(result, {
           type: 'sms',
           desc: '适用于发送短信',
-        });
+        })
       } else if (/^alipay/.test(textarea)) {
-        const schemeArr = textarea.split('?');
-        temp = parse(schemeArr[1]);
+        const schemeArr = textarea.split('?')
+        temp = parse(schemeArr[1])
         Object.assign(result, {
           type: 'alipays',
           desc: '适用于唤醒支付宝内页面，支持小程序',
-        });
+        })
       } else if (/^minitype/.test(textarea)) {
         Object.assign(result, {
           type: 'minitype',
           desc: '适用于多维度小程序主体内向其他小程序跳转（包含同主体的）',
-        });
+        })
       }
       if (temp.page) {
-        const pageArr = temp.page.split('?');
-        result.pathname = pageArr[0];
+        const pageArr = temp.page.split('?')
+        result.pathname = pageArr[0]
         if (pageArr[0]) {
-          const t = parse(pageArr[1]);
+          const t = parse(pageArr[1])
           if (t.url) {
-            result.webviewUrl = t.url;
-            delete t.url;
+            result.webviewUrl = t.url
+            delete t.url
           }
-          result.pageQuery = stringify(t, '');
+          result.pageQuery = stringify(t, '')
         }
       }
       Object.assign(result, {
         appId: temp.appId || temp.appid,
         query: temp.query,
-      });
-      if (JSON.stringify(result) === '{}') return '';
-      return JSON.stringify(result, null, 2);
+      })
+      if (JSON.stringify(result) === '{}') return ''
+      return JSON.stringify(result, null, 2)
     },
     // output() {
     //   const output = this.computedUrl();
@@ -409,49 +404,49 @@ export default {
     // },
   },
   watch: {
-    ['minitype']: function(val, oldVal) {
+    ['minitype']: function (val, oldVal) {
       if (val !== oldVal) {
-        this.reset();
+        this.reset()
         if (['aliapp', 'wxapp'].includes(val)) {
-          link = new MiniLink(miniRules[val]);
+          link = new MiniLink(miniRules[val])
         }
       }
     },
-    ['form.fromAppValue']: function(val, oldVal) {
+    ['form.fromAppValue']: function (val, oldVal) {
       if (val !== oldVal) {
-        this.form.tip = '';
+        this.form.tip = ''
       }
     },
-    ['form.toAppId']: function(val, oldVal) {
+    ['form.toAppId']: function (val, oldVal) {
       if (val && val !== 0) {
         if (this.minitype !== 'h5') {
           // 此时要设置 input 无法手动修改
-          this.form.toAppIdString = `appid=${val}`;
+          this.form.toAppIdString = `appid=${val}`
         } else {
-          this.form.toAppIdString = `${val}`;
+          this.form.toAppIdString = `${val}`
         }
       } else {
-        this.form.toAppIdString = '';
+        this.form.toAppIdString = ''
       }
       if (val !== oldVal) {
         // 目标 app 变更
-        this.form.pageName = '';
+        this.form.pageName = ''
       }
     },
     // 目标 app 变更，page 应该看情况重置
     // 没选page，query 应该是隐藏的
-    ['form.pageName']: function(val, oldVal) {
-      let pathname = '';
+    ['form.pageName']: function (val, oldVal) {
+      let pathname = ''
       if (val) {
         if (this.minitype !== 'h5') {
-          pathname = `pages/${val}/${val}`;
+          pathname = `pages/${val}/${val}`
         } else if (
           this.form.toAppId === 'https://m.haoshiqi.net' &&
           val !== 'topic'
         ) {
-          pathname = `v2/${val}`;
+          pathname = `v2/${val}`
         } else {
-          pathname = `${val}`;
+          pathname = `${val}`
         }
       }
       // this.form.pathname = pathname;
@@ -460,25 +455,25 @@ export default {
         let newForm = {
           ...this.form,
           pathname,
-        };
+        }
         if (val === 'topic') {
-          newForm.pageQueryString = defaultData.pageQueryString;
+          newForm.pageQueryString = defaultData.pageQueryString
           // 需要校验输入的 httpsUrl
         }
         if (oldVal === 'topic') {
-          newForm.httpsUrl = defaultData.httpsUrl;
+          newForm.httpsUrl = defaultData.httpsUrl
         }
-        this.form = newForm;
+        this.form = newForm
       }
     },
-    ['appData']: function(val, oldVal) {
-      this.qrcode = '';
-      this.shortUrl = '';
-      this.form.tip = '';
-      this.shortTargetUrl = '';
+    ['appData']: function (val, oldVal) {
+      this.qrcode = ''
+      this.shortUrl = ''
+      this.form.tip = ''
+      this.shortTargetUrl = ''
       if (val !== oldVal) {
-        this.output = this.getOutput();
-        this.qrcode = this.getQrcode();
+        this.output = this.getOutput()
+        this.qrcode = this.getQrcode()
       }
     },
     // ['form.httpsUrl']: function(val, oldVal) {
@@ -488,56 +483,56 @@ export default {
     // },
   },
   created() {
-    link = new MiniLink(miniRules[this.minitype]);
+    link = new MiniLink(miniRules[this.minitype])
   },
   methods: {
     reset() {
       // 将数据初始化
       this.form = {
         ...defaultData,
-      };
+      }
     },
     show(type) {
-      const { minitype, form } = this;
-      let bool = false;
+      const { minitype, form } = this
+      let bool = false
       /* eslint no-duplicate-case: 0 */
       switch (type) {
         case 'fromApp':
-          bool = true;
-          break;
+          bool = true
+          break
         case 'pathname':
-          bool = true;
-          break;
+          bool = true
+          break
         case 'toApp':
-          bool = true;
+          bool = true
           // if (minitype !== 'h5') bool = true;
           // 这里模板消息可以显示 toApp，但显示此项可以方便选择 pageList
           // if (form.fromAppValue === 'tplmsg') {
           //   bool = false;
           // }
-          break;
+          break
         case 'httpsUrl':
-          bool = form.pageName === 'topic' || minitype === 'short';
-          break;
+          bool = form.pageName === 'topic' || minitype === 'short'
+          break
         case 'pageQuery':
-          bool = form.pageName !== 'topic';
-          break;
+          bool = form.pageName !== 'topic'
+          break
         case 'bizParams':
-          bool = true;
-          break;
+          bool = true
+          break
         case 'extraData':
-          if (form.fromAppValue === '') bool = true;
-          if (minitype === 'h5') bool = false;
-          break;
+          if (form.fromAppValue === '') bool = true
+          if (minitype === 'h5') bool = false
+          break
         case 'shorUrl':
           if (minitype === 'short') {
-            bool = true;
+            bool = true
           } else if (minitype === 'h5') {
             if (form.pageName === 'topic' && isValidUrl(form.httpsUrl)) {
-              bool = true;
+              bool = true
             }
             if (form.pathname && form.pageName !== 'topic') {
-              bool = true;
+              bool = true
             }
           } else if (minitype !== 'h5') {
             // 输入 topic 专题时，使用 httpsUrl 生成短链接
@@ -547,26 +542,26 @@ export default {
               form.pageName === 'topic' &&
               form.httpsUrl
             ) {
-              bool = true;
+              bool = true
             } else if (
               minitype === 'aliapp' &&
               this.appData.linkType === 'sms'
             ) {
-              bool = true;
+              bool = true
             }
           }
-          break;
+          break
         default:
         // do nothing...
       }
       if (minitype === 'short' && !['httpsUrl', 'shorUrl'].includes(type)) {
-        bool = false;
+        bool = false
       }
-      return bool;
+      return bool
     },
     getOutput(shortUrl) {
       // const data = this.appData;
-      const data = this.appData;
+      const data = this.appData
       const {
         appId,
         fromApp,
@@ -577,17 +572,17 @@ export default {
         bizParams,
         extraData,
         webviewUrl,
-      } = data;
+      } = data
       if (this.minitype === 'h5') {
-        const query = { ...pageQuery, ...bizParams };
-        let domain = toApp.value || '';
-        let path = pathname;
+        const query = { ...pageQuery, ...bizParams }
+        let domain = toApp.value || ''
+        let path = pathname
         if (pathname === 'topic') {
-          domain = webviewUrl;
-          path = '';
+          domain = webviewUrl
+          path = ''
         }
-        path = path ? `/${path}` : '';
-        const result = `${domain}${path}${stringify(query)}`;
+        path = path ? `/${path}` : ''
+        const result = `${domain}${path}${stringify(query)}`
         this.$emit('resultUrl', {
           errno: 0,
           errmsg: '这是 H5 链接',
@@ -595,12 +590,12 @@ export default {
             ...data,
             output: result,
           },
-        });
-        return result;
+        })
+        return result
         // return;
       }
       if (this.minitype === 'short') {
-        const result = `${webviewUrl}`;
+        const result = `${webviewUrl}`
         this.$emit('resultUrl', {
           errno: 0,
           errmsg: '这是短链接',
@@ -608,22 +603,22 @@ export default {
             ...data,
             output: result,
           },
-        });
-        return result;
+        })
+        return result
         // return `${webviewUrl}${stringify(bizParams)}`;
       }
       // const extraData = parse(form.extraDataString);
-      if (linkType === 'sms') this.form.tip = '短信内限制必须使用http协议';
+      if (linkType === 'sms') this.form.tip = '短信内限制必须使用http协议'
       if (fromApp.terminal === 'other-mini') {
-        const path = `${pathname}${stringify(pageQuery)}` || '无';
-        const extraDataString = `${stringify(extraData, '')}` || '无';
+        const path = `${pathname}${stringify(pageQuery)}` || '无'
+        const extraDataString = `${stringify(extraData, '')}` || '无'
         this.form.tip = `配置后将以下数据提供给需求方
 {
     appId: ${appId || '必须配置'},
     path: ${path},
     extraData: ${extraDataString}
   }
-  `;
+  `
       }
       // console.log('linkType:', linkType);
       // console.log(data);
@@ -632,8 +627,8 @@ export default {
           errno: 2,
           errmsg: '这里请选择 H5 类型生成链接',
           data: {},
-        });
-        return '这里请选择 H5 类型生成链接';
+        })
+        return '这里请选择 H5 类型生成链接'
       }
       if (
         !linkType ||
@@ -643,19 +638,19 @@ export default {
           errno: 1,
           errmsg: '不支持此类型',
           data: {},
-        });
-        return '';
+        })
+        return ''
       }
       if (shortUrl) {
-        data.webviewUrl = shortUrl;
+        data.webviewUrl = shortUrl
       }
       const result = link
         .input(data)
         [linkType]()
-        .toString();
+        .toString()
       if (this.minitype === 'wxapp' && result.length > 100) {
         // 微信第三方平台配置路径，很多有长度限制，过长会被截断
-        this.form.tip = `链接总长 ${result.length} 超过 100，请使用短链接优化`;
+        this.form.tip = `链接总长 ${result.length} 超过 100，请使用短链接优化`
       }
       this.$emit('resultUrl', {
         errno: 0,
@@ -664,14 +659,14 @@ export default {
           ...data,
           output: result,
         },
-      });
-      return result;
+      })
+      return result
     },
     getQrcode() {
-      const data = this.appData;
-      const { minitype, appId, linkType } = data;
-      if (minitype === 'wxapp') return;
-      if (!appId) return;
+      const data = this.appData
+      const { minitype, appId, linkType } = data
+      if (minitype === 'wxapp') return
+      if (!appId) return
       const useQRCode = [
         'alipays',
         'sms',
@@ -679,24 +674,24 @@ export default {
         'ssp',
         'tplmsg',
         'mini',
-      ].includes(linkType);
+      ].includes(linkType)
       if (useQRCode) {
         const output = link
           .input(data)
           .alipays()
-          .toString();
-        if (!output) return;
+          .toString()
+        if (!output) return
         const prefixQr =
-          'https://api.v3.iqianggou.com/api/common/qrcode?content=';
-        return `${prefixQr}${encodeURIComponent(output)}`;
+          'https://api.v3.iqianggou.com/api/common/qrcode?content='
+        return `${prefixQr}${encodeURIComponent(output)}`
       }
     },
     handleChange(value) {
-      console.log(value);
+      console.log(value)
     },
     async fetchShortUrl(url) {
-      if (!url) return;
-      if (!isValidUrl(url)) return;
+      if (!url) return
+      if (!isValidUrl(url)) return
       // https://topic.doweidu.com/zt?id=c1c0813ad706d98f84dd0f00bf6b6a63&spm=wxapp%2Fxs3ff&d_console=1
       // https://short.doweidu.com/yourls-api.php?signature=468b913cc6&action=shorturl&url=https://doweidu.com?a=b&c=d&format=json
       const res = await axios({
@@ -713,12 +708,12 @@ export default {
         // data: {
         //   lastName: 'Flintstone',
         // },
-      });
+      })
 
-      console.warn('短链接', res);
-      const { data = {} } = res || {};
+      console.warn('短链接', res)
+      const { data = {} } = res || {}
       // this.shortUrl = data.shorturl;
-      return data.shorturl;
+      return data.shorturl
 
       // .then(res => {
       //   debugger;
@@ -732,14 +727,14 @@ export default {
       // });
     },
     async onSubmit() {
-      const { minitype, form } = this;
+      const { minitype, form } = this
       if (minitype === 'h5' && form.pathname) {
-        this.shortTargetUrl = this.output;
-        this.shortUrl = await this.fetchShortUrl(this.shortTargetUrl);
+        this.shortTargetUrl = this.output
+        this.shortUrl = await this.fetchShortUrl(this.shortTargetUrl)
       }
       if (minitype === 'short' && form.httpsUrl) {
-        this.shortTargetUrl = form.httpsUrl;
-        this.shortUrl = await this.fetchShortUrl(this.shortTargetUrl);
+        this.shortTargetUrl = form.httpsUrl
+        this.shortUrl = await this.fetchShortUrl(this.shortTargetUrl)
       }
       if (minitype !== 'h5') {
         // 输入 topic 专题时，使用 httpsUrl 生成短链接
@@ -749,13 +744,13 @@ export default {
           form.pageName === 'topic' &&
           form.httpsUrl
         ) {
-          this.shortTargetUrl = form.httpsUrl;
-          let shortUrl = await this.fetchShortUrl(this.shortTargetUrl);
-          this.shortUrl = this.getOutput(shortUrl);
+          this.shortTargetUrl = form.httpsUrl
+          let shortUrl = await this.fetchShortUrl(this.shortTargetUrl)
+          this.shortUrl = this.getOutput(shortUrl)
           // this.shortUrl = await this.fetchShortUrl(shortUrl);
         } else if (minitype === 'aliapp' && this.appData.linkType === 'sms') {
-          this.shortTargetUrl = this.output;
-          this.shortUrl = await this.fetchShortUrl(this.shortTargetUrl);
+          this.shortTargetUrl = this.output
+          this.shortUrl = await this.fetchShortUrl(this.shortTargetUrl)
         }
       }
 
@@ -790,13 +785,13 @@ export default {
       this.$message({
         message: 'reset!',
         type: 'warning',
-      });
+      })
     },
     hideTip() {
       // this.hidden = true;
     },
   },
-};
+}
 </script>
 <style lang="stylus" scoped>
 .fr {

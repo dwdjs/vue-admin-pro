@@ -1,12 +1,12 @@
 <template>
   <svg :class="svgClass" :width="width" :height="height" aria-hidden="true">
-    <use :xlink:href="iconName"></use>
+    <use :xlink:href="iconName"/>
   </svg>
 </template>
 
 <script>
 export default {
-  name: 'icon-svg',
+  name: 'IconSvg',
   props: {
     iconClass: {
       type: String,
@@ -24,17 +24,17 @@ export default {
   },
   computed: {
     iconName() {
-      return `#icon-${this.iconClass}`;
+      return `#icon-${this.iconClass}`
     },
     svgClass() {
       return [
         'icon-svg',
         // `icon-svg__${this.name}`,
         this.className, // && /\S/.test(this.className) ? `${this.className}` : '',
-      ];
+      ]
     },
   },
-};
+}
 </script>
 
 <style scoped>

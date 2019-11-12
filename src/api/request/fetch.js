@@ -3,10 +3,10 @@
 // 低版本浏览器需要，如IE
 // require('es6-promise').polyfill()
 // import Promise from 'bluebird'
-import fetch from 'kit-request/fetch';
-// import { stringify } from 'kit-qs';
-import mini from '@/utils/mini';
-import router from '@/router';
+import fetch from 'kit-request/fetch'
+// import { stringify } from '@dwdjs/utils';
+import mini from '@/utils/mini'
+import router from '@/router'
 // Toast
 
 // const mini = {
@@ -15,7 +15,7 @@ import router from '@/router';
 // }
 
 function noop() {
-  console.error('异常流程，不应该进入这里');
+  console.error('异常流程，不应该进入这里')
 }
 
 // Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.
@@ -41,7 +41,7 @@ const defaultOptions = {
   // redirect // 收到重定向请求之后的操作，follow, error, manual
   // integrity // 完整性校验
   cache: 'default', // 缓存模式(default, reload, no-cache)
-};
+}
 
 // response
 // type – basic, cors
@@ -61,10 +61,10 @@ const defaultOptions = {
 // };
 
 function checkStatus(res = {}) {
-  console.log('check');
-  const { status } = res;
+  console.log('check')
+  const { status } = res
   if (status >= 200 && status < 300) {
-    return res;
+    return res
     // res.ok = true
     // if (res.data && res.data.errno === 0) {
     //   return res.data
@@ -91,16 +91,16 @@ export default function request(
   success = noop,
   fail = noop
 ) {
-  const newOptions = Object.assign({}, defaultOptions, options);
-  const method = (newOptions.method || 'GET').toUpperCase();
-  const { headers } = newOptions;
-  newOptions.method = method;
+  const newOptions = Object.assign({}, defaultOptions, options)
+  const method = (newOptions.method || 'GET').toUpperCase()
+  const { headers } = newOptions
+  newOptions.method = method
   if (method === 'GET') {
     newOptions.headers = {
       // 我们的get请求 不需要这个
       'Content-Type': 'application/json; charset=utf-8',
       ...headers,
-    };
+    }
     // newOptions.data = JSON.stringify(newOptions.data)
   } else if (method === 'POST') {
     newOptions.headers = {
@@ -109,44 +109,44 @@ export default function request(
       'Content-Type': 'application/json; charset=utf-8',
       // 'Content-Type': 'application/x-www-form-urlencoded',
       ...headers,
-    };
+    }
     Object.defineProperty(newOptions, 'body', {
       value: `${JSON.stringify(newOptions.data)}`,
-    });
+    })
     // newOptions.body = `${stringify(newOptions.data)}`
     // newOptions.data = `${stringify(newOptions.data)}`
   }
 
   const resolve = data => {
-    mini.hideLoading();
+    mini.hideLoading()
     if (typeof success === 'function') {
-      success(data);
+      success(data)
     }
-  };
+  }
   const reject = (err = {}) => {
-    mini.hideLoading();
+    mini.hideLoading()
     if (typeof fail === 'function' && fail(err)) {
-      return;
+      return
     }
-    const { errmsg = '网络异常，请稍后重试', errno = 'err' } = err;
+    const { errmsg = '网络异常，请稍后重试', errno = 'err' } = err
     if (errno === 401) {
       router.replace({
         path: '/401',
         replace: true,
         query: { noGoBack: true },
-      });
+      })
       // mini.goPage('login', { replace: true })
     } else {
-      const message = `${errno}: ${errmsg}`;
-      console.log('errmsg:', message);
-      mini.showToast(message);
+      const message = `${errno}: ${errmsg}`
+      console.log('errmsg:', message)
+      mini.showToast(message)
     }
-  };
+  }
 
   function log(res) {
     // console.log('44444444');
-    console.log(`api: ${method} ${res.status} ${url}`);
-    return res;
+    console.log(`api: ${method} ${res.status} ${url}`)
+    return res
   }
 
   fetch(url, newOptions)
@@ -155,18 +155,18 @@ export default function request(
     .then(response => response.json())
     .then(
       (res = {}) => {
-        console.log(res);
+        console.log(res)
         // const { data = {} } = res
         // if (status >= 200 && status < 300) {
         //   res.ok = true
         if (res.statusCode === 0) {
-          resolve(res);
+          resolve(res)
         } else {
           // console.log('err:', res)
           reject({
             errno: res.statusCode,
             errmsg: res.message,
-          });
+          })
         }
         // } else {
         //   // 小程序未处理过的错误
@@ -176,7 +176,7 @@ export default function request(
       },
       (err = {}) => {
         // 异常错误
-        console.log('fail:', err);
+        console.log('fail:', err)
         // err: {
         //   error: 12,
         //   errorMessage: '',
@@ -187,9 +187,9 @@ export default function request(
         reject({
           errno: err.statusCode,
           errmsg: err.message,
-        });
+        })
       }
-    );
+    )
 
   // 把 Promise 封装成回调来使用
   // fetch(url, options).then((success) => {

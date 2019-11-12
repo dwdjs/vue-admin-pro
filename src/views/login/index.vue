@@ -1,11 +1,11 @@
 <template>
   <div class="login-container">
     <el-form
-      class="login-form"
-      autoComplete="on"
+      ref="loginForm"
       :model="loginForm"
       :rules="loginRules"
-      ref="loginForm"
+      class="login-form"
+      auto-complete="on"
       label-position="left"
     >
       <div class="title-container">
@@ -17,10 +17,10 @@
           <icon-svg icon-class="user" />
         </span>
         <el-input
+          v-model="loginForm.username"
           name="username"
           type="text"
-          v-model="loginForm.username"
-          autoComplete="on"
+          auto-complete="on"
           placeholder="用户名"
         />
       </el-form-item>
@@ -30,12 +30,12 @@
           <icon-svg icon-class="password" />
         </span>
         <el-input
-          name="password"
           :type="passwordType"
-          @keyup.enter.native="handleLogin"
           v-model="loginForm.password"
-          autoComplete="on"
+          name="password"
+          auto-complete="on"
           placeholder="密码"
+          @keyup.enter.native="handleLogin"
         />
         <span class="show-pwd" @click="showPwd">
           <icon-svg icon-class="eye" />
@@ -43,10 +43,10 @@
       </el-form-item>
 
       <el-button
-        class="btn-login"
         :loading="loading"
+        class="btn-login"
         @click.native.prevent="handleLogin"
-        >{{ $t('login.logIn') }}</el-button
+      >{{ $t('login.logIn') }}</el-button
       >
 
       <!-- <div class="tips">
@@ -72,9 +72,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { isvalidUsername } from '@/utils/validate';
-import LangSelect from '@/components/LangSelect';
+import { mapGetters } from 'vuex'
+import { validUsername } from '@/utils/validate'
+import LangSelect from '@/components/LangSelect'
 // import SocialSign from './socialsignin'
 
 export default {
@@ -82,22 +82,22 @@ export default {
     LangSelect,
     // SocialSign,
   },
-  name: 'login',
+  name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
-        callback(new Error('请输入正确的用户名'));
+      if (!validUsername(value)) {
+        callback(new Error('请输入正确的用户名'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('密码不能小于5位'));
+        callback(new Error('密码不能小于5位'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       loginForm: {
         username: 'test@admin.com',
@@ -122,7 +122,7 @@ export default {
       passwordType: 'password',
       loading: false,
       showDialog: false,
-    };
+    }
   },
   computed: {
     ...mapGetters(['site']),
@@ -130,36 +130,36 @@ export default {
   methods: {
     showPwd() {
       if (this.passwordType === 'password') {
-        this.passwordType = '';
+        this.passwordType = ''
       } else {
-        this.passwordType = 'password';
+        this.passwordType = 'password'
       }
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true;
-          const { username = '', password } = this.loginForm;
+          this.loading = true
+          const { username = '', password } = this.loginForm
           const userInfo = {
             email: username.trim(),
             password,
-          };
-          console.log('login');
+          }
+          console.log('login')
           this.$store
-            .dispatch('Login', userInfo)
+            .dispatch('user/Login', userInfo)
             .then(() => {
-              this.loading = false;
-              debugger;
-              this.$router.push({ path: '/' });
+              this.loading = false
+              debugger
+              this.$router.push({ path: '/' })
             })
             .catch(() => {
-              this.loading = false;
-            });
+              this.loading = false
+            })
         } else {
-          console.log('error submit!!');
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
     afterQRScan() {
       // const hash = window.location.hash.slice(1)
@@ -174,7 +174,7 @@ export default {
       // if (!codeName) {
       //   alert('第三方登录失败')
       // } else {
-      //   this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
+      //   this.$store.dispatch('user/LoginByThirdparty', codeName).then(() => {
       //     this.$router.push({ path: '/' })
       //   })
       // }
@@ -186,7 +186,7 @@ export default {
   destroyed() {
     // window.removeEventListener('hashchange', this.afterQRScan)
   },
-};
+}
 </script>
 
 <style lang="stylus">

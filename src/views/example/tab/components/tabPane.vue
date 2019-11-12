@@ -1,10 +1,15 @@
 <template>
-  <el-table :data="list" border fit highlight-current-row style="width: 100%">
+  <el-table 
+    :data="list" 
+    border 
+    fit 
+    highlight-current-row 
+    style="width: 100%">
     <el-table-column
+      v-loading="loading"
       align="center"
       label="ID"
       width="65"
-      v-loading="loading"
       element-loading-text="请给我点时间！"
     >
       <template slot-scope="scope">
@@ -37,9 +42,9 @@
       <template slot-scope="scope">
         <icon-svg
           v-for="n in +scope.row.importance"
-          icon-class="star"
           :key="n"
-        ></icon-svg>
+          icon-class="star"
+        />
       </template>
     </el-table-column>
 
@@ -60,7 +65,7 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/old/article';
+import { fetchList } from '@/api/old/article'
 
 export default {
   props: {
@@ -79,7 +84,7 @@ export default {
         sort: '+id',
       },
       loading: false,
-    };
+    }
   },
   filters: {
     statusFilter(status) {
@@ -87,22 +92,22 @@ export default {
         published: 'success',
         draft: 'info',
         deleted: 'danger',
-      };
-      return statusMap[status];
+      }
+      return statusMap[status]
     },
   },
   created() {
-    this.getList();
+    this.getList()
   },
   methods: {
     getList() {
-      this.loading = true;
-      this.$emit('create'); // for test
+      this.loading = true
+      this.$emit('create') // for test
       fetchList(this.listQuery).then(res => {
-        this.list = res.data.items;
-        this.loading = false;
-      });
+        this.list = res.data.items
+        this.loading = false
+      })
     },
   },
-};
+}
 </script>

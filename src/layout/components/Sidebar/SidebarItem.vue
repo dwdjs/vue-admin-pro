@@ -16,11 +16,11 @@
         <icon-svg
           v-if="onlyOneChild.meta && onlyOneChild.meta.icon"
           :icon-class="onlyOneChild.meta.icon"
-        ></icon-svg>
+        />
         <span
           v-if="onlyOneChild.meta && onlyOneChild.meta.title"
           slot="title"
-          >{{ generateTitle(onlyOneChild.meta.title) }}</span
+        >{{ generateTitle(onlyOneChild.meta.title) }}</span
         >
       </el-menu-item>
     </router-link>
@@ -30,7 +30,7 @@
         <icon-svg
           v-if="item.meta && item.meta.icon"
           :icon-class="item.meta.icon"
-        ></icon-svg>
+        />
         <span v-if="item.meta && item.meta.title" slot="title">{{
           generateTitle(item.meta.title)
         }}</span>
@@ -38,21 +38,20 @@
 
       <template v-for="child in item.children" v-if="!child.hidden">
         <sidebar-item
-          class="nest-menu"
           v-if="child.children && child.children.length > 0"
           :is-nest="true"
           :item="child"
           :base-path="resolvePath(child.path)"
           :key="child.path"
-        >
-        </sidebar-item>
+          class="nest-menu"
+        />
 
         <router-link v-else :to="resolvePath(child.path)" :key="child.name">
           <el-menu-item :index="resolvePath(child.path)">
             <icon-svg
               v-if="child.meta && child.meta.icon"
               :icon-class="child.meta.icon"
-            ></icon-svg>
+            />
             <span v-if="child.meta && child.meta.title" slot="title">{{
               generateTitle(child.meta.title)
             }}</span>
@@ -64,8 +63,8 @@
 </template>
 
 <script>
-import path from 'path';
-import { generateTitle } from '@/utils/i18n';
+import path from 'path'
+import { generateTitle } from '@/utils/i18n'
 
 export default {
   name: 'SidebarItem',
@@ -87,26 +86,26 @@ export default {
   data() {
     return {
       onlyOneChild: null,
-    };
+    }
   },
   methods: {
     hasOneShowingChild(children) {
       const showingChildren = children.filter(item => {
         if (item.hidden) {
-          return false;
+          return false
         } else {
           // temp set(will be used if only has one showing child )
-          this.onlyOneChild = item;
-          return true;
+          this.onlyOneChild = item
+          return true
         }
-      });
+      })
       if (showingChildren.length === 1) {
-        return true;
+        return true
       }
-      return false;
+      return false
     },
     resolvePath(...paths) {
-      return path.resolve(this.basePath, ...paths);
+      return path.resolve(this.basePath, ...paths)
       // return path.resolve('', ...paths)
     },
     // hasOneShowingChildren(children) {
@@ -120,5 +119,5 @@ export default {
     // },
     generateTitle,
   },
-};
+}
 </script>

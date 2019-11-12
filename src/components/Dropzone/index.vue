@@ -1,26 +1,26 @@
 <template>
-  <div :ref="id" :action="url" class="dropzone" :id="id">
-    <input type="file" name="file" />
+  <div :ref="id" :action="url" :id="id" class="dropzone">
+    <input type="file" name="file" >
   </div>
 </template>
 
 <script>
-import Dropzone from 'dropzone';
-import 'dropzone/dist/dropzone.css';
+import Dropzone from 'dropzone'
+import 'dropzone/dist/dropzone.css'
 // import { getToken } from 'api/qiniu';
 
-Dropzone.autoDiscover = false;
+Dropzone.autoDiscover = false
 
 export default {
   data() {
     return {
       dropzone: '',
       initOnce: true,
-    };
+    }
   },
   mounted() {
-    const element = document.getElementById(this.id);
-    const vm = this;
+    const element = document.getElementById(this.id)
+    const vm = this
     this.dropzone = new Dropzone(element, {
       clickable: this.clickable,
       thumbnailWidth: this.thumbnailWidth,
@@ -47,26 +47,26 @@ export default {
         this.thumbnailHeight +
         'px" data-dz-thumbnail /></div>  <div class="dz-details"><div class="dz-size"><span data-dz-size></span></div> <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>  <div class="dz-error-message"><span data-dz-errormessage></span></div>  <div class="dz-success-mark"> <i class="material-icons">done</i> </div>  <div class="dz-error-mark"><i class="material-icons">error</i></div></div>',
       init() {
-        const val = vm.defaultImg;
-        if (!val) return;
+        const val = vm.defaultImg
+        if (!val) return
         if (Array.isArray(val)) {
-          if (val.length === 0) return;
+          if (val.length === 0) return
           val.map((v, i) => {
-            const mockFile = { name: 'name' + i, size: 12345, url: v };
-            this.options.addedfile.call(this, mockFile);
-            this.options.thumbnail.call(this, mockFile, v);
-            mockFile.previewElement.classList.add('dz-success');
-            mockFile.previewElement.classList.add('dz-complete');
-            vm.initOnce = false;
-            return true;
-          });
+            const mockFile = { name: 'name' + i, size: 12345, url: v }
+            this.options.addedfile.call(this, mockFile)
+            this.options.thumbnail.call(this, mockFile, v)
+            mockFile.previewElement.classList.add('dz-success')
+            mockFile.previewElement.classList.add('dz-complete')
+            vm.initOnce = false
+            return true
+          })
         } else {
-          const mockFile = { name: 'name', size: 12345, url: val };
-          this.options.addedfile.call(this, mockFile);
-          this.options.thumbnail.call(this, mockFile, val);
-          mockFile.previewElement.classList.add('dz-success');
-          mockFile.previewElement.classList.add('dz-complete');
-          vm.initOnce = false;
+          const mockFile = { name: 'name', size: 12345, url: val }
+          this.options.addedfile.call(this, mockFile)
+          this.options.thumbnail.call(this, mockFile, val)
+          mockFile.previewElement.classList.add('dz-success')
+          mockFile.previewElement.classList.add('dz-complete')
+          vm.initOnce = false
         }
       },
       accept: (file, done) => {
@@ -78,82 +78,82 @@ export default {
         //   file.url = response.data.qiniu_url;
         //   done();
         // })
-        done();
+        done()
       },
       sending: (file, xhr, formData) => {
         // formData.append('token', file.token);
         // formData.append('key', file.key);
-        vm.initOnce = false;
+        vm.initOnce = false
       },
-    });
+    })
 
     if (this.couldPaste) {
-      document.addEventListener('paste', this.pasteImg);
+      document.addEventListener('paste', this.pasteImg)
     }
 
     this.dropzone.on('success', file => {
-      vm.$emit('dropzone-success', file, vm.dropzone.element);
-    });
+      vm.$emit('dropzone-success', file, vm.dropzone.element)
+    })
     this.dropzone.on('addedfile', file => {
-      vm.$emit('dropzone-fileAdded', file);
-    });
+      vm.$emit('dropzone-fileAdded', file)
+    })
     this.dropzone.on('removedfile', file => {
-      vm.$emit('dropzone-removedFile', file);
-    });
+      vm.$emit('dropzone-removedFile', file)
+    })
     this.dropzone.on('error', (file, error, xhr) => {
-      vm.$emit('dropzone-error', file, error, xhr);
-    });
+      vm.$emit('dropzone-error', file, error, xhr)
+    })
     this.dropzone.on('successmultiple', (file, error, xhr) => {
-      vm.$emit('dropzone-successmultiple', file, error, xhr);
-    });
+      vm.$emit('dropzone-successmultiple', file, error, xhr)
+    })
   },
   methods: {
     removeAllFiles() {
-      this.dropzone.removeAllFiles(true);
+      this.dropzone.removeAllFiles(true)
     },
     processQueue() {
-      this.dropzone.processQueue();
+      this.dropzone.processQueue()
     },
     pasteImg(event) {
       const items = (event.clipboardData || event.originalEvent.clipboardData)
-        .items;
+        .items
       if (items[0].kind === 'file') {
-        this.dropzone.addFile(items[0].getAsFile());
+        this.dropzone.addFile(items[0].getAsFile())
       }
     },
     initImages(val) {
-      if (!val) return;
+      if (!val) return
       if (Array.isArray(val)) {
         val.map((v, i) => {
-          const mockFile = { name: 'name' + i, size: 12345, url: v };
-          this.dropzone.options.addedfile.call(this.dropzone, mockFile);
-          this.dropzone.options.thumbnail.call(this.dropzone, mockFile, v);
-          mockFile.previewElement.classList.add('dz-success');
-          mockFile.previewElement.classList.add('dz-complete');
-          return true;
-        });
+          const mockFile = { name: 'name' + i, size: 12345, url: v }
+          this.dropzone.options.addedfile.call(this.dropzone, mockFile)
+          this.dropzone.options.thumbnail.call(this.dropzone, mockFile, v)
+          mockFile.previewElement.classList.add('dz-success')
+          mockFile.previewElement.classList.add('dz-complete')
+          return true
+        })
       } else {
-        const mockFile = { name: 'name', size: 12345, url: val };
-        this.dropzone.options.addedfile.call(this.dropzone, mockFile);
-        this.dropzone.options.thumbnail.call(this.dropzone, mockFile, val);
-        mockFile.previewElement.classList.add('dz-success');
-        mockFile.previewElement.classList.add('dz-complete');
+        const mockFile = { name: 'name', size: 12345, url: val }
+        this.dropzone.options.addedfile.call(this.dropzone, mockFile)
+        this.dropzone.options.thumbnail.call(this.dropzone, mockFile, val)
+        mockFile.previewElement.classList.add('dz-success')
+        mockFile.previewElement.classList.add('dz-complete')
       }
     },
   },
   destroyed() {
-    document.removeEventListener('paste', this.pasteImg);
-    this.dropzone.destroy();
+    document.removeEventListener('paste', this.pasteImg)
+    this.dropzone.destroy()
   },
   watch: {
     defaultImg(val) {
       if (val.length === 0) {
-        this.initOnce = false;
-        return;
+        this.initOnce = false
+        return
       }
-      if (!this.initOnce) return;
-      this.initImages(val);
-      this.initOnce = false;
+      if (!this.initOnce) return
+      this.initImages(val)
+      this.initOnce = false
     },
   },
   props: {
@@ -200,18 +200,11 @@ export default {
       type: Boolean,
       default: true,
     },
-    useCustomDropzoneOptions: {
-      type: Boolean,
-      default: false,
-    },
-    defaultImg: {
-      default: false,
-    },
-    couldPaste: {
-      default: false,
-    },
+    useCustomDropzoneOptions: Boolean,
+    defaultImg: Boolean,
+    couldPaste: Boolean,
   },
-};
+}
 </script>
 
 <style scoped>
@@ -241,7 +234,7 @@ i {
 }
 
 .dropzone .dz-preview .dz-image {
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 .dropzone .dz-preview:hover .dz-image img {
@@ -252,8 +245,8 @@ i {
 }
 
 .dropzone .dz-preview .dz-details {
-  bottom: 0px;
-  top: 0px;
+  bottom: 0;
+  top: 0;
   color: white;
   background-color: rgba(33, 150, 243, 0.8);
   transition: opacity 0.2s linear;

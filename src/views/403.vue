@@ -2,10 +2,10 @@
   <div style="background:#f0f2f5;margin-top: -20px;">
     <div class="wscn-http404">
       <div class="pic-404">
-        <img class="pic-404__parent" :src="img_404" alt="404" />
-        <img class="pic-404__child left" :src="img_404_cloud" alt="404" />
-        <img class="pic-404__child mid" :src="img_404_cloud" alt="404" />
-        <img class="pic-404__child right" :src="img_404_cloud" alt="404" />
+        <img :src="img_404" class="pic-404__parent" alt="404" >
+        <img :src="img_404_cloud" class="pic-404__child left" alt="404" >
+        <img :src="img_404_cloud" class="pic-404__child mid" alt="404" >
+        <img :src="img_404_cloud" class="pic-404__child right" alt="404" >
       </div>
       <div class="bullshit">
         403 抱歉，你无权访问该页面 404 抱歉，你访问的页面不存在 500
@@ -16,7 +16,7 @@
             class="link-type"
             href="https://wallstreetcn.com"
             target="_blank"
-            >华尔街见闻</a
+          >华尔街见闻</a
           >
         </div>
         <div class="bullshit__headline">{{ message }}</div>
@@ -31,22 +31,22 @@
 
 <script>
 /* eslint camelcase: 0 */
-import img_404 from '@/assets/404_images/404.png';
-import img_404_cloud from '@/assets/404_images/404_cloud.png';
+import img_404 from '@/assets/404_images/404.png'
+import img_404_cloud from '@/assets/404_images/404_cloud.png'
 
 export default {
   data() {
     return {
       img_404,
       img_404_cloud,
-    };
+    }
   },
   computed: {
     message() {
-      return '特朗普说这个页面你不能进......';
+      return '特朗普说这个页面你不能进......'
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

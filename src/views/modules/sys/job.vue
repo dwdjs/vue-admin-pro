@@ -5,35 +5,35 @@
       <el-form :model="dataForm" :inline="true">
         <el-form-item label="">
           <el-input
+            v-model="dataForm.keywords"
             placeholder="名称"
             width="200"
             class="filter-item"
-            @keyup.enter.native="handleFilter"
-            v-model="dataForm.keywords"
             clearable
-          ></el-input>
+            @keyup.enter.native="handleFilter"
+          />
         </el-form-item>
         <el-button
+          v-waves
           class="filter-item"
           type="primary"
-          v-waves
           icon="el-icon-search"
           @click="handleFilter"
-          >搜索</el-button
+        >搜索</el-button
         >
         <el-button
           class="filter-item"
           style="margin-left: 10px;"
-          @click="handleAddOrUpdate()"
           type="success"
           icon="el-icon-edit"
-          >新增</el-button
+          @click="handleAddOrUpdate()"
+        >新增</el-button
         >
         <el-button
+          :disabled="dataListSelections.length <= 0"
           type="danger"
           @click="handleDelete()"
-          :disabled="dataListSelections.length <= 0"
-          >批量删除</el-button
+        >批量删除</el-button
         >
         <!-- <el-button type="danger" @click="handlePause()" :disabled="dataListSelections.length <= 0">批量暂停</el-button>
         <el-button type="danger" @click="handleResume()" :disabled="dataListSelections.length <= 0">批量恢复</el-button>
@@ -43,9 +43,9 @@
     </div>
 
     <el-table
+      v-loading="dataListLoading"
       :key="tableKey"
       :data="dataList"
-      v-loading="dataListLoading"
       element-loading-text="给我一点时间"
       border
       highlight-current-row
@@ -56,8 +56,7 @@
         header-align="center"
         align="center"
         width="50"
-      >
-      </el-table-column>
+      />
       <!-- <el-table-column
         prop="1"
         header-align="center"
@@ -70,40 +69,35 @@
         align="center"
         width="120"
         label="名称"
-      >
-      </el-table-column>
+      />
       <el-table-column
         prop="method"
         header-align="center"
         align="center"
         width="120"
         label="方法名称"
-      >
-      </el-table-column>
+      />
       <el-table-column
         prop="params"
         header-align="center"
         align="center"
         width="120"
         label="参数"
-      >
-      </el-table-column>
+      />
       <el-table-column
         prop="cron"
         header-align="center"
         align="center"
         width="120"
         label="表达式"
-      >
-      </el-table-column>
+      />
       <el-table-column
         prop="remark"
         header-align="center"
         align="center"
         width="120"
         label="备注"
-      >
-      </el-table-column>
+      />
       <el-table-column
         prop="state"
         header-align="center"
@@ -112,8 +106,11 @@
       >
         <template slot-scope="scope">
           <el-tag v-if="scope.row.state === 0" size="small">正常</el-tag>
-          <el-tag v-if="scope.row.state === 1" size="small" type="danger"
-            >禁用</el-tag
+          <el-tag 
+            v-if="scope.row.state === 1" 
+            size="small" 
+            type="danger"
+          >禁用</el-tag
           >
         </template>
       </el-table-column>
@@ -129,34 +126,34 @@
             type="primary"
             size="mini"
             @click="handleAddOrUpdate(scope.row)"
-            >编辑</el-button
+          >编辑</el-button
           >
           <el-button
             type="danger"
             size="mini"
             @click="handleDelete(scope.row.id)"
-            >删除</el-button
+          >删除</el-button
           >
           <el-button
             v-if="scope.row.status === 1"
             type="danger"
             size="mini"
             @click="handlePause(scope.row.id)"
-            >暂停</el-button
+          >暂停</el-button
           >
           <el-button
             v-if="scope.row.status === 2"
             type="danger"
             size="mini"
             @click="handleResume(scope.row.id)"
-            >恢复</el-button
+          >恢复</el-button
           >
           <el-button
             v-if="[0, 3].includes(scope.row.status)"
             type="danger"
             size="mini"
             @click="handleStart(scope.row.id)"
-            >立即执行</el-button
+          >立即执行</el-button
           >
         </template>
       </el-table-column>
@@ -164,16 +161,15 @@
 
     <div class="pagination-container" style="margin-top: 16px;">
       <el-pagination
-        background
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
         :current-page="pageIndex"
         :page-size="pageLimit"
         :total="totalCount"
         :page-sizes="[10, 20, 50, 100]"
+        background
         layout="total, sizes, prev, pager, next, jumper"
-      >
-      </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
     </div>
 
     <!-- 弹窗, 新增 / 修改 -->
@@ -181,16 +177,15 @@
       v-if="addOrUpdateVisible"
       ref="addOrUpdate"
       @refreshDataList="getDataList"
-    >
-    </add-or-update>
+    />
   </div>
 </template>
 
 <script>
-import api from '@/api';
-// import { copy } from 'kit-qs';
-import waves from '@/directive/waves'; // 水波纹指令
-import AddOrUpdate from './job-add-or-update';
+import api from '@/api'
+// import { copy } from '@dwdjs/utils';
+import waves from '@/directive/waves' // 水波纹指令
+import AddOrUpdate from './job-add-or-update'
 
 const modelApi = {
   list: api.getJob,
@@ -200,10 +195,10 @@ const modelApi = {
   pause: api.jobPause,
   resume: api.jobResume,
   start: api.jobStart,
-};
+}
 
 export default {
-  name: 'sys_job',
+  name: 'SysJob',
   components: {
     AddOrUpdate,
   },
@@ -224,15 +219,15 @@ export default {
       dataListLoading: true,
       dataListSelections: [],
       addOrUpdateVisible: false,
-    };
+    }
   },
   filters: {},
   created() {
-    this.getDataList();
+    this.getDataList()
   },
   methods: {
     getDataList() {
-      this.dataListLoading = true;
+      this.dataListLoading = true
       modelApi.list(
         {
           ...this.dataForm,
@@ -240,50 +235,50 @@ export default {
           size: this.pageLimit,
         },
         res => {
-          this.dataListLoading = false;
-          this.dataList = res.data.list;
-          this.totalCount = res.data.total;
+          this.dataListLoading = false
+          this.dataList = res.data.list
+          this.totalCount = res.data.total
         },
         err => {}
-      );
+      )
     },
     handlePause(ID, onlyOne) {
-      modelApi.pause({}, res => {});
+      modelApi.pause({}, res => {})
     },
     handleResume(id, onlyOne) {},
     handleStart(id, onlyOne) {},
     log() {},
     handleFilter() {
-      this.pageIndex = 1;
-      this.getDataList();
+      this.pageIndex = 1
+      this.getDataList()
     },
     handleSizeChange(val) {
-      this.pageLimit = val;
-      this.getDataList();
+      this.pageLimit = val
+      this.getDataList()
     },
     handleCurrentChange(val) {
-      this.pageIndex = val;
-      this.getDataList();
+      this.pageIndex = val
+      this.getDataList()
     },
     // 多选
     handleSelectionChange(val) {
-      this.dataListSelections = val;
+      this.dataListSelections = val
     },
     handleAddOrUpdate(id) {
-      this.addOrUpdateVisible = true;
+      this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(id);
-      });
+        this.$refs.addOrUpdate.init(id)
+      })
     },
     updateItem(data, type) {
       if (type === 'add') {
-        this.dataList.unshift(data);
+        this.dataList.unshift(data)
       } else {
         for (const v of this.dataList) {
           if (v.id === data.id) {
-            const index = this.dataList.indexOf(v);
-            this.dataList.splice(index, 1, data);
-            break;
+            const index = this.dataList.indexOf(v)
+            this.dataList.splice(index, 1, data)
+            break
           }
         }
       }
@@ -294,8 +289,8 @@ export default {
       const ids = id
         ? [id]
         : this.dataListSelections.map(item => {
-            return item.id;
-          });
+            return item.id
+          })
       modelApi.del(
         {
           ids,
@@ -306,9 +301,9 @@ export default {
             message: '删除成功',
             type: 'success',
             duration: 2000,
-          });
+          })
 
-          this.getDataList();
+          this.getDataList()
           // const index = this.dataList.indexOf({
 
           // })
@@ -318,12 +313,12 @@ export default {
           this.$message({
             message: '删除失败',
             type: 'danger',
-          });
+          })
         }
-      );
+      )
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped></style>

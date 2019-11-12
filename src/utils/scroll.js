@@ -1,6 +1,6 @@
 // import { isServer } from './index'
 
-const isServer = false;
+const isServer = false
 
 // [debounce 和 throttle](https://www.cnblogs.com/wilber2013/p/5893426.html)
 
@@ -43,7 +43,7 @@ export default {
    * @return {Element | window}
    */
   getScrollEventTarget(element, rootParent = window) {
-    let currentNode = element;
+    let currentNode = element
     // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and
     // http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
     while (
@@ -53,40 +53,40 @@ export default {
       currentNode.nodeType === 1 &&
       currentNode !== rootParent
     ) {
-      const { overflowY } = this.getComputedStyle(currentNode);
+      const { overflowY } = this.getComputedStyle(currentNode)
       if (overflowY === 'scroll' || overflowY === 'auto') {
-        return currentNode;
+        return currentNode
       }
-      currentNode = currentNode.parentNode;
+      currentNode = currentNode.parentNode
     }
-    return rootParent;
+    return rootParent
   },
 
   // 判断元素是否被加入到页面节点内
   isAttached(element) {
-    let currentNode = element.parentNode;
+    let currentNode = element.parentNode
     while (currentNode) {
       if (currentNode.tagName === 'HTML') {
-        return true;
+        return true
       }
       if (currentNode.nodeType === 11) {
-        return false;
+        return false
       }
-      currentNode = currentNode.parentNode;
+      currentNode = currentNode.parentNode
     }
-    return false;
+    return false
   },
 
   // 获取滚动高度
   getScrollTop(element) {
-    return 'scrollTop' in element ? element.scrollTop : element.pageYOffset;
+    return 'scrollTop' in element ? element.scrollTop : element.pageYOffset
   },
 
   // 设置滚动高度
   setScrollTop(element, value) {
     'scrollTop' in element
       ? (element.scrollTop = value)
-      : element.scrollTo(element.scrollX, value);
+      : element.scrollTo(element.scrollX, value)
   },
 
   // 获取元素距离顶部高度
@@ -94,16 +94,16 @@ export default {
     return (
       (element === window ? 0 : element.getBoundingClientRect().top) +
       this.getScrollTop(window)
-    );
+    )
   },
 
   getVisibleHeight(element) {
     return element === window
       ? element.innerHeight
-      : element.getBoundingClientRect().height;
+      : element.getBoundingClientRect().height
   },
 
   getComputedStyle:
     !isServer &&
     document.defaultView.getComputedStyle.bind(document.defaultView),
-};
+}

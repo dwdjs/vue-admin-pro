@@ -1,10 +1,10 @@
 <template>
   <transition :name="transitionName">
     <div
-      class="back-to-ceiling"
-      @click="backToTop"
       v-show="visible"
       :style="customStyle"
+      class="back-to-ceiling"
+      @click="backToTop"
     >
       <svg
         width="16"
@@ -20,7 +20,7 @@
           <path
             d="M12.036 15.59c0 .55-.453.995-.997.995H5.032c-.55 0-.997-.445-.997-.996V8.584H1.03c-1.1 0-1.36-.633-.578-1.416L7.33.29c.39-.39 1.026-.385 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.004z"
             fill-rule="evenodd"
-          ></path>
+          />
         </g>
       </svg>
     </div>
@@ -50,7 +50,7 @@ export default {
           'border-radius': '4px',
           'line-height': '45px',
           background: '#e7eaf1',
-        };
+        }
       },
     },
     transitionName: {
@@ -62,41 +62,41 @@ export default {
     return {
       visible: false,
       interval: null,
-    };
+    }
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll)
     if (this.interval) {
-      clearInterval(this.interval);
+      clearInterval(this.interval)
     }
   },
   methods: {
     handleScroll() {
-      this.visible = window.pageYOffset > this.visibilityHeight;
+      this.visible = window.pageYOffset > this.visibilityHeight
     },
     backToTop() {
-      const start = window.pageYOffset;
-      let i = 0;
+      const start = window.pageYOffset
+      let i = 0
       this.interval = setInterval(() => {
-        const next = Math.floor(this.easeInOutQuad(10 * i, start, -start, 500));
+        const next = Math.floor(this.easeInOutQuad(10 * i, start, -start, 500))
         if (next <= this.backPosition) {
-          window.scrollTo(0, this.backPosition);
-          clearInterval(this.interval);
+          window.scrollTo(0, this.backPosition)
+          clearInterval(this.interval)
         } else {
-          window.scrollTo(0, next);
+          window.scrollTo(0, next)
         }
-        i++;
-      }, 16.7);
+        i++
+      }, 16.7)
     },
     easeInOutQuad(t, b, c, d) {
-      if ((t /= d / 2) < 1) return (c / 2) * t * t + b;
-      return (-c / 2) * (--t * (t - 2) - 1) + b;
+      if ((t /= d / 2) < 1) return (c / 2) * t * t + b
+      return (-c / 2) * (--t * (t - 2) - 1) + b
     },
   },
-};
+}
 </script>
 
 <style scoped>

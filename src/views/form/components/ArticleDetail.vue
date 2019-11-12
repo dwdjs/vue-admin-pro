@@ -1,31 +1,32 @@
 <template>
   <div class="createPost-container">
     <el-form
-      class="form-container"
+      ref="postForm"
       :model="postForm"
       :rules="rules"
-      ref="postForm"
+      class="form-container"
     >
-      <sticky :className="'sub-navbar ' + postForm.status">
+      <sticky :class-name="'sub-navbar ' + postForm.status">
         <template v-if="fetchSuccess">
           <router-link
-            style="margin-right:15px;"
             v-show="isEdit"
             :to="{ path: 'create-form' }"
+            style="margin-right:15px;"
           >
             <el-button type="info">创建form</el-button>
           </router-link>
 
           <el-dropdown trigger="click">
-            <el-button plain
-              >{{ !postForm.comment_disabled ? '评论已打开' : '评论已关闭' }}
-              <i class="el-icon-caret-bottom el-icon--right"></i>
+            <el-button
+              plain
+            >{{ !postForm.comment_disabled ? '评论已打开' : '评论已关闭' }}
+              <i class="el-icon-caret-bottom el-icon--right"/>
             </el-button>
-            <el-dropdown-menu class="no-padding" slot="dropdown">
+            <el-dropdown-menu slot="dropdown" class="no-padding">
               <el-dropdown-item>
                 <el-radio-group
-                  style="padding: 10px;"
                   v-model="postForm.comment_disabled"
+                  style="padding: 10px;"
                 >
                   <el-radio :label="true">关闭评论</el-radio>
                   <el-radio :label="false">打开评论</el-radio>
@@ -35,11 +36,12 @@
           </el-dropdown>
 
           <el-dropdown trigger="click">
-            <el-button plain
-              >平台
-              <i class="el-icon-caret-bottom el-icon--right"></i>
+            <el-button
+              plain
+            >平台
+              <i class="el-icon-caret-bottom el-icon--right"/>
             </el-button>
-            <el-dropdown-menu class="no-border" slot="dropdown">
+            <el-dropdown-menu slot="dropdown" class="no-border">
               <el-checkbox-group
                 v-model="postForm.platforms"
                 style="padding: 5px 15px;"
@@ -58,12 +60,12 @@
           <el-dropdown trigger="click">
             <el-button plain>
               外链
-              <i class="el-icon-caret-bottom el-icon--right"></i>
+              <i class="el-icon-caret-bottom el-icon--right"/>
             </el-button>
             <el-dropdown-menu
+              slot="dropdown"
               class="no-padding no-border"
               style="width:300px"
-              slot="dropdown"
             >
               <el-form-item
                 label-width="0px"
@@ -71,11 +73,12 @@
                 prop="source_uri"
               >
                 <el-input
-                  placeholder="请输入内容"
                   v-model="postForm.source_uri"
+                  placeholder="请输入内容"
                 >
-                  <template slot="prepend"
-                    >填写url</template
+                  <template
+                    slot="prepend"
+                  >填写url</template
                   >
                 </el-input>
               </el-form-item>
@@ -87,10 +90,13 @@
             style="margin-left: 10px;"
             type="success"
             @click="submitForm()"
-            >发布
+          >发布
           </el-button>
-          <el-button v-loading="loading" type="warning" @click="draftForm"
-            >草稿</el-button
+          <el-button
+            v-loading="loading"
+            type="warning"
+            @click="draftForm"
+          >草稿</el-button
           >
         </template>
         <template v-else>
@@ -105,8 +111,10 @@
               <!-- <MDinput name="name" v-model="postForm.title" required :maxlength="100">
                 标题
               </MDinput> -->
-              <span v-show="postForm.title.length >= 26" class="title-prompt"
-                >app可能会显示不全</span
+              <span
+                v-show="postForm.title.length >= 26"
+                class="title-prompt"
+              >app可能会显示不全</span
               >
             </el-form-item>
 
@@ -121,13 +129,13 @@
                     <multiselect
                       v-model="postForm.author"
                       :options="userLIstOptions"
-                      @search-change="getRemoteUserList"
+                      :internal-search="false"
                       placeholder="搜索用户"
-                      selectLabel="选择"
-                      deselectLabel="删除"
+                      select-label="选择"
+                      deselect-label="删除"
                       track-by="key"
-                      :internalSearch="false"
                       label="key"
+                      @search-change="getRemoteUserList"
                     >
                       <span slot="noResult">无结果</span>
                     </multiselect>
@@ -147,11 +155,10 @@
                       class="postInfo-container-item"
                     >
                       <el-input
+                        v-model="postForm.source_name"
                         placeholder="将替换作者"
                         style="min-width:150px;"
-                        v-model="postForm.source_name"
-                      >
-                      </el-input>
+                      />
                     </el-form-item>
                   </el-tooltip>
                 </el-col>
@@ -167,8 +174,7 @@
                       type="datetime"
                       format="yyyy-MM-dd HH:mm:ss"
                       placeholder="选择日期时间"
-                    >
-                    </el-date-picker>
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -182,16 +188,17 @@
           label="摘要:"
         >
           <el-input
+            :rows="1"
+            v-model="postForm.content_short"
             type="textarea"
             class="article-textarea"
-            :rows="1"
             autosize
             placeholder="请输入内容"
-            v-model="postForm.content_short"
-          >
-          </el-input>
-          <span class="word-counter" v-show="contentShortLength"
-            >{{ contentShortLength }}字</span
+          />
+          <span
+            v-show="contentShortLength"
+            class="word-counter"
+          >{{ contentShortLength }}字</span
           >
         </el-form-item>
 
@@ -200,7 +207,7 @@
         </div>
 
         <div style="margin-bottom: 20px;">
-          <Upload v-model="postForm.image_uri"></Upload>
+          <Upload v-model="postForm.image_uri"/>
         </div>
       </div>
     </el-form>
@@ -209,17 +216,17 @@
 
 <script>
 // import Tinymce from '@/components/Tinymce'
-import Upload from '@/components/Upload/singleImage3';
+import Upload from '@/components/Upload/singleImage3'
 // import MDinput from '@/components/MDinput'
 // 使用的一个多选框组件，element-ui的select不能满足所有需求
-import Multiselect from 'vue-multiselect';
+import Multiselect from 'vue-multiselect'
 // 多选框组件css
-import 'vue-multiselect/dist/vue-multiselect.min.css';
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 // 粘性header组件
-import Sticky from '@/components/Sticky';
-import { validateURL } from '@/utils/validate';
-import { fetchArticle } from '@/api/old/article';
-import { userSearch } from '@/api/old/remoteSearch';
+import Sticky from '@/components/Sticky'
+import { validURL } from '@/utils/validate'
+import { fetchArticle } from '@/api/old/article'
+import { userSearch } from '@/api/old/remoteSearch'
 
 const defaultForm = {
   status: 'draft',
@@ -233,10 +240,10 @@ const defaultForm = {
   id: undefined,
   platforms: ['a-platform'],
   comment_disabled: false,
-};
+}
 
 export default {
-  name: 'articleDetail',
+  name: 'ArticleDetail',
   components: {
     // Tinymce,
     // MDinput,
@@ -256,27 +263,27 @@ export default {
         this.$message({
           message: rule.field + '为必传项',
           type: 'error',
-        });
-        callback(null);
+        })
+        callback(null)
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const validateSourceUri = (rule, value, callback) => {
       if (value) {
-        if (validateURL(value)) {
-          callback();
+        if (validURL(value)) {
+          callback()
         } else {
           this.$message({
             message: '外链url填写不正确',
             type: 'error',
-          });
-          callback(null);
+          })
+          callback(null)
         }
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       postForm: Object.assign({}, defaultForm),
       fetchSuccess: true,
@@ -293,50 +300,50 @@ export default {
         content: [{ validator: validateRequire }],
         source_uri: [{ validator: validateSourceUri, trigger: 'blur' }],
       },
-    };
+    }
   },
   computed: {
     contentShortLength() {
-      return this.postForm.content_short.length;
+      return this.postForm.content_short.length
     },
   },
   created() {
     if (this.isEdit) {
-      this.fetchData();
+      this.fetchData()
     } else {
-      this.postForm = Object.assign({}, defaultForm);
+      this.postForm = Object.assign({}, defaultForm)
     }
   },
   methods: {
     fetchData() {
       fetchArticle()
         .then(res => {
-          this.postForm = res.data;
+          this.postForm = res.data
         })
         .catch(err => {
-          this.fetchSuccess = false;
-          console.log(err);
-        });
+          this.fetchSuccess = false
+          console.log(err)
+        })
     },
     submitForm() {
-      this.postForm.display_time = parseInt(this.display_time / 1000, 10);
-      console.log(this.postForm);
+      this.postForm.display_time = parseInt(this.display_time / 1000, 10)
+      console.log(this.postForm)
       this.$refs.postForm.validate(valid => {
         if (valid) {
-          this.loading = true;
+          this.loading = true
           this.$notify({
             title: '成功',
             message: '发布文章成功',
             type: 'success',
             duration: 2000,
-          });
-          this.postForm.status = 'published';
-          this.loading = false;
+          })
+          this.postForm.status = 'published'
+          this.loading = false
         } else {
-          console.log('error submit!!');
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
     draftForm() {
       if (
@@ -346,28 +353,28 @@ export default {
         this.$message({
           message: '请填写必要的标题和内容',
           type: 'warning',
-        });
-        return;
+        })
+        return
       }
       this.$message({
         message: '保存成功',
         type: 'success',
         showClose: true,
         duration: 1000,
-      });
-      this.postForm.status = 'draft';
+      })
+      this.postForm.status = 'draft'
     },
     getRemoteUserList(query) {
       userSearch(query).then(res => {
-        if (!res.data.items) return;
-        console.log(res);
+        if (!res.data.items) return
+        console.log(res)
         this.userLIstOptions = res.data.items.map(v => ({
           key: v.name,
-        }));
-      });
+        }))
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

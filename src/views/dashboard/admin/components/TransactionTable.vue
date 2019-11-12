@@ -14,39 +14,39 @@
       <template slot-scope="scope">
         <el-tag :type="scope.row.status | statusFilter">
           {{ scope.row.status }}</el-tag
-        >
+          >
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
-import { fetchList } from '@/api/old/transaction';
+import { fetchList } from '@/api/old/transaction'
 
 export default {
   data() {
     return {
       list: null,
-    };
+    }
   },
   filters: {
     statusFilter(status) {
       const statusMap = {
         success: 'success',
         pending: 'danger',
-      };
-      return statusMap[status];
+      }
+      return statusMap[status]
     },
   },
   created() {
-    this.fetchData();
+    this.fetchData()
   },
   methods: {
     fetchData() {
       fetchList().then(res => {
-        this.list = res.data.items.slice(0, 8);
-      });
+        this.list = res.data.items.slice(0, 8)
+      })
     },
   },
-};
+}
 </script>

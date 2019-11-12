@@ -1,5 +1,5 @@
 // import fetch from './fetch'
-import axios from './axios';
+import axios from './axios'
 
 // export default fetch
-export default axios;
+export default axios

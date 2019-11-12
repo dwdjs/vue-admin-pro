@@ -1,17 +1,20 @@
-import api from '@/api';
-import { storage } from '@/utils/storage';
-// import cookie from '@/utils/cookie';
-import { isEmptyObj } from '@/utils/is';
+import api from '@/api'
+import {
+  // cookie,
+  storage,
+  isEmptyObject,
+} from '@dwdjs/utils'
 
-let userInfo = storage.get('userInfo') || {};
+let userInfo = storage.get('userInfo') || {}
 
 // const cookieKey = 'dwdus_sid';
 function getLoginStatus(data = {}) {
   // return !!cookie.get(cookieKey) || !!(data.token && data.id);
-  return !!(data.token && data.id);
+  return !!(data.token && data.id)
 }
 
 const user = {
+  namespaced: true,
   state: {
     userInfo: userInfo,
     logged: getLoginStatus(userInfo),
@@ -21,18 +24,18 @@ const user = {
   mutations: {
     // 全量更新
     SET_USERINFO: (state, data = {}) => {
-      if (isEmptyObj(data)) {
-        state.userInfo = {};
-        state.logged = false;
-        storage.remove('userInfo');
-        return;
+      if (isEmptyObject(data)) {
+        state.userInfo = {}
+        state.logged = false
+        storage.remove('userInfo')
+        return
       }
       data = {
         ...state.userInfo,
         ...data,
-      };
-      state.userInfo = data;
-      state.logged = getLoginStatus(data);
+      }
+      state.userInfo = data
+      state.logged = getLoginStatus(data)
       // api.setHeader({
       //   token: data.token || '',
       //   userId: data.id || '',
@@ -40,14 +43,14 @@ const user = {
       api.setCommonParams({
         token: data.token || '',
         user_id: data.id || '',
-      });
-      storage.set('userInfo', data, 86400 * 30);
+      })
+      storage.set('userInfo', data, 86400 * 30)
     },
     SET_SETTING: (state, setting) => {
-      state.setting = setting;
+      state.setting = setting
     },
     SET_ROLES: (state, roles) => {
-      state.roles = roles;
+      state.roles = roles
     },
   },
 
@@ -60,15 +63,15 @@ const user = {
             ...loginForm,
           },
           res => {
-            const { data } = res;
-            commit('SET_USERINFO', data);
-            resolve(res);
+            const { data } = res
+            commit('SET_USERINFO', data)
+            resolve(res)
           },
           err => {
-            reject(err);
+            reject(err)
           }
-        );
-      });
+        )
+      })
     },
 
     // 获取用户信息
@@ -77,29 +80,29 @@ const user = {
         api.getUserInfo(
           {},
           res => {
-            const { data } = res;
+            const { data } = res
             // 由于 mockjs 不支持自定义状态码只能这样hack
             if (!data) {
-              reject('error');
+              reject('error')
             }
-            data.roles = ['admin'];
+            data.roles = ['admin']
             // 验证返回的roles是否是一个非空数组
             if (data.roles && data.roles.length > 0) {
-              commit('SET_ROLES', data.roles);
+              commit('SET_ROLES', data.roles)
             } else {
               /* eslint prefer-promise-reject-errors: 0 */
-              reject('getInfo: roles must be a non-null array !');
+              reject('getInfo: roles must be a non-null array !')
             }
-            commit('SET_USERINFO', data);
-            resolve(res);
+            commit('SET_USERINFO', data)
+            resolve(res)
           },
           err => {
-            reject(err);
+            reject(err)
             // 这里统一鉴权提示报错
-            return true;
+            return true
           }
-        );
-      });
+        )
+      })
     },
 
     // 登出
@@ -108,22 +111,22 @@ const user = {
         api.logout(
           {},
           res => {
-            commit('SET_USERINFO', {});
-            resolve({});
+            commit('SET_USERINFO', {})
+            resolve({})
           },
           err => {
-            reject(err);
+            reject(err)
           }
-        );
-      });
+        )
+      })
     },
 
     // 前端 登出
     FedLogout({ commit }) {
       return new Promise(resolve => {
-        commit('SET_USERINFO', {});
-        resolve({});
-      });
+        commit('SET_USERINFO', {})
+        resolve({})
+      })
     },
 
     // 动态修改权限
@@ -143,6 +146,6 @@ const user = {
     //   })
     // },
   },
-};
+}
 
-export default user;
+export default user

@@ -1,10 +1,10 @@
-import Mock from 'mockjs';
+import Mock from 'mockjs'
 
-const List = [];
-const TableList = [];
-const AccountList = [];
-const UserList = [];
-const count = 20;
+const List = []
+const TableList = []
+const AccountList = []
+const UserList = []
+const count = 20
 
 for (let i = 0; i < count; i++) {
   List.push(
@@ -15,7 +15,7 @@ for (let i = 0; i < count; i++) {
       price: '@float(1000, 15000, 0, 2)',
       'status|1': ['success', 'pending'],
     })
-  );
+  )
 }
 
 for (let i = 0; i < count; i++) {
@@ -28,7 +28,7 @@ for (let i = 0; i < count; i++) {
       'status|1': ['success', 'pending'],
       display_time: '@date()',
     })
-  );
+  )
 }
 for (let i = 0; i < count; i++) {
   AccountList.push(
@@ -40,7 +40,7 @@ for (let i = 0; i < count; i++) {
       'rule|1': ['admin', 'manager', 'general', 'anonymous'],
       note: '',
     })
-  );
+  )
 }
 
 for (let i = 0; i < count; i++) {
@@ -55,7 +55,7 @@ for (let i = 0; i < count; i++) {
       'education|1': ['高中', '大专', '本科', '硕士'],
       'phone|1': ['13423423423', '13817131714', '15927687580', '13312368516'],
     })
-  );
+  )
 }
 
 export default {
@@ -63,24 +63,24 @@ export default {
     return {
       total: List.length,
       items: List,
-    };
+    }
   },
   getTableList: () => {
     return {
       total: TableList.length,
       items: TableList,
-    };
+    }
   },
   getAccountList: () => {
     return {
       total: AccountList.length,
       items: AccountList,
-    };
+    }
   },
   getUserList: () => {
     return {
       total: UserList.length,
       items: UserList,
-    };
+    }
   },
-};
+}

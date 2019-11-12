@@ -20,24 +20,24 @@
 </template>
 
 <script>
-import permission from '@/directive/permission/index.js'; // 权限判断指令
-import SwitchRoles from './components/SwitchRoles';
+import permission from '@/directive/permission/index.js' // 权限判断指令
+import SwitchRoles from './components/SwitchRoles'
 
 export default {
-  name: 'directivePermission',
+  name: 'DirectivePermission',
   components: { SwitchRoles },
   directives: { permission },
   data() {
     return {
       key: 1, // 为了能每次切换权限的时候重新初始化指令
-    };
+    }
   },
   methods: {
     handleRolesChange() {
-      this.key++;
+      this.key++
     },
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

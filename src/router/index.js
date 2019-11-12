@@ -1,26 +1,26 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import env from '@/config/env';
-import { isURL } from '@/utils/validate';
+import Vue from 'vue'
+import Router from 'vue-router'
+import env from '@/config/env'
+import { isURL } from '@/utils/validate'
 import {
   // storage,
   session,
-} from '@/utils/storage';
+} from '@dwdjs/utils'
 
 const _import =
   process.env.NODE_ENV === 'production'
     ? file => () =>
-        import(/* webpackChunkName: "x-[index]" */ '@/views/' + file + '.vue')
-    : file => require('@/views/' + file + '.vue').default;
+        import(/* webpackChunkName: "[request]" */ '@/views/' + file + '.vue')
+    : file => require('@/views/' + file + '.vue').default
 
 // in development-env not use lazy-loading,
 // because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
-Vue.use(Router);
+Vue.use(Router)
 
 /* Layout */
-import Layout from '@/layout/Layout';
+import Layout from '@/layout/Layout'
 
 const layouts = {
   layout: Layout,
@@ -28,9 +28,9 @@ const layouts = {
   // org: Layout,
   // project: Layout,
   page: null,
-};
+}
 function getLayout(key = '') {
-  return layouts[key] || null;
+  return layouts[key] || null
 }
 
 /** note: submenu only apppear when children.length>=1
@@ -85,7 +85,7 @@ export const constantRouterMap = [
       },
     ],
   },
-];
+]
 
 export default new Router({
   mode: env.routerMode,
@@ -93,7 +93,7 @@ export default new Router({
   // mode: 'history', // 后端支持可开
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap,
-});
+})
 
 // 通过路径配置过滤来动态加载路由
 // 动态路由在store中接口控制
@@ -342,7 +342,7 @@ export const asyncRouterMap = [
   },
 
   { path: '*', redirect: '/404', hidden: true },
-];
+]
 
 /**
  * 添加动态(菜单)路由
@@ -352,11 +352,11 @@ export const asyncRouterMap = [
 // 生成菜单来展示菜单数据
 // 菜单有三级没关系，通过path对应到路由，路由目前两级，只跟布局模板有关系
 export function fnDynamicMenuRoutes(menuList = [], prePath = '/') {
-  const routes = [];
+  const routes = []
   for (let i = 0; i < menuList.length; i++) {
-    const item = menuList[i];
-    const hasChildren = item.children && item.children.length;
-    item.link = item.link.replace(/^\//, '');
+    const item = menuList[i]
+    const hasChildren = item.children && item.children.length
+    item.link = item.link.replace(/^\//, '')
 
     const route = {
       // path: item.link,
@@ -372,9 +372,9 @@ export function fnDynamicMenuRoutes(menuList = [], prePath = '/') {
         iframeUrl: '',
         // isTab: true,
       },
-    };
+    }
     if (hasChildren) {
-      route.children = fnDynamicMenuRoutes(item.children, item.link);
+      route.children = fnDynamicMenuRoutes(item.children, item.link)
       // routes = routes.concat(item.children);
       // 非空白
     }
@@ -382,21 +382,21 @@ export function fnDynamicMenuRoutes(menuList = [], prePath = '/') {
       // } else {
       // url 以 http[s]:// 开头, 通过iframe展示
       if (isURL(item.link)) {
-        route['path'] = `i-${item.menuId}`;
-        route['name'] = `i-${item.menuId}`;
-        route['meta']['iframeUrl'] = item.link;
+        route['path'] = `i-${item.menuId}`
+        route['name'] = `i-${item.menuId}`
+        route['meta']['iframeUrl'] = item.link
       } else {
         try {
-          const componentPath = item.link.replace(/^\//, '');
+          const componentPath = item.link.replace(/^\//, '')
           route['component'] =
             prePath === '/'
               ? getLayout(componentPath)
-              : _import(`modules/${componentPath}`) || null;
+              : _import(`modules/${componentPath}`) || null
         } catch (e) {
           // nothing...
         }
       }
-      routes.push(route);
+      routes.push(route)
     }
   }
   // if (routes.length >= 1) {
@@ -408,7 +408,7 @@ export function fnDynamicMenuRoutes(menuList = [], prePath = '/') {
     //   redirect: '/404',
     //   hidden: true,
     // });
-    session.set('dynamicRoutes', routes, 86400);
+    session.set('dynamicRoutes', routes, 86400)
   }
-  return routes;
+  return routes
 }

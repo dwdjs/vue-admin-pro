@@ -19,7 +19,7 @@
  * <Icon mode="custom" type="String" />
  * <Icon mode="custom" type="arrow-right"></Icon>
  */
-import VueTypes from 'vue-types';
+import VueTypes from 'vue-types'
 
 export default {
   name: 'VueIcon',
@@ -38,10 +38,10 @@ export default {
 
   computed: {
     classes() {
-      const { mode, type, spin, shape, reverse } = this.$props;
+      const { mode, type, spin, shape, reverse } = this.$props
 
-      let { prefixCls = 'icon' } = this.$props;
-      prefixCls = mode ? `${prefixCls}-${mode}` : `${prefixCls}-svg`;
+      let { prefixCls = 'icon' } = this.$props
+      prefixCls = mode ? `${prefixCls}-${mode}` : `${prefixCls}-svg`
       // this.prefixCls = prefixCls
       return {
         // icon: true,
@@ -50,80 +50,80 @@ export default {
         [`${prefixCls}-${reverse}`]: reverse,
         [`is-${shape}`]: !!shape,
         [`is-spin`]: spin || type === 'loading',
-      };
+      }
     },
     styles() {
-      const { size, color, bg } = this.$props;
+      const { size, color, bg } = this.$props
       return {
         fontSize: `${size / 100}rem`,
         color: !!color,
         backgroundColor: !!bg,
-      };
+      }
     },
     iconType() {
-      const { mode, type } = this.$props;
-      if (mode !== 'svg') return;
+      const { mode, type } = this.$props
+      if (mode !== 'svg') return
 
-      const warnMsg = `Icon ${type} is invalid, have you set svg-sprite-loader correctly? see https://github.com/kisenka/svg-sprite-loader`;
+      const warnMsg = `Icon ${type} is invalid, have you set svg-sprite-loader correctly? see https://github.com/kisenka/svg-sprite-loader`
       if (!type || typeof type !== 'string') {
-        console.error(warnMsg);
-        return null;
+        console.error(warnMsg)
+        return null
       }
 
-      let xlinkHref = this.renderSvg();
+      let xlinkHref = this.renderSvg()
       // if (!/^#/.test(xlinkHref || type)) {
       //   console.error(warnMsg)
       // }
       // let outerIcon
       if (!xlinkHref) {
         // outerIcon = true
-        xlinkHref = `icon-${type}`;
+        xlinkHref = `icon-${type}`
       } else {
-        xlinkHref = `#icon-${type}`;
+        xlinkHref = `#icon-${type}`
       }
       // console.log(xlinkHref)
-      return xlinkHref;
+      return xlinkHref
       // return `#icon-${type}`;
     },
     // 目前单位用 px
     svgStyles() {
-      const { size, color } = this.$props;
-      let sizeStyle = {};
+      const { size, color } = this.$props
+      let sizeStyle = {}
       if (size) {
         // var size = '280, 70'
         // console.log(size.split(/\s*,\s*| +/))
-        let width;
-        let height;
+        let width
+        let height
         if (typeof size === 'number') {
-          [width, height] = [size, size];
+          [width, height] = [size, size]
         } else {
-          [width, height = width] = size.split(/\s*,\s*| +/);
+          [width, height = width] = size.split(/\s*,\s*| +/)
         }
         sizeStyle = {
           width, // svg 不需要单位
           height,
-        };
+        }
       }
       return {
         color,
         ...sizeStyle,
-      };
+      }
     },
   },
 
   methods: {
     renderSvg() {
-      const { type, mode } = this.$props;
-      if (mode !== 'svg') return;
-      let svg;
+      const { type, mode } = this.$props
+      if (mode !== 'svg') return
+      let svg
       try {
-        svg = import(`@/icons/svg/${type}.svg`);
+        svg = import(`@/icons/svg/${type}.svg`)
       } catch (e) {
-        svg = {};
+        svg = {}
         // console.log(e)
       } finally {
         /* eslint no-unsafe-finally: 0 */
-        return svg; // .default
+        return svg // .default
       }
     },
   },
@@ -131,17 +131,17 @@ export default {
   render(h) {
     // const $default = this.$slots.default
     // const $data = $default.$data
-    const { mode } = this.$props;
+    const { mode } = this.$props
     // const { mode, ...props } = this.$props
 
-    let iconNode = null;
+    let iconNode = null
     // 这里如何塞入 slot 呢
     switch (mode) {
       case 'font': {
         // 通过{}实现块区域，隔离 const 变量
-        const { classes, styles } = this;
-        iconNode = <i class={classes} style={styles} />;
-        break;
+        const { classes, styles } = this
+        iconNode = <i class={classes} style={styles} />
+        break
       }
       // case 'canvas': {
       //   iconNode = 'IconCanvas'
@@ -149,17 +149,17 @@ export default {
       // }
       case 'custom': {
         // 通过 css 实现的icon
-        const { classes } = this;
-        const { size } = this.$props;
+        const { classes } = this
+        const { size } = this.$props
         const styles = {
           transform: size ? `scale(${size})` : false,
-        };
-        iconNode = <span class={classes} style={styles} />;
-        break;
+        }
+        iconNode = <span class={classes} style={styles} />
+        break
       }
       case 'svg':
       default: {
-        const { classes, svgStyles, iconType } = this;
+        const { classes, svgStyles, iconType } = this
         iconNode = (
           <svg
             class={classes}
@@ -168,13 +168,13 @@ export default {
             aria-hidden="true">
             <use xlinkHref={iconType} />
           </svg>
-        );
+        )
       }
     }
 
-    return iconNode;
+    return iconNode
   },
-};
+}
 </script>
 
 <style lang="stylus" scoped>

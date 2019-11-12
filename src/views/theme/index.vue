@@ -12,7 +12,7 @@
       </div>
       <div class="box-item">
         <span class="field-label">{{ $t('theme.change') }} : </span>
-        <el-switch v-model="theme"></el-switch>
+        <el-switch v-model="theme"/>
         <code style="margin-top:15px;">{{ $t('theme.tips') }}</code>
       </div>
     </el-card>
@@ -26,22 +26,22 @@
     </div>
 
     <div class="block">
-      <el-button type="primary" icon="el-icon-edit"></el-button>
-      <el-button type="primary" icon="el-icon-share"></el-button>
-      <el-button type="primary" icon="el-icon-delete"></el-button>
+      <el-button type="primary" icon="el-icon-edit"/>
+      <el-button type="primary" icon="el-icon-share"/>
+      <el-button type="primary" icon="el-icon-delete"/>
       <el-button type="primary" icon="el-icon-search">Search</el-button>
       <el-button type="primary">
         Upload
-        <i class="el-icon-upload el-icon-right"></i>
+        <i class="el-icon-upload el-icon-right"/>
       </el-button>
     </div>
 
     <div class="block">
       <el-tag
-        class="tag-item"
         v-for="tag in tags"
         :type="tag.type"
         :key="tag.type"
+        class="tag-item"
       >
         {{ tag.name }}
       </el-tag>
@@ -56,17 +56,17 @@
     </div>
 
     <div class="block">
-      <el-slider v-model="slideValue"></el-slider>
+      <el-slider v-model="slideValue"/>
     </div>
   </div>
 </template>
 
 <script>
-import { toggleClass } from '@/utils';
+import { toggleClass } from '@/utils'
 // import '@/assets/custom-theme/index.css' // the theme changed version element-ui css
 
 export default {
-  name: 'theme',
+  name: 'Theme',
   data() {
     return {
       theme: false,
@@ -79,14 +79,14 @@ export default {
       ],
       slideValue: 50,
       radio: 3,
-    };
+    }
   },
   watch: {
     theme() {
-      toggleClass(document.body, 'custom-theme');
+      toggleClass(document.body, 'custom-theme')
     },
   },
-};
+}
 </script>
 
 <style scoped>
