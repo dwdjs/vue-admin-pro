@@ -117,7 +117,7 @@
             "children": [],
             "icon": "documentation",
             "id": "8a80869d66768aab0166768ce74e002a",
-            "link": "oss",
+            "link": "oss/oss",
             "name": "文件管理",
             "parentId": "8a80869d66768aab0166768ce70a0024",
             "position": 1,
@@ -257,6 +257,55 @@
         "state": 0,
         "type": "0",
         "visible": 1
+      },
+      {
+        "children": [
+          {
+            "children": [],
+            "icon": "navigate",
+            "id": "8a80869d66768aab0166768ce5780011",
+            "link": "helper/link",
+            "name": "链接工具",
+            "parentId": "8a80869d66768aab0166768ce3434343",
+            "position": 0,
+            "state": 0,
+            "type": "1",
+            "visible": 1
+          },
+          {
+            "children": [],
+            "icon": "gc1",
+            "id": "8a80869d66768aab0166768ce5780012",
+            "link": "helper/link-old",
+            "name": "链接工具old",
+            "parentId": "8a80869d66768aab0166768ce3434343",
+            "position": 0,
+            "state": 0,
+            "type": "1",
+            "visible": 1
+          },
+          {
+            "children": [],
+            "icon": "gc1",
+            "id": "8a80869d66768aab0166768ce5780013",
+            "link": "helper/cdn",
+            "name": "图片CDN",
+            "parentId": "8a80869d66768aab0166768ce3434343",
+            "position": 0,
+            "state": 0,
+            "type": "1",
+            "visible": 1
+          }
+        ],
+        "icon": "icon",
+        "id": "8a80869d66768aab0166768ce3434343",
+        "link": "helper",
+        "name": "链接工具",
+        "parentId": "8a80869d66768aab0166768ce52c0000",
+        "position": 0,
+        "state": 0,
+        "type": "0",
+        "visible": 1
       }
     ],
     "permissionList": [
@@ -321,8 +370,8 @@
       "project:tasks:save"
     ]
   },
-  "message": "success",
-  "statusCode": 0,
-  "elapsedTime": 27,
-  "timestamp": 1539765142477
+  "errmsg": "success",
+  "errno": 0,
+  "logid": 99,
+  "timestamp": 1539757407445
 }

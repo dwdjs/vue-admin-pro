@@ -1,0 +1,37 @@
+{
+  "data": [{
+    "address": "xx",
+    "id": 1,
+    "leader": 0,
+    "name": "多维度",
+    "parentId": 0,
+    "position": 0,
+    "scope": "xx",
+    "state": 0,
+    "url": "xx"
+  }, {
+    "address": "xx",
+    "id": 2,
+    "leader": 0,
+    "name": "技术部",
+    "parentId": 1,
+    "position": 0,
+    "scope": "x",
+    "state": 0,
+    "url": "x"
+  }, {
+    "address": "x",
+    "id": 3,
+    "leader": 0,
+    "name": "产品部",
+    "parentId": 1,
+    "position": 0,
+    "scope": "x",
+    "state": 0,
+    "url": "x"
+  }],
+  "errmsg": "success",
+  "errno": 0,
+  "logid": 99,
+  "timestamp": 1539757407445
+}

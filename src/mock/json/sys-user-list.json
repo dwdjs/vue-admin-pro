@@ -1,0 +1,25 @@
+{
+  "data": {
+    "total": 2,
+    "page": 1,
+    "list": [{
+      "email": "test@admin.com",
+      "id": "8a80869d66768aab0166768cf26600d5",
+      "lastVisit": 1540027450984,
+      "loginCount": 75,
+      "state": 0,
+      "updateTime": 1539587240546,
+      "username": "test"
+    }, {
+      "email": "admin@admin.com",
+      "id": "8a80869d66768aab0166768ceaa2005f",
+      "state": 0,
+      "updateTime": 1539587238550,
+      "username": "admin"
+    }]
+  },
+  "errmsg": "success",
+  "errno": 0,
+  "logid": 99,
+  "timestamp": 1539757407445
+}

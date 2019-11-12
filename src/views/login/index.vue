@@ -6,29 +6,48 @@
       :model="loginForm"
       :rules="loginRules"
       ref="loginForm"
-      label-position="left">
+      label-position="left"
+    >
       <div class="title-container">
-        <h3 class="title">{{site.title}}</h3>
+        <h3 class="title">{{ site.title }}</h3>
         <!-- <lang-select class="set-language"></lang-select> -->
       </div>
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
           <icon-svg icon-class="user" />
         </span>
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="用户名" />
+        <el-input
+          name="username"
+          type="text"
+          v-model="loginForm.username"
+          autoComplete="on"
+          placeholder="用户名"
+        />
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
           <icon-svg icon-class="password" />
         </span>
-        <el-input name="password" :type="passwordType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on" placeholder="密码" />
+        <el-input
+          name="password"
+          :type="passwordType"
+          @keyup.enter.native="handleLogin"
+          v-model="loginForm.password"
+          autoComplete="on"
+          placeholder="密码"
+        />
         <span class="show-pwd" @click="showPwd">
           <icon-svg icon-class="eye" />
         </span>
       </el-form-item>
 
-      <el-button class="btn-login" :loading="loading" @click.native.prevent="handleLogin">{{$t('login.logIn')}}</el-button>
+      <el-button
+        class="btn-login"
+        :loading="loading"
+        @click.native.prevent="handleLogin"
+        >{{ $t('login.logIn') }}</el-button
+      >
 
       <!-- <div class="tips">
         <span>{{$t('login.username')}} : admin</span>
@@ -125,6 +144,7 @@ export default {
             email: username.trim(),
             password,
           };
+          console.log('login');
           this.$store
             .dispatch('Login', userInfo)
             .then(() => {
@@ -192,12 +212,15 @@ $light_gray = #eee;
       height: 48px;
 
       &:focus {
-        border: #40a9ff;
+        // border: #40a9ff;
       }
 
       &:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: #fff !important;
+        // background: #fff;
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+        // -webkit-text-fill-color: #fff !important;
+        // -webkit-box-shadow: none !important;
+        // -webkit-text-fill-color: #fff !important;
       }
     }
   }
@@ -215,11 +238,10 @@ $light_gray = #eee;
     display: flex;
   }
 }
-
 </style>
 
 <style lang="stylus" scoped>
-@import '../../style/var';
+@import '~@/style/var';
 
 $bg = #2d3a4b;
 $dark_gray = #889aa4;

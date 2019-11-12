@@ -1,0 +1,23 @@
+{
+  "data": {
+    "total": 2,
+    "page": 1,
+    "list": [{
+      "code": "admin",
+      "description": "仅包含系统管理和系统监控权限",
+      "id": "8a80869d66768aab0166768ce799002f",
+      "name": "系统管理员",
+      "type": ""
+    }, {
+      "code": "test",
+      "description": "测试账户组所有权限",
+      "id": "8a80869d66768aab0166768ceccf0083",
+      "name": "test",
+      "type": ""
+    }]
+  },
+  "errmsg": "success",
+  "errno": 0,
+  "logid": 99,
+  "timestamp": 1539757407445
+}

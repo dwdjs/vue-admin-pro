@@ -11,19 +11,20 @@ let params = {};
 let reqHeaders = {};
 
 // api 列表
+// TODO: 可提升性能，可以书写配置文件，但编译后（prod模式）直接为结果而无需再次计算得出
 // https://dapi.cloudai.net/swagger-ui.html
 export const modelApis = {
   // 初始化配置
   // test: 'https://easy-mock.com/mock/5aa79bf26701e17a67bde1d7/',
-  // 系统管理
-  login: 'POST /admin/login',
-  // getUserInfo: '/user/info',
-  // login: 'POST /login/login',
-  logout: 'POST /admin/logout',
-  adminCheck: '/admin/check',
+  // 登录相关
+  login: 'POST /user/login', // 手机号 邮箱 第三方
+  // register: 'POST /user/register',
+  // forgot: 'POST /user/forgot',
+  logout: 'POST /user/logout',
+  loginCheck: '/user/check',
 
   // 菜单
-  getMenu: '/admin/menu',
+  getMenu: '/sys/menu',
   // 权限管理
   getAuth: '/sys/permission/list',
   addAuth: 'POST /sys/permission/save',
