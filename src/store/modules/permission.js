@@ -119,6 +119,7 @@ function filterAsyncRouter2(asyncRouterMap2, menus, basePath = '') {
 }
 
 const permission = {
+  namespaced: true,
   state: {
     isAddDynamicRouters: false,
     menus: constantRouterMap,

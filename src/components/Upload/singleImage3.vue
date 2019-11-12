@@ -4,27 +4,29 @@
       :data="dataObj"
       :multiple="false"
       :show-file-list="false"
-      :on-success="handleImageScucess"
+      :on-success="handleImageSuccess"
       class="image-uploader"
       drag
       action="https://httpbin.org/post"
     >
-      <i class="el-icon-upload"/>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+      <i class="el-icon-upload" />
+      <div class="el-upload__text">
+        将文件拖到此处，或<em>点击上传</em>
+      </div>
     </el-upload>
     <div class="image-preview image-app-preview">
-      <div v-show="imageUrl.length > 1" class="image-preview-wrapper">
-        <img :src="imageUrl" >
+      <div v-show="imageUrl.length>1" class="image-preview-wrapper">
+        <img :src="imageUrl">
         <div class="image-preview-action">
-          <i class="el-icon-delete" @click="rmImage"/>
+          <i class="el-icon-delete" @click="rmImage" />
         </div>
       </div>
     </div>
     <div class="image-preview">
-      <div v-show="imageUrl.length > 1" class="image-preview-wrapper">
-        <img :src="imageUrl" >
+      <div v-show="imageUrl.length>1" class="image-preview-wrapper">
+        <img :src="imageUrl">
         <div class="image-preview-action">
-          <i class="el-icon-delete" @click="rmImage"/>
+          <i class="el-icon-delete" @click="rmImage" />
         </div>
       </div>
     </div>
@@ -37,11 +39,9 @@ import { getToken } from '@/api/old/qiniu'
 export default {
   name: 'SingleImageUpload3',
   props: {
-    value: String,
-  },
-  computed: {
-    imageUrl() {
-      return this.value
+    value: {
+      type: String,
+      default: '',
     },
   },
   data() {
@@ -50,6 +50,11 @@ export default {
       dataObj: { token: '', key: '' },
     }
   },
+  computed: {
+    imageUrl() {
+      return this.value
+    },
+  },
   methods: {
     rmImage() {
       this.emitInput('')
@@ -57,7 +62,7 @@ export default {
     emitInput(val) {
       this.$emit('input', val)
     },
-    handleImageScucess(file) {
+    handleImageSuccess(file) {
       this.emitInput(file.files.file)
     },
     beforeUpload() {

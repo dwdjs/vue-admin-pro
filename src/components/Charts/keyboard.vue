@@ -1,15 +1,13 @@
 <template>
-  <div
-    :class="className"
-    :id="id"
-    :style="{ height: height, width: width }"
-  />
+  <div :id="id" :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
+import resize from './mixins/resize'
 
 export default {
+  mixins: [resize],
   props: {
     className: {
       type: String,
@@ -57,30 +55,24 @@ export default {
       }
       this.chart.setOption({
         backgroundColor: '#08263a',
-        xAxis: [
-          {
-            show: false,
-            data: xAxisData,
-          },
-          {
-            show: false,
-            data: xAxisData,
-          },
-        ],
+        grid: {
+          left: '5%',
+          right: '5%',
+        },
+        xAxis: [{
+          show: false,
+          data: xAxisData,
+        }, {
+          show: false,
+          data: xAxisData,
+        }],
         visualMap: {
           show: false,
           min: 0,
           max: 50,
           dimension: 0,
           inRange: {
-            color: [
-              '#4a657a',
-              '#308e92',
-              '#b1cfa5',
-              '#f5d69f',
-              '#f5898b',
-              '#ef5055',
-            ],
+            color: ['#4a657a', '#308e92', '#b1cfa5', '#f5d69f', '#f5898b', '#ef5055'],
           },
         },
         yAxis: {
@@ -102,56 +94,52 @@ export default {
             show: false,
           },
         },
-        series: [
-          {
-            name: 'back',
-            type: 'bar',
-            data: data2,
-            z: 1,
-            itemStyle: {
-              normal: {
-                opacity: 0.4,
-                barBorderRadius: 5,
-                shadowBlur: 3,
-                shadowColor: '#111',
-              },
+        series: [{
+          name: 'back',
+          type: 'bar',
+          data: data2,
+          z: 1,
+          itemStyle: {
+            normal: {
+              opacity: 0.4,
+              barBorderRadius: 5,
+              shadowBlur: 3,
+              shadowColor: '#111',
             },
           },
-          {
-            name: 'Simulate Shadow',
-            type: 'line',
-            data,
-            z: 2,
-            showSymbol: false,
-            animationDelay: 0,
-            animationEasing: 'linear',
-            animationDuration: 1200,
-            lineStyle: {
-              normal: {
-                color: 'transparent',
-              },
-            },
-            areaStyle: {
-              normal: {
-                color: '#08263a',
-                shadowBlur: 50,
-                shadowColor: '#000',
-              },
+        }, {
+          name: 'Simulate Shadow',
+          type: 'line',
+          data,
+          z: 2,
+          showSymbol: false,
+          animationDelay: 0,
+          animationEasing: 'linear',
+          animationDuration: 1200,
+          lineStyle: {
+            normal: {
+              color: 'transparent',
             },
           },
-          {
-            name: 'front',
-            type: 'bar',
-            data,
-            xAxisIndex: 1,
-            z: 3,
-            itemStyle: {
-              normal: {
-                barBorderRadius: 5,
-              },
+          areaStyle: {
+            normal: {
+              color: '#08263a',
+              shadowBlur: 50,
+              shadowColor: '#000',
             },
           },
-        ],
+        }, {
+          name: 'front',
+          type: 'bar',
+          data,
+          xAxisIndex: 1,
+          z: 3,
+          itemStyle: {
+            normal: {
+              barBorderRadius: 5,
+            },
+          },
+        }],
         animationEasing: 'elasticOut',
         animationEasingUpdate: 'elasticOut',
         animationDelay(idx) {

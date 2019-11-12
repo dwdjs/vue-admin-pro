@@ -73,7 +73,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { isvalidUsername } from '@/utils/validate'
+import { validUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect'
 // import SocialSign from './socialsignin'
 
@@ -85,7 +85,7 @@ export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
+      if (!validUsername(value)) {
         callback(new Error('请输入正确的用户名'))
       } else {
         callback()
@@ -174,7 +174,7 @@ export default {
       // if (!codeName) {
       //   alert('第三方登录失败')
       // } else {
-      //   this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
+      //   this.$store.dispatch('user/LoginByThirdparty', codeName).then(() => {
       //     this.$router.push({ path: '/' })
       //   })
       // }

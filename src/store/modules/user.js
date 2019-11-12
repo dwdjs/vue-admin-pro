@@ -12,6 +12,7 @@ function getLoginStatus(data = {}) {
 }
 
 const user = {
+  namespaced: true,
   state: {
     userInfo: userInfo,
     logged: getLoginStatus(userInfo),

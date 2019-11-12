@@ -159,7 +159,7 @@ const defaultInfo = {
 
 export default {
   data() {
-    const validateUrl = (rule, value, callback) => {
+    const validURL = (rule, value, callback) => {
       if (this.dataForm.type === 1 && !/\S/.test(value)) {
         callback(new Error('菜单URL不能为空'))
       } else {
@@ -179,7 +179,7 @@ export default {
         parentName: [
           { required: true, message: '上级菜单不能为空', trigger: 'change' },
         ],
-        url: [{ validator: validateUrl, trigger: 'blur' }],
+        url: [{ validator: validURL, trigger: 'blur' }],
       },
       menuList: [],
       menuListTreeProps: {

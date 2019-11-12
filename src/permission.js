@@ -33,7 +33,7 @@ router.beforeEach((to, from, next) => {
       // 判断当前用户是否已拉取完user_info信息
       // 拉取user_info
       store
-        .dispatch('GetUserInfo')
+        .dispatch('user/GetUserInfo')
         .then(res => {
           // note: roles must be a array! such as: ['editor','develop']
           const { roles } = res.data
@@ -42,7 +42,7 @@ router.beforeEach((to, from, next) => {
           // 使用api控制路由
           // store.dispatch('GenerateRoutes', { roles }).then(() => {
           // 使用本地控制路由
-          store.dispatch('GenerateLocalRoutes', { roles }).then(() => {
+          store.dispatch('permission/GenerateLocalRoutes', { roles }).then(() => {
             // 动态添加可访问路由表
             console.log('addRoutes: ', store.getters.addRouters)
             router.addRoutes(store.getters.addRouters)

@@ -4,19 +4,21 @@
       :data="dataObj"
       :multiple="false"
       :show-file-list="false"
-      :on-success="handleImageScucess"
+      :on-success="handleImageSuccess"
       class="image-uploader"
       drag
       action="https://httpbin.org/post"
     >
-      <i class="el-icon-upload"/>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+      <i class="el-icon-upload" />
+      <div class="el-upload__text">
+        将文件拖到此处，或<em>点击上传</em>
+      </div>
     </el-upload>
     <div class="image-preview">
-      <div v-show="imageUrl.length > 1" class="image-preview-wrapper">
-        <img :src="imageUrl + '?imageView2/1/w/200/h/200'" >
+      <div v-show="imageUrl.length>1" class="image-preview-wrapper">
+        <img :src="imageUrl+'?imageView2/1/w/200/h/200'">
         <div class="image-preview-action">
-          <i class="el-icon-delete" @click="rmImage"/>
+          <i class="el-icon-delete" @click="rmImage" />
         </div>
       </div>
     </div>
@@ -24,17 +26,14 @@
 </template>
 
 <script>
-// 预览效果见付费文章
-import { getToken } from '@/api/old/qiniu'
+import { getToken } from '@/api/qiniu'
 
 export default {
   name: 'SingleImageUpload',
   props: {
-    value: String,
-  },
-  computed: {
-    imageUrl() {
-      return this.value
+    value: {
+      type: String,
+      default: '',
     },
   },
   data() {
@@ -43,6 +42,11 @@ export default {
       dataObj: { token: '', key: '' },
     }
   },
+  computed: {
+    imageUrl() {
+      return this.value
+    },
+  },
   methods: {
     rmImage() {
       this.emitInput('')
@@ -50,7 +54,7 @@ export default {
     emitInput(val) {
       this.$emit('input', val)
     },
-    handleImageScucess() {
+    handleImageSuccess() {
       this.emitInput(this.tempUrl)
     },
     beforeUpload() {

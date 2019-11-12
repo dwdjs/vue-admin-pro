@@ -93,7 +93,7 @@ const defaultInfo = {
 
 export default {
   data() {
-    // const validateUrl = (rule, value, callback) => {
+    // const validURL = (rule, value, callback) => {
     //   if (value && !/\S/.test(value)) {
     //     callback(new Error('网站URL不能为空'))
     //   } else {
@@ -114,7 +114,7 @@ export default {
           { required: true, message: '上级部门不能为空', trigger: 'change' },
         ],
         // url: [
-        //   { validator: validateUrl, trigger: 'blur' },
+        //   { validator: validURL, trigger: 'blur' },
         // ],
       },
       menuList: [],

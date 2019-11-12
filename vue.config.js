@@ -153,7 +153,7 @@ module.exports = {
   // dll 方案, 使用 vue-cli-plugin-dll
   pluginOptions: {
     dll: {
-      entry: ['vue', 'vue-router', 'vuex', 'axios', 'element-ui'],
+      entry: ['vue', 'vue-router', 'vuex', 'axios', 'element-ui', 'nprogress'],
       output: path.join(__dirname, './public/dll'),
       // 只在生产环境加入 webpack.DllReferencePlugin 插件
       open: __PROD__,

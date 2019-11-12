@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../../styles/variables.scss';
+@import '~@/style/var';
 
 .scroll-container {
   position: relative;
@@ -62,7 +62,7 @@ export default {
   background-color: $menuBg;
   .scroll-wrapper {
     position: absolute;
-     width: 100%!important;
+     width: 100% !important;
   }
 }
 </style>

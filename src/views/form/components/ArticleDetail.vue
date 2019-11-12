@@ -17,7 +17,7 @@
           </router-link>
 
           <el-dropdown trigger="click">
-            <el-button 
+            <el-button
               plain
             >{{ !postForm.comment_disabled ? '评论已打开' : '评论已关闭' }}
               <i class="el-icon-caret-bottom el-icon--right"/>
@@ -36,7 +36,7 @@
           </el-dropdown>
 
           <el-dropdown trigger="click">
-            <el-button 
+            <el-button
               plain
             >平台
               <i class="el-icon-caret-bottom el-icon--right"/>
@@ -76,7 +76,7 @@
                   v-model="postForm.source_uri"
                   placeholder="请输入内容"
                 >
-                  <template 
+                  <template
                     slot="prepend"
                   >填写url</template
                   >
@@ -92,9 +92,9 @@
             @click="submitForm()"
           >发布
           </el-button>
-          <el-button 
-            v-loading="loading" 
-            type="warning" 
+          <el-button
+            v-loading="loading"
+            type="warning"
             @click="draftForm"
           >草稿</el-button
           >
@@ -111,8 +111,8 @@
               <!-- <MDinput name="name" v-model="postForm.title" required :maxlength="100">
                 标题
               </MDinput> -->
-              <span 
-                v-show="postForm.title.length >= 26" 
+              <span
+                v-show="postForm.title.length >= 26"
                 class="title-prompt"
               >app可能会显示不全</span
               >
@@ -195,8 +195,8 @@
             autosize
             placeholder="请输入内容"
           />
-          <span 
-            v-show="contentShortLength" 
+          <span
+            v-show="contentShortLength"
             class="word-counter"
           >{{ contentShortLength }}字</span
           >
@@ -224,7 +224,7 @@ import Multiselect from 'vue-multiselect'
 import 'vue-multiselect/dist/vue-multiselect.min.css'
 // 粘性header组件
 import Sticky from '@/components/Sticky'
-import { validateURL } from '@/utils/validate'
+import { validURL } from '@/utils/validate'
 import { fetchArticle } from '@/api/old/article'
 import { userSearch } from '@/api/old/remoteSearch'
 
@@ -271,7 +271,7 @@ export default {
     }
     const validateSourceUri = (rule, value, callback) => {
       if (value) {
-        if (validateURL(value)) {
+        if (validURL(value)) {
           callback()
         } else {
           this.$message({

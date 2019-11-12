@@ -81,10 +81,10 @@ export default {
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch('toggleSideBar')
+      this.$store.dispatch('app/toggleSideBar')
     },
     logout() {
-      this.$store.dispatch('Logout').then(() => {
+      this.$store.dispatch('user/Logout').then(() => {
         // 为了重新实例化vue-router对象 避免bug
         window.location.reload()
       })

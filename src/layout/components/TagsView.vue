@@ -80,7 +80,7 @@ export default {
       if (!route) {
         return false
       }
-      this.$store.dispatch('addVisitedViews', route)
+      this.$store.dispatch('tagsView/addVisitedView', route)
     },
     moveToCurrentTag() {
       const tags = this.$refs.tag
@@ -94,7 +94,7 @@ export default {
       })
     },
     closeSelectedTag(view) {
-      this.$store.dispatch('delVisitedViews', view).then(views => {
+      this.$store.dispatch('tagsView/delVisitedView', view).then(views => {
         if (this.isActive(view)) {
           const latestView = views.slice(-1)[0]
           if (latestView) {
@@ -107,7 +107,7 @@ export default {
     },
     closeOthersTags() {
       this.$router.push(this.selectedTag.path)
-      this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
+      this.$store.dispatch('tagsView/delOthersView', this.selectedTag).then(() => {
         this.moveToCurrentTag()
       })
     },

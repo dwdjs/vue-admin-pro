@@ -1,5 +1,5 @@
 /* eslint-disable */
-require('script-loader!file-saver');
+import { saveAs } from 'file-saver'
 import JSZip from 'jszip'
 
 export function export_txt_to_zip(th, jsonData, txtName, zipName) {
@@ -14,7 +14,9 @@ export function export_txt_to_zip(th, jsonData, txtName, zipName) {
     txtData += `${tempStr}\r\n`
   })
   zip.file(`${txt_name}.txt`, txtData)
-  zip.generateAsync({type:"blob"}).then((blob) => {
+  zip.generateAsync({
+    type: "blob"
+  }).then((blob) => {
     saveAs(blob, `${zip_name}.zip`)
   }, (err) => {
     alert('导出失败')
