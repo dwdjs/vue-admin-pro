@@ -73,5 +73,5 @@ dist/
 build
 dll
 webpack.config.js
-temp
+temp*
 src/views/test

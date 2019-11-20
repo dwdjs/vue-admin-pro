@@ -70,16 +70,15 @@ export default {
     this.fetchData()
   },
   methods: {
-    fetchData() {
+    async fetchData() {
       this.listLoading = true
-      fetchList().then(res => {
-        this.list = res.data.items
-        this.listLoading = false
-      })
+      const { data } = await fetchList()
+      this.list = data.items
+      this.listLoading = false
     },
     handleDownload() {
       this.downloadLoading = true
-      // import('@/vendor/Export2Zip').then((zip) => {
+      // import('@/vendor/Export2Zip').then(zip => {
       //   const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
       //   const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
       //   const { list } = this

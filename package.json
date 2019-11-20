@@ -26,19 +26,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jskit/kit-admin.git"
+    "url": "git+https://github.com/dwdjs/vue-admin-pro.git"
   },
   "keywords": [
     "admin",
-    "kit-admin",
-    "jskit"
+    "vue-admin-pro",
+    "dwdjs"
   ],
   "author": "cloudyan <1395093509@qq.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jskit/kit-admin/issues"
+    "url": "https://github.com/dwdjs/vue-admin-pro/issues"
   },
-  "homepage": "https://github.com/jskit/kit-admin#readme",
+  "homepage": "https://github.com/dwdjs/vue-admin-pro#readme",
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
   "dependencies": {
     "@dwdjs/utils": "^1.0.0",
     "axios": "0.19.0",
@@ -51,11 +59,10 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@tweenjs/tween.js": "^18.4.2",
     "@vue/cli-plugin-babel": "^3.12.1",
     "@vue/cli-plugin-e2e-cypress": "^3.12.1",
     "@vue/cli-plugin-eslint": "^3.12.1",
-    "@vue/cli-plugin-pwa": "^3.12.1",
+    "@vue/cli-plugin-pwa": "^4.0.5",
     "@vue/cli-plugin-unit-jest": "^4.0.5",
     "@vue/cli-service": "^3.12.1",
     "@vue/eslint-config-prettier": "^5.0.0",
