@@ -1,22 +1,13 @@
 <template>
-  <section class="kit-sidebar">
-    <div class="kit-sidebar__header">
-      <h1 class="kit-sidebar__brand">
-        <router-link
-          :to="{ name: 'dashboard' }"
-          class="kit-sidebar__brand-lg"
-        >{{ `${site.title}${site.desc}` }}</router-link>
-        <router-link
-          :to="{ name: 'dashboard' }"
-          class="kit-sidebar__brand-mini"
-        >{{ site.title }}</router-link>
-      </h1>
-    </div>
-    <el-scrollbar class="kit-sidebar__body" wrap-class="scrollbar-wrapper">
+  <div :class="{'has-logo':showLogo}">
+    <logo v-if="showLogo" :collapse="isCollapse" />
+    <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :show-timeout="200"
-        :default-active="$route.path"
+        :default-active="activeMenu"
         :collapse="isCollapse"
+        :unique-opened="false"
+        :collapse-transition="false"
         mode="vertical"
         background-color="#304156"
         text-color="#bfcbd9"
@@ -30,23 +21,40 @@
         />
       </el-menu>
     </el-scrollbar>
-  </section>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 // import api from '@/api';
 
 export default {
-  components: { SidebarItem },
+  components: {
+    Logo,
+    SidebarItem,
+  },
   computed: {
     ...mapGetters([
       'menus',
-      // 'permission_routers',
+      'permission_routes',
       'sidebar',
       'site',
     ]),
+    activeMenu() {
+      // $route.path
+      const route = this.$route
+      const { meta, path } = route
+      // if set path, the sidebar will highlight the path you set
+      if (meta.activeMenu) {
+        return meta.activeMenu
+      }
+      return path
+    },
+    showLogo() {
+      return this.$store.state.settings.sidebarLogo
+    },
     isCollapse() {
       return !this.sidebar.opened
     },

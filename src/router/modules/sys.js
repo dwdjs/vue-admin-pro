@@ -1,7 +1,7 @@
 // 系统管理
 
 import { lazyLoad } from '../utils'
-import Layout from '@/layout/Layout'
+import Layout from '@/layout'
 
 export default [
   {

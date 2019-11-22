@@ -30,8 +30,8 @@ let channel = params.channel || 'h5'
 let terminal = 'wap'
 
 const defaultShareInfo = {
-  title: '觅食蜂 年轻人的美食社区',
-  desc: '来觅食蜂查看觅食笔记吧！',
+  title: '',
+  desc: '',
   link: location.origin,
   imgUrl: 'https://img1.haoshiqi.net/static/img/default-avatar.d5f87370.png',
 }
@@ -105,7 +105,7 @@ location /v2 {
 */
 const baseEnv = {
   site: {
-    title: 'admin',
+    title: 'vue-admin-pro',
     desc: '后台管理系统',
   },
   ...ENV['prod'],

@@ -1,61 +1,57 @@
 <template>
-  <el-menu class="navbar" mode="horizontal">
-    <hamburger
-      :toggle-click="toggleSideBar"
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-    />
+  <div class="navbar">
+    <hamburger id="hamburger-container" :is-active="sidebar.opened" @toggleClick="toggleSideBar" class="hamburger-container" />
 
-    <breadcrumb class="breadcrumb-container" />
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
     <div class="right-menu">
-      <error-log class="errLog-container right-menu-item" />
+      <template v-if="device!=='mobile'">
+        <!-- <search id="header-search" class="right-menu-item" /> -->
 
-      <el-tooltip
-        :content="$t('navbar.screenfull')"
-        effect="dark"
-        placement="bottom"
-      >
-        <screenfull class="screenfull right-menu-item" />
-      </el-tooltip>
+        <error-log class="error-log-container right-menu-item hover-effect" />
 
-      <!-- <lang-select class="international right-menu-item"></lang-select> -->
+        <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
-      <!-- <el-tooltip effect="dark" :content="$t('navbar.theme')" placement="bottom">
-        <theme-picker class="theme-switch right-menu-item"></theme-picker>
-      </el-tooltip> -->
+        <el-tooltip :content="$t('navbar.size')" effect="dark" placement="bottom">
+          <size-select id="size-select" class="right-menu-item hover-effect" />
+        </el-tooltip>
 
-      <el-dropdown class="avatar-container right-menu-item" trigger="click">
+        <lang-select class="right-menu-item hover-effect" />
+
+      </template>
+
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img
-            v-if="avatar"
-            :src="avatar + '?imageView2/1/w/80/h/80'"
-            class="user-avatar"
-          >
-          <span :v-else="avatar">{{ name || '管理员' }}</span>
+          <img v-if="avatar" :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <span v-else>{{ name || '管理员' }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
+          <router-link to="/profile/index">
+            <el-dropdown-item>
+              {{ $t('navbar.profile') }}
+            </el-dropdown-item>
+          </router-link>
           <router-link to="/">
             <el-dropdown-item>
               {{ $t('navbar.dashboard') }}
             </el-dropdown-item>
           </router-link>
-          <!-- <a target='_blank' href="https://github.com/PanJiaChen/vue-element-admin/">
+          <a rel="noopener noreferrer" target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
             <el-dropdown-item>
-              {{$t('navbar.github')}}
+              {{ $t('navbar.github') }}
             </el-dropdown-item>
-          </a> -->
-          <!-- <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item> -->
+          </a>
+          <a rel="noopener noreferrer" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
+            <el-dropdown-item>Docs</el-dropdown-item>
+          </a>
           <el-dropdown-item divided>
-            <span @click="logout" style="display:block;">{{
-              $t('navbar.logOut')
-            }}</span>
+            <span @click="logout" style="display:block;">{{ $t('navbar.logOut') }}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-  </el-menu>
+  </div>
 </template>
 
 <script>
@@ -64,8 +60,9 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
-// import LangSelect from '@/components/LangSelect'
-// import ThemePicker from '@/components/ThemePicker'
+import SizeSelect from '@/components/SizeSelect'
+import LangSelect from '@/components/LangSelect'
+// import Search from '@/components/HeaderSearch'
 
 export default {
   components: {
@@ -73,21 +70,25 @@ export default {
     Hamburger,
     ErrorLog,
     Screenfull,
-    // LangSelect,
-    // ThemePicker,
+    SizeSelect,
+    LangSelect,
+    // Search,
   },
   computed: {
-    ...mapGetters(['sidebar', 'name', 'avatar']),
+    ...mapGetters([
+      'sidebar',
+      'avatar',
+      'device',
+    ]),
   },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
-    logout() {
-      this.$store.dispatch('user/Logout').then(() => {
-        // 为了重新实例化vue-router对象 避免bug
-        window.location.reload()
-      })
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      // 为了重新实例化vue-router对象 避免bug
+      window.location.reload()
     },
   },
 }
@@ -97,56 +98,75 @@ export default {
 .navbar {
   height: 50px;
   line-height: 50px;
-  border-radius: 0px !important;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
   .hamburger-container {
-    line-height: 58px;
-    height: 50px;
+    height: 100%;
     float: left;
-    padding: 0 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+
     &:hover {
-      background: #e6f7ff;
+      background: rgba(0, 0, 0, 0.025);
     }
   }
-  .breadcrumb-container{
+
+  .breadcrumb-container {
     float: left;
   }
-  .errLog-container {
+
+  .error-log-container {
     display: inline-block;
     vertical-align: top;
   }
+
   .right-menu {
     display: flex;
     align-items: center;
     float: right;
     height: 100%;
-    &:focus{
-     outline: none;
+
+    &:focus {
+      outline: none;
     }
+
     .right-menu-item {
-      display: inline-block;
-      margin: 0 8px;
+      display: flex;
+      align-items: center;
+      // margin: 0 4px;
+      padding: 0 8px;
+
+      >>> .icon-svg {
+        font-size: 20px;
+      }
+
+      &.hover-effect {
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.025);
+        }
+      }
     }
-    .screenfull {
-      height: 20px;
-    }
-    .international{
-      vertical-align: top;
-    }
-    .theme-switch {
-      vertical-align: 15px;
-    }
+
     .avatar-container {
-      height: 50px;
       margin-right: 30px;
+
       .avatar-wrapper {
         cursor: pointer;
-        // margin-top: 5px;
         position: relative;
+
         .user-avatar {
           width: 40px;
           height: 40px;
           border-radius: 10px;
         }
+
         .el-icon-caret-bottom {
           position: absolute;
           right: -20px;

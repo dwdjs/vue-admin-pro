@@ -10,7 +10,7 @@ import {
 Vue.use(Router)
 
 import { lazyLoad } from './utils'
-import Layout from '@/layout/Layout'
+import Layout from '@/layout'
 
 // modules
 import sysRouter from './modules/sys'

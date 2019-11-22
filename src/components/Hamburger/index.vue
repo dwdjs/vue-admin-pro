@@ -2,21 +2,13 @@
   <div @click="toggleClick" class="hamburger-box">
     <svg
       :class="{ 'is-active': isActive }"
-      t="1492500959545"
       class="hamburger"
-      style=""
       viewBox="0 0 1024 1024"
-      version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      p-id="1923"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
       width="64"
       height="64"
     >
-      <path
-        d="M112 799.99999998h800c26.5 0 48 21.5 48 48s-21.5 48-48 48H113c-26.5 0-48-21.5-48-48s21.5-48 48-48z m801-240H433c-26.5 0-48-21.5-48-48s21.5-48 48-48h480c26.5 0 48 21.5 48 48s-21.5 48-48 48zM243.7 668.39999998L78.6 524.09999998c-6.7-5.8-7.3-15.9-1.5-22.6 0.5-0.5 1-1.1 1.5-1.5l165.1-144c3.3-2.9 8.4-2.6 11.3 0.8 1.3 1.5 2 3.3 2 5.3v300.3c0 4.4-3.6 8-8 8-1.9 0-3.8-0.7-5.3-2zM913 223.99999998H113c-26.5 0-48-21.5-48-48S86.5 127.99999998 113 127.99999998h800c26.5 0 48 21.5 48 48s-21.5 48-48 48z"
-        p-id="1924"
-      />
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM142.4 642.1L298.7 519a8.84 8.84 0 0 0 0-13.9L142.4 381.9c-5.8-4.6-14.4-.5-14.4 6.9v246.3a8.9 8.9 0 0 0 14.4 7z" />
     </svg>
   </div>
 </template>
@@ -25,13 +17,11 @@
 export default {
   name: 'Hamburger',
   props: {
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
-    toggleClick: {
-      type: Function,
-      default: null,
+    isActive: Boolean,
+  },
+  methods: {
+    toggleClick() {
+      this.$emit('toggleClick')
     },
   },
 }
@@ -40,20 +30,20 @@ export default {
 <style scoped>
 .hamburger-box {
   cursor: pointer;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
 }
+
 .hamburger {
   display: inline-block;
   width: 20px;
   height: 20px;
-  transform: scaleX(-1);
-  transition: 0.38s;
   transform-origin: 50% 50%;
-  /* opacity: 0.5; */
 }
-/* .hamburger:hover {
-  opacity: 1;
-} */
+
 .hamburger.is-active {
-  transform: scaleX(1);
+  /* transform: scaleX(-1); */
+  transform: rotate(180deg);
 }
 </style>

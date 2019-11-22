@@ -30,10 +30,9 @@ export default {
   methods: {
     handleSetLanguage(lang) {
       this.$i18n.locale = lang
-      this.$store.dispatch('setLanguage', lang)
-      const tip = this.$t('navbar.setLanguageTip')
+      this.$store.dispatch('app/setLanguage', lang)
       this.$message({
-        message: tip,
+        message: this.$t('navbar.setLanguageTip'),
         type: 'success',
       })
     },
@@ -41,10 +40,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.international-icon {
-  font-size: 20px;
-  cursor: pointer;
-  vertical-align: -5px !important;
-}
-</style>

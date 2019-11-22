@@ -50,9 +50,10 @@ module.exports = {
     'vue/multiline-html-element-content-newline': 'off',
     'vue/no-v-html': 'off',
     'vue/no-template-shadow': 'off', // temp
-    'vue/order-in-components': 'off', // temp
-    'vue/require-default-prop': 'off',
     // 'vue/no-unused-components': '1',
+    'vue/order-in-components': 'off', // temp
+    'vue/require-component-is': 'off', // 这个属性误报
+    'vue/require-default-prop': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'comma-dangle': [
       'error',

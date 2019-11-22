@@ -138,6 +138,7 @@ const permission = {
     SET_MENUS: (state, menus) => {
       // 当前的全部路由
       state.menus = constantRouterMap.concat(menus)
+      console.log('所有菜单', state.menus)
     },
   },
   actions: {

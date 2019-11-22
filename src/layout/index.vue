@@ -1,11 +1,11 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" @click="handleClickOutside" class="drawer-bg" />
+    <div v-if="device==='mobile' && sidebar.opened" @click="handleClickOutside" class="drawer-bg" />
     <sidebar class="sidebar-container" />
-    <section :class="{hasTagsView:needTagsView}" class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
+    <section :class="{ hasTagsView: needTagsView }" class="main-container">
+      <div :class="{'fixed-header': fixedHeader}">
         <navbar />
-        <tags-view v-if="needTagsView" />
+        <!-- <tags-view v-if="needTagsView" /> -->
       </div>
       <app-main />
       <right-panel v-if="showSettings">
@@ -17,7 +17,13 @@
 
 <script>
 import RightPanel from '@/components/RightPanel'
-import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
+import {
+  AppMain,
+  Navbar,
+  Settings,
+  Sidebar,
+  // TagsView,
+} from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import { mapState } from 'vuex'
 
@@ -29,7 +35,7 @@ export default {
     RightPanel,
     Settings,
     Sidebar,
-    TagsView,
+    // TagsView,
   },
   mixins: [ResizeMixin],
   computed: {
@@ -73,7 +79,7 @@ export default {
 $sideBarWidth = 200px
 
 .app-wrapper {
-  // clearfix();
+  clearfix();
   position: relative;
   height: 100%;
   width: 100%;
@@ -99,7 +105,7 @@ $sideBarWidth = 200px
   top: 0;
   right: 0;
   z-index: 9;
-  // width: calc(100% - $sideBarWidth);
+  width: 'calc(100% - $sideBarWidth)';
   transition: width 0.28s;
 }
 

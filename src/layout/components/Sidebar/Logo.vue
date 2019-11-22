@@ -1,19 +1,21 @@
 <template>
-  <div :class="{'collapse':collapse}" class="sidebar-logo-container">
+  <div :class="{ collapse: collapse }" class="sidebar-logo-container">
     <transition name="sidebarLogoFade">
       <router-link key="collapse" v-if="collapse" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 v-else class="sidebar-title">{{ title }} </h1>
+        <h1 v-else class="sidebar-title">{{ site.title }} </h1>
       </router-link>
       <router-link key="expand" v-else class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 class="sidebar-title">{{ title }} </h1>
+        <h1 class="sidebar-title">{{ site.title }} </h1>
       </router-link>
     </transition>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'SidebarLogo',
   props: {
@@ -22,9 +24,13 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapGetters([
+      'site',
+    ]),
+  },
   data() {
     return {
-      title: 'Vue Element Admin',
       logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png',
     }
   },

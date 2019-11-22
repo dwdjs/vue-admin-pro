@@ -3,7 +3,10 @@ import defaultSettings from '@/settings'
 
 const { showSettings, tagsView, fixedHeader, sidebarLogo } = defaultSettings
 
+const theme = '#409EFF'
+
 const state = {
+  theme,
   // theme: variables.theme,
   showSettings: showSettings,
   tagsView: tagsView,

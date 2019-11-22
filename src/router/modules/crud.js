@@ -1,4 +1,4 @@
 // 增删改查
 
 import { lazyLoad } from '../utils'
-import Layout from '@/layout/Layout'
+import Layout from '@/layout'

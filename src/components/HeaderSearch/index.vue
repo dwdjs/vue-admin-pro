@@ -1,6 +1,6 @@
 <template>
   <div :class="{ show: show }" class="header-search">
-    <svg-icon
+    <icon-svg
       @click.stop="click"
       class-name="search-icon"
       icon-class="search"
@@ -71,13 +71,14 @@ export default {
     },
   },
   mounted() {
-    this.searchPool = this.generateRoutes(this.routes)
+    // this.searchPool = this.generateRoutes(this.routes)
   },
   methods: {
     click() {
       this.show = !this.show
       if (this.show) {
-        this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
+        console.log(111)
+        // this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
       }
     },
     close() {

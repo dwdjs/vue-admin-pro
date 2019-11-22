@@ -9,9 +9,13 @@ import { mapGetters } from 'vuex'
 import adminDashboard from './admin'
 import editorDashboard from './editor'
 
+/* eslint vue/no-unused-components: 0 */
 export default {
   name: 'Dashboard',
-  components: { adminDashboard, editorDashboard },
+  components: {
+    adminDashboard,
+    editorDashboard,
+  },
   data() {
     return {
       currentRole: 'adminDashboard',
