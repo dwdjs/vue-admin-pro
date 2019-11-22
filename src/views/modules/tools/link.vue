@@ -194,13 +194,13 @@
         <div class="output">
           <div class="output-item">{{ output }}</div>
           <div
+            v-html="form.tip"
             class="output-item"
             style="white-space: pre; color: red;"
-            v-html="form.tip"
           />
         </div>
         <div v-show="show('shorUrl')" class="output">
-          <el-button class="mtb10" type="primary" @click="onSubmit">
+          <el-button @click="onSubmit" class="mtb10" type="primary">
             使用短链接
           </el-button>
           <!-- <div class="output-item" v-show="shortTargetUrl">

@@ -5,26 +5,26 @@
         <el-form-item label="">
           <el-input
             v-model="dataForm.keywords"
+            @keyup.enter.native="handleFilter"
             placeholder="搜索关键字"
             width="200"
             class="filter-item"
             clearable
-            @keyup.enter.native="handleFilter"
           />
         </el-form-item>
         <el-button
           v-waves
+          @click="handleFilter"
           class="filter-item"
           type="primary"
           icon="el-icon-search"
-          @click="handleFilter"
         >搜索</el-button>
         <!-- <el-button class="filter-item" style="margin-left: 10px;" @click="handleAddOrUpdate()" type="success" icon="el-icon-edit">上传文件</el-button> -->
         <!-- <el-button class="filter-item" style="margin-left: 10px;" @click="handleConfig" type="primary" icon="el-icon-edit">云存储配置</el-button> -->
         <el-button
           :disabled="dataListSelections.length <= 0"
-          type="danger"
           @click="handleDelete()"
+          type="danger"
         >批量删除</el-button>
       </el-form>
     </div>
@@ -33,10 +33,10 @@
       :key="tableKey"
       v-loading="dataListLoading"
       :data="dataList"
+      @selection-change="handleSelectionChange"
       element-loading-text="给我一点时间"
       border
       highlight-current-row
-      @selection-change="handleSelectionChange"
     >
       <el-table-column
         type="selection"
@@ -74,9 +74,9 @@
         <template slot-scope="scope">
           <!-- <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button> -->
           <el-button 
+            @click="handleDelete(scope.row)" 
             type="danger" 
-            size="mini" 
-            @click="handleDelete(scope.row)"
+            size="mini"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -88,10 +88,10 @@
         :page-size="pageLimit"
         :total="totalCount"
         :page-sizes="[10, 20, 50, 100]"
-        background
-        layout="total, sizes, prev, pager, next, jumper"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
+        background
+        layout="total, sizes, prev, pager, next, jumper"
       />
     </div>
 

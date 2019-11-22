@@ -2,18 +2,18 @@
   <div class="tags-view-container">
     <scroll-pane ref="scrollPane" class="tags-view-wrapper">
       <router-link
-        v-for="tag in Array.from(visitedViews)"
         ref="tag"
+        v-for="tag in Array.from(visitedViews)"
         :key="tag.path"
         :class="isActive(tag) ? 'active' : ''"
         :to="tag.path"
-        class="tags-view-item"
         @contextmenu.prevent.native="openMenu(tag, $event)"
+        class="tags-view-item"
       >
         {{ generateTitle(tag.title) }}
         <span
-          class="el-icon-close"
           @click.prevent.stop="closeSelectedTag(tag)"
+          class="el-icon-close"
         />
       </router-link>
     </scroll-pane>

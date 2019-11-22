@@ -9,8 +9,8 @@
         />
         <span
           v-if="iconShow(0, scope.row)"
-          class="tree-ctrl"
           @click="toggleExpanded(scope.$index)"
+          class="tree-ctrl"
         >
           <i v-if="!scope.row._expanded" class="el-icon-plus" />
           <i v-else class="el-icon-minus" />
@@ -36,8 +36,8 @@
         </template>
         <span
           v-if="iconShow(index, scope.row)"
-          class="tree-ctrl"
           @click="toggleExpanded(scope.$index)"
+          class="tree-ctrl"
         >
           <i v-if="!scope.row._expanded" class="el-icon-plus" />
           <i v-else class="el-icon-minus" />

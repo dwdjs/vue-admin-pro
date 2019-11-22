@@ -2,19 +2,19 @@
   <div>
     <input 
       ref="excel-upload-input" 
+      @change="handleClick" 
       class="excel-upload-input" 
       type="file" 
-      accept=".xlsx, .xls" 
-      @change="handleClick"
+      accept=".xlsx, .xls"
     >
-    <div class="drop" @drop="handleDrop" @dragover="handleDragover" @dragenter="handleDragover">
+    <div @drop="handleDrop" @dragover="handleDragover" @dragenter="handleDragover" class="drop">
       Drop excel file here or
       <el-button 
         :loading="loading" 
+        @click="handleUpload" 
         style="margin-left:16px;" 
         size="mini" 
-        type="primary" 
-        @click="handleUpload"
+        type="primary"
       >
         Browse
       </el-button>

@@ -4,12 +4,12 @@
       <el-form-item label="">
         <el-input
           v-model="queryForm.title"
-          placeholder="姓名或账户"
           @keyup.enter.native="paginate(1)"
+          placeholder="姓名或账户"
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="paginate(1)">搜索</el-button>
+        <el-button @click="paginate(1)" type="primary">搜索</el-button>
         <el-button @click="addUser">添加</el-button>
       </el-form-item>
     </el-form>

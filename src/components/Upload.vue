@@ -6,7 +6,7 @@ index)，status为返回状态，200为成功（这时result为七牛图片信�
 **/
 <template>
   <label class="mo-upload">
-    <input :accept="accepts" type="file" @change="upload">
+    <input :accept="accepts" @change="upload" type="file">
     <slot />
   </label>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div :class="hidden ? 'hidden' : ''" class="full-tip" @click="hideTip">
+    <div :class="hidden ? 'hidden' : ''" @click="hideTip" class="full-tip">
       <a
         class="red"
         href="http://bi.doweidu.com/#/manage/spm?show_add=1&is_miniapp=1"
@@ -112,7 +112,7 @@
       <el-form-item v-show="form.createShortUrl">
         <!-- <el-button type="primary" @click="onSubmit">生成短链接</el-button> -->
         <a href="http://dwz.wailian.work/" target="_blank">
-          <el-button type="primary" @click="onSubmit">生成短链接</el-button>
+          <el-button @click="onSubmit" type="primary">生成短链接</el-button>
         </a>
         <!-- <el-button type="danger" @click="onCancel">重置</el-button> -->
       </el-form-item>

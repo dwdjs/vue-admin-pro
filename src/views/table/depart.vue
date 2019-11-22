@@ -5,25 +5,25 @@
         <el-form-item label="">
           <el-input
             v-model="queryForm.keywords"
+            @keyup.enter.native="handleFilter"
             placeholder="搜索关键字"
             width="200"
             class="filter-item"
-            @keyup.enter.native="handleFilter"
           />
         </el-form-item>
         <el-button
           v-waves
+          @click="handleFilter"
           class="filter-item"
           type="primary"
           icon="el-icon-search"
-          @click="handleFilter"
         >搜索</el-button>
         <el-button
+          @click="handleCreate"
           class="filter-item"
           style="margin-left: 10px;"
           type="primary"
           icon="el-icon-edit"
-          @click="handleCreate"
         >添加</el-button>
         <!-- <el-button class="filter-item" type="primary" :loading="downloadLoading" v-waves icon="el-icon-download" @click="handleDownload">{{$t('table.export')}}</el-button> -->
         <!-- <el-checkbox class="filter-item" style='margin-left:15px;' @change='tableKey=tableKey+1' v-model="showReviewer">{{$t('table.reviewer')}}</el-checkbox> -->
@@ -89,14 +89,14 @@
       >
         <template slot-scope="scope">
           <el-button 
+            @click="handleUpdate(scope.row)" 
             type="primary" 
-            size="mini" 
-            @click="handleUpdate(scope.row)"
+            size="mini"
           >编辑</el-button>
           <el-button 
+            @click="handleDelete(scope.row)" 
             type="danger" 
-            size="mini" 
-            @click="handleDelete(scope.row)"
+            size="mini"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -108,10 +108,10 @@
         :page-sizes="[10, 20, 30, 50]"
         :page-size="queryForm.size"
         :total="total"
-        background
-        layout="total, sizes, prev, pager, next, jumper"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
+        background
+        layout="total, sizes, prev, pager, next, jumper"
       />
     </div>
 
@@ -190,10 +190,10 @@
         <el-button @click="dialogFormVisible = false">取消</el-button>
         <el-button
           v-if="dialogStatus == 'create'"
-          type="primary"
           @click="createData"
+          type="primary"
         >确定</el-button>
-        <el-button v-else type="primary" @click="updateData">确定</el-button>
+        <el-button v-else @click="updateData" type="primary">确定</el-button>
       </div>
     </el-dialog>
   </div>

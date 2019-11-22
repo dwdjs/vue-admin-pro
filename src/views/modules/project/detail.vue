@@ -8,8 +8,8 @@
       ref="dataForm"
       :model="dataForm"
       :rules="dataRule"
-      label-width="120px"
       @keyup.enter.native="dataFormSubmit()"
+      label-width="120px"
     >
       <el-form-item label="项目名称" prop="name">
         <el-input v-model="dataForm.name" placeholder="项目名称" />
@@ -47,13 +47,13 @@
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button @click="dataFormSubmit()" type="primary">确定</el-button>
     </span>
 
     <!-- 弹窗, 新增 / 修改 -->
     <add-or-update
-      v-if="addOrUpdateVisible"
       ref="addOrUpdate"
+      v-if="addOrUpdateVisible"
       @refreshDataList="getDataList"
     />
   </div>

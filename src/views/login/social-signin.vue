@@ -1,12 +1,12 @@
 <template>
   <div class="social-signup-container">
-    <div class="sign-btn" @click="wechatHandleClick('wechat')">
+    <div @click="wechatHandleClick('wechat')" class="sign-btn">
       <span
         class="wx-svg-container"
       ><icon-svg icon-class="wechat" class="icon" /></span>
       微信
     </div>
-    <div class="sign-btn" @click="tencentHandleClick('tencent')">
+    <div @click="tencentHandleClick('tencent')" class="sign-btn">
       <span
         class="qq-svg-container"
       ><icon-svg icon-class="qq" class="icon" /></span>

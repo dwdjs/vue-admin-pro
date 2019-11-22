@@ -9,10 +9,10 @@
     />
     <el-button
       :loading="downloadLoading"
+      @click="handleDownload"
       style="margin-bottom:20px;"
       type="primary"
       icon="document"
-      @click="handleDownload"
     >{{ $t('zip.export') }} zip</el-button>
     <el-table
       v-loading.body="listLoading"

@@ -5,8 +5,8 @@
     class="layout-base"
   >
     <cm-header
-      v-if="isShowHeader"
       slot="header"
+      v-if="isShowHeader"
       :class="{ show: isShowHeader }"
       :title="title"
       class="layout-header"
@@ -23,8 +23,8 @@
       </keep-alive>
     </transition>
     <tabbar
-      v-if="isShowTabBar"
       slot="bottom"
+      v-if="isShowTabBar"
       :class="{ show: isShowTabBar }"
       :value="tabbarVal"
       class="layout-tabbar"

@@ -1,6 +1,6 @@
 // ~/.vuerc or ./vue.config.js
 const path = require('path')
-const QiniuPlugin = require('qiniu-webpack-plugin')
+// const QiniuPlugin = require('qiniu-webpack-plugin')
 const svgoConfig = require('./svgo-config.json')
 const qnConfig = require('./qn.private').hsq || {}
 // const PreloadWebpackPlugin = require('preload-webpack-plugin')
@@ -25,17 +25,17 @@ function resolve(dir) {
 
 // vue.config.js
 module.exports = {
-  // vue-router history模式下 子路由需要 baseUrl : '/' 为绝对路径
-  // hash 模式下 baseUrl : './' 没有问题
+  // vue-router history模式下 子路由需要 publicPath : '/' 为绝对路径
+  // hash 模式下 publicPath : './' 没有问题
   publicPath:
-    __DEV__ && qnConfig.domain ? './' : `${qnConfig.domain}${qnConfig.prefix}`,
+    __DEV__ && qnConfig.domain ? '/' : `${qnConfig.domain}${qnConfig.prefix}`,
   assetsDir: __DEV__ ? './' : './static',
   configureWebpack: config => {
     // console.log(config);
     config.resolve.extensions.push('.css', '.styl', '.less', '.md')
 
 
-    const plugins = []
+    // const plugins = []
     if (!__DEV__) {
       // 为生产环境修改配置...
       // plugins.push(new InlineManifestWebpackPlugin())
@@ -186,10 +186,10 @@ module.exports = {
   integrity: false,
   // 代理设置
   devServer: {
-    overlay: {
-      warnings: true,
-      errors: true,
-    },
+    // overlay: {
+    //   warnings: true,
+    //   errors: true,
+    // },
     port: 8081,
     proxy: {
       '/api': {

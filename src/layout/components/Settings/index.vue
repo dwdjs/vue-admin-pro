@@ -5,7 +5,7 @@
 
       <div class="drawer-item">
         <span>{{ $t('settings.theme') }}</span>
-        <theme-picker style="float: right;height: 26px;margin: -3px 8px 0 0;" @change="themeChange" />
+        <theme-picker @change="themeChange" style="float: right;height: 26px;margin: -3px 8px 0 0;" />
       </div>
 
       <div class="drawer-item">

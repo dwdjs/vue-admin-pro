@@ -18,8 +18,8 @@
           :icon-class="onlyOneChild.meta.icon"
         />
         <span
-          v-if="onlyOneChild.meta && onlyOneChild.meta.title"
           slot="title"
+          v-if="onlyOneChild.meta && onlyOneChild.meta.title"
         >{{ generateTitle(onlyOneChild.meta.title) }}</span>
       </el-menu-item>
     </router-link>
@@ -30,7 +30,7 @@
           v-if="item.meta && item.meta.icon"
           :icon-class="item.meta.icon"
         />
-        <span v-if="item.meta && item.meta.title" slot="title">{{
+        <span slot="title" v-if="item.meta && item.meta.title">{{
           generateTitle(item.meta.title)
         }}</span>
       </template>
@@ -51,7 +51,7 @@
               v-if="child.meta && child.meta.icon"
               :icon-class="child.meta.icon"
             />
-            <span v-if="child.meta && child.meta.title" slot="title">{{
+            <span slot="title" v-if="child.meta && child.meta.title">{{
               generateTitle(child.meta.title)
             }}</span>
           </el-menu-item>

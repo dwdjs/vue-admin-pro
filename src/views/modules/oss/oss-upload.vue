@@ -3,8 +3,8 @@
   <el-dialog
     :close-on-click-modal="false"
     :visible.sync="visible"
-    title="上传文件"
     @close="handleClose"
+    title="上传文件"
   >
     <el-upload
       :action="url"

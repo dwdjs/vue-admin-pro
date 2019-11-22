@@ -1,8 +1,8 @@
 <template>
   <div
     ref="scrollContainer"
-    class="scroll-container"
     @wheel.prevent="handleScroll"
+    class="scroll-container"
   >
     <div
       ref="scrollWrapper"

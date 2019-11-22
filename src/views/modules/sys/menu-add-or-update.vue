@@ -8,8 +8,8 @@
       ref="dataForm"
       :model="dataForm"
       :rules="dataRule"
-      label-width="80px"
       @keyup.enter.native="dataFormSubmit()"
+      label-width="80px"
     >
       <el-form-item label="类型" prop="type">
         <el-radio-group v-model="dataForm.type">
@@ -42,9 +42,9 @@
             :default-expand-all="false"
             :highlight-current="true"
             :expand-on-click-node="false"
+            @current-change="handleMenuListTreeCurrentChange"
             node-key="id"
             accordion
-            @current-change="handleMenuListTreeCurrentChange"
           />
         </el-popover>
         <el-input
@@ -120,7 +120,7 @@
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button @click="dataFormSubmit()" type="primary">确定</el-button>
     </span>
   </el-dialog>
 </template>

@@ -15,11 +15,11 @@
         :disabled="disabled"
         :autoComplete="autoComplete"
         :required="required"
-        type="email"
-        class="material-input"
         @focus="handleMdFocus"
         @blur="handleMdBlur"
         @input="handleModelInput"
+        type="email"
+        class="material-input"
       >
       <input
         v-if="type === 'url'"
@@ -30,11 +30,11 @@
         :disabled="disabled"
         :autoComplete="autoComplete"
         :required="required"
-        type="url"
-        class="material-input"
         @focus="handleMdFocus"
         @blur="handleMdBlur"
         @input="handleModelInput"
+        type="url"
+        class="material-input"
       >
       <input
         v-if="type === 'number'"
@@ -50,11 +50,11 @@
         :minlength="minlength"
         :maxlength="maxlength"
         :required="required"
-        type="number"
-        class="material-input"
         @focus="handleMdFocus"
         @blur="handleMdBlur"
         @input="handleModelInput"
+        type="number"
+        class="material-input"
       >
       <input
         v-if="type === 'password'"
@@ -67,11 +67,11 @@
         :max="max"
         :min="min"
         :required="required"
-        type="password"
-        class="material-input"
         @focus="handleMdFocus"
         @blur="handleMdBlur"
         @input="handleModelInput"
+        type="password"
+        class="material-input"
       >
       <input
         v-if="type === 'tel'"
@@ -82,11 +82,11 @@
         :disabled="disabled"
         :autoComplete="autoComplete"
         :required="required"
-        type="tel"
-        class="material-input"
         @focus="handleMdFocus"
         @blur="handleMdBlur"
         @input="handleModelInput"
+        type="tel"
+        class="material-input"
       >
       <input
         v-if="type === 'text'"
@@ -99,11 +99,11 @@
         :minlength="minlength"
         :maxlength="maxlength"
         :required="required"
-        type="text"
-        class="material-input"
         @focus="handleMdFocus"
         @blur="handleMdBlur"
         @input="handleModelInput"
+        type="text"
+        class="material-input"
       >
       <span class="material-input-bar" />
       <label class="material-label">

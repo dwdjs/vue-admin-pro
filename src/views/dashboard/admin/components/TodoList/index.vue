@@ -3,10 +3,10 @@
     <!-- header -->
     <header class="header">
       <input
+        @keyup.enter="addTodo"
         class="new-todo"
         autocomplete="off"
         placeholder="Todo List"
-        @keyup.enter="addTodo"
       >
     </header>
     <!-- main section -->
@@ -14,9 +14,9 @@
       <input
         id="toggle-all"
         :checked="allChecked"
+        @change="toggleAll({ done: !allChecked })"
         class="toggle-all"
         type="checkbox"
-        @change="toggleAll({ done: !allChecked })"
       >
       <label for="toggle-all" />
       <ul class="todo-list">

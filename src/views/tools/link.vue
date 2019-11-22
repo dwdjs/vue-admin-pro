@@ -80,7 +80,7 @@
       <el-form-item v-show="form.createShortUrl">
         <!-- <el-button type="primary" @click="onSubmit">生成短链接</el-button> -->
         <a href="http://dwz.wailian.work/" target="_blank">
-          <el-button type="primary" @click="onSubmit">生成短链接</el-button>
+          <el-button @click="onSubmit" type="primary">生成短链接</el-button>
         </a>
         <!-- <el-button type="danger" @click="onCancel">重置</el-button> -->
       </el-form-item>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <svg
+      @click="click"
       t="1508738709248"
       class="screenfull-svg"
       viewBox="0 0 1024 1024"
@@ -10,7 +11,6 @@
       xmlns:xlink="http://www.w3.org/1999/xlink"
       width="32"
       height="32"
-      @click="click"
     >
       <path
         d="M333.493443 428.647617 428.322206 333.832158 262.572184 168.045297 366.707916 64.444754 64.09683 64.444754 63.853283 366.570793 167.283957 262.460644Z"

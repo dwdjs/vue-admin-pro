@@ -3,9 +3,9 @@
     ref="dragSelect"
     v-model="selectVal"
     v-bind="$attrs"
+    v-on="$listeners"
     class="drag-select"
     multiple
-    v-on="$listeners"
   >
     <slot />
   </el-select>

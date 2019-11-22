@@ -1,6 +1,6 @@
 <template>
   <div class="error-page-container">
-    <el-button icon="el-icon-arrow-left" class="pan-back-btn" @click="back">
+    <el-button @click="back" icon="el-icon-arrow-left" class="pan-back-btn">
       返回
     </el-button>
     <el-row>
@@ -21,7 +21,7 @@
           <li class="link-type">
             <a href="https://www.taobao.com/">随便看看</a>
           </li>
-          <li><a href="#" @click.prevent="dialogVisible=true">点我看图</a></li>
+          <li><a @click.prevent="dialogVisible=true" href="#">点我看图</a></li>
         </ul>
       </el-col>
       <el-col :span="12">

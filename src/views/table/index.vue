@@ -4,12 +4,12 @@
       <el-form-item label="">
         <el-input
           v-model="queryForm.title"
-          placeholder="姓名或账户"
           @keyup.enter.native="paginate(1)"
+          placeholder="姓名或账户"
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="paginate(1)">搜索</el-button>
+        <el-button @click="paginate(1)" type="primary">搜索</el-button>
         <el-button @click="addUser">添加</el-button>
       </el-form-item>
     </el-form>
@@ -66,17 +66,17 @@
         <template slot-scope="scope">
           <router-link :to="{ path: '/example' }">
             <el-button
+              @click.prevent.stop="onUpdate(scope.row.id, scope.row.channel)"
               type="text"
               size="small"
-              @click.prevent.stop="onUpdate(scope.row.id, scope.row.channel)"
             >编辑</el-button>
           </router-link>
           <!-- <el-button type="text" size="small" @click="onChangeStatus(scope.row.id, scope.row.status)">{{scope.row.status ? '下线' : '上线' }}</el-button> -->
           <el-button
             :disabled="!!scope.row.status"
+            @click="onRemove(scope.row.id)"
             type="text"
             size="small"
-            @click="onRemove(scope.row.id)"
           >删除</el-button>
         </template>
       </el-table-column>

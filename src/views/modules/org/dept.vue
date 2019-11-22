@@ -6,26 +6,26 @@
         <el-form-item label="">
           <el-input
             v-model="dataForm.keywords"
+            @keyup.enter.native="handleFilter"
             placeholder="搜索关键字"
             width="200"
             class="filter-item"
             clearable
-            @keyup.enter.native="handleFilter"
           />
         </el-form-item>
         <el-button
           v-waves
+          @click="handleFilter"
           class="filter-item"
           type="primary"
           icon="el-icon-search"
-          @click="handleFilter"
         >搜索</el-button>
         <el-button
+          @click="handleAddOrUpdate()"
           class="filter-item"
           style="margin-left: 10px;"
           type="success"
           icon="el-icon-edit"
-          @click="handleAddOrUpdate()"
         >新增</el-button>
         <!-- <el-button type="danger" @click="handleDelete()" :disabled="dataListSelections.length <= 0">批量删除</el-button> -->
       </el-form>
@@ -35,10 +35,10 @@
       :key="tableKey"
       v-loading="dataListLoading"
       :data="dataList"
+      @selection-change="handleSelectionChange"
       element-loading-text="给我一点时间"
       border
       highlight-current-row
-      @selection-change="handleSelectionChange"
     >
       <!-- <el-table-column
         type="selection"
@@ -105,14 +105,14 @@
       >
         <template slot-scope="scope">
           <el-button
+            @click="handleAddOrUpdate(scope.row)"
             type="primary"
             size="mini"
-            @click="handleAddOrUpdate(scope.row)"
           >编辑</el-button>
           <el-button
+            @click="handleDelete(scope.row.id)"
             type="danger"
             size="mini"
-            @click="handleDelete(scope.row.id)"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -133,8 +133,8 @@
 
     <!-- 弹窗, 新增 / 修改 -->
     <add-or-update
-      v-if="addOrUpdateVisible"
       ref="addOrUpdate"
+      v-if="addOrUpdateVisible"
       @refreshDataList="getDataList"
     />
   </div>

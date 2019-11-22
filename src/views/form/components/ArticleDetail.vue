@@ -86,15 +86,15 @@
 
           <el-button
             v-loading="loading"
+            @click="submitForm()"
             style="margin-left: 10px;"
             type="success"
-            @click="submitForm()"
           >发布
           </el-button>
           <el-button
             v-loading="loading"
-            type="warning"
             @click="draftForm"
+            type="warning"
           >草稿</el-button>
         </template>
         <template v-else>
@@ -127,12 +127,12 @@
                       v-model="postForm.author"
                       :options="userLIstOptions"
                       :internal-search="false"
+                      @search-change="getRemoteUserList"
                       placeholder="搜索用户"
                       select-label="选择"
                       deselect-label="删除"
                       track-by="key"
                       label="key"
-                      @search-change="getRemoteUserList"
                     >
                       <span slot="noResult">无结果</span>
                     </multiselect>

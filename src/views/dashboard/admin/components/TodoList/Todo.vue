@@ -3,21 +3,21 @@
     <div class="view">
       <input
         :checked="todo.done"
+        @change="toggleTodo(todo)"
         class="toggle"
         type="checkbox"
-        @change="toggleTodo(todo)"
       >
       <label @dblclick="editing = true" v-text="todo.text" />
-      <button class="destroy" @click="deleteTodo(todo)" />
+      <button @click="deleteTodo(todo)" class="destroy" />
     </div>
     <input
       v-show="editing"
       v-focus="editing"
       :value="todo.text"
-      class="edit"
       @keyup.enter="doneEdit"
       @keyup.esc="cancelEdit"
       @blur="doneEdit"
+      class="edit"
     >
   </li>
 </template>

@@ -32,20 +32,20 @@
         <el-input
           v-model="loginForm.password"
           :type="passwordType"
+          @keyup.enter.native="handleLogin"
           name="password"
           auto-complete="on"
           placeholder="密码"
-          @keyup.enter.native="handleLogin"
         />
-        <span class="show-pwd" @click="showPwd">
+        <span @click="showPwd" class="show-pwd">
           <icon-svg icon-class="eye" />
         </span>
       </el-form-item>
 
       <el-button
         :loading="loading"
-        class="btn-login"
         @click.native.prevent="handleLogin"
+        class="btn-login"
       >{{ $t('login.logIn') }}</el-button>
 
       <!-- <div class="tips">

@@ -48,7 +48,7 @@
           </a> -->
           <!-- <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item> -->
           <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">{{
+            <span @click="logout" style="display:block;">{{
               $t('navbar.logOut')
             }}</span>
           </el-dropdown-item>

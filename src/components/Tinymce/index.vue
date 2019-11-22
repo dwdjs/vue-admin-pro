@@ -3,9 +3,9 @@
     <textarea :id="tinymceId" class="tinymce-textarea" />
     <div class="editor-custom-btn-container">
       <editorImage
+        @successCBK="imageSuccessCBK"
         color="#20a0ff"
         class="editor-upload-btn"
-        @successCBK="imageSuccessCBK"
       />
     </div>
   </div>

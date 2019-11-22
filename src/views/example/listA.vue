@@ -5,9 +5,9 @@
         <el-input
           v-model="queryForm.title"
           :placeholder="$t('table.title')"
+          @keyup.enter.native="handleFilter"
           width="200"
           class="filter-item"
-          @keyup.enter.native="handleFilter"
         />
         <!-- <el-select clearable style="width: 90px" class="filter-item" v-model="queryForm.importance" :placeholder="$t('table.importance')">
           <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item">
@@ -33,17 +33,17 @@
         </el-select> -->
         <el-button
           v-waves
+          @click="handleFilter"
           class="filter-item"
           type="primary"
           icon="el-icon-search"
-          @click="handleFilter"
         >{{ $t('table.search') }}</el-button>
         <el-button
+          @click="handleCreate"
           class="filter-item"
           style="margin-left: 10px;"
           type="primary"
           icon="el-icon-edit"
-          @click="handleCreate"
         >{{ $t('table.add') }}</el-button>
         <!-- <el-button class="filter-item" type="primary" :loading="downloadLoading" v-waves icon="el-icon-download" @click="handleDownload">{{$t('table.export')}}</el-button> -->
         <!-- <el-checkbox class="filter-item" style='margin-left:15px;' @change='tableKey=tableKey+1' v-model="showReviewer">{{$t('table.reviewer')}}</el-checkbox> -->
@@ -74,7 +74,7 @@
       </el-table-column>
       <el-table-column :label="$t('table.title')" min-width="150px">
         <template slot-scope="scope">
-          <span class="link-type" @click="handleUpdate(scope.row)">{{
+          <span @click="handleUpdate(scope.row)" class="link-type">{{
             scope.row.title
           }}</span>
           <el-tag>{{ scope.row.type | typeFilter }}</el-tag>
@@ -109,8 +109,8 @@
         <template slot-scope="scope">
           <span
             v-if="scope.row.pageviews"
-            class="link-type"
             @click="handleFetchPv(scope.row.pageviews)"
+            class="link-type"
           >{{ scope.row.pageviews }}</span>
           <span v-else>0</span>
         </template>
@@ -134,28 +134,28 @@
       >
         <template slot-scope="scope">
           <el-button
+            @click="handleUpdate(scope.row)"
             type="primary"
             size="mini"
-            @click="handleUpdate(scope.row)"
           >{{ $t('table.edit') }}</el-button>
           <el-button
             v-if="scope.row.status != 'published'"
+            @click="handleModifyStatus(scope.row, 'published')"
             size="mini"
             type="success"
-            @click="handleModifyStatus(scope.row, 'published')"
           >{{ $t('table.publish') }}
           </el-button>
           <el-button
             v-if="scope.row.status != 'draft'"
-            size="mini"
             @click="handleModifyStatus(scope.row, 'draft')"
+            size="mini"
           >{{ $t('table.draft') }}
           </el-button>
           <el-button
             v-if="scope.row.status != 'deleted'"
+            @click="handleModifyStatus(scope.row, 'deleted')"
             size="mini"
             type="danger"
-            @click="handleModifyStatus(scope.row, 'deleted')"
           >{{ $t('table.delete') }}
           </el-button>
         </template>
@@ -168,10 +168,10 @@
         :page-sizes="[10, 20, 30, 50]"
         :page-size="queryForm.limit"
         :total="total"
-        background
-        layout="total, sizes, prev, pager, next, jumper"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
+        background
+        layout="total, sizes, prev, pager, next, jumper"
       />
     </div>
 
@@ -245,10 +245,10 @@
         }}</el-button>
         <el-button
           v-if="dialogStatus == 'create'"
-          type="primary"
           @click="createData"
+          type="primary"
         >{{ $t('table.confirm') }}</el-button>
-        <el-button v-else type="primary" @click="updateData">{{
+        <el-button v-else @click="updateData" type="primary">{{
           $t('table.confirm')
         }}</el-button>
       </div>
@@ -266,7 +266,7 @@
         <el-table-column prop="pv" label="Pv" />
       </el-table>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false">{{
+        <el-button @click="dialogPvVisible = false" type="primary">{{
           $t('table.confirm')
         }}</el-button>
       </span>

@@ -8,8 +8,8 @@
       ref="dataForm"
       :model="dataForm"
       :rules="dataRule"
-      label-width="120px"
       @keyup.enter.native="dataFormSubmit()"
+      label-width="120px"
     >
       <el-form-item label="任务名称" prop="name">
         <el-input v-model="dataForm.name" placeholder="任务名称" />
@@ -38,7 +38,7 @@
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button @click="dataFormSubmit()" type="primary">确定</el-button>
     </span>
   </el-dialog>
 </template>

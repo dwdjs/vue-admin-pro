@@ -1,18 +1,18 @@
 <template>
   <div v-show="value" class="vue-image-crop-upload">
     <div class="vicp-wrap">
-      <div class="vicp-close" @click="off">
+      <div @click="off" class="vicp-close">
         <i class="vicp-icon4" />
       </div>
 
       <div v-show="step == 1" class="vicp-step1">
         <div
-          class="vicp-drop-area"
           @dragleave="preventDefault"
           @dragover="preventDefault"
           @dragenter="preventDefault"
           @click="handleClick"
           @drop="handleChange"
+          class="vicp-drop-area"
         >
           <i v-show="loading != 1" class="vicp-icon1">
             <i class="vicp-icon1-arrow" />
@@ -22,11 +22,11 @@
           <span v-show="loading !== 1" class="vicp-hint">{{ lang.hint }}</span>
           <span v-show="!isSupported" class="vicp-no-supported-hint">{{ lang.noSupported }}</span>
           <input 
+            ref="fileinput" 
             v-show="false" 
             v-if="step == 1" 
-            ref="fileinput" 
-            type="file" 
-            @change="handleChange"
+            @change="handleChange" 
+            type="file"
           >
         </div>
         <div v-show="hasError" class="vicp-error">
@@ -46,8 +46,6 @@
                 ref="img"
                 :src="sourceImgUrl"
                 :style="sourceImgStyle"
-                class="vicp-img"
-                draggable="false"
                 @drag="preventDefault"
                 @dragstart="preventDefault"
                 @dragend="preventDefault"
@@ -63,6 +61,8 @@
                 @mousemove="imgMove"
                 @mouseup="createImg"
                 @mouseout="createImg"
+                class="vicp-img"
+                draggable="false"
               >
               <div :style="sourceImgShadeStyle" class="vicp-img-shade vicp-img-shade-1" />
               <div :style="sourceImgShadeStyle" class="vicp-img-shade vicp-img-shade-2" />
@@ -71,23 +71,23 @@
             <div class="vicp-range">
               <input
                 :value="scale.range"
+                @input="zoomChange"
                 type="range"
                 step="1"
                 min="0"
                 max="100"
-                @input="zoomChange"
               >
               <i
-                class="vicp-icon5"
                 @mousedown="startZoomSub"
                 @mouseout="endZoomSub"
                 @mouseup="endZoomSub"
+                class="vicp-icon5"
               />
               <i
-                class="vicp-icon6"
                 @mousedown="startZoomAdd"
                 @mouseout="endZoomAdd"
                 @mouseup="endZoomAdd"
+                class="vicp-icon6"
               />
             </div>
 
@@ -111,7 +111,7 @@
         </div>
         <div class="vicp-operate">
           <a @click="setStep(1)" @mousedown="ripple">{{ lang.btn.back }}</a>
-          <a class="vicp-operate-btn" @click="prepareUpload" @mousedown="ripple">{{ lang.btn.save }}</a>
+          <a @click="prepareUpload" @mousedown="ripple" class="vicp-operate-btn">{{ lang.btn.save }}</a>
         </div>
       </div>
 
@@ -135,7 +135,7 @@
           <a @click="off" @mousedown="ripple">{{ lang.btn.close }}</a>
         </div>
       </div>
-      <canvas v-show="false" ref="canvas" :width="width" :height="height" />
+      <canvas ref="canvas" v-show="false" :width="width" :height="height" />
     </div>
   </div>
 </template>
