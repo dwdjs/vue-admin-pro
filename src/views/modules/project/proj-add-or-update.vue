@@ -12,7 +12,7 @@
       @keyup.enter.native="dataFormSubmit()"
     >
       <el-form-item label="项目名称" prop="name">
-        <el-input v-model="dataForm.name" placeholder="项目名称"/>
+        <el-input v-model="dataForm.name" placeholder="项目名称" />
       </el-form-item>
       <el-form-item label="项目关键字" prop="keyWord">
         <el-input
@@ -21,7 +21,7 @@
         />
       </el-form-item>
       <el-form-item label="项目分类" prop="category">
-        <el-input v-model="dataForm.category" placeholder="项目分类"/>
+        <el-input v-model="dataForm.category" placeholder="项目分类" />
       </el-form-item>
       <el-form-item label="项目创建者" prop="creatorId">
         <el-input
@@ -36,7 +36,7 @@
         />
       </el-form-item>
       <el-form-item label="描述" prop="description">
-        <el-input v-model="dataForm.description" placeholder="描述"/>
+        <el-input v-model="dataForm.description" placeholder="描述" />
       </el-form-item>
       <!-- <el-form-item label="状态" size="mini" prop="state">
         <el-radio-group v-model="dataForm.state">

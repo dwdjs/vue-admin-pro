@@ -12,19 +12,19 @@
       @keyup.enter.native="dataFormSubmit()"
     >
       <el-form-item label="名称" prop="name">
-        <el-input v-model="dataForm.name" placeholder="名称"/>
+        <el-input v-model="dataForm.name" placeholder="名称" />
       </el-form-item>
       <el-form-item label="方法名称" prop="method">
-        <el-input v-model="dataForm.method" placeholder="方法名称"/>
+        <el-input v-model="dataForm.method" placeholder="方法名称" />
       </el-form-item>
       <el-form-item label="参数" prop="params">
-        <el-input v-model="dataForm.params" placeholder="参数"/>
+        <el-input v-model="dataForm.params" placeholder="参数" />
       </el-form-item>
       <el-form-item label="表达式" prop="cron">
-        <el-input v-model="dataForm.cron" placeholder="表达式"/>
+        <el-input v-model="dataForm.cron" placeholder="表达式" />
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="dataForm.remark" placeholder="备注"/>
+        <el-input v-model="dataForm.remark" placeholder="备注" />
       </el-form-item>
       <el-form-item label="是否禁用" size="mini" prop="state">
         <el-radio-group v-model="dataForm.state">

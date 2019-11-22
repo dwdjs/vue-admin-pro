@@ -19,28 +19,25 @@
           type="primary"
           icon="el-icon-search"
           @click="handleFilter"
-        >搜索</el-button
-        >
+        >搜索</el-button>
         <el-button
           class="filter-item"
           style="margin-left: 10px;"
           type="success"
           icon="el-icon-edit"
           @click="handleAddOrUpdate()"
-        >新增</el-button
-        >
+        >新增</el-button>
         <el-button
           :disabled="dataListSelections.length <= 0"
           type="danger"
           @click="handleDelete()"
-        >批量删除</el-button
-        >
+        >批量删除</el-button>
       </el-form>
     </div>
 
     <el-table
-      v-loading="dataListLoading"
       :key="tableKey"
+      v-loading="dataListLoading"
       :data="dataList"
       element-loading-text="给我一点时间"
       border
@@ -60,14 +57,14 @@
         width="80"
         label="ID">
       </el-table-column> -->
-      <el-table-column prop="name" header-align="center" label="项目名称"/>
+      <el-table-column prop="name" header-align="center" label="项目名称" />
       <el-table-column
         prop="keyWord"
         header-align="center"
         width="200"
         label="项目关键字"
       />
-      <el-table-column prop="category" header-align="center" label="分类"/>
+      <el-table-column prop="category" header-align="center" label="分类" />
       <!-- <el-table-column
         prop="state"
         header-align="center"
@@ -96,7 +93,7 @@
         width="180"
         label="创建时间"
       />
-      <el-table-column prop="status" header-align="center" label="项目状态"/>
+      <el-table-column prop="status" header-align="center" label="项目状态" />
       <el-table-column
         fixed="right"
         header-align="center"
@@ -109,14 +106,12 @@
             type="primary"
             size="mini"
             @click="handleAddOrUpdate(scope.row)"
-          >编辑</el-button
-          >
+          >编辑</el-button>
           <el-button
             type="danger"
             size="mini"
             @click="handleDelete(scope.row.id)"
-          >删除</el-button
-          >
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>

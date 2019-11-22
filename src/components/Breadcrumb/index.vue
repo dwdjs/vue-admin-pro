@@ -2,15 +2,13 @@
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item
-        v-for="(item, index) in levelList"
-        v-if="item.meta.title"
+        v-for="(item, index) in levelListFilter"
         :key="item.path"
       >
         <span
-          v-if="item.redirect === 'noredirect' || index == levelList.length - 1"
+          v-if="item.redirect === 'noredirect' || index == levelListFilter.length - 1"
           class="no-redirect"
-        >{{ generateTitle(item.meta.title) }}</span
-        >
+        >{{ generateTitle(item.meta.title) }}</span>
         <router-link v-else :to="item.redirect || item.path">{{
           generateTitle(item.meta.title)
         }}</router-link>
@@ -34,6 +32,11 @@ export default {
   watch: {
     $route() {
       this.getBreadcrumb()
+    },
+  },
+  computed: {
+    levelListFilter() {
+      return this.levelList.filter(item => item.meta.title)
     },
   },
   methods: {

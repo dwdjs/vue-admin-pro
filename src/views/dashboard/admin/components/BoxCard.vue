@@ -6,23 +6,23 @@
       >
     </div>
     <div style="position:relative;">
-      <pan-thumb :image="avatar" class="panThumb"/>
-      <mallki class-name="mallki-text" text="vue-element-admin"/>
+      <pan-thumb :image="avatar" class="panThumb" />
+      <mallki class-name="mallki-text" text="vue-element-admin" />
       <div style="padding-top:35px;" class="progress-item">
         <span>Vue</span>
-        <el-progress :percentage="70"/>
+        <el-progress :percentage="70" />
       </div>
       <div class="progress-item">
         <span>JavaScript</span>
-        <el-progress :percentage="18"/>
+        <el-progress :percentage="18" />
       </div>
       <div class="progress-item">
         <span>Css</span>
-        <el-progress :percentage="12"/>
+        <el-progress :percentage="12" />
       </div>
       <div class="progress-item">
         <span>ESLint</span>
-        <el-progress :percentage="100" status="success"/>
+        <el-progress :percentage="100" status="success" />
       </div>
     </div>
   </el-card>

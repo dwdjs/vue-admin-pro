@@ -5,13 +5,11 @@
         <router-link
           :to="{ name: 'dashboard' }"
           class="kit-sidebar__brand-lg"
-        >{{ `${site.title}${site.desc}` }}</router-link
-        >
+        >{{ `${site.title}${site.desc}` }}</router-link>
         <router-link
           :to="{ name: 'dashboard' }"
           class="kit-sidebar__brand-mini"
-        >{{ site.title }}</router-link
-        >
+        >{{ site.title }}</router-link>
       </h1>
     </div>
     <el-scrollbar class="kit-sidebar__body" wrap-class="scrollbar-wrapper">

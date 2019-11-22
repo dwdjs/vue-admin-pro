@@ -10,8 +10,8 @@
     <div class="fr link-parse">
       <h4>链接解析</h4>
       <el-input
-        :rows="9"
         v-model="textarea"
+        :rows="9"
         type="textarea"
         placeholder="请输入内容"
       />
@@ -24,7 +24,7 @@
       <el-form-item v-show="qrcode" class="qrcode">
         <div class="output">
           <div class="output-item">
-            <img :src="qrcode" width="160" height="100%" alt="" >
+            <img :src="qrcode" width="160" height="100%" alt="">
           </div>
         </div>
       </el-form-item>
@@ -73,10 +73,10 @@
         >
           <el-option
             v-for="(item, index) in fromList"
+            :key="index"
             :label="item.label"
             :value="item.value"
             :disabled="item.disabled"
-            :key="index"
           />
         </el-select>
       </el-form-item>
@@ -128,18 +128,18 @@
           <el-select slot="prepend" v-model="form.toAppId" placeholder="请选择">
             <el-option
               v-for="(item, index) in toList"
+              :key="index"
               :label="item.label"
               :value="item.value"
               :disabled="item.disabled"
-              :key="index"
             />
           </el-select>
         </el-input>
       </el-form-item>
       <el-form-item v-show="show('pathname')" label="页面路径">
         <el-input
-          :placeholder="`${pathnameTip}`"
           v-model="form.pathname"
+          :placeholder="`${pathnameTip}`"
           class="input-with-select"
         >
           <el-select
@@ -149,10 +149,10 @@
           >
             <el-option
               v-for="(item, index) in pageList"
+              :key="index"
               :label="item.label"
               :value="item.value"
               :disabled="item.disabled"
-              :key="index"
             />
           </el-select>
         </el-input>

@@ -1,12 +1,10 @@
 <template>
   <div :class="{ 'is-fixed': fixed }" class="vue-header">
-    <div class="header-left"><slot name="left"/></div>
+    <div class="header-left"><slot name="left" /></div>
     <div class="header-center">
-      <slot
-      ><h3 class="header-title">{{ title }}</h3></slot
-      >
+      <slot><h3 class="header-title">{{ title }}</h3></slot>
     </div>
-    <div class="header-right"><slot name="right"/></div>
+    <div class="header-right"><slot name="right" /></div>
   </div>
 </template>
 

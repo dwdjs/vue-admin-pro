@@ -2,8 +2,8 @@
   <div class="app-container">
     <!-- $t is vue-i18n global function to translate lang -->
     <el-input
-      :placeholder="$t('zip.placeholder')"
       v-model="filename"
+      :placeholder="$t('zip.placeholder')"
       style="width:300px;"
       prefix-icon="el-icon-document"
     />
@@ -13,8 +13,7 @@
       type="primary"
       icon="document"
       @click="handleDownload"
-    >{{ $t('zip.export') }} zip</el-button
-    >
+    >{{ $t('zip.export') }} zip</el-button>
     <el-table
       v-loading.body="listLoading"
       :data="list"
@@ -45,7 +44,7 @@
       </el-table-column>
       <el-table-column align="center" label="Date" width="220">
         <template slot-scope="scope">
-          <i class="el-icon-time"/>
+          <i class="el-icon-time" />
           <span>{{ scope.row.display_time }}</span>
         </template>
       </el-table-column>

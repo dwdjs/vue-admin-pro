@@ -8,9 +8,9 @@
       />
       <input
         v-if="type === 'email'"
+        v-model="currentValue"
         :name="name"
         :placeholder="fillPlaceHolder"
-        v-model="currentValue"
         :readonly="readonly"
         :disabled="disabled"
         :autoComplete="autoComplete"
@@ -23,9 +23,9 @@
       >
       <input
         v-if="type === 'url'"
+        v-model="currentValue"
         :name="name"
         :placeholder="fillPlaceHolder"
-        v-model="currentValue"
         :readonly="readonly"
         :disabled="disabled"
         :autoComplete="autoComplete"
@@ -38,9 +38,9 @@
       >
       <input
         v-if="type === 'number'"
+        v-model="currentValue"
         :name="name"
         :placeholder="fillPlaceHolder"
-        v-model="currentValue"
         :step="step"
         :readonly="readonly"
         :disabled="disabled"
@@ -58,9 +58,9 @@
       >
       <input
         v-if="type === 'password'"
+        v-model="currentValue"
         :name="name"
         :placeholder="fillPlaceHolder"
-        v-model="currentValue"
         :readonly="readonly"
         :disabled="disabled"
         :autoComplete="autoComplete"
@@ -75,9 +75,9 @@
       >
       <input
         v-if="type === 'tel'"
+        v-model="currentValue"
         :name="name"
         :placeholder="fillPlaceHolder"
-        v-model="currentValue"
         :readonly="readonly"
         :disabled="disabled"
         :autoComplete="autoComplete"
@@ -90,9 +90,9 @@
       >
       <input
         v-if="type === 'text'"
+        v-model="currentValue"
         :name="name"
         :placeholder="fillPlaceHolder"
-        v-model="currentValue"
         :readonly="readonly"
         :disabled="disabled"
         :autoComplete="autoComplete"
@@ -105,9 +105,9 @@
         @blur="handleMdBlur"
         @input="handleModelInput"
       >
-      <span class="material-input-bar"/>
+      <span class="material-input-bar" />
       <label class="material-label">
-        <slot/>
+        <slot />
       </label>
     </div>
   </div>

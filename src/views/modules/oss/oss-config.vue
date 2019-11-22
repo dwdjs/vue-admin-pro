@@ -23,8 +23,7 @@
           <a 
             href="http://www.renren.io/open/qiniu.html" 
             target="_blank"
-          >免费申请(七牛)10GB储存空间</a
-          >
+          >免费申请(七牛)10GB储存空间</a>
         </el-form-item>
         <el-form-item label="域名">
           <el-input

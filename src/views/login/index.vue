@@ -30,8 +30,8 @@
           <icon-svg icon-class="password" />
         </span>
         <el-input
-          :type="passwordType"
           v-model="loginForm.password"
+          :type="passwordType"
           name="password"
           auto-complete="on"
           placeholder="密码"
@@ -46,8 +46,7 @@
         :loading="loading"
         class="btn-login"
         @click.native.prevent="handleLogin"
-      >{{ $t('login.logIn') }}</el-button
-      >
+      >{{ $t('login.logIn') }}</el-button>
 
       <!-- <div class="tips">
         <span>{{$t('login.username')}} : admin</span>
@@ -74,12 +73,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import { validUsername } from '@/utils/validate'
-import LangSelect from '@/components/LangSelect'
+// import LangSelect from '@/components/LangSelect'
 // import SocialSign from './socialsignin'
 
 export default {
   components: {
-    LangSelect,
+    // LangSelect,
     // SocialSign,
   },
   name: 'Login',

@@ -12,12 +12,11 @@
         <span class="display_name">{{ name }}</span>
         <span 
           style="font-size:20px;padding-top:20px;display:inline-block;"
-        >editor : dashboard</span
-        >
+        >editor : dashboard</span>
       </div>
     </div>
     <div>
-      <img :src="emptyGif" class="emptyGif" >
+      <img :src="emptyGif" class="emptyGif">
     </div>
   </div>
 </template>

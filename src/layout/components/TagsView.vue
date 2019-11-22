@@ -4,9 +4,9 @@
       <router-link
         v-for="tag in Array.from(visitedViews)"
         ref="tag"
+        :key="tag.path"
         :class="isActive(tag) ? 'active' : ''"
         :to="tag.path"
-        :key="tag.path"
         class="tags-view-item"
         @contextmenu.prevent.native="openMenu(tag, $event)"
       >

@@ -4,8 +4,8 @@
     <el-tabs v-model="activeName" style="margin-top:15px;" type="border-card">
       <el-tab-pane
         v-for="item in tabMapOptions"
-        :label="item.label"
         :key="item.key"
+        :label="item.label"
         :name="item.key"
       >
         <keep-alive>

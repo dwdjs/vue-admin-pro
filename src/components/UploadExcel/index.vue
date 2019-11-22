@@ -5,7 +5,8 @@
       class="excel-upload-input" 
       type="file" 
       accept=".xlsx, .xls" 
-      @change="handleClick">
+      @change="handleClick"
+    >
     <div class="drop" @drop="handleDrop" @dragover="handleDragover" @dragenter="handleDragover">
       Drop excel file here or
       <el-button 
@@ -13,7 +14,8 @@
         style="margin-left:16px;" 
         size="mini" 
         type="primary" 
-        @click="handleUpload">
+        @click="handleUpload"
+      >
         Browse
       </el-button>
     </div>

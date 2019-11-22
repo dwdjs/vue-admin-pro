@@ -9,7 +9,7 @@
       :style="{ left: left + 'px' }"
       class="scroll-wrapper"
     >
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>

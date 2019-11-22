@@ -12,8 +12,8 @@
           class="tree-ctrl"
           @click="toggleExpanded(scope.$index)"
         >
-          <i v-if="!scope.row._expanded" class="el-icon-plus"/>
-          <i v-else class="el-icon-minus"/>
+          <i v-if="!scope.row._expanded" class="el-icon-plus" />
+          <i v-else class="el-icon-minus" />
         </span>
         {{ scope.$index }}
       </template>
@@ -39,13 +39,13 @@
           class="tree-ctrl"
           @click="toggleExpanded(scope.$index)"
         >
-          <i v-if="!scope.row._expanded" class="el-icon-plus"/>
-          <i v-else class="el-icon-minus"/>
+          <i v-if="!scope.row._expanded" class="el-icon-plus" />
+          <i v-else class="el-icon-minus" />
         </span>
         {{ scope.row[column.value] }}
       </template>
     </el-table-column>
-    <slot/>
+    <slot />
   </el-table>
 </template>
 

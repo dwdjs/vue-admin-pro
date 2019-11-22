@@ -21,10 +21,10 @@
           class="input-with-select"
         >
           <el-select slot="prepend" v-model="form.page" placeholder="请选择">
-            <el-option label="首页 index" value="index"/>
-            <el-option label="详情 detail" value="detail"/>
-            <el-option label="专题 zt2" value="zt2"/>
-            <el-option label="个人中心 profile" value="profile"/>
+            <el-option label="首页 index" value="index" />
+            <el-option label="详情 detail" value="detail" />
+            <el-option label="专题 zt2" value="zt2" />
+            <el-option label="个人中心 profile" value="profile" />
             <el-option
               label="订单列表 order-list"
               value="order-list"

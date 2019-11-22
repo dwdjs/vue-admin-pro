@@ -6,17 +6,17 @@
       class="hamburger-container"
     />
 
-    <breadcrumb class="breadcrumb-container"/>
+    <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-      <error-log class="errLog-container right-menu-item"/>
+      <error-log class="errLog-container right-menu-item" />
 
       <el-tooltip
         :content="$t('navbar.screenfull')"
         effect="dark"
         placement="bottom"
       >
-        <screenfull class="screenfull right-menu-item"/>
+        <screenfull class="screenfull right-menu-item" />
       </el-tooltip>
 
       <!-- <lang-select class="international right-menu-item"></lang-select> -->
@@ -33,7 +33,7 @@
             class="user-avatar"
           >
           <span :v-else="avatar">{{ name || '管理员' }}</span>
-          <i class="el-icon-caret-bottom"/>
+          <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
@@ -64,8 +64,8 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
-import LangSelect from '@/components/LangSelect'
-import ThemePicker from '@/components/ThemePicker'
+// import LangSelect from '@/components/LangSelect'
+// import ThemePicker from '@/components/ThemePicker'
 
 export default {
   components: {
@@ -73,8 +73,8 @@ export default {
     Hamburger,
     ErrorLog,
     Screenfull,
-    LangSelect,
-    ThemePicker,
+    // LangSelect,
+    // ThemePicker,
   },
   computed: {
     ...mapGetters(['sidebar', 'name', 'avatar']),

@@ -19,28 +19,25 @@
           type="primary"
           icon="el-icon-search"
           @click="handleFilter"
-        >搜索</el-button
-        >
+        >搜索</el-button>
         <el-button
           class="filter-item"
           style="margin-left: 10px;"
           type="success"
           icon="el-icon-edit"
           @click="handleAddOrUpdate()"
-        >新增</el-button
-        >
+        >新增</el-button>
         <el-button
           :disabled="dataListSelections.length <= 0"
           type="danger"
           @click="handleDelete()"
-        >批量删除</el-button
-        >
+        >批量删除</el-button>
       </el-form>
     </div>
 
     <el-table
-      v-loading="dataListLoading"
       :key="tableKey"
+      v-loading="dataListLoading"
       :data="dataList"
       element-loading-text="给我一点时间"
       border
@@ -114,8 +111,7 @@
             v-if="scope.row.state === 1" 
             size="small" 
             type="danger"
-          >禁用</el-tag
-          >
+          >禁用</el-tag>
         </template>
       </el-table-column>
       <!-- <el-table-column
@@ -152,14 +148,12 @@
             type="primary"
             size="mini"
             @click="handleAddOrUpdate(scope.row)"
-          >编辑</el-button
-          >
+          >编辑</el-button>
           <el-button
             type="danger"
             size="mini"
             @click="handleDelete(scope.row.id)"
-          >删除</el-button
-          >
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>

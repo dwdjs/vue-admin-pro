@@ -18,7 +18,7 @@
         type="checkbox"
         @change="toggleAll({ done: !allChecked })"
       >
-      <label for="toggle-all"/>
+      <label for="toggle-all" />
       <ul class="todo-list">
         <todo
           v-for="(todo, index) in filteredTodos"
@@ -41,8 +41,7 @@
           <a
             :class="{ selected: visibility === key }"
             @click.prevent="visibility = key"
-          >{{ key | capitalize }}</a
-          >
+          >{{ key | capitalize }}</a>
         </li>
       </ul>
       <!-- <button class="clear-completed" v-show="todos.length > remaining" @click="clearCompleted">

@@ -2,10 +2,10 @@
   <div style="background:#f0f2f5;margin-top: -20px;">
     <div class="wscn-http404">
       <div class="pic-404">
-        <img :src="img_404" class="pic-404__parent" alt="404" >
-        <img :src="img_404_cloud" class="pic-404__child left" alt="404" >
-        <img :src="img_404_cloud" class="pic-404__child mid" alt="404" >
-        <img :src="img_404_cloud" class="pic-404__child right" alt="404" >
+        <img :src="img_404" class="pic-404__parent" alt="404">
+        <img :src="img_404_cloud" class="pic-404__child left" alt="404">
+        <img :src="img_404_cloud" class="pic-404__child mid" alt="404">
+        <img :src="img_404_cloud" class="pic-404__child right" alt="404">
       </div>
       <div class="bullshit">
         403 抱歉，你无权访问该页面 404 抱歉，你访问的页面不存在 500
@@ -16,8 +16,7 @@
             class="link-type"
             href="https://wallstreetcn.com"
             target="_blank"
-          >华尔街见闻</a
-          >
+          >华尔街见闻</a>
         </div>
         <div class="bullshit__headline">{{ message }}</div>
         <div class="bullshit__info">

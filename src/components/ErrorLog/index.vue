@@ -33,7 +33,7 @@
               <span class="message-title">Msg:</span>
               <el-tag type="danger">{{ scope.row.err.message }}</el-tag>
             </div>
-            <br >
+            <br>
             <div>
               <span 
                 class="message-title" 
@@ -43,10 +43,9 @@
               <el-tag 
                 type="warning"
               >{{ scope.row.vm.$vnode.tag }} error in
-                {{ scope.row.info }}</el-tag
-                >
+                {{ scope.row.info }}</el-tag>
             </div>
-            <br >
+            <br>
             <div>
               <span 
                 class="message-title" 

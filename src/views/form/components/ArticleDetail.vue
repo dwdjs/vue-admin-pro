@@ -20,7 +20,7 @@
             <el-button
               plain
             >{{ !postForm.comment_disabled ? '评论已打开' : '评论已关闭' }}
-              <i class="el-icon-caret-bottom el-icon--right"/>
+              <i class="el-icon-caret-bottom el-icon--right" />
             </el-button>
             <el-dropdown-menu slot="dropdown" class="no-padding">
               <el-dropdown-item>
@@ -39,7 +39,7 @@
             <el-button
               plain
             >平台
-              <i class="el-icon-caret-bottom el-icon--right"/>
+              <i class="el-icon-caret-bottom el-icon--right" />
             </el-button>
             <el-dropdown-menu slot="dropdown" class="no-border">
               <el-checkbox-group
@@ -48,8 +48,8 @@
               >
                 <el-checkbox
                   v-for="item in platformsOptions"
-                  :label="item.key"
                   :key="item.key"
+                  :label="item.key"
                 >
                   {{ item.name }}
                 </el-checkbox>
@@ -60,7 +60,7 @@
           <el-dropdown trigger="click">
             <el-button plain>
               外链
-              <i class="el-icon-caret-bottom el-icon--right"/>
+              <i class="el-icon-caret-bottom el-icon--right" />
             </el-button>
             <el-dropdown-menu
               slot="dropdown"
@@ -78,8 +78,7 @@
                 >
                   <template
                     slot="prepend"
-                  >填写url</template
-                  >
+                  >填写url</template>
                 </el-input>
               </el-form-item>
             </el-dropdown-menu>
@@ -96,8 +95,7 @@
             v-loading="loading"
             type="warning"
             @click="draftForm"
-          >草稿</el-button
-          >
+          >草稿</el-button>
         </template>
         <template v-else>
           <el-tag>发送异常错误,刷新页面,或者联系程序员</el-tag>
@@ -114,8 +112,7 @@
               <span
                 v-show="postForm.title.length >= 26"
                 class="title-prompt"
-              >app可能会显示不全</span
-              >
+              >app可能会显示不全</span>
             </el-form-item>
 
             <div class="postInfo-container">
@@ -188,8 +185,8 @@
           label="摘要:"
         >
           <el-input
-            :rows="1"
             v-model="postForm.content_short"
+            :rows="1"
             type="textarea"
             class="article-textarea"
             autosize
@@ -198,8 +195,7 @@
           <span
             v-show="contentShortLength"
             class="word-counter"
-          >{{ contentShortLength }}字</span
-          >
+          >{{ contentShortLength }}字</span>
         </el-form-item>
 
         <div class="editor-container">
@@ -207,7 +203,7 @@
         </div>
 
         <div style="margin-bottom: 20px;">
-          <Upload v-model="postForm.image_uri"/>
+          <Upload v-model="postForm.image_uri" />
         </div>
       </div>
     </el-form>

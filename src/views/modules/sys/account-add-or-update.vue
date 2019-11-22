@@ -12,10 +12,10 @@
       @keyup.enter.native="dataFormSubmit()"
     >
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="dataForm.username" placeholder="登录帐号"/>
+        <el-input v-model="dataForm.username" placeholder="登录帐号" />
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="dataForm.email" placeholder="邮箱"/>
+        <el-input v-model="dataForm.email" placeholder="邮箱" />
       </el-form-item>
       <el-form-item
         :class="{ 'is-required': !dataForm.id }"
@@ -40,10 +40,10 @@
         />
       </el-form-item>
       <el-form-item label="手机号" prop="mobile">
-        <el-input v-model="dataForm.mobile" placeholder="手机号"/>
+        <el-input v-model="dataForm.mobile" placeholder="手机号" />
       </el-form-item>
       <el-form-item label="备注" prop="description">
-        <el-input v-model="dataForm.description"/>
+        <el-input v-model="dataForm.description" />
       </el-form-item>
       <el-form-item label="角色" size="mini" prop="role">
         <el-checkbox-group v-model="dataForm.roleIds">
@@ -51,8 +51,7 @@
             v-for="role in roleList"
             :key="role.id"
             :label="role.id"
-          >{{ role.code }}</el-checkbox
-          >
+          >{{ role.code }}</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
       <!-- <el-form-item label="角色" prop="role">

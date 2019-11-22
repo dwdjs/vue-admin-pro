@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'is-fixed': fixed }" class="vue-tabbar">
-    <slot/>
+    <slot />
   </div>
 </template>
 

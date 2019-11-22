@@ -159,7 +159,7 @@ module.exports = {
       // entry: ['vue', 'vue-router', 'vuex', 'axios', 'element-ui', 'nprogress'],
       // 多入口
       entry: {
-        vue: ['vue', 'vue-router', 'vuex', 'vuex-router-sync', 'axios', 'vue-lazyload'], // core-js
+        vue: ['vue', 'vue-router', 'vuex', 'vuex-router-sync', 'axios', 'vue-lazyload', 'vue-i18n', 'core-js'], // core-js
         ui: ['element-ui', 'nprogress'],
         xlsx: ['xlsx'],
         echarts: ['echarts'],

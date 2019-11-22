@@ -8,7 +8,7 @@
         <slot />
       </div>
     </div>
-    <img :src="image" class="pan-thumb" >
+    <img :src="image" class="pan-thumb">
   </div>
 </template>
 

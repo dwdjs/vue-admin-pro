@@ -1,5 +1,6 @@
 # vue-admin-pro
 
+commit message:
 
 - feat: 新增功能
 - fix: 修复bug
@@ -21,37 +22,21 @@ npm i -g @vue/cli
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+## Usage
 
 ```bash
-yarn run serve
+# Compiles and hot-reloads for development
+npm run serve
+
+# Compiles and minifies for production
+npm run dll # only run once
+npm run build
+
+npm run lint
+npm run test
 ```
 
-### Compiles and minifies for production
-
-```bash
-yarn run build
-```
-
-### Lints and fixes files
-
-```bash
-yarn run lint
-```
-
-### Run your unit tests
-
-```bash
-yarn run test:unit
-```
-
-### Run your end-to-end tests
-
-```bash
-yarn run test:e2e
-```
-
-### Deploy
+## Deploy
 
 ```bash
 yarn deploy
@@ -93,13 +78,13 @@ deploy branch gh-pages
 - [x] 七牛配置 √ 支持上传cdn 以及替换路径
 - [x] svg加载处理 √ svg-sprite-loader app.js一次性加载全部 ICON
 - [ ] manifest 提取(不一定再需要)
-- [ ] pwa
-- [ ] 预加载
-- [x] report 分析 √ 暂时使用 vue ui 提供的
+- [x] pwa 可用
+- [ ] 预加载是否能提升速度, 待确认
+- [x] report 分析 √, 可以查看 `dist/report.html`
 - [ ] skeleton 骨架屏
-- [x] 代码规范 prettier 规则(没有太多的配置项可供选择)
+- [x] 代码规范 使用 `eslint-plugin-vue`
 - [ ] stylelint 规则
-- [x] 缓存处理 storage, session `@/utils/storage`
+- [x] 缓存处理 `import { storage, session } from @dwdjs/utils`
 - [ ] 转场动画约定
   - 同级页面不要动画
   - 第一次进入不要动画效果
@@ -115,7 +100,7 @@ deploy branch gh-pages
   - body,#app     1-9(用于转场、人为干扰复合层的排序)
 - [x] Debug 调试页面 `/#/debug`
 - [x] bridge `@/utils/bridge`
-- [ ] 统计数据 `@/utils/tongji`
+- [x] 统计数据 `@dwdjs/utils/tongji`
 - [x] 样式引入
   - `import '~@/'`
 
@@ -187,78 +172,3 @@ vue-cli-service build
 vue-cli-service build --mode staging
 ```
 
-## 其他
-
-```js
-// 自定义解析URL
-// import { urlMap, getUrlType, getParams } from '@/utils/urlMap';
-
-// 这里要处理url 与 query 的参数合并（需要提取path、合并query）
-// 本质真正要处理的，只是一种：站内链接，其余都是站外链接（其他H5或schema链接）
-// 所以封装两个 站内链接 + 站外链接 两个方法即可；
-// 最终定位封装一个urlParse方法，解析为一个对象以及各种url参数数据，同时包含是否站内链接等，可以传入target目标链接
-// URL解析url，自定义schema与http链接解析结果pathname不一致，例如
-// mishifeng://native/home?id=xxx
-// https://m.mishifeng.com/home?id=xxx
-
-export function urlfix(url, paramsUrl = '') {
-  let fixUrl = url;
-  if (paramsUrl) {
-    fixUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + paramsUrl;
-  }
-  return fixUrl;
-}
-
-export function urlParse(url) {
-  try {
-    return new URL(url);
-  } catch (err) {
-    console.error('URL is not a constructor');
-  }
-  return {};
-}
-
-// const httpReg = /^https?/i;
-// regex-weburl.js
-// https://gist.github.com/dperini/729294
-// http://nodejs.cn/api/url.html
-
-// function getChannel(url = '', targetUrl = url) {
-//   // 透传参数
-//   // 如果targetUrl已存在参数，则不透传
-//   const query = getParams(url) || {};
-//   const targetQuery = getParams(targetUrl, '') || {};
-//   const paramsObj = {};
-//   const params = ['d_host', 'channel_id', 'spm', 'share'];
-//   for (let i = 0; i < params.length; i++) {
-//     const key = params[i];
-//     if (query[key] && query[key] !== targetQuery[key]) {
-//       paramsObj[key] = query[key];
-//     }
-//   }
-//   return paramsObj;
-// }
-
-```
-
-
-- git无法pull仓库refusing to merge unrelated histories
-
-如果合并了两个不同的开始提交的仓库，在新的 git 会发现这两个仓库可能不是同一个，为了防止开发者上传错误，于是就给下面的提示
-
-```bash
-fatal: refusing to merge unrelated histories
-```
-
-  https://blog.csdn.net/lindexi_gd/article/details/52554159
-
-
-解决方法
-
-```bash
-git pull --allow-unrelated-histories
-```
-
-- RemoveParentModulesPlugin takes a long time with hundreds of chunks
-
-https://github.com/webpack/webpack/issues/6248

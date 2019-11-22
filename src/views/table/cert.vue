@@ -17,37 +17,35 @@
           type="primary"
           icon="el-icon-search"
           @click="handleFilter"
-        >搜索</el-button
-        >
+        >搜索</el-button>
         <el-button
           class="filter-item"
           style="margin-left: 10px;"
           type="primary"
           icon="el-icon-edit"
           @click="handleCreate"
-        >添加</el-button
-        >
+        >添加</el-button>
         <!-- <el-button class="filter-item" type="primary" :loading="downloadLoading" v-waves icon="el-icon-download" @click="handleDownload">{{$t('table.export')}}</el-button> -->
         <!-- <el-checkbox class="filter-item" style='margin-left:15px;' @change='tableKey=tableKey+1' v-model="showReviewer">{{$t('table.reviewer')}}</el-checkbox> -->
       </el-form>
     </div>
 
     <el-table
-      v-loading="listLoading"
       :key="tableKey"
+      v-loading="listLoading"
       :data="list"
       element-loading-text="给我一点时间"
       border
       highlight-current-row
     >
-      <el-table-column label="姓名" prop="username"/>
+      <el-table-column label="姓名" prop="username" />
       <el-table-column label="性别">
         <template slot-scope="scope">
           <span>{{ scope.row.gender | sexFilter }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="手机号" prop="mobile"/>
-      <el-table-column label="邮箱" prop="email"/>
+      <el-table-column label="手机号" prop="mobile" />
+      <el-table-column label="邮箱" prop="email" />
       <el-table-column label="学历">
         <template slot-scope="scope">
           <span>{{ scope.row.education }}</span>
@@ -94,14 +92,12 @@
             type="primary" 
             size="mini" 
             @click="handleUpdate(scope.row)"
-          >编辑</el-button
-          >
+          >编辑</el-button>
           <el-button 
             type="danger" 
             size="mini" 
             @click="handleDelete(scope.row)"
-          >删除</el-button
-          >
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -129,7 +125,7 @@
         style="min-width: 300px; max-width: 400px; margin-left:50px;"
       >
         <el-form-item label="姓名" prop="username">
-          <el-input v-model="temp.username"/>
+          <el-input v-model="temp.username" />
         </el-form-item>
         <el-form-item label="性别" prop="gender">
           <el-radio-group v-model="temp.gender">
@@ -139,10 +135,10 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="手机号" prop="mobile">
-          <el-input v-model="temp.mobile"/>
+          <el-input v-model="temp.mobile" />
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="temp.email"/>
+          <el-input v-model="temp.email" />
         </el-form-item>
         <el-form-item label="学历" prop="education">
           <el-select
@@ -196,8 +192,7 @@
           v-if="dialogStatus == 'create'"
           type="primary"
           @click="createData"
-        >确定</el-button
-        >
+        >确定</el-button>
         <el-button v-else type="primary" @click="updateData">确定</el-button>
       </div>
     </el-dialog>

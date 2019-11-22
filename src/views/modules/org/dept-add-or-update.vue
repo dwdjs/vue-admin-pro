@@ -30,27 +30,27 @@
           />
         </el-popover>
         <el-input
-          v-popover:menuListPopover
           v-model="dataForm.parentName"
+          v-popover:menuListPopover
           :readonly="true"
           placeholder="点击选择上级菜单"
           class="menu-list__input"
         />
       </el-form-item>
       <el-form-item label="部门名称" prop="name">
-        <el-input v-model="dataForm.name" placeholder="部门名称"/>
+        <el-input v-model="dataForm.name" placeholder="部门名称" />
       </el-form-item>
       <el-form-item label="部门地址" prop="address">
-        <el-input v-model="dataForm.address" placeholder="部门地址"/>
+        <el-input v-model="dataForm.address" placeholder="部门地址" />
       </el-form-item>
       <el-form-item label="部门网址" prop="url">
-        <el-input v-model="dataForm.url" placeholder="部门网址"/>
+        <el-input v-model="dataForm.url" placeholder="部门网址" />
       </el-form-item>
       <el-form-item label="部门职责" prop="scope">
-        <el-input v-model="dataForm.scope" placeholder="部门职责"/>
+        <el-input v-model="dataForm.scope" placeholder="部门职责" />
       </el-form-item>
       <el-form-item label="部门负责人" prop="leader">
-        <el-input v-model="dataForm.leader" placeholder="部门负责人"/>
+        <el-input v-model="dataForm.leader" placeholder="部门负责人" />
       </el-form-item>
       <el-form-item label="排序" prop="position">
         <el-input-number

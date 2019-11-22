@@ -5,7 +5,7 @@
         :style="childStyles(scope.row)"
         @click.prevent="toggleHandle(scope.$index, scope.row)"
       >
-        <i :class="iconClasses(scope.row)" :style="iconStyles(scope.row)"/>
+        <i :class="iconClasses(scope.row)" :style="iconStyles(scope.row)" />
         {{ scope.row[prop] }}
       </span>
     </template>

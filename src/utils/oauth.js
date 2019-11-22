@@ -5,8 +5,8 @@ import { wxappId, aliappId } from '@/config'
 const { location } = window
 const getRedirectUri = () => {
   return encodeURIComponent(
-    // `xxx/redirect?redirect=${window.location.origin}/authredirect`
-    `${location.origin}${location.pathname}/authredirect`
+    // `xxx/redirect?redirect=${window.location.origin}/auth-redirect`
+    `${location.origin}${location.pathname}/auth-redirect`
   )
 }
 

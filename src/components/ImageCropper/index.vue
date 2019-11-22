@@ -26,7 +26,8 @@
             v-if="step == 1" 
             ref="fileinput" 
             type="file" 
-            @change="handleChange">
+            @change="handleChange"
+          >
         </div>
         <div v-show="hasError" class="vicp-error">
           <i class="vicp-icon2" />

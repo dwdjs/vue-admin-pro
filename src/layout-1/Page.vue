@@ -2,7 +2,7 @@
 <template>
   <section class="page-container">
     <div class="page-view">
-      <slot/>
+      <slot />
     </div>
   </section>
 </template>

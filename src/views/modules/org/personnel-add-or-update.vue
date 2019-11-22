@@ -12,7 +12,7 @@
       @keyup.enter.native="dataFormSubmit()"
     >
       <el-form-item label="姓名" prop="username">
-        <el-input v-model="dataForm.username" placeholder="姓名"/>
+        <el-input v-model="dataForm.username" placeholder="姓名" />
       </el-form-item>
       <el-form-item label="性别" size="mini" prop="gender">
         <el-radio-group v-model="dataForm.gender">
@@ -21,10 +21,10 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="dataForm.email" placeholder="邮箱"/>
+        <el-input v-model="dataForm.email" placeholder="邮箱" />
       </el-form-item>
       <el-form-item label="手机号" prop="mobile">
-        <el-input v-model="dataForm.mobile" placeholder="手机号"/>
+        <el-input v-model="dataForm.mobile" placeholder="手机号" />
       </el-form-item>
       <!-- <el-form-item label="密码" prop="password" :class="{ 'is-required': !dataForm.id }">
         <el-input v-model="dataForm.password" type="password" placeholder="密码"></el-input>
@@ -51,18 +51,18 @@
           />
         </el-popover>
         <el-input
-          v-popover:menuListPopover
           v-model="dataForm.deptName"
+          v-popover:menuListPopover
           :readonly="true"
           placeholder="点击选择所属部门"
           class="menu-list__input"
         />
       </el-form-item>
       <el-form-item label="学历" prop="education">
-        <el-input v-model="dataForm.education" placeholder="学历"/>
+        <el-input v-model="dataForm.education" placeholder="学历" />
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="dataForm.remark"/>
+        <el-input v-model="dataForm.remark" />
       </el-form-item>
       <!-- <el-form-item label="角色" size="mini" prop="roleIdList">
         <el-checkbox-group v-model="dataForm.roleIdList">

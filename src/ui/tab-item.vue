@@ -5,9 +5,9 @@
     @click="$parent.$emit('tab-click', id, $event)"
   >
     <div class="item-icon">
-      <slot name="icon"/>
+      <slot name="icon" />
     </div>
-    <div class="item-text"><slot/></div>
+    <div class="item-text"><slot /></div>
   </a>
 </template>
 

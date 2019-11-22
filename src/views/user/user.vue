@@ -3,8 +3,8 @@
     <div class="filter-container">
       <el-form :inline="true" :model="queryForm">
         <el-input
-          :placeholder="$t('table.title')"
           v-model="queryForm.title"
+          :placeholder="$t('table.title')"
           width="200"
           class="filter-item"
           @keyup.enter.native="handleFilter"
@@ -37,24 +37,22 @@
           type="primary"
           icon="el-icon-search"
           @click="handleFilter"
-        >{{ $t('table.search') }}</el-button
-        >
+        >{{ $t('table.search') }}</el-button>
         <el-button
           class="filter-item"
           style="margin-left: 10px;"
           type="primary"
           icon="el-icon-edit"
           @click="handleCreate"
-        >{{ $t('table.add') }}</el-button
-        >
+        >{{ $t('table.add') }}</el-button>
         <!-- <el-button class="filter-item" type="primary" :loading="downloadLoading" v-waves icon="el-icon-download" @click="handleDownload">{{$t('table.export')}}</el-button> -->
         <!-- <el-checkbox class="filter-item" style='margin-left:15px;' @change='tableKey=tableKey+1' v-model="showReviewer">{{$t('table.reviewer')}}</el-checkbox> -->
       </el-form>
     </div>
 
     <el-table
-      v-loading="listLoading"
       :key="tableKey"
+      v-loading="listLoading"
       :data="list"
       element-loading-text="给我一点时间"
       border
@@ -113,8 +111,7 @@
             v-if="scope.row.pageviews"
             class="link-type"
             @click="handleFetchPv(scope.row.pageviews)"
-          >{{ scope.row.pageviews }}</span
-          >
+          >{{ scope.row.pageviews }}</span>
           <span v-else>0</span>
         </template>
       </el-table-column>
@@ -140,8 +137,7 @@
             type="primary"
             size="mini"
             @click="handleUpdate(scope.row)"
-          >{{ $t('table.edit') }}</el-button
-          >
+          >{{ $t('table.edit') }}</el-button>
           <el-button
             v-if="scope.row.status != 'published'"
             size="mini"
@@ -210,7 +206,7 @@
           />
         </el-form-item>
         <el-form-item :label="$t('table.title')" prop="title">
-          <el-input v-model="temp.title"/>
+          <el-input v-model="temp.title" />
         </el-form-item>
         <el-form-item :label="$t('table.status')">
           <el-select
@@ -236,8 +232,8 @@
         </el-form-item>
         <el-form-item :label="$t('table.remark')">
           <el-input
-            :autosize="{ minRows: 2, maxRows: 4 }"
             v-model="temp.remark"
+            :autosize="{ minRows: 2, maxRows: 4 }"
             type="textarea"
             placeholder="Please input"
           />
@@ -251,8 +247,7 @@
           v-if="dialogStatus == 'create'"
           type="primary"
           @click="createData"
-        >{{ $t('table.confirm') }}</el-button
-        >
+        >{{ $t('table.confirm') }}</el-button>
         <el-button v-else type="primary" @click="updateData">{{
           $t('table.confirm')
         }}</el-button>
@@ -267,8 +262,8 @@
         highlight-current-row
         style="width: 100%"
       >
-        <el-table-column prop="key" label="Channel"/>
-        <el-table-column prop="pv" label="Pv"/>
+        <el-table-column prop="key" label="Channel" />
+        <el-table-column prop="pv" label="Pv" />
       </el-table>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogPvVisible = false">{{

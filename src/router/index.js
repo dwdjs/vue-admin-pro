@@ -7,20 +7,18 @@ import {
   session,
 } from '@dwdjs/utils'
 
-const _import =
-  process.env.NODE_ENV === 'production'
-    ? file => () =>
-        import(/* webpackChunkName: "[request]" */ '@/views/' + file + '.vue')
-    : file => require('@/views/' + file + '.vue').default
-
-// in development-env not use lazy-loading,
-// because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
-// detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
-
 Vue.use(Router)
 
-/* Layout */
+import { lazyLoad } from './utils'
 import Layout from '@/layout/Layout'
+
+// modules
+import sysRouter from './modules/sys'
+import ossRouter from './modules/oss'
+import orgRouter from './modules/org'
+import projectRouter from './modules/project'
+import errorRouter from './modules/error'
+import toolRouter from './modules/tool'
 
 const layouts = {
   layout: Layout,
@@ -33,43 +31,62 @@ function getLayout(key = '') {
   return layouts[key] || null
 }
 
-/** note: submenu only apppear when children.length>=1
- *   detail see  https://panjiachen.github.io/vue-element-admin-site/#/router-and-nav?id=sidebar
- * */
+/**
+ * Note: sub-menu only appear when route children.length >= 1
+ * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
+ *
+ * hidden: true                   if set true, item will not show in the sidebar(default is false)
+ * alwaysShow: true               if set true, will always show the root menu
+ *                                if not set alwaysShow, when item has more than one children route,
+ *                                it will becomes nested mode, otherwise not show the root menu
+ * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
+    roles: ['admin','editor']    control the page roles (you can set multiple roles)
+    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
+    icon: 'svg-name'             the icon show in the sidebar
+    noCache: true                if set true, the page will no be cached(default is false)
+    affix: true                  if set true, the tag will affix in the tags-view
+    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
+    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+  }
+ */
 
 /**
-* hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
-* alwaysShow: true               if set true, will always show the root menu, whatever its child routes length
-*                                if not set alwaysShow, only more than one route under the children
-*                                it will becomes nested mode, otherwise not show the root menu
-* redirect: noredirect           if `redirect:noredirect` will no redirct in the breadcrumb
-* name:'router-name'             the name is used by <keep-alive> (must set!!!)
-* meta : {
-    roles: ['admin','editor']     will control the page roles (you can set multiple roles)
-    title: 'title'               the name show in submenu and breadcrumb (recommend set)
-    icon: 'svg-name'             the icon show in the sidebar,
-    noCache: true                if true ,the page will no be cached(default is false)
-  }
-* */
+ * constantRoutes
+ * a base page that does not have permission requirements
+ * all roles can be accessed
+ */
 export const constantRouterMap = [
   {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path*',
+        component: lazyLoad('redirect/index'),
+      },
+    ],
+  },
+  {
     path: '/login',
-    component: _import('login/index'),
+    component: lazyLoad('login/index'),
     hidden: true,
   },
   {
-    path: '/authredirect',
-    component: _import('login/authredirect'),
+    path: '/auth-redirect',
+    component: lazyLoad('login/auth-redirect'),
     hidden: true,
   },
   {
     path: '/404',
-    component: _import('errorPage/404'),
+    component: lazyLoad('error-page/404'),
     hidden: true,
   },
   {
     path: '/401',
-    component: _import('errorPage/401'),
+    component: lazyLoad('error-page/401'),
     hidden: true,
   },
   {
@@ -79,9 +96,9 @@ export const constantRouterMap = [
     children: [
       {
         path: 'dashboard',
-        component: _import('dashboard/index'),
+        component: lazyLoad('dashboard/index'),
         name: 'dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', noCache: true },
+        meta: { title: 'dashboard', icon: 'dashboard', affix: true },
       },
     ],
   },
@@ -90,257 +107,19 @@ export const constantRouterMap = [
 export default new Router({
   mode: env.routerMode,
   base: env.routerBase,
-  // mode: 'history', // 后端支持可开
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap,
 })
 
 // 通过路径配置过滤来动态加载路由
-// 动态路由在store中接口控制
+// 动态路由在 store 中接口控制
 export const asyncRouterMap = [
-  {
-    path: '/sys',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'system',
-    meta: {
-      title: '系统管理',
-      icon: 'system1',
-    },
-    children: [
-      {
-        path: 'account',
-        component: _import('modules/sys/account'),
-        name: 'account',
-        meta: {
-          title: '管理员列表',
-          icon: 'admin',
-        },
-      },
-      {
-        path: 'role',
-        component: _import('modules/sys/role'),
-        name: 'role',
-        meta: {
-          title: '角色管理',
-          icon: 'role',
-        },
-      },
-      {
-        path: 'menu',
-        component: _import('modules/sys/menu'),
-        name: 'menu',
-        meta: {
-          title: '菜单管理',
-          icon: 'menu',
-        },
-      },
-      {
-        path: 'sql',
-        component: _import('modules/sys/sql'),
-        name: 'sql',
-        meta: {
-          title: 'SQL监控',
-          icon: 'sql',
-        },
-      },
-      {
-        path: 'job',
-        component: _import('modules/sys/job'),
-        name: 'job',
-        meta: {
-          title: '定时任务',
-          icon: 'task',
-        },
-      },
-      {
-        path: 'dict',
-        component: _import('modules/sys/dict'),
-        name: 'dict',
-        meta: {
-          title: '数据字典',
-          icon: 'dict',
-        },
-      },
-      {
-        path: 'log',
-        component: _import('modules/sys/log'),
-        name: 'log',
-        meta: {
-          title: '系统日志',
-          icon: 'log',
-        },
-      },
-      // {
-      //   path: 'base',
-      //   component: _import('doing/doing'),
-      //   name: 'base',
-      //   meta: {
-      //     title: 'system',
-      //     icon: 'setting',
-      //   },
-      // },
-    ],
-  },
-  {
-    path: '/oss',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'oss',
-    meta: {
-      title: '文件管理',
-      icon: 'storage',
-    },
-    children: [
-      {
-        path: 'upload',
-        component: _import('modules/oss/oss'),
-        name: 'upload',
-        meta: {
-          title: '文件上传',
-          icon: 'upload',
-        },
-      },
-    ],
-  },
-  {
-    path: '/org',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'org',
-    meta: {
-      title: '组织架构',
-      icon: 'org1',
-    },
-    children: [
-      {
-        path: 'dept',
-        component: _import('modules/org/dept'),
-        name: 'dept',
-        meta: {
-          title: '部门管理',
-          icon: 'depart',
-        },
-      },
-      {
-        path: 'personnel',
-        component: _import('modules/org/personnel'),
-        name: 'personnel',
-        meta: {
-          title: '员工管理',
-          icon: 'personnel',
-        },
-      },
-      {
-        path: 'post',
-        component: _import('modules/org/post'),
-        name: 'post',
-        meta: {
-          title: '岗位管理',
-          icon: 'post',
-        },
-      },
-      // 资源管理
-      {
-        path: 'res-cert',
-        component: _import('modules/org/res-cert'),
-        name: 'res-cert',
-        meta: {
-          title: '证书管理',
-          icon: 'cert3',
-        },
-      },
-    ],
-  },
-
-  {
-    path: '/project',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'project',
-    meta: {
-      title: 'project',
-      icon: 'project',
-    },
-    children: [
-      {
-        path: 'proj',
-        component: _import('modules/project/proj'),
-        name: 'proj',
-        meta: {
-          title: '项目管理',
-          icon: 'gc1',
-        },
-      },
-      {
-        path: 'detail',
-        component: _import('modules/project/detail'),
-        name: 'proj_detail',
-        meta: {
-          title: '详情',
-          icon: 'gc1',
-        },
-      },
-      // {
-      //   path: 'tracking',
-      //   component: _import('modules/project/tracking'),
-      //   name: 'tracking',
-      //   meta: {
-      //     title: '项目跟踪',
-      //     icon: 'gc1',
-      //   },
-      // },
-      {
-        path: 'task',
-        component: _import('modules/project/task'),
-        name: 'task',
-        meta: {
-          title: '任务管理',
-          icon: 'tasks',
-        },
-      },
-    ],
-  },
-  {
-    path: '/tools',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'tools',
-    meta: {
-      title: '工具助手',
-      icon: 'icon',
-    },
-    children: [
-      {
-        path: 'link',
-        component: _import('modules/tools/link'),
-        name: 'link',
-        meta: {
-          title: '链接生成工具',
-          icon: 'gc1',
-        },
-      },
-      // {
-      //   path: 'link-old',
-      //   component: _import('modules/tools/link-old'),
-      //   name: 'link-old',
-      //   meta: {
-      //     title: '链接生成 old',
-      //     icon: 'gc1',
-      //   },
-      // },
-      {
-        path: 'cdn',
-        component: _import('modules/tools/cdn'),
-        name: 'cdn',
-        meta: {
-          title: '图片CDN',
-          icon: 'gc1',
-        },
-      },
-    ],
-  },
-
+  ...sysRouter,
+  ...ossRouter,
+  ...orgRouter,
+  ...projectRouter,
+  ...toolRouter,
+  ...errorRouter,
   { path: '*', redirect: '/404', hidden: true },
 ]
 
@@ -391,7 +170,7 @@ export function fnDynamicMenuRoutes(menuList = [], prePath = '/') {
           route['component'] =
             prePath === '/'
               ? getLayout(componentPath)
-              : _import(`modules/${componentPath}`) || null
+              : lazyLoad(`modules/${componentPath}`) || null
         } catch (e) {
           // nothing...
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="vue-pull-scroll view-scroll">
     <div class="vue-pull-refresh__track">
-      <div class="vue-pull-refresh__head"/>
+      <div class="vue-pull-refresh__head" />
       <div class="vue-pull-list">
         <slot />
         <!-- <div class="van-list__loading" v-show="pullLoading">

@@ -1,14 +1,13 @@
 <template>
   <span :class="{ [`${position}`]: !!position }" class="badge">
-    <slot/>
+    <slot />
     <sup
       v-if="text"
       v-show="!hidden && text"
       :class="classes"
       :style="styles"
       @click="onClick"
-    >{{ badgeText }}</sup
-    >
+    >{{ badgeText }}</sup>
   </span>
 </template>
 

@@ -12,13 +12,13 @@
       @keyup.enter.native="dataFormSubmit()"
     >
       <el-form-item label="角色标识" prop="code">
-        <el-input v-model="dataForm.code" placeholder="角色标识"/>
+        <el-input v-model="dataForm.code" placeholder="角色标识" />
       </el-form-item>
       <el-form-item label="角色名称" prop="name">
-        <el-input v-model="dataForm.name" placeholder="角色名称"/>
+        <el-input v-model="dataForm.name" placeholder="角色名称" />
       </el-form-item>
       <el-form-item label="备注" prop="description">
-        <el-input v-model="dataForm.description" placeholder="备注"/>
+        <el-input v-model="dataForm.description" placeholder="备注" />
       </el-form-item>
       <el-form-item size="mini" label="授权">
         <el-tree

@@ -4,40 +4,35 @@
       <a
         class="red"
         href="http://bi.doweidu.com/#/manage/spm?show_add=1&is_miniapp=1"
-      >去新站点</a
-      >
+      >去新站点</a>
     </div>
     <el-form ref="form" :model="form" label-width="120px">
       <el-form-item>
         <!-- <h4>链接种类太多，不知道怎么配置，怎么办？</h4> -->
         <p>
           以下功能支持自动生成 <b>场景A</b> -> <b>场景B</b> 的跳转链接
-          <b> 要使用spm配置</b
-          ><a
+          <b> 要使用spm配置</b><a
             class="red"
             href="http://bi.doweidu.com/#/manage/spm?show_add=1&is_miniapp=1"
-          >去新站点</a
-          >
+          >去新站点</a>
         </p>
       </el-form-item>
       <el-form-item label="在哪配置">
         <el-radio-group v-model="form.source">
           <el-radio
             v-for="(item, index) in formList"
-            :label="item.label"
             :key="index"
-          >{{ item.text }}</el-radio
-          >
+            :label="item.label"
+          >{{ item.text }}</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="跳转到哪里">
         <el-radio-group v-model="form.dist">
           <el-radio
             v-for="(item, index) in toList"
-            :label="item.label"
             :key="index"
-          >{{ item.text }}</el-radio
-          >
+            :label="item.label"
+          >{{ item.text }}</el-radio>
         </el-radio-group>
         <div v-show="form.dist === 'othermini'">
           <el-input
@@ -61,9 +56,9 @@
           <el-select slot="prepend" v-model="form.page" placeholder="请选择">
             <el-option
               v-for="(item, index) in pageList"
+              :key="index"
               :label="item.label"
               :value="item.value"
-              :key="index"
             />
           </el-select>
         </el-input>
@@ -93,15 +88,15 @@
       <el-form-item v-show="form.dist !== 'othermini'" label="开关">
         <label 
           class="inline-item"
-        >关闭首页Button <el-switch v-model="form.noHome"/></label>
+        >关闭首页Button <el-switch v-model="form.noHome" /></label>
         <label 
           v-show="form.page !== 'index'" 
           class="inline-item"
-        >跳转先经过首页 <el-switch v-model="form.useJumpIndex"/></label>
+        >跳转先经过首页 <el-switch v-model="form.useJumpIndex" /></label>
         <label
           v-show="form.source === 'tplmsg' && form.page == 'topic'"
           class="inline-item"
-        >使用微信小程序链接<el-switch v-model="form.isWxapp"/></label>
+        >使用微信小程序链接<el-switch v-model="form.isWxapp" /></label>
       </el-form-item>
       <el-form-item label="生成结果">
         <div class="output">
@@ -111,7 +106,7 @@
       </el-form-item>
       <el-form-item v-if="output" label="扫码校验">
         <div class="output">
-          <div class="output-item"><img :src="qrcode" alt="" ></div>
+          <div class="output-item"><img :src="qrcode" alt=""></div>
         </div>
       </el-form-item>
       <el-form-item v-show="form.createShortUrl">

@@ -18,22 +18,20 @@
           type="primary"
           icon="el-icon-search"
           @click="handleFilter"
-        >搜索</el-button
-        >
+        >搜索</el-button>
         <!-- <el-button class="filter-item" style="margin-left: 10px;" @click="handleAddOrUpdate()" type="success" icon="el-icon-edit">上传文件</el-button> -->
         <!-- <el-button class="filter-item" style="margin-left: 10px;" @click="handleConfig" type="primary" icon="el-icon-edit">云存储配置</el-button> -->
         <el-button
           :disabled="dataListSelections.length <= 0"
           type="danger"
           @click="handleDelete()"
-        >批量删除</el-button
-        >
+        >批量删除</el-button>
       </el-form>
     </div>
 
     <el-table
-      v-loading="dataListLoading"
       :key="tableKey"
+      v-loading="dataListLoading"
       :data="dataList"
       element-loading-text="给我一点时间"
       border
@@ -79,8 +77,7 @@
             type="danger" 
             size="mini" 
             @click="handleDelete(scope.row)"
-          >删除</el-button
-          >
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
