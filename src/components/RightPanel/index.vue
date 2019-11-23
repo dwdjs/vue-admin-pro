@@ -7,7 +7,7 @@
         @click="show = !show"
         class="handle-button"
       >
-        <i :class="show ? 'el-icon-close' : 'el-icon-setting'" />
+        <em :class="show ? 'el-icon-close' : 'el-icon-setting'" />
       </div>
       <div class="rightPanel-items">
         <slot />

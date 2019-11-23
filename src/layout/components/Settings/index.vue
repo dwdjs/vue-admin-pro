@@ -22,7 +22,13 @@
         <span>{{ $t('settings.sidebarLogo') }}</span>
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
-      <a v-if="isShowJob" href="https://panjiachen.github.io/vue-element-admin-site/zh/job/" target="_blank" class="job-link">
+      <a
+        v-if="isShowJob"
+        rel="noopener noreferrer"
+        href="https://panjiachen.github.io/vue-element-admin-site/zh/job/"
+        target="_blank"
+        class="job-link"
+      >
         <el-alert
           :closable="false"
           title="部门目前非常缺人！有兴趣的可以点击了解详情。坐标: 字节跳动"
@@ -100,22 +106,22 @@ export default {
 
   .drawer-title {
     margin-bottom: 12px;
-    color: rgba(0, 0, 0, .85);
+    color: rgba(0, 0, 0, 0.85);
     font-size: 14px;
     line-height: 22px;
   }
 
   .drawer-item {
-    color: rgba(0, 0, 0, .65);
+    color: rgba(0, 0, 0, 0.65);
     font-size: 14px;
     padding: 12px 0;
   }
 
   .drawer-switch {
-    float: right
+    float: right;
   }
 
-  .job-link{
+  .job-link {
     display: block;
     position: absolute;
     width: 100%;

@@ -76,8 +76,6 @@ export default {
 <style lang="stylus" scoped>
 @import '~@/style/var';
 
-$sideBarWidth = 200px
-
 .app-wrapper {
   clearfix();
   position: relative;
@@ -105,20 +103,15 @@ $sideBarWidth = 200px
   top: 0;
   right: 0;
   z-index: 9;
-  width: 'calc(100% - $sideBarWidth)';
+  width: 'calc(100% - %s)' %($sideBarWidth);
   transition: width 0.28s;
 }
 
 .hideSidebar .fixed-header {
-width: calc(100% - 54px)
+  width: calc(100% - 54px)
 }
 
 .mobile .fixed-header {
   width: 100%;
-}
-.kit-sidebar {
-  display: flex;
-  flex-direction: column;
-  width: 180px;
 }
 </style>

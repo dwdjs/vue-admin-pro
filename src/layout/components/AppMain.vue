@@ -1,5 +1,5 @@
 <template>
-  <section class="app-main" style="min-height: 100%">
+  <section class="app-main" style="min-height: 100%;">
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
         <router-view :key="key" />
@@ -31,7 +31,7 @@ export default {
   overflow: hidden;
 }
 
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 
@@ -41,17 +41,8 @@ export default {
     min-height: calc(100vh - 84px);
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 84px;
-  }
-}
-</style>
-
-<style lang="stylus">
-// fix css style bug in open el-dialog
-.el-popup-parent--hidden {
-  .fixed-header {
-    padding-right: 15px;
   }
 }
 </style>
