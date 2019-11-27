@@ -102,8 +102,9 @@ export default {
 <style scoped>
 .back-to-ceiling {
   position: fixed;
-  display: inline-block;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 

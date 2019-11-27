@@ -29,13 +29,19 @@ export default [
       },
       {
         path: 'editor',
-        redirect: '/components/editor/markdown',
+        redirect: '/components/editor/json',
         component: routerNode, // Parent router-view
         name: 'editor',
         meta: {
           title: '编辑器',
         },
         children: [
+          {
+            path: 'json',
+            component: lazyLoad('components/editor/json'),
+            name: 'JSON',
+            meta: { title: 'json' },
+          },
           {
             path: 'markdown',
             component: lazyLoad('components/editor/markdown'),
@@ -51,16 +57,39 @@ export default [
         ],
       },
       {
-        path: 'json',
-        component: lazyLoad('components/json/index'),
-        name: 'JSON',
-        meta: { title: 'json' },
-      },
-      {
-        path: 'split-pane',
-        component: lazyLoad('components/split-pane/index'),
-        name: 'SplitPane',
-        meta: { title: 'split-pane' },
+        path: 'interactive',
+        redirect: '/components/interactive/back-to-top',
+        component: routerNode, // Parent router-view
+        name: 'interactive',
+        meta: {
+          title: '交互操作',
+        },
+        children: [
+          {
+            path: 'back-to-top',
+            component: lazyLoad('components/interactive/back-to-top'),
+            name: 'BackToTopDemo',
+            meta: { title: 'backToTop' },
+          },
+          {
+            path: 'split-pane',
+            component: lazyLoad('components/interactive/split-pane'),
+            name: 'SplitPane',
+            meta: { title: 'split-pane' },
+          },
+          // {
+          //   path: 'sticky',
+          //   component: lazyLoad('components/sticky/index'),
+          //   name: 'StickyDemo',
+          //   meta: { title: 'sticky' },
+          // },
+          // {
+          //   path: 'count-to',
+          //   component: lazyLoad('components/count-to/index'),
+          //   name: 'CountToDemo',
+          //   meta: { title: 'countTo' },
+          // },
+        ],
       },
       {
         path: 'avatar-upload',
@@ -74,30 +103,14 @@ export default [
       //   name: 'DropzoneDemo',
       //   meta: { title: 'dropzone' },
       // },
-      // {
-      //   path: 'sticky',
-      //   component: lazyLoad('components/sticky/index'),
-      //   name: 'StickyDemo',
-      //   meta: { title: 'sticky' },
-      // },
-      // {
-      //   path: 'count-to',
-      //   component: lazyLoad('components/count-to/index'),
-      //   name: 'CountToDemo',
-      //   meta: { title: 'countTo' },
-      // },
+
       // {
       //   path: 'mixin',
       //   component: lazyLoad('components/mixin/index'),
       //   name: 'ComponentMixinDemo',
       //   meta: { title: 'componentMixin' },
       // },
-      // {
-      //   path: 'back-to-top',
-      //   component: lazyLoad('components/back-to-top/index'),
-      //   name: 'BackToTopDemo',
-      //   meta: { title: 'backToTop' },
-      // },
+
       {
         path: 'drag',
         redirect: 'noRedirect',
