@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!item.hidden&&item.children" class="menu-wrapper">
+  <!-- <div v-if="!item.hidden&&item.children" class="menu-wrapper">
 
     <router-link
       v-if="hasOneShowingChild(item.children) && !onlyOneChild.children&&!item.alwaysShow"
@@ -40,9 +40,10 @@
       </template>
     </el-submenu>
 
-  </div>
-  <!-- <div v-if="!item.hidden && item.children" class="menu-wrapper">
-    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
+  </div> -->
+  <div v-if="!item.hidden" class="menu-wrapper">
+    <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
+      xxx
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
           <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="generateTitle(onlyOneChild.meta.title)" />
@@ -54,33 +55,31 @@
       <template slot="title">
         <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="generateTitle(item.meta.title)" />
       </template>
-      <template v-for="child in item.children">
-        <sidebar-item
-          v-if="!child.hidden"
-          :is-nest="true"
-          :item="child"
-          :base-path="resolvePath(child.path)"
-          :key="child.path"
-          class="nest-menu"
-        />
-      </template>
+      <sidebar-item
+        v-for="child in item.children"
+        :key="child.path"
+        :is-nest="true"
+        :item="child"
+        :base-path="resolvePath(child.path)"
+        class="nest-menu"
+      />
     </el-submenu>
-  </div> -->
+  </div>
 </template>
 
 <script>
 import path from 'path'
 import { generateTitle } from '@/utils/i18n'
 import { isExternal } from '@/utils/validate'
-// import Item from './Item'
-// import AppLink from './Link'
+import Item from './Item'
+import AppLink from './Link'
 import FixiOSBug from './FixiOSBug'
 
 export default {
   name: 'SidebarItem',
   components: {
-    // Item,
-    // AppLink,
+    Item,
+    AppLink,
   },
   mixins: [FixiOSBug],
   props: {
@@ -101,10 +100,13 @@ export default {
   data() {
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
     // TODO: refactor with render function
-    // this.onlyOneChild = null
-    return {
-      onlyOneChild: null,
-    }
+    this.onlyOneChild = null
+    return {}
+  },
+  created() {
+    // if (this.$props.item.name === 'editor') {
+    //   debugger
+    // }
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
@@ -125,7 +127,7 @@ export default {
 
       // Show parent if there are no child router to display
       if (showingChildren.length === 0) {
-        this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
+        this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
         return true
       }
 

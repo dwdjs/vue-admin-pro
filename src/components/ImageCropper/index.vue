@@ -21,11 +21,11 @@
           </i>
           <span v-show="loading !== 1" class="vicp-hint">{{ lang.hint }}</span>
           <span v-show="!isSupported" class="vicp-no-supported-hint">{{ lang.noSupported }}</span>
-          <input 
-            ref="fileinput" 
-            v-show="false" 
-            v-if="step == 1" 
-            @change="handleChange" 
+          <input
+            ref="fileinput"
+            v-show="false"
+            v-if="step == 1"
+            @change="handleChange"
             type="file"
           >
         </div>
@@ -142,7 +142,7 @@
 
 <script>
 'use strict'
-import request from '@/utils/request'
+import { ajaxFormData } from '@/api/request/axios'
 import language from './utils/language.js'
 import mimes from './utils/mimes.js'
 import data2blob from './utils/data2blob.js'
@@ -797,9 +797,8 @@ export default {
       this.reset()
       this.loading = 1
       this.setStep(3)
-      request({
+      ajaxFormData({
         url,
-        method: 'post',
         data: fmData,
       })
         .then(resData => {
@@ -825,50 +824,31 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@-webkit-keyframes vicp_progress {
-  0% {
-    background-position-y: 0;
-  }
-  100% {
-    background-position-y: 40px;
-  }
-}
 @keyframes vicp_progress {
   0% {
     background-position-y: 0;
   }
+
   100% {
     background-position-y: 40px;
   }
 }
-@-webkit-keyframes vicp {
-  0% {
-    opacity: 0;
-    -webkit-transform: scale(0) translatey(-60px);
-    transform: scale(0) translatey(-60px);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: scale(1) translatey(0);
-    transform: scale(1) translatey(0);
-  }
-}
+
 @keyframes vicp {
   0% {
     opacity: 0;
-    -webkit-transform: scale(0) translatey(-60px);
-    transform: scale(0) translatey(-60px);
+    transform: scale(0) translateY(-60px);
   }
+
   100% {
     opacity: 1;
-    -webkit-transform: scale(1) translatey(0);
-    transform: scale(1) translatey(0);
+    transform: scale(1) translateY(0);
   }
 }
+
 .vue-image-crop-upload {
   position: fixed;
   display: block;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   z-index: 10000;
   top: 0;
@@ -878,15 +858,13 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.65);
-  -webkit-tap-highlight-color: transparent;
   -moz-tap-highlight-color: transparent;
 }
+
 .vue-image-crop-upload .vicp-wrap {
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   position: fixed;
   display: block;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   z-index: 10000;
   top: 0;
@@ -899,31 +877,27 @@ export default {
   padding: 25px;
   background-color: #fff;
   border-radius: 2px;
-  -webkit-animation: vicp 0.12s ease-in;
   animation: vicp 0.12s ease-in;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-close {
   position: absolute;
   right: -30px;
   top: -30px;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4 {
   position: relative;
   display: block;
   width: 30px;
   height: 30px;
   cursor: pointer;
-  -webkit-transition: -webkit-transform 0.18s;
-  transition: -webkit-transform 0.18s;
   transition: transform 0.18s;
-  transition: transform 0.18s, -webkit-transform 0.18s;
-  -webkit-transform: rotate(0);
-  -ms-transform: rotate(0);
   transform: rotate(0);
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after,
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::before {
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   content: "";
   position: absolute;
@@ -931,24 +905,20 @@ export default {
   left: 4px;
   width: 20px;
   height: 3px;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
   transform: rotate(45deg);
   background-color: #fff;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after {
-  -webkit-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4:hover {
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
   transform: rotate(90deg);
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area {
   position: relative;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 35px;
   height: 170px;
@@ -957,6 +927,7 @@ export default {
   border: 1px dashed rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 {
   display: block;
   margin: 0 auto 6px;
@@ -964,12 +935,8 @@ export default {
   height: 42px;
   overflow: hidden;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step1
-  .vicp-drop-area
-  .vicp-icon1
-  .vicp-icon1-arrow {
+
+.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-arrow {
   display: block;
   margin: 0 auto;
   width: 0;
@@ -978,31 +945,23 @@ export default {
   border-left: 14.7px solid transparent;
   border-right: 14.7px solid transparent;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step1
-  .vicp-drop-area
-  .vicp-icon1
-  .vicp-icon1-body {
+
+.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-body {
   display: block;
   width: 12.6px;
   height: 14.7px;
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.3);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step1
-  .vicp-drop-area
-  .vicp-icon1
-  .vicp-icon1-bottom {
-  -webkit-box-sizing: border-box;
+
+.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-bottom {
   box-sizing: border-box;
   display: block;
   height: 12.6px;
   border: 6px solid rgba(0, 0, 0, 0.3);
   border-top: none;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-hint {
   display: block;
   padding: 15px;
@@ -1010,11 +969,8 @@ export default {
   color: #666;
   line-height: 30px;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step1
-  .vicp-drop-area
-  .vicp-no-supported-hint {
+
+.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-no-supported-hint {
   display: block;
   position: absolute;
   top: 0;
@@ -1028,23 +984,22 @@ export default {
   color: #666;
   font-size: 14px;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area:hover {
   cursor: pointer;
   border-color: rgba(0, 0, 0, 0.1);
   background-color: rgba(0, 0, 0, 0.05);
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop {
   overflow: hidden;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left {
   float: left;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-img-container {
+
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container {
   position: relative;
   display: block;
   width: 240px;
@@ -1052,69 +1007,31 @@ export default {
   background-color: #e5e5e0;
   overflow: hidden;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-img-container
-  .vicp-img {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img {
   position: absolute;
   display: block;
   cursor: move;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-img-container
-  .vicp-img-shade {
-  -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
   position: absolute;
   background-color: rgba(241, 242, 243, 0.8);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-img-container
-  .vicp-img-shade.vicp-img-shade-1 {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-1 {
   top: 0;
   left: 0;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-img-container
-  .vicp-img-shade.vicp-img-shade-2 {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-2 {
   bottom: 0;
   right: 0;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-rotate {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate {
   position: relative;
   width: 240px;
   height: 18px;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-rotate
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate
   i {
   display: block;
   width: 18px;
@@ -1128,61 +1045,28 @@ export default {
   color: #fff;
   overflow: hidden;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-rotate
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate
   i:hover {
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.14);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-rotate
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate
   i:first-child {
   float: left;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-rotate
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate
   i:last-child {
   float: right;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range {
   position: relative;
   margin: 30px 0 10px 0;
   width: 240px;
   height: 18px;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon5,
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon6 {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5,
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {
   position: absolute;
   top: 0;
   width: 18px;
@@ -1190,41 +1074,16 @@ export default {
   border-radius: 100%;
   background-color: rgba(0, 0, 0, 0.08);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon5:hover,
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon6:hover {
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5:hover,
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6:hover {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.14);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon5 {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5 {
   left: 0;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon5::before {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5::before {
   position: absolute;
   content: "";
   display: block;
@@ -1234,22 +1093,10 @@ export default {
   height: 2px;
   background-color: #fff;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon6 {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {
   right: 0;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon6::before {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::before {
   position: absolute;
   content: "";
   display: block;
@@ -1259,13 +1106,7 @@ export default {
   height: 2px;
   background-color: #fff;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  .vicp-icon6::after {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::after {
   position: absolute;
   content: "";
   display: block;
@@ -1275,13 +1116,7 @@ export default {
   height: 12px;
   background-color: #fff;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"] {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"] {
   display: block;
   padding-top: 5px;
   margin: 0 auto;
@@ -1289,7 +1124,6 @@ export default {
   height: 8px;
   vertical-align: top;
   background: transparent;
-  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
@@ -1298,25 +1132,11 @@ export default {
   /* 轨道
                ---------------------------------------------------------------*/
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]:focus {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]:focus {
   outline: none;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]::-webkit-slider-thumb {
-  -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
-  -webkit-appearance: none;
   appearance: none;
   margin-top: -3px;
   width: 12px;
@@ -1324,16 +1144,9 @@ export default {
   background-color: #61c091;
   border-radius: 100%;
   border: none;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]::-moz-range-thumb {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]::-moz-range-thumb {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
   -moz-appearance: none;
   appearance: none;
@@ -1342,16 +1155,9 @@ export default {
   background-color: #61c091;
   border-radius: 100%;
   border: none;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]::-ms-thumb {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]::-ms-thumb {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
   appearance: none;
   width: 12px;
@@ -1359,52 +1165,25 @@ export default {
   background-color: #61c091;
   border: none;
   border-radius: 100%;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]:active::-moz-range-thumb {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]:active::-moz-range-thumb {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   width: 14px;
   height: 14px;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]:active::-ms-thumb {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]:active::-ms-thumb {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   width: 14px;
   height: 14px;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]:active::-webkit-slider-thumb {
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]:active::-webkit-slider-thumb {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   margin-top: -4px;
   width: 14px;
   height: 14px;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]::-webkit-slider-runnable-track {
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]::-webkit-slider-runnable-track {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   width: 100%;
   height: 6px;
@@ -1413,13 +1192,7 @@ export default {
   border: none;
   background-color: rgba(68, 170, 119, 0.3);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]::-moz-range-track {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]::-moz-range-track {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   width: 100%;
   height: 6px;
@@ -1428,13 +1201,7 @@ export default {
   border: none;
   background-color: rgba(68, 170, 119, 0.3);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]::-ms-track {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]::-ms-track {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   width: 100%;
   cursor: pointer;
@@ -1445,79 +1212,32 @@ export default {
   border-radius: 2px;
   border: none;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]::-ms-fill-lower {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]::-ms-fill-lower {
   background-color: rgba(68, 170, 119, 0.3);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]::-ms-fill-upper {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]::-ms-fill-upper {
   background-color: rgba(68, 170, 119, 0.15);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]:focus::-webkit-slider-runnable-track {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]:focus::-webkit-slider-runnable-track {
   background-color: rgba(68, 170, 119, 0.5);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]:focus::-moz-range-track {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]:focus::-moz-range-track {
   background-color: rgba(68, 170, 119, 0.5);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]:focus::-ms-fill-lower {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]:focus::-ms-fill-lower {
   background-color: rgba(68, 170, 119, 0.45);
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-left
-  .vicp-range
-  input[type="range"]:focus::-ms-fill-upper {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type="range"]:focus::-ms-fill-upper {
   background-color: rgba(68, 170, 119, 0.25);
 }
 .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right {
   float: right;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-right
-  .vicp-preview {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview {
   height: 150px;
   overflow: hidden;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-right
-  .vicp-preview
-  .vicp-preview-item {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item {
   position: relative;
   padding: 5px;
   width: 100px;
@@ -1525,13 +1245,7 @@ export default {
   float: left;
   margin-right: 16px;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-right
-  .vicp-preview
-  .vicp-preview-item
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item
   span {
   position: absolute;
   bottom: -30px;
@@ -1541,14 +1255,7 @@ export default {
   display: block;
   text-align: center;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-right
-  .vicp-preview
-  .vicp-preview-item
-  img {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item img {
   position: absolute;
   display: block;
   top: 0;
@@ -1560,33 +1267,16 @@ export default {
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-right
-  .vicp-preview
-  .vicp-preview-item.vicp-preview-item-circle {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle {
   margin-right: 0;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step2
-  .vicp-crop
-  .vicp-crop-right
-  .vicp-preview
-  .vicp-preview-item.vicp-preview-item-circle
-  img {
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle img {
   border-radius: 100%;
 }
 .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload {
   position: relative;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 35px;
   height: 170px;
@@ -1601,36 +1291,21 @@ export default {
   color: #999;
   line-height: 30px;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap {
   margin-top: 12px;
   background-color: rgba(0, 0, 0, 0.08);
   border-radius: 3px;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step3
-  .vicp-upload
-  .vicp-progress-wrap
-  .vicp-progress {
+
+.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress {
   position: relative;
   display: block;
   height: 5px;
   border-radius: 3px;
   background-color: #4a7;
-  -webkit-box-shadow: 0 2px 6px 0 rgba(68, 170, 119, 0.3);
   box-shadow: 0 2px 6px 0 rgba(68, 170, 119, 0.3);
-  -webkit-transition: width 0.15s linear;
   transition: width 0.15s linear;
-  background-image: -webkit-linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 75%,
-    transparent
-  );
   background-image: linear-gradient(
     -45deg,
     rgba(255, 255, 255, 0.2) 25%,
@@ -1642,15 +1317,10 @@ export default {
     transparent
   );
   background-size: 40px 40px;
-  -webkit-animation: vicp_progress 0.5s linear infinite;
   animation: vicp_progress 0.5s linear infinite;
 }
-.vue-image-crop-upload
-  .vicp-wrap
-  .vicp-step3
-  .vicp-upload
-  .vicp-progress-wrap
-  .vicp-progress::after {
+
+.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress::after {
   content: "";
   position: absolute;
   display: block;
@@ -1659,21 +1329,23 @@ export default {
   width: 9px;
   height: 9px;
   border: 1px solid rgba(245, 246, 247, 0.7);
-  -webkit-box-shadow: 0 1px 4px 0 rgba(68, 170, 119, 0.7);
   box-shadow: 0 1px 4px 0 rgba(68, 170, 119, 0.7);
   border-radius: 100%;
   background-color: #4a7;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-error,
 .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-success {
   height: 100px;
   line-height: 100px;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-operate {
   position: absolute;
   right: 20px;
   bottom: 20px;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-operate a {
   position: relative;
   float: left;
@@ -1688,14 +1360,13 @@ export default {
   color: #4a7;
   border-radius: 2px;
   overflow: hidden;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-operate a:hover {
   background-color: rgba(0, 0, 0, 0.03);
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-error,
 .vue-image-crop-upload .vicp-wrap .vicp-success {
   display: block;
@@ -1706,9 +1377,11 @@ export default {
   text-align: center;
   vertical-align: top;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-success {
   color: #4a7;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-icon3 {
   position: relative;
   display: inline-block;
@@ -1716,6 +1389,7 @@ export default {
   height: 20px;
   top: 4px;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-icon3::after {
   position: absolute;
   top: 3px;
@@ -1725,11 +1399,10 @@ export default {
   border-width: 0 2px 2px 0;
   border-color: #4a7;
   border-style: solid;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
   transform: rotate(45deg);
   content: "";
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-icon2 {
   position: relative;
   display: inline-block;
@@ -1737,6 +1410,7 @@ export default {
   height: 20px;
   top: 4px;
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-icon2::after,
 .vue-image-crop-upload .vicp-wrap .vicp-icon2::before {
   content: "";
@@ -1746,39 +1420,27 @@ export default {
   width: 13px;
   height: 2px;
   background-color: #d10;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
 .vue-image-crop-upload .vicp-wrap .vicp-icon2::after {
-  -webkit-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+
 .e-ripple {
   position: absolute;
   border-radius: 100%;
   background-color: rgba(0, 0, 0, 0.15);
   background-clip: padding-box;
   pointer-events: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
   transform: scale(0);
   opacity: 1;
 }
+
 .e-ripple.z-active {
   opacity: 0;
-  -webkit-transform: scale(2);
-  -ms-transform: scale(2);
   transform: scale(2);
-  -webkit-transition: opacity 1.2s ease-out, -webkit-transform 0.6s ease-out;
-  transition: opacity 1.2s ease-out, -webkit-transform 0.6s ease-out;
   transition: opacity 1.2s ease-out, transform 0.6s ease-out;
-  transition: opacity 1.2s ease-out, transform 0.6s ease-out,
-    -webkit-transform 0.6s ease-out;
 }
 </style>

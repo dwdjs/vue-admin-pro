@@ -1,6 +1,6 @@
 import {
-  asyncRouterMap,
-  constantRouterMap,
+  asyncRoutes,
+  constantRoutes,
   // fnDynamicMenuRoutes,
 } from '@/router'
 import { isURL } from '@/utils/validate'
@@ -34,11 +34,11 @@ function hasPermission(roles, route) {
  * roles 服务端返回roles角色，前端根据meta配置的roles返回符合用户角色权限的路由表
  * auths 服务端返回menu菜单，前端根据菜单的url配置，返回对应的路由表
  *       菜单可以好多级，路由暂时只有两级，默认都是layout模板
- * @param asyncRouterMap
+ * @param asyncRoutes
  * @param filter 过滤方式
  */
-function filterAsyncRouter(asyncRouterMap2, roles) {
-  const accessedRouters = asyncRouterMap2.filter(route => {
+function filterAsyncRouter(asyncRoutes2, roles) {
+  const accessedRouters = asyncRoutes2.filter(route => {
     if (hasPermission(roles, route)) {
       if (route.children && route.children.length) {
         route.children = filterAsyncRouter(route.children, roles)
@@ -102,8 +102,8 @@ function fnDynamicMenu(menuList = [], menusMap = {}, prePath = '/') {
 //
 // TODO: 404 未做好
 // TODO: 还未支持iframe打开远程连接
-function filterAsyncRouter2(asyncRouterMap2, menus, basePath = '') {
-  const accessedRouters = asyncRouterMap2.filter(route => {
+function filterAsyncRouter2(asyncRoutes2, menus, basePath = '') {
+  const accessedRouters = asyncRoutes2.filter(route => {
     let path = route.path.replace(/^\//, '')
     path = basePath ? [basePath, path].join('/') : path
     // 如果路径匹配或为顶级路由时（二级路由暂未判断），都返回true
@@ -122,8 +122,8 @@ const permission = {
   namespaced: true,
   state: {
     isAddDynamicRouters: false,
-    menus: constantRouterMap,
-    routers: constantRouterMap,
+    menus: constantRoutes,
+    routers: constantRoutes,
     addRouters: [],
   },
   mutations: {
@@ -133,16 +133,16 @@ const permission = {
       state.addRouters = routers
       // 当前的全部路由
       state.isAddDynamicRouters = true
-      state.routers = constantRouterMap.concat(routers)
+      state.routers = constantRoutes.concat(routers)
     },
     SET_MENUS: (state, menus) => {
       // 当前的全部路由
-      state.menus = constantRouterMap.concat(menus)
+      state.menus = constantRoutes.concat(menus)
       console.log('所有菜单', state.menus)
     },
   },
   actions: {
-    // 生成对应的路由表，结构同 asyncRouterMap
+    // 生成对应的路由表，结构同 asyncRoutes
     GenerateRoutes({ commit }, data) {
       return new Promise((resolve, reject) => {
         // const { roles } = data
@@ -155,9 +155,9 @@ const permission = {
             const { menus, menusMap } = fnDynamicMenu(menuList)
             // const menuListMap = getMenuListMap(menuList);
 
-            // 链接必须先在路由 asyncRouterMap 中添加，然后才能由数据返回结构控制是否注册
+            // 链接必须先在路由 asyncRoutes 中添加，然后才能由数据返回结构控制是否注册
             const accessedRouters = filterAsyncRouter2(
-              asyncRouterMap,
+              asyncRoutes,
               menusMap
             )
             // const { menuList = [], permissionList = [] } = res.data;
@@ -181,11 +181,11 @@ const permission = {
         const { roles } = data
         let accessedRouters
         // 过滤支持两种，一种按照角色（meta.roles）一种按照权限菜单
-        if (roles.indexOf('admin') >= 0) {
-          accessedRouters = asyncRouterMap
-        } else {
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
-        }
+        accessedRouters = asyncRoutes
+        // if (roles.indexOf('admin') >= 0) {
+        // } else {
+        //   accessedRouters = filterAsyncRouter(asyncRoutes, roles)
+        // }
         commit('SET_MENUS', accessedRouters)
         commit('SET_ROUTERS', accessedRouters)
         resolve()

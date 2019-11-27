@@ -7,7 +7,7 @@ export default [
   {
     path: '/sys',
     component: Layout,
-    redirect: 'noredirect',
+    redirect: 'noRedirect',
     name: 'system',
     meta: {
       title: '系统管理',

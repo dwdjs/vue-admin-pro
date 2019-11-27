@@ -11,12 +11,12 @@
           <div class="list-complete-item-handle">
             [{{ element.author }}] {{ element.title }}
           </div>
-          <div style="position:absolute;right:0px;">
+          <div style="position: absolute; right: 0;">
             <span
               @click="deleteEle(element)"
-              style="float: right ;margin-top: -20px;margin-right:5px;"
+              style="float: right; margin-top: -20px; margin-right: 5px;"
             >
-              <i style="color:#ff4949" class="el-icon-delete" />
+              <em style="color: #ff4949;" class="el-icon-delete" />
             </span>
           </div>
         </div>

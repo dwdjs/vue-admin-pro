@@ -59,6 +59,7 @@ export default {
 .CodeMirror {
   height: 100%;
 }
+
 .json-editor .cm-s-rubyblue span.cm-string {
   color: #f08047;
 }

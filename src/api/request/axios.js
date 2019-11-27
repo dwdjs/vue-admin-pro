@@ -102,12 +102,12 @@ export default function request({
     return res
   }
 
-  axios(opts)
+  return axios(opts)
     .then(log)
     .then(checkStatus)
-    .then(res => {
+    .then((res = {}) => {
       // console.log(JSON.stringify(res));
-      const data = res.data || res || {}
+      const data = res.data
       const errno = data.errno
       const errmsg = data.errmsg
       if (errno === 0) {
@@ -123,21 +123,21 @@ export default function request({
         })
       }
     })
-    .catch(err => {
-      // alert(JSON.stringify(err));
-      // console.log(err.response);
-      errorCallBack({
-        errno: 400,
-        errmsg: err.message,
-      })
-    })
+    // .catch(err => {
+    //   // alert(JSON.stringify(err));
+    //   // console.log(err.response);
+    //   errorCallBack({
+    //     errno: 400,
+    //     errmsg: err.message,
+    //   })
+    // })
 }
 
 // 以formData形式上传七牛
-export function ajaxFormData(formData) {
+export function ajaxFormData({ url = 'https://up.qbox.me', data, method = 'post' }) {
   return new Promise(function (resolve, reject) {
     axios
-      .post('https://up.qbox.me', formData, {
+      .post(url, data, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then(res => {

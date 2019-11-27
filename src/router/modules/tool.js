@@ -8,7 +8,7 @@ export default [
   {
     path: '/tools',
     component: Layout,
-    redirect: 'noredirect',
+    redirect: 'noRedirect',
     name: 'tools',
     meta: {
       title: '工具助手',

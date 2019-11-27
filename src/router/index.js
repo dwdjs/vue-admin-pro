@@ -13,6 +13,7 @@ import { lazyLoad } from './utils'
 import Layout from '@/layout'
 
 // modules
+import componentsRouter from './modules/components'
 import sysRouter from './modules/sys'
 import ossRouter from './modules/oss'
 import orgRouter from './modules/org'
@@ -57,7 +58,7 @@ function getLayout(key = '') {
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
-export const constantRouterMap = [
+export const constantRoutes = [
   {
     path: '/redirect',
     component: Layout,
@@ -90,50 +91,56 @@ export const constantRouterMap = [
     hidden: true,
   },
   {
-    path: '',
+    path: '/',
     component: Layout,
-    redirect: 'dashboard',
+    redirect: '/dashboard',
     children: [
       {
         path: 'dashboard',
         component: lazyLoad('dashboard/index'),
-        name: 'dashboard',
+        name: 'Dashboard',
         meta: { title: 'dashboard', icon: 'dashboard', affix: true },
       },
     ],
   },
-  {
-    path: '/guide',
-    component: Layout,
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: lazyLoad('guide/index'),
-        name: 'Guide',
-        meta: { title: 'guide', icon: 'guide', noCache: true },
-      },
-    ],
-  },
+  ...componentsRouter,
+  ...errorRouter,
+  { path: '*', redirect: '/404', hidden: true },
 ]
 
-export default new Router({
+// export default new Router({
+//   mode: env.routerMode,
+//   base: env.routerBase,
+//   scrollBehavior: () => ({ y: 0 }),
+//   routes: constantRoutes,
+// })
+
+const createRouter = () => new Router({
   mode: env.routerMode,
   base: env.routerBase,
+  // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap,
+  routes: constantRoutes,
 })
+
+const router = createRouter()
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
+
+export default router
 
 // 通过路径配置过滤来动态加载路由
 // 动态路由在 store 中接口控制
-export const asyncRouterMap = [
+export const asyncRoutes = [
   ...sysRouter,
   ...ossRouter,
   ...orgRouter,
   ...projectRouter,
   ...toolRouter,
-  ...errorRouter,
-  { path: '*', redirect: '/404', hidden: true },
 ]
 
 /**
@@ -151,10 +158,9 @@ export function fnDynamicMenuRoutes(menuList = [], prePath = '/') {
     item.link = item.link.replace(/^\//, '')
 
     const route = {
-      // path: item.link,
       path: item.link,
       component: null,
-      redirect: hasChildren ? 'noredirect' : undefined,
+      redirect: hasChildren ? 'noRedirect' : undefined,
       name: item.link.replace('/', '-'),
       meta: {
         isDynamic: true,

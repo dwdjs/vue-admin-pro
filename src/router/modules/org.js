@@ -7,7 +7,7 @@ export default [
   {
     path: '/org',
     component: Layout,
-    redirect: 'noredirect',
+    redirect: 'noRedirect',
     name: 'org',
     meta: {
       title: '组织架构',

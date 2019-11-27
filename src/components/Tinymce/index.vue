@@ -167,16 +167,20 @@ export default {
 .tinymce-container {
   position: relative;
 }
+
 .tinymce-textarea {
   visibility: hidden;
   z-index: -1;
 }
+
 .editor-custom-btn-container {
   position: absolute;
   right: 15px;
-  /*z-index: 2005;*/
+
+  /* z-index: 2005; */
   top: 18px;
 }
+
 .editor-upload-btn {
   display: inline-block;
 }

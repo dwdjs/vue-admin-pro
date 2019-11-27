@@ -7,7 +7,7 @@ export default [
   {
     path: '/oss',
     component: Layout,
-    redirect: 'noredirect',
+    redirect: 'noRedirect',
     name: 'oss',
     meta: {
       title: '文件管理',

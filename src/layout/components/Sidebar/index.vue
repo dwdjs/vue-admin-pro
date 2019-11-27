@@ -14,7 +14,7 @@
         active-text-color="#409EFF"
       >
         <sidebar-item
-          v-for="route in menus"
+          v-for="route in permission_routes"
           :key="route.name"
           :item="route"
           :base-path="route.path"
@@ -60,6 +60,7 @@ export default {
     },
   },
   created() {
+    console.log('sidebar', this.permission_routes)
     // api.getMenu({}, (res) => {
     //   console.log(res);
     // }, (err) => {

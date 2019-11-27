@@ -8,7 +8,7 @@ export default [
   {
     path: '/project',
     component: Layout,
-    redirect: 'noredirect',
+    redirect: 'noRedirect',
     name: 'project',
     meta: {
       title: 'project',

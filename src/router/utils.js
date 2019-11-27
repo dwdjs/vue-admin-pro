@@ -8,3 +8,4 @@ export const lazyLoad =
     ? file => () =>
         import(/* webpackChunkName: "[request]" */ '@/views/' + file + '.vue')
     : file => require('@/views/' + file + '.vue').default
+

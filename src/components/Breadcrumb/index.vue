@@ -6,7 +6,7 @@
         :key="item.path"
       >
         <span
-          v-if="item.redirect === 'noredirect' || index == levelListFilter.length - 1"
+          v-if="item.redirect === 'noRedirect' || index == levelListFilter.length - 1"
           class="no-redirect"
         >{{ generateTitle(item.meta.title) }}</span>
         <router-link v-else :to="item.redirect || item.path">{{

@@ -48,6 +48,12 @@ Object.keys(mini).forEach(key => {
 
 Vue.config.productionTip = false
 
+if (process.env.NODE_ENV == 'development') {
+  Vue.config.devtools = true
+} else {
+  Vue.config.devtools = false
+}
+
 new Vue({
   el: '#app',
   router,

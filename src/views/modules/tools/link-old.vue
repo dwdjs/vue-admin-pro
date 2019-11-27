@@ -86,11 +86,11 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item v-show="form.dist !== 'othermini'" label="开关">
-        <label 
+        <label
           class="inline-item"
         >关闭首页Button <el-switch v-model="form.noHome" /></label>
-        <label 
-          v-show="form.page !== 'index'" 
+        <label
+          v-show="form.page !== 'index'"
           class="inline-item"
         >跳转先经过首页 <el-switch v-model="form.useJumpIndex" /></label>
         <label
@@ -126,7 +126,6 @@
 </template>
 
 <script>
-// import { ajax } from '@/utils/request';
 // import base64 from '@/utils/base64';
 
 /* eslint no-unused-vars: 0, no-case-declarations: 0, no-shadow: 0 */

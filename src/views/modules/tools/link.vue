@@ -228,7 +228,6 @@
 </template>
 
 <script>
-// import { ajax } from '@/utils/request';
 // import base64 from '@/utils/base64';
 import axios from 'axios'
 import config from './link/config.js'
