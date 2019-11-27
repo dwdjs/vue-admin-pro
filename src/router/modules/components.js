@@ -72,23 +72,23 @@ export default [
             meta: { title: 'backToTop' },
           },
           {
+            path: 'sticky',
+            component: lazyLoad('components/interactive/sticky'),
+            name: 'StickyDemo',
+            meta: { title: 'sticky' },
+          },
+          {
+            path: 'count-to',
+            component: lazyLoad('components/interactive/count-to'),
+            name: 'CountToDemo',
+            meta: { title: 'countTo' },
+          },
+          {
             path: 'split-pane',
             component: lazyLoad('components/interactive/split-pane'),
             name: 'SplitPane',
             meta: { title: 'split-pane' },
           },
-          // {
-          //   path: 'sticky',
-          //   component: lazyLoad('components/sticky/index'),
-          //   name: 'StickyDemo',
-          //   meta: { title: 'sticky' },
-          // },
-          // {
-          //   path: 'count-to',
-          //   component: lazyLoad('components/count-to/index'),
-          //   name: 'CountToDemo',
-          //   meta: { title: 'countTo' },
-          // },
         ],
       },
       {
