@@ -230,7 +230,7 @@
 <script>
 // import base64 from '@/utils/base64';
 import axios from 'axios'
-import config from './link/config.js'
+import config from './link/config'
 import { stringify, parse, MiniLink, miniRules } from './link/index'
 
 // const aliapp = new MiniLink(miniRules.aliapp);

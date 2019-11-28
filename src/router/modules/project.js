@@ -11,8 +11,8 @@ export default [
     redirect: 'noRedirect',
     name: 'project',
     meta: {
-      title: 'project',
-      icon: 'project',
+      title: '项目流程',
+      icon: 'org1',
     },
     children: [
       {

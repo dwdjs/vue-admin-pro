@@ -11,7 +11,7 @@ export default [
     name: 'org',
     meta: {
       title: '组织架构',
-      icon: 'org1',
+      icon: 'depart',
     },
     children: [
       {
@@ -20,7 +20,7 @@ export default [
         name: 'dept',
         meta: {
           title: '部门管理',
-          icon: 'depart',
+          icon: 'org',
         },
       },
       {

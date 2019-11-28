@@ -12,7 +12,7 @@ export default [
     name: 'tools',
     meta: {
       title: '工具助手',
-      icon: 'icon',
+      icon: 'role3',
     },
     children: [
       {
@@ -21,7 +21,7 @@ export default [
         name: 'link',
         meta: {
           title: '链接生成工具',
-          icon: 'gc1',
+          icon: 'link',
         },
       },
       // {

@@ -11,7 +11,7 @@ export default [
     name: 'oss',
     meta: {
       title: '文件管理',
-      icon: 'storage',
+      icon: 'disk',
     },
     children: [
       {
