@@ -79,7 +79,7 @@ export default [
       },
       // {
       //   path: 'base',
-      //   component: lazyLoad('doing/doing'),
+      //   component: lazyLoad('demo/doing'),
       //   name: 'base',
       //   meta: {
       //     title: 'system',

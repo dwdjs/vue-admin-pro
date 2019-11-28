@@ -1,0 +1,248 @@
+// 组件 demo
+
+import { lazyLoad } from '../utils'
+import Layout from '@/layout'
+import routerNode from '@/views/demo/index'
+
+export default [
+  {
+    path: '/demo',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'demo',
+    meta: {
+      title: 'demo',
+      icon: 'component',
+    },
+    children: [
+      {
+        path: 'guide',
+        component: lazyLoad('demo/guide/index'),
+        name: 'Guide',
+        meta: { title: '引导页', icon: 'guide' },
+      },
+      {
+        path: 'icon',
+        component: lazyLoad('demo/icon/index'),
+        name: 'Icon',
+        meta: { title: '图标', icon: 'icon' },
+      },
+      {
+        path: 'tab',
+        component: routerNode,
+        children: [
+          {
+            path: 'index',
+            component: lazyLoad('demo/tab/index'),
+            name: 'Tab',
+            meta: { title: 'tab', icon: 'tab' },
+          },
+        ],
+      },
+      {
+        path: 'interactive',
+        redirect: '/demo/interactive/back-to-top',
+        component: routerNode, // Parent router-view
+        name: 'interactive',
+        meta: {
+          title: '交互操作',
+          icon: 'example',
+        },
+        children: [
+          {
+            path: 'i18n',
+            component: lazyLoad('demo/interactive/i18n/index'),
+            name: 'i18n',
+            meta: { title: 'i18n' },
+          },
+          {
+            path: 'back-to-top',
+            component: lazyLoad('demo/interactive/back-to-top'),
+            name: 'BackToTopDemo',
+            meta: { title: 'backToTop' },
+          },
+          {
+            path: 'sticky',
+            component: lazyLoad('demo/interactive/sticky'),
+            name: 'StickyDemo',
+            meta: { title: 'sticky' },
+          },
+          {
+            path: 'count-to',
+            component: lazyLoad('demo/interactive/count-to'),
+            name: 'CountToDemo',
+            meta: { title: 'countTo' },
+          },
+          {
+            path: 'split-pane',
+            component: lazyLoad('demo/interactive/split-pane'),
+            name: 'SplitPane',
+            meta: { title: 'split-pane' },
+          },
+          {
+            path: 'avatar-upload',
+            component: lazyLoad('demo/interactive/avatar-upload'),
+            name: 'AvatarUploadDemo',
+            meta: { title: 'avatarUpload' },
+          },
+        ],
+      },
+      {
+        path: 'editor',
+        redirect: '/demo/editor/json',
+        component: routerNode, // Parent router-view
+        name: 'editor',
+        meta: {
+          title: '编辑器',
+          icon: 'edit',
+        },
+        children: [
+          {
+            path: 'json',
+            component: lazyLoad('demo/editor/json'),
+            name: 'JSON',
+            meta: { title: 'json' },
+          },
+          {
+            path: 'markdown',
+            component: lazyLoad('demo/editor/markdown'),
+            name: 'Markdown',
+            meta: { title: 'markdown' },
+          },
+          {
+            path: 'clipboard',
+            component: lazyLoad('demo/editor/clipboard'),
+            name: 'Clipboard',
+            meta: { title: 'clipboard' },
+          },
+          // {
+          //   path: 'tinymce',
+          //   component: lazyLoad('demo/editor/tinymce'),
+          //   name: 'Tinymce',
+          //   meta: { title: '富文本编辑器' },
+          // },
+        ],
+      },
+      {
+        path: 'excel',
+        component: routerNode,
+        redirect: '/demo/excel/export-excel',
+        name: 'Excel',
+        meta: {
+          title: 'excel',
+          icon: 'excel',
+        },
+        children: [
+          {
+            path: 'export-excel',
+            component: lazyLoad('demo/excel/export-excel'),
+            name: 'ExportExcel',
+            meta: { title: 'exportExcel' },
+          },
+          {
+            path: 'export-selected-excel',
+            component: lazyLoad('demo/excel/select-excel'),
+            name: 'SelectExcel',
+            meta: { title: 'selectExcel' },
+          },
+          {
+            path: 'export-merge-header',
+            component: lazyLoad('demo/excel/merge-header'),
+            name: 'MergeHeader',
+            meta: { title: 'mergeHeader' },
+          },
+          {
+            path: 'upload-excel',
+            component: lazyLoad('demo/excel/upload-excel'),
+            name: 'UploadExcel',
+            meta: { title: 'uploadExcel' },
+          },
+        ],
+      },
+      {
+        path: 'pdf',
+        component: routerNode,
+        redirect: '/demo/pdf/index',
+        children: [
+          {
+            path: 'index',
+            component: lazyLoad('demo/pdf/index'),
+            name: 'PDF',
+            meta: { title: 'pdf', icon: 'pdf' },
+          },
+          {
+            path: 'download',
+            component: lazyLoad('demo/pdf/download'),
+            hidden: true,
+          },
+        ],
+      },
+      {
+        path: 'zip',
+        component: routerNode,
+        redirect: '/demo/zip/download',
+        alwaysShow: true,
+        name: 'Zip',
+        meta: { title: 'zip', icon: 'zip' },
+        children: [
+          {
+            path: 'download',
+            component: lazyLoad('demo/zip/index'),
+            name: 'ExportZip',
+            meta: { title: 'exportZip' },
+          },
+        ],
+      },
+      // {
+      //   path: 'dropzone',
+      //   component: lazyLoad('demo/dropzone/index'),
+      //   name: 'DropzoneDemo',
+      //   meta: { title: 'dropzone' },
+      // },
+
+      // {
+      //   path: 'mixin',
+      //   component: lazyLoad('demo/mixin/index'),
+      //   name: 'ComponentMixinDemo',
+      //   meta: { title: 'componentMixin' },
+      // },
+
+      {
+        path: 'drag',
+        redirect: 'noRedirect',
+        name: 'drag',
+        component: routerNode,
+        meta: {
+          title: '拖拽',
+          icon: 'drag',
+        },
+        children: [
+          {
+            path: 'dialog',
+            component: lazyLoad('demo/drag/dialog'),
+            name: 'DragDialogDemo',
+            meta: { title: 'dragDialog' },
+          },
+          {
+            path: 'select',
+            component: lazyLoad('demo/drag/select'),
+            name: 'DragSelectDemo',
+            meta: { title: 'dragSelect' },
+          },
+          {
+            path: 'list',
+            component: lazyLoad('demo/drag/list'),
+            name: 'DndListDemo',
+            meta: { title: 'dndList' },
+          },
+          {
+            path: 'kanban',
+            component: lazyLoad('demo/drag/kanban'),
+            name: 'DragKanbanDemo',
+            meta: { title: 'dragKanban' },
+          },
+        ],
+      },
+    ],
+  },
+]

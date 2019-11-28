@@ -31,8 +31,8 @@ module.exports = {
     __DEV__ && qnConfig.domain ? '/' : `${qnConfig.domain}${qnConfig.prefix}`,
   assetsDir: __DEV__ ? './' : './static',
   configureWebpack: config => {
-    // console.log(config);
     config.resolve.extensions.push('.css', '.styl', '.less', '.md')
+    // console.log(config.resolve.extensions)
 
 
     // const plugins = []

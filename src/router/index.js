@@ -13,7 +13,7 @@ import { lazyLoad } from './utils'
 import Layout from '@/layout'
 
 // modules
-import componentsRouter from './modules/components'
+import demoRouter from './modules/demo'
 import sysRouter from './modules/sys'
 import ossRouter from './modules/oss'
 import orgRouter from './modules/org'
@@ -59,17 +59,17 @@ function getLayout(key = '') {
  * all roles can be accessed
  */
 export const constantRoutes = [
-  {
-    path: '/redirect',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: '/redirect/:path*',
-        component: lazyLoad('redirect/index'),
-      },
-    ],
-  },
+  // {
+  //   path: '/redirect',
+  //   component: Layout,
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: '/redirect/:path*',
+  //       component: lazyLoad('demo/redirect/index'),
+  //     },
+  //   ],
+  // },
   {
     path: '/login',
     component: lazyLoad('login/index'),
@@ -78,16 +78,6 @@ export const constantRoutes = [
   {
     path: '/auth-redirect',
     component: lazyLoad('login/auth-redirect'),
-    hidden: true,
-  },
-  {
-    path: '/404',
-    component: lazyLoad('error-page/404'),
-    hidden: true,
-  },
-  {
-    path: '/401',
-    component: lazyLoad('error-page/401'),
     hidden: true,
   },
   {
@@ -103,7 +93,7 @@ export const constantRoutes = [
       },
     ],
   },
-  ...componentsRouter,
+  ...demoRouter,
   ...errorRouter,
   { path: '*', redirect: '/404', hidden: true },
 ]

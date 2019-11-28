@@ -2,6 +2,7 @@
   <div class="icons-container">
     <p class="warn-content">
       <a
+        rel="noopener noreferrer"
         href="https://panjiachen.github.io/vue-element-admin-site/#/icon"
         target="_blank"
       >Add and use

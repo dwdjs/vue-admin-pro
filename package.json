@@ -84,6 +84,7 @@
     "gh-pages": "2.1.1",
     "js-cookie": "2.2.1",
     "jsonlint": "^1.6.3",
+    "jszip": "^3.2.2",
     "lint-staged": "9.4.3",
     "lodash": "4.17.15",
     "mockjs": "1.1.0",

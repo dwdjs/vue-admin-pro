@@ -5,26 +5,42 @@ import Layout from '@/layout'
 
 export default [
   {
+    path: '/401',
+    component: lazyLoad('error/401'),
+    hidden: true,
+  },
+  {
+    path: '/404',
+    component: lazyLoad('error/404'),
+    hidden: true,
+  },
+  {
     path: '/error',
     component: Layout,
     redirect: 'noRedirect',
-    name: 'error-pages',
+    name: 'error',
     meta: {
-      title: 'error-pages',
+      title: 'error',
       icon: '404',
     },
     children: [
       {
         path: '401',
-        component: () => import('@/views/error-page/401'),
+        component: lazyLoad('error/401'),
         name: '401',
-        meta: { title: 'page-401', noCache: true },
+        meta: { title: '401', noCache: true },
       },
       {
         path: '404',
-        component: () => import('@/views/error-page/404'),
+        component: lazyLoad('error/404'),
         name: '404',
-        meta: { title: 'page-404', noCache: true },
+        meta: { title: '404', noCache: true },
+      },
+      {
+        path: 'log',
+        component: lazyLoad('error/log'),
+        name: 'log',
+        meta: { title: 'log', noCache: true },
       },
     ],
   },
