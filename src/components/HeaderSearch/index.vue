@@ -1,7 +1,7 @@
 <template>
   <div :class="{ show: show }" class="header-search">
     <icon-svg
-      @click.stop="click"
+      @click.stop="toggleSearch"
       class-name="search-icon"
       icon-class="search"
     />
@@ -71,14 +71,13 @@ export default {
     },
   },
   mounted() {
-    // this.searchPool = this.generateRoutes(this.routes)
+    this.searchPool = this.generateRoutes(this.routes)
   },
   methods: {
-    click() {
+    toggleSearch() {
       this.show = !this.show
       if (this.show) {
-        console.log(111)
-        // this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
+        this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
       }
     },
     close() {

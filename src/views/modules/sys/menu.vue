@@ -23,7 +23,6 @@
         <el-button
           @click="handleAddOrUpdate()"
           class="filter-item"
-          style="margin-left: 10px;"
           type="success"
           icon="el-icon-edit"
         >新增</el-button>
@@ -75,14 +74,14 @@
       <el-table-column header-align="center" align="center" label="类型">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.type === '0'" size="small">目录</el-tag>
-          <el-tag 
-            v-else-if="scope.row.type === '1'" 
-            size="small" 
+          <el-tag
+            v-else-if="scope.row.type === '1'"
+            size="small"
             type="success"
           >菜单</el-tag>
-          <el-tag 
-            v-else-if="scope.row.type === '2'" 
-            size="small" 
+          <el-tag
+            v-else-if="scope.row.type === '2'"
+            size="small"
             type="info"
           >按钮</el-tag>
         </template>
@@ -105,9 +104,9 @@
       </el-table-column>
       <el-table-column header-align="center" align="center" label="可见">
         <template slot-scope="scope">
-          <el-tag 
-            v-if="scope.row.visible" 
-            size="small" 
+          <el-tag
+            v-if="scope.row.visible"
+            size="small"
             type="success"
           >显示</el-tag>
           <el-tag v-else size="small" type="info">隐藏</el-tag>

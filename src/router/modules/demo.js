@@ -28,6 +28,16 @@ export default [
         meta: { title: '图标', icon: 'icon' },
       },
       {
+        path: 'external-link',
+        component: routerNode,
+        children: [
+          {
+            path: 'https://baidu.com?spm=vue-admin-pro',
+            meta: { title: 'externalLink', icon: 'link' },
+          },
+        ],
+      },
+      {
         path: 'tab',
         component: routerNode,
         children: [

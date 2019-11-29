@@ -33,15 +33,15 @@ export default [
       //     icon: 'gc1',
       //   },
       // },
-      {
-        path: 'cdn',
-        component: lazyLoad('modules/tools/cdn'),
-        name: 'cdn',
-        meta: {
-          title: '图片CDN',
-          icon: 'gc1',
-        },
-      },
+      // {
+      //   path: 'cdn',
+      //   component: lazyLoad('modules/tools/cdn'),
+      //   name: 'cdn',
+      //   meta: {
+      //     title: '图片CDN',
+      //     icon: 'gc1',
+      //   },
+      // },
     ],
   },
 ]

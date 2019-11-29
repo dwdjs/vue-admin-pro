@@ -23,7 +23,6 @@
         <el-button
           @click="handleAddOrUpdate()"
           class="filter-item"
-          style="margin-left: 10px;"
           type="success"
           icon="el-icon-edit"
         >新增</el-button>
