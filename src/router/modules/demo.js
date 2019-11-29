@@ -60,12 +60,6 @@ export default [
         },
         children: [
           {
-            path: 'i18n',
-            component: lazyLoad('demo/interactive/i18n/index'),
-            name: 'i18n',
-            meta: { title: 'i18n' },
-          },
-          {
             path: 'back-to-top',
             component: lazyLoad('demo/interactive/back-to-top'),
             name: 'BackToTopDemo',
@@ -95,6 +89,19 @@ export default [
             name: 'AvatarUploadDemo',
             meta: { title: 'avatarUpload' },
           },
+          {
+            path: 'i18n',
+            component: lazyLoad('demo/interactive/i18n/index'),
+            name: 'i18n',
+            meta: { title: 'i18n' },
+          },
+          // 换肤涉及诸多色彩协调的问题
+          // {
+          //   path: 'theme',
+          //   component: lazyLoad('demo/interactive/theme'),
+          //   name: 'theme',
+          //   meta: { title: 'theme' },
+          // },
         ],
       },
       {

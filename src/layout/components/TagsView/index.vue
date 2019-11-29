@@ -50,7 +50,7 @@ export default {
       return this.$store.state.tagsView.visitedViews
     },
     routes() {
-      return this.$store.state.permission.routes
+      return this.$store.state.permission.routers
     },
   },
   watch: {
@@ -72,12 +72,6 @@ export default {
   },
   methods: {
     generateTitle, // generateTitle by vue-i18n
-    generateRoute() {
-      if (this.$route.name) {
-        return this.$route
-      }
-      return false
-    },
     isActive(route) {
       return route.path === this.$route.path
     },

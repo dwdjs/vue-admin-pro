@@ -94,6 +94,7 @@ export default {
 .field-label {
   vertical-align: middle;
 }
+
 .box-card {
   width: 400px;
   max-width: 100%;
