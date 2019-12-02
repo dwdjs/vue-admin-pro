@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
           // 根据roles权限生成可访问的路由表
           // GenerateRoutes or GenerateLocalRoutes
           // 使用api控制路由
-          // store.dispatch('GenerateRoutes', { roles }).then(() => {
+          // store.dispatch('permission/GenerateRoutes', { roles }).then(() => {
           // 使用本地控制路由
           store.dispatch('permission/GenerateLocalRoutes', { roles }).then(() => {
             // 动态添加可访问路由表
@@ -53,7 +53,7 @@ router.beforeEach((to, from, next) => {
           })
         })
         .catch((err = {}) => {
-          store.dispatch('FedLogout').then(() => {
+          store.dispatch('user/FedLogout').then(() => {
             Message.error(
               err.errmsg || 'Verification failed, please login again'
             )

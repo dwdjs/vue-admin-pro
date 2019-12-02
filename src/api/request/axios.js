@@ -86,7 +86,7 @@ export default function request({
     console.warn(JSON.stringify(err))
     // 9610010 未登录
     if (errno === 9610010) {
-      store.dispatch('FedLogout')
+      store.dispatch('user/FedLogout')
       mini.forward('/login')
     } else {
       const message = `${errno}: ${errmsg}`

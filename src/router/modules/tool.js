@@ -37,6 +37,12 @@ export default [
         meta: { title: '图标', icon: 'icon' },
       },
       // {
+      //   path: 'lock',
+      //   component: lazyLoad('modules/tools/lock/index'),
+      //   name: 'Lock',
+      //   meta: { title: '锁屏', icon: 'client' },
+      // },
+      // {
       //   path: 'link-old',
       //   component: lazyLoad('modules/tools/link-old'),
       //   name: 'link-old',
