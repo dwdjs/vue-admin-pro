@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import "../../style/var";
+@import "~@/style/var";
 
 .upload-container {
   width: 100%;

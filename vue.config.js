@@ -172,6 +172,13 @@ module.exports = {
     },
   },
   css: {
+    loaderOptions: {
+      stylus: {
+        // 全局引入变量
+        import: path.resolve(__dirname, './src/style/var'),
+        // data: `@import "~@/style/var";`, // 这样不行
+      },
+    },
     // modules: false,
     sourceMap: !__PROD__,
   },

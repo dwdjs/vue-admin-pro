@@ -81,11 +81,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import "../../style/var";
+@import "~@/style/var";
+
 .upload-container {
+  clearfix();
   width: 100%;
   position: relative;
-  clearfix();
   .image-uploader {
     width: 60%;
     float: left;

@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '~@/style/var';
+@import "~@/style/var";
 
 .scroll-container {
   position: relative;

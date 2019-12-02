@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '~@/style/var';
+// @import "~@/style/var"; // 配置全局引入
 
 .app-wrapper {
   clearfix();

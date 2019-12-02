@@ -28,7 +28,7 @@ export default [
         component: lazyLoad('modules/oss/oss'),
         name: 'upload',
         meta: {
-          title: '图床配置',
+          title: '图床设置',
           icon: 'upload',
         },
       },

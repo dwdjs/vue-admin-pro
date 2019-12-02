@@ -240,7 +240,7 @@ $light_gray = #eee;
 </style>
 
 <style lang="stylus" scoped>
-@import '~@/style/var';
+@import "~@/style/var";
 
 $bg = #2d3a4b;
 $dark_gray = #889aa4;

@@ -118,7 +118,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import "../style/var";
+@import "~@/style/var";
 
 // 实现力求精简，精简到只保留 core 部分同样 OK
 
