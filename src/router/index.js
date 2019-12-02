@@ -89,12 +89,11 @@ export const constantRoutes = [
         path: 'dashboard',
         component: lazyLoad('dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', affix: true },
+        meta: { title: '工作台', icon: 'dashboard', affix: true },
       },
     ],
   },
   ...demoRouter,
-  ...errorRouter,
   { path: '*', redirect: '/404', hidden: true },
 ]
 
@@ -131,6 +130,7 @@ export const asyncRoutes = [
   ...orgRouter,
   ...projectRouter,
   ...toolRouter,
+  ...errorRouter,
 ]
 
 /**

@@ -21,13 +21,15 @@ vue-admin-pro 开箱即用
   - 菜单列表
 - 主编辑区
 
+非常规场景, 入口收纳到示例中展示
+
 ### 通用功能 common
 
-- [ ] 控制台/概况页(定制展示或常用操作)
-- tools 工具助手
+- 控制台/概况页(定制展示或常用操作)
+- 工具助手 tools
   - [x] 引导页
 - 错误页 401 404 500 log
-- demo 示例
+- 示例 demo
 
 ### 核心功能 base
 
@@ -39,15 +41,22 @@ vue-admin-pro 开箱即用
   - [x] 定时任务
   - [x] 数据字典
   - [x] 系统日志
-- 运维
-  - 开发配置
-  - 安全维护
 - 组织架构
   - 部门管理
   - 员工管理
   - 岗位管理
   - 证书管理
-- 文件管理
+- 文件上传
+  - 图床配置
+  - 文件管理
+- 项目流程
+  - 项目管理
+  - 进度详情
+  - 任务管理
+  - 工单?
+- 系统运维
+  - 开发配置
+  - 安全维护
 
 ### 业务模块 biz
 
@@ -127,5 +136,5 @@ deploy branch gh-pages
   - https://saber.bladex.vip/#/login
   - https://archer.bladex.vip/#/wel/index
 - https://gitee.com/y_project/RuoYi
-  - http://demo.ruoyi.vip/login
+  - http://demo.ruoyi.vip/
 - https://gitee.com/ZhongBangKeJi/CRMEB

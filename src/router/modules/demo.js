@@ -11,44 +11,10 @@ export default [
     redirect: 'noRedirect',
     name: 'demo',
     meta: {
-      title: 'demo',
+      title: '示例',
       icon: 'component',
     },
     children: [
-      {
-        path: 'guide',
-        component: lazyLoad('demo/guide/index'),
-        name: 'Guide',
-        meta: { title: '引导页', icon: 'guide' },
-      },
-      {
-        path: 'icon',
-        component: lazyLoad('demo/icon/index'),
-        name: 'Icon',
-        meta: { title: '图标', icon: 'icon' },
-      },
-      {
-        path: 'external-link',
-        component: routerNode,
-        children: [
-          {
-            path: 'https://baidu.com?spm=vue-admin-pro',
-            meta: { title: 'externalLink', icon: 'link' },
-          },
-        ],
-      },
-      {
-        path: 'tab',
-        component: routerNode,
-        children: [
-          {
-            path: 'index',
-            component: lazyLoad('demo/tab/index'),
-            name: 'Tab',
-            meta: { title: 'tab', icon: 'tab' },
-          },
-        ],
-      },
       {
         path: 'interactive',
         redirect: '/demo/interactive/back-to-top',
@@ -59,6 +25,22 @@ export default [
           icon: 'example',
         },
         children: [
+          {
+            path: 'clipboard',
+            component: lazyLoad('demo/interactive/clipboard'),
+            name: 'Clipboard',
+            meta: { title: 'clipboard' },
+          },
+          {
+            path: 'index',
+            component: lazyLoad('demo/tab/index'),
+            name: 'Tab',
+            meta: { title: 'tab', icon: 'tab' },
+          },
+          {
+            path: 'https://baidu.com?spm=vue-admin-pro',
+            meta: { title: 'externalLink', icon: 'link' },
+          },
           {
             path: 'back-to-top',
             component: lazyLoad('demo/interactive/back-to-top'),
@@ -102,6 +84,42 @@ export default [
           //   name: 'theme',
           //   meta: { title: 'theme' },
           // },
+          {
+            path: 'drag',
+            redirect: 'noRedirect',
+            name: 'drag',
+            component: routerNode,
+            meta: {
+              title: '拖拽',
+              icon: 'drag',
+            },
+            children: [
+              {
+                path: 'dialog',
+                component: lazyLoad('demo/drag/dialog'),
+                name: 'DragDialogDemo',
+                meta: { title: 'dragDialog' },
+              },
+              {
+                path: 'select',
+                component: lazyLoad('demo/drag/select'),
+                name: 'DragSelectDemo',
+                meta: { title: 'dragSelect' },
+              },
+              {
+                path: 'list',
+                component: lazyLoad('demo/drag/list'),
+                name: 'DndListDemo',
+                meta: { title: 'dndList' },
+              },
+              {
+                path: 'kanban',
+                component: lazyLoad('demo/drag/kanban'),
+                name: 'DragKanbanDemo',
+                meta: { title: 'dragKanban' },
+              },
+            ],
+          },
         ],
       },
       {
@@ -125,12 +143,6 @@ export default [
             component: lazyLoad('demo/editor/markdown'),
             name: 'Markdown',
             meta: { title: 'markdown' },
-          },
-          {
-            path: 'clipboard',
-            component: lazyLoad('demo/editor/clipboard'),
-            name: 'Clipboard',
-            meta: { title: 'clipboard' },
           },
           // {
           //   path: 'tinymce',
@@ -224,42 +236,7 @@ export default [
       //   meta: { title: 'componentMixin' },
       // },
 
-      {
-        path: 'drag',
-        redirect: 'noRedirect',
-        name: 'drag',
-        component: routerNode,
-        meta: {
-          title: '拖拽',
-          icon: 'drag',
-        },
-        children: [
-          {
-            path: 'dialog',
-            component: lazyLoad('demo/drag/dialog'),
-            name: 'DragDialogDemo',
-            meta: { title: 'dragDialog' },
-          },
-          {
-            path: 'select',
-            component: lazyLoad('demo/drag/select'),
-            name: 'DragSelectDemo',
-            meta: { title: 'dragSelect' },
-          },
-          {
-            path: 'list',
-            component: lazyLoad('demo/drag/list'),
-            name: 'DndListDemo',
-            meta: { title: 'dndList' },
-          },
-          {
-            path: 'kanban',
-            component: lazyLoad('demo/drag/kanban'),
-            name: 'DragKanbanDemo',
-            meta: { title: 'dragKanban' },
-          },
-        ],
-      },
+
     ],
   },
 ]

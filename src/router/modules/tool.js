@@ -1,4 +1,4 @@
-// 工具箱
+// 工具助手
 // 链接生成
 
 import { lazyLoad } from '../utils'
@@ -23,6 +23,18 @@ export default [
           title: '链接生成工具',
           icon: 'link',
         },
+      },
+      {
+        path: 'guide',
+        component: lazyLoad('modules/tools/guide/index'),
+        name: 'Guide',
+        meta: { title: '引导页', icon: 'guide' },
+      },
+      {
+        path: 'icon',
+        component: lazyLoad('modules/tools/icon/index'),
+        name: 'Icon',
+        meta: { title: '图标', icon: 'icon' },
       },
       // {
       //   path: 'link-old',

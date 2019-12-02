@@ -20,7 +20,7 @@ export default [
     redirect: 'noRedirect',
     name: 'error',
     meta: {
-      title: 'error',
+      title: '错误页',
       icon: '404',
     },
     children: [

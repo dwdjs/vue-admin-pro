@@ -10,7 +10,7 @@ export default [
     redirect: 'noRedirect',
     name: 'oss',
     meta: {
-      title: '文件管理',
+      title: '文件上传',
       icon: 'disk',
     },
     children: [
@@ -19,7 +19,16 @@ export default [
         component: lazyLoad('modules/oss/oss'),
         name: 'upload',
         meta: {
-          title: '文件上传',
+          title: '上传文件',
+          icon: 'upload',
+        },
+      },
+      {
+        path: 'upload',
+        component: lazyLoad('modules/oss/oss'),
+        name: 'upload',
+        meta: {
+          title: '图床配置',
           icon: 'upload',
         },
       },
