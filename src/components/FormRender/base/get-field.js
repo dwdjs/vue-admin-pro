@@ -1,4 +1,4 @@
-export function getWidgetName(schema, map) {
+function getWidgetName(schema, map) {
   const { type, format, enum: enums, readonly } = schema
   const list = []
   if (readonly) {

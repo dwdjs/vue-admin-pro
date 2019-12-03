@@ -23,10 +23,7 @@
         "type": "range",
         "format": "dateTime",
         "ui:options": {
-          "placeholder": [
-            "开始",
-            "结束"
-          ]
+          "placeholder": ["开始", "结束"]
         }
       },
       "customizedWidgets": {
@@ -61,16 +58,8 @@
             "movieType": {
               "title": "短片类型",
               "type": "string",
-              "enum": [
-                "a",
-                "b",
-                "c"
-              ],
-              "enumNames": [
-                "教育",
-                "恐怖",
-                "故事"
-              ]
+              "enum": ["a", "b", "c"],
+              "enumNames": ["教育", "恐怖", "故事"]
             },
             "movieList": {
               "title": "电影列表",
@@ -92,23 +81,11 @@
               "items": {
                 "type": "string"
               },
-              "enum": [
-                "A",
-                "B",
-                "C",
-                "D"
-              ],
-              "enumNames": [
-                "早上",
-                "中午",
-                "下午",
-                "晚上"
-              ]
+              "enum": ["A", "B", "C", "D"],
+              "enumNames": ["早上", "中午", "下午", "晚上"]
             }
           },
-          "required": [
-            "age"
-          ]
+          "required": ["age"]
         }
       }
     }
@@ -128,17 +105,12 @@
   },
   "formData": {
     "inputDemo": "750",
-    "numberDemo": "",
-    "dateRange": null,
-    "customizedWidgets": {
-      "asyncSelect": ""
-    },
+    "textareaDemo": "FormRender\nHello World!",
     "complexArray": [
       {
         "age": "",
         "movieType": "b",
-        "movieList": [],
-        "when": []
+        "movieList": []
       }
     ]
   }

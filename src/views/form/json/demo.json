@@ -23,6 +23,7 @@
         "title": "输入框",
         "type": "string"
       },
+
       "imgDemo": {
         "title": "图片",
         "type": "string",
@@ -42,10 +43,7 @@
       "enumDemo": {
         "title": "枚举",
         "type": "string",
-        "enum": [
-          "A",
-          "B"
-        ],
+        "enum": ["A", "B"],
         "enumNames": [
           "养成",
           "<span style='background-color: black;display: inline-block;vertical-align: text-top;width: 48px;height: 24px;margin-top:-2px;color:white; border: 1px solid #ddd;'>试试</span>"
@@ -75,14 +73,8 @@
           "wayToTravel": {
             "title": "旅行方式",
             "type": "string",
-            "enum": [
-              "self",
-              "group"
-            ],
-            "enumNames": [
-              "自驾",
-              "跟团"
-            ]
+            "enum": ["self", "group"],
+            "enumNames": ["自驾", "跟团"]
           },
           "canDrive": {
             "title": "是否拥有驾照",
@@ -90,9 +82,7 @@
             "default": false
           }
         },
-        "required": [
-          "background"
-        ]
+        "required": ["background"]
       },
       "multiSelectDemo": {
         "title": "多选组件",
@@ -101,18 +91,8 @@
         "items": {
           "type": "string"
         },
-        "enum": [
-          "A",
-          "B",
-          "C",
-          "D"
-        ],
-        "enumNames": [
-          "杭州",
-          "武汉",
-          "湖州",
-          "贵阳"
-        ]
+        "enum": ["A", "B", "C", "D"],
+        "enumNames": ["杭州", "武汉", "湖州", "贵阳"]
       },
       "custom": {
         "properties": {
@@ -120,25 +100,13 @@
             "title": "支付方式",
             "description": "",
             "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "enum": [
-              "1",
-              "5",
-              "6"
-            ],
-            "enumNames": [
-              "预付",
-              "面付",
-              "信用住"
-            ]
+            "items": { "type": "string" },
+            "enum": ["1", "5", "6"],
+            "enumNames": ["预付", "面付", "信用住"]
           }
         },
         "type": "object",
-        "required": [
-          "payType"
-        ],
+        "required": ["payType"],
         "title": "酒店行业限制",
         "name": "custom"
       },
@@ -166,11 +134,7 @@
         }
       }
     },
-    "required": [
-      "textareaDemo",
-      "dateDemo",
-      "multiSelectDemo"
-    ]
+    "required": ["textareaDemo", "dateDemo", "multiSelectDemo"]
   },
   "uiSchema": {
     "inputDemo": {
@@ -236,35 +200,22 @@
   },
   "formData": {
     "inputDemo": "750",
-    "numberDemo": "",
     "textareaDemo": "FormRender\nHello World!",
     "imgDemo": "https://img.alicdn.com/tfs/TB1P8p2uQyWBuNjy0FpXXassXXa-750-1334.png",
-    "uploadDemo": "https://img.alicdn.com/tfs/TB1P8p2uQyWBuNjy0FpXXassXXa-750-1334.png",
-    "disabledDemo": "我是一个被 disabled 的值",
     "enumDemo": "A",
     "dateDemo": "2018-11-22",
+    "isLike": true,
     "objDemo": {
       "isLike": true,
-      "background": "#ffff00",
-      "wayToTravel": "self",
-      "canDrive": false
+      "background": "#ffff00"
     },
-    "multiSelectDemo": [
-      "C",
-      "D"
-    ],
-    "custom": {
-      "payType": []
-    },
+    "multiSelectDemo": ["C", "D"],
     "arrDemo": [
       {
         "name": "表单渲染",
         "num": 10
       },
-      {
-        "name": "",
-        "num": ""
-      }
+      {}
     ]
   }
 }

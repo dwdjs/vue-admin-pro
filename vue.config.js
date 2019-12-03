@@ -162,9 +162,10 @@ module.exports = {
       entry: {
         vue: ['vue', 'vue-router', 'vuex', 'vuex-router-sync', 'axios', 'vue-lazyload', 'vue-i18n', 'core-js'], // core-js
         ui: ['element-ui', 'nprogress'],
-        xlsx: ['xlsx'],
+        xlsx: ['xlsx', 'jszip', 'file-saver'],
         echarts: ['echarts'],
         mockjs: ['mockjs'],
+        demo: ['driver.js', 'vuedraggable', 'vue-splitpane', 'vue-count-to', 'tui-editor'],
       },
       output: path.join(__dirname, './public/dll'),
       // 只在生产环境加入 webpack.DllReferencePlugin 插件

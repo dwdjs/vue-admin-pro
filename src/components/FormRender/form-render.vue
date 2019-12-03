@@ -1,6 +1,6 @@
 <script>
-import { mapping, widgets } from './form/element-ui'
-import getField from './form/base/get-field'
+import { mapping, widgets } from './element-ui'
+import getField from './base/get-field'
 
 /**
  * format 指定渲染组件

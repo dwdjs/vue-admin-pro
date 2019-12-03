@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import FormRender from './form-render'
-import SCHEMA from './data/1'
+import FormRender from '@/components/FormRender/form-render'
+import SCHEMA from './json/simplest.json'
 
 export default {
   name: 'PageForm',
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       propsSchema: SCHEMA.propsSchema,
-      formData: SCHEMA.formData,
+      formData: SCHEMA.formData || {},
     }
   },
 }
@@ -29,3 +29,4 @@ export default {
 <style>
 
 </style>
+

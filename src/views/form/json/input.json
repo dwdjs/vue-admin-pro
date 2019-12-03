@@ -85,20 +85,8 @@
         }
       }
     },
-    "required": [
-      "string4",
-      "string5"
-    ]
+    "required": ["string4", "string5"]
   },
   "uiSchema": {},
-  "formData": {
-    "string": "hello world",
-    "string2": "",
-    "string3": "",
-    "string4": "",
-    "string5": "",
-    "string6": "hello world",
-    "string7": "",
-    "string8": ""
-  }
+  "formData": {}
 }
