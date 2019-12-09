@@ -139,6 +139,12 @@ export default [
             meta: { title: 'json' },
           },
           {
+            path: 'json2',
+            component: lazyLoad('demo/editor/json2'),
+            name: 'JSON2',
+            meta: { title: 'json2' },
+          },
+          {
             path: 'markdown',
             component: lazyLoad('demo/editor/markdown'),
             name: 'Markdown',
