@@ -66,47 +66,66 @@ module.exports = {
       .set('assets', resolve('src/assets'))
       .set('components', resolve('src/components'))
 
-    const svgRule = config.module.rule('svg')
+    // const svgRule = config.module.rule('svg')
 
     // svgRule.exclude.add('src/icons').end();
+
+    config
+      // https://webpack.js.org/configuration/devtool/#development
+      .when(process.env.NODE_ENV === 'development',
+        c => c.devtool('cheap-source-map')
+      )
 
     // 清除已有的所有 loader。
     // 如果你不这样做，接下来的 loader 会附加在该规则现有的 loader 之后。
     // svgRule.use
-    svgRule.uses.clear()
+    // svgRule.uses.clear()
 
     // 添加要替换的 loader
     // http://tech.lede.com/2018/03/28/fe/svg-icon/
     // https://medium.com/@deeepakampolu/til-using-svg-icon-sprites-with-webpack-2fd4db7ead76
-    svgRule
-      .test(/\.(svg)(\?.*)?$/)
-      // .include.add('src/icons')
-      // .end()
-      .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
-      .tap(options => {
-        // 修改它的选项...
-        return {
-          symbolId: 'icon-[name]',
-          // 不要提取成一个外部独立文件使用，这样与按需加载理念冲突
-          // extract: true,
-          // spriteFilename: 'svg-sprite.[hash:6].svg',
-        }
-      })
+    // set svg-sprite-loader
 
     // 优化SVG大小
     // Error in parsing SVG: Non-whitespace before first tag.
     // https://github.com/kisenka/svg-sprite-loader/issues/236
     // It means that svg-sprite-loader should applies after svgo-loader
-    svgRule
-      .test(/\.(svg)(\?.*)?$/)
-      .use('svgo-loader')
-      .loader('svgo-loader')
-      .tap(options => {
-        return {
-          ...svgoConfig,
-        }
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/icons'))
+      // .use('svgo-loader')
+      // .loader('svgo-loader')
+      // .tap(options => {
+      //   return {
+      //     ...svgoConfig,
+      //   }
+      // })
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]',
+        // 不要提取成一个外部独立文件使用，这样与按需加载理念冲突
+        // extract: true,
+        // spriteFilename: 'svg-sprite.[hash:6].svg',
       })
+      .end()
+
+    // set preserveWhitespace
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap(options => {
+        options.compilerOptions.preserveWhitespace = true
+        return options
+      })
+      .end()
 
     /**
       第三方库提取（分四层）

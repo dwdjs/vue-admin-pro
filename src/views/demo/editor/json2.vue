@@ -1,27 +1,42 @@
 <template>
   <div class="app-container">
-    <v-jsoneditor
+    <vue-json-editor
       v-model="json"
       :options="options"
       :plus="false"
       @error="onError"
-      height="400px"
+      height="500px"
     />
   </div>
 </template>
 
 <script>
-import VJsoneditor from 'v-jsoneditor'
+// http://jsoneditoronline.org/
+// https://github.com/josdejong/jsoneditor
+// https://github.com/yansenlei/VJsoneditor
+import VueJsonEditor from '@/components/JsonEditor2'
 
+// json 作为数据对象来使用时, 不应该随意改变排序(或者 js 不应该信任 json 的排序)
 export default {
-  name: 'JsonEditor2',
+  name: 'JsonEditor',
   components: {
-    VJsoneditor,
+    VueJsonEditor,
   },
   data() {
     return {
+      options: {
+        mode: 'tree', // code view tree
+        statusBar: true,
+        navigationBar: true,
+      },
       json: {
-        'hello': 'vue',
+        'array': [1, 2, 3],
+        'boolean': true,
+        'color': '#82b92c',
+        'null': null,
+        'number': 123,
+        'object': {'a': 'b', 'c': 'd'},
+        'string': 'Hello World',
       },
     }
   },
