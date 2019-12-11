@@ -6,8 +6,11 @@
         href="https://github.com/codemirror/CodeMirror/blob/master/addon/lint/json-lint.js"
         target="_blank"
       >json-lint</a>.</aside>
+    <div class="header-container">
+      <el-button @click="handleSave" class="filter-item" type="primary">保存</el-button>
+    </div>
     <div class="editor-container">
-      <json-editor ref="jsonEditor" v-model="value" />
+      <json-editor ref="jsonEditor" v-model="json" />
     </div>
   </div>
 </template>
@@ -22,8 +25,12 @@ export default {
   components: { JsonEditor },
   data() {
     return {
-      value: JSON.parse(jsonData),
+      json: JSON.parse(jsonData),
     }
+  },
+  methods: {
+    handleSave() {
+    },
   },
 }
 </script>

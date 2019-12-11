@@ -1,122 +1,127 @@
 <!-- 组织部门 -->
 <template>
-  <div class="app-container calendar-list-container">
-    <div class="filter-container">
-      <el-form :model="dataForm" :inline="true">
-        <el-form-item label="">
-          <el-input
-            v-model="dataForm.keywords"
-            @keyup.enter.native="handleFilter"
-            placeholder="搜索关键字"
-            width="200"
-            class="filter-item"
-            clearable
-          />
-        </el-form-item>
-        <el-button
-          v-waves
-          @click="handleFilter"
-          class="filter-item"
-          type="primary"
-          icon="el-icon-search"
-        >搜索</el-button>
-        <el-button
-          @click="handleAddOrUpdate()"
-          class="filter-item"
-          style="margin-left: 10px;"
-          type="success"
-          icon="el-icon-edit"
-        >新增</el-button>
-        <!-- <el-button type="danger" @click="handleDelete()" :disabled="dataListSelections.length <= 0">批量删除</el-button> -->
-      </el-form>
+  <div class="filter-tree-container flex">
+    <div class="filter-tree">
+      顶级
     </div>
-
-    <el-table
-      :key="tableKey"
-      v-loading="dataListLoading"
-      :data="dataList"
-      @selection-change="handleSelectionChange"
-      element-loading-text="给我一点时间"
-      border
-      highlight-current-row
-    >
-      <!-- <el-table-column
-        type="selection"
-        header-align="center"
-        align="center"
-        width="50">
-      </el-table-column> -->
-      <el-table-column
-        prop="id"
-        header-align="center"
-        align="center"
-        width="80"
-        label="ID"
-      />
-      <table-tree-column
-        prop="name"
-        header-align="center"
-        tree-key="id"
-        width="180"
-        label="部门名称"
-      />
-      <el-table-column
-        prop="address"
-        header-align="center"
-        width="200"
-        label="部门地址"
-      />
-      <el-table-column
-        prop="url"
-        header-align="center"
-        width="200"
-        label="部门网址"
-      />
-      <!-- <el-table-column
-        prop="parentName"
-        header-align="center"
-        align="center"
-        width="120"
-        label="上级菜单">
-      </el-table-column> -->
-      <el-table-column header-align="center" width="200" label="部门职责">
-        <template slot-scope="scope">
-          {{ scope.row.scope }}
-        </template>
-      </el-table-column>
-      <el-table-column header-align="center" label="部门负责人">
-        <template slot-scope="scope">
-          {{ scope.row.leader }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        prop="position"
-        header-align="center"
-        align="center"
-        width="80"
-        label="排序"
-      />
-      <el-table-column
-        fixed="right"
-        header-align="center"
-        align="center"
-        width="200"
-        label="操作"
-      >
-        <template slot-scope="scope">
+    <div class="app-container">
+      <div class="filter-container">
+        <el-form :model="dataForm" :inline="true">
+          <el-form-item label="">
+            <el-input
+              v-model="dataForm.keywords"
+              @keyup.enter.native="handleFilter"
+              placeholder="搜索关键字"
+              width="200"
+              class="filter-item"
+              clearable
+            />
+          </el-form-item>
           <el-button
-            @click="handleAddOrUpdate(scope.row)"
+            v-waves
+            @click="handleFilter"
+            class="filter-item"
             type="primary"
-            size="mini"
-          >编辑</el-button>
+            icon="el-icon-search"
+          >搜索</el-button>
           <el-button
-            @click="handleDelete(scope.row.id)"
-            type="danger"
-            size="mini"
-          >删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+            @click="handleAddOrUpdate()"
+            class="filter-item"
+            style="margin-left: 10px;"
+            type="success"
+            icon="el-icon-edit"
+          >新增</el-button>
+          <!-- <el-button type="danger" @click="handleDelete()" :disabled="dataListSelections.length <= 0">批量删除</el-button> -->
+        </el-form>
+      </div>
+
+      <el-table
+        :key="tableKey"
+        v-loading="dataListLoading"
+        :data="dataList"
+        @selection-change="handleSelectionChange"
+        element-loading-text="给我一点时间"
+        border
+        highlight-current-row
+      >
+        <!-- <el-table-column
+          type="selection"
+          header-align="center"
+          align="center"
+          width="50">
+        </el-table-column> -->
+        <el-table-column
+          prop="id"
+          header-align="center"
+          align="center"
+          width="80"
+          label="ID"
+        />
+        <table-tree-column
+          prop="name"
+          header-align="center"
+          tree-key="id"
+          width="180"
+          label="部门名称"
+        />
+        <el-table-column
+          prop="address"
+          header-align="center"
+          width="200"
+          label="部门地址"
+        />
+        <el-table-column
+          prop="url"
+          header-align="center"
+          width="200"
+          label="部门网址"
+        />
+        <!-- <el-table-column
+          prop="parentName"
+          header-align="center"
+          align="center"
+          width="120"
+          label="上级菜单">
+        </el-table-column> -->
+        <el-table-column header-align="center" width="200" label="部门职责">
+          <template slot-scope="scope">
+            {{ scope.row.scope }}
+          </template>
+        </el-table-column>
+        <el-table-column header-align="center" label="部门负责人">
+          <template slot-scope="scope">
+            {{ scope.row.leader }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="position"
+          header-align="center"
+          align="center"
+          width="80"
+          label="排序"
+        />
+        <el-table-column
+          fixed="right"
+          header-align="center"
+          align="center"
+          width="200"
+          label="操作"
+        >
+          <template slot-scope="scope">
+            <el-button
+              @click="handleAddOrUpdate(scope.row)"
+              type="primary"
+              size="mini"
+            >编辑</el-button>
+            <el-button
+              @click="handleDelete(scope.row.id)"
+              type="danger"
+              size="mini"
+            >删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
 
     <!-- <div class="pagination-container" style="margin-top: 16px;">
       <el-pagination

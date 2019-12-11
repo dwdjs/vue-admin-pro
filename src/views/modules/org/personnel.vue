@@ -23,13 +23,13 @@
         <el-button
           @click="handleAddOrUpdate()"
           class="filter-item"
-          style="margin-left: 10px;"
           type="success"
           icon="el-icon-edit"
         >新增</el-button>
         <el-button
           :disabled="dataListSelections.length <= 0"
           @click="handleDelete()"
+          class="filter-item"
           type="danger"
         >批量删除</el-button>
       </el-form>
@@ -107,9 +107,9 @@
       >
         <template slot-scope="scope">
           <el-tag v-if="scope.row.state === 0" size="small">正常</el-tag>
-          <el-tag 
-            v-if="scope.row.state === 1" 
-            size="small" 
+          <el-tag
+            v-if="scope.row.state === 1"
+            size="small"
             type="danger"
           >禁用</el-tag>
         </template>

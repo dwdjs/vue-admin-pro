@@ -4,8 +4,8 @@
     :style="getHeight"
     class="jsoneditor-container"
   >
-    <div class="mode">
-      <el-radio-group v-model="options.mode" @change="changeMode">
+    <div v-if="showMode" class="mode">
+      <el-radio-group v-model="options.mode" @change="changeMode" size="mini">
         <template v-for="item in modes">
           <el-radio-button :label="item" :key="item" />
         </template>
@@ -23,6 +23,9 @@
 </template>
 
 <script>
+// http://jsoneditoronline.org/
+// https://github.com/josdejong/jsoneditor
+// https://github.com/yansenlei/VJsoneditor
 import JSONEditor from 'jsoneditor/dist/jsoneditor.min.js'
 import 'jsoneditor/dist/jsoneditor.min.css'
 
@@ -47,6 +50,7 @@ export default {
         }
       },
     },
+    showMode: Boolean,
     value: [Object, Array, Number, String, Boolean],
     height: {
       type: String,
@@ -82,16 +86,17 @@ export default {
     },
     initView() {
       if (!this.editor) {
-        var container = this.$refs.jsoneditor
-        const options = Object.assign({
-            onChange: this.onChange,
-            navigationBar: false,
-            statusBar: true,
-          },
-          this.options)
+        const container = this.$refs.jsoneditor
+        const options = {
+          onChange: this.onChange,
+          navigationBar: false,
+          statusBar: true,
+          ...this.options,
+        }
         this.editor = new JSONEditor(container, options)
       }
       this.editor.set(this.value || {})
+      this.editor.setSchema(this.options.schema || {}, this.options.schemaRefs || {})
     },
     destroyView() {
       if (this.editor) {
@@ -111,13 +116,15 @@ export default {
         this.initView()
       })
     },
+    ['options.schema'](val, oldVal) {
+      console.log(121212)
+      this.$nextTick(() => {
+        this.initView()
+      })
+    },
   },
   mounted() {
     this.initView()
-
-    setTimeout(() => {
-      this.options.mode = 'tree'
-    }, 1000)
   },
   beforeDestroy() {
     this.destroyView()
@@ -135,7 +142,19 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
+.jsoneditor-container {
+  position: relative;
+
+  .mode {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+}
+
 .jsoneditor-container.max-box {
   position: fixed;
   top: 0;
@@ -155,9 +174,9 @@ export default {
   height: 100%;
 }
 
-.jsoneditor-container:hover .max-btn {
-  display: block;
-}
+// .jsoneditor-container:hover .max-btn {
+//   display: block;
+// }
 
 .max-btn {
   display: none;
@@ -171,9 +190,9 @@ export default {
   background-position: 3px;
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 3px;
-}
 
-.max-btn:hover {
-  border: 1px solid #d7e6fe;
+  &:hover {
+    border: 1px solid #d7e6fe;
+  }
 }
 </style>

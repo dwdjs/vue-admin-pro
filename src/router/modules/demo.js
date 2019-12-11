@@ -16,6 +16,15 @@ export default [
     },
     children: [
       {
+        path: 'test',
+        component: lazyLoad('demo/test'), // Parent router-view
+        name: 'interactive',
+        meta: {
+          title: '测试',
+          icon: 'example',
+        },
+      },
+      {
         path: 'interactive',
         redirect: '/demo/interactive/back-to-top',
         component: routerNode, // Parent router-view

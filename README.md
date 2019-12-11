@@ -49,14 +49,40 @@ vue-admin-pro 开箱即用
   - 员工管理
   - 岗位管理
   - 证书管理
-- 文件上传
+- 文件管理
   - 图床配置
-  - 文件管理
-- 项目流程
-  - 项目管理
+  - 文件上传
+- 项目管理
+  - 项目列表
   - 进度详情
   - 任务管理
   - 工单?
+- 用户中心
+  - 会员配置
+  - 用户列表
+  - 收货地址
+  - 用户收藏
+  - 历史足迹
+  - 搜索历史
+  - 用户签到记录
+  - 用户购物车
+  - 用户反馈
+- 商城配置
+  - 搜索关键字
+  - 商品分类
+  - 商品详情参数
+  - 品牌制造商(待审核)
+  - 商品问答
+  - 快递公司配置
+  - 店铺管理
+- 商品管理
+  - 商品列表
+  - 商品分类
+  - 商品评价
+  - 秒杀配置
+- 订单管理
+  - 所有订单
+- 营销中心
 - 系统运维
   - 开发配置
   - 安全维护
@@ -141,3 +167,6 @@ deploy branch gh-pages
 - https://gitee.com/y_project/RuoYi
   - http://demo.ruoyi.vip/
 - https://gitee.com/ZhongBangKeJi/CRMEB
+- https://gitee.com/naan1993/guns/tree/master
+  - http://demo.stylefeng.cn 👍
+

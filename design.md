@@ -144,6 +144,13 @@ vue-cli-service build --mode staging
 
 ```
 
+## 文件读取和保存
+
+- [FileReader.js](https://github.com/bgrins/filereader.js) HTML5 FileReader API 实现读取文件
+- [FileSaver.js](https://github.com/eligrey/FileSaver.js) 使用 HTML5 saveAs() FileSaver 和 Blob  实现保存文件
+- [StreamSaver.js](https://github.com/jimmywarting/StreamSaver.js) 如果要保存大型文件, 超出 Blob 大小限制或内存限制的情况
+- [papaparse](https://www.npmjs.com/package/papaparse) 使用JavaScript解析CSV
+
 参考:
 
 - kit-admin

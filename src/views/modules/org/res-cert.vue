@@ -24,6 +24,7 @@
         <el-button
           :disabled="dataListSelections.length <= 0"
           @click="handleDelete()"
+          class="filter-item"
           type="danger"
         >批量删除</el-button>
       </el-form>
@@ -73,9 +74,9 @@
       >
         <template slot-scope="scope">
           <!-- <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button> -->
-          <el-button 
-            @click="handleDelete(scope.row)" 
-            type="danger" 
+          <el-button
+            @click="handleDelete(scope.row)"
+            type="danger"
             size="mini"
           >删除</el-button>
         </template>
