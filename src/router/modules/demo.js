@@ -154,6 +154,12 @@ export default [
             meta: { title: 'json2' },
           },
           {
+            path: 'monaco',
+            component: lazyLoad('demo/editor/monaco'),
+            name: 'Monaco',
+            meta: { title: 'monaco' },
+          },
+          {
             path: 'markdown',
             component: lazyLoad('demo/editor/markdown'),
             name: 'Markdown',
