@@ -1,7 +1,13 @@
+<template>
+  <div :style="styles" class="monaco_editor_container" />
+</template>
+
+<script>
 // https://microsoft.github.io/monaco-editor
 // https://github.com/FE-Mars/monaco-editor-vue
 
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
+// import { debounce } from 'lodash'
 
 function noop() { }
 
@@ -56,7 +62,7 @@ export default {
   },
 
   computed: {
-    style() {
+    styles() {
       return {
         width: !/^\d+$/.test(this.width) ? this.width : `${this.width}px`,
         height: !/^\d+$/.test(this.height) ? this.height : `${this.height}px`,
@@ -64,21 +70,24 @@ export default {
     },
   },
 
+  created() {
+    // this.debounceResize = debounce(this.autoLayout, 100)
+  },
+
   mounted () {
     this.initMonaco()
+    // window.addEventListener('resize', this.debounceResize)
   },
 
   beforeDestroy() {
     this.editor && this.editor.dispose()
-  },
-
-  render (h) {
-    return (
-      <div class="monaco_editor_container" style={this.style}></div>
-    )
+    // window.removeEventListener('resize', this.debounceResize)
   },
 
   methods: {
+    // autoLayout() {
+    //   if (this.editor) this.editor.layout()
+    // },
     initMonaco() {
       const { value, language, theme, options } = this
       Object.assign(options, this._editorBeforeMount())      // 编辑器初始化前
@@ -86,6 +95,7 @@ export default {
         value: value,
         language: language,
         theme: theme,
+        automaticLayout: true,
         ...options,
       })
       this.diffEditor && this._setModel(this.value, this.original)
@@ -144,3 +154,4 @@ export default {
     },
   },
 }
+</script>

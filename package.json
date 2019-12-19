@@ -87,7 +87,7 @@
     "jsonlint": "^1.6.3",
     "jszip": "^3.2.2",
     "lint-staged": "9.5.0",
-    "lodash": "4.17.15",
+    "lodash": "^4.17.15",
     "mockjs": "1.1.0",
     "monaco-editor": "^0.18.1",
     "postcss-px-to-viewport": "1.1.1",
