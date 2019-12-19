@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <h2>form 表单生成器</h2>
+    <h2>表单设计器</h2>
     <form-render
       :propsSchema="propsSchema"
       :formData="formData"

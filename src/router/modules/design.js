@@ -2,23 +2,24 @@
 
 import { lazyLoad } from '../utils'
 import Layout from '@/layout'
+import routerNode from '@/layout/router-node'
 
 export default [
   {
-    path: '/form',
-    component: Layout,
+    path: '/design',
+    component: routerNode,
     redirect: 'noRedirect',
-    name: 'Form',
+    name: 'design',
     meta: {
-      title: '表单设计',
+      title: '设计器',
       icon: 'form',
     },
     children: [
       {
         path: 'index',
-        component: lazyLoad('form/index'),
-        name: 'form',
-        meta: { title: '表单生成器' },
+        component: lazyLoad('design/index'),
+        name: 'design',
+        meta: { title: '设计器' },
       },
       // {
       //     path: 'generator',

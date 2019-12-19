@@ -12,7 +12,7 @@ module.exports = {
   // https://github.com/prettier/stylelint-config-prettier
   // 关闭所有不必要或可能与Prettier冲突的规则。这使您可以使用自己喜欢的可共享配置，而不会在使用Prettier时让其风格选择受到影响。
   'extends': ['stylelint-config-standard'],
-  'plugins': ['stylelint-scss'],
+  // 'plugins': ['stylelint-scss'],
   'rules': {
     // 不要使用已被 autoprefixer 支持的浏览器前缀
     'media-feature-name-no-vendor-prefix': true,

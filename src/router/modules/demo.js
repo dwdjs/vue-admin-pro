@@ -2,7 +2,7 @@
 
 import { lazyLoad } from '../utils'
 import Layout from '@/layout'
-import routerNode from '@/views/demo/index'
+import routerNode from '@/layout/router-node'
 
 export default [
   {

@@ -18,7 +18,7 @@ import sysRouter from './modules/sys'
 import ossRouter from './modules/oss'
 import orgRouter from './modules/org'
 import projectRouter from './modules/project'
-import formRouter from './modules/form'
+import designRouter from './modules/design'
 import errorRouter from './modules/error'
 import toolRouter from './modules/tool'
 
@@ -95,7 +95,7 @@ export const constantRoutes = [
     ],
   },
   ...demoRouter,
-  ...formRouter,
+  ...designRouter,
   ...errorRouter,
   { path: '*', redirect: '/404', hidden: true },
 ]
