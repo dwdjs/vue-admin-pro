@@ -131,3 +131,29 @@
 .scrollbar-wrapper {
 
 }
+
+// 自动撑开时不要 padding
+.el-tabs--top .is-stretch {
+
+  .el-tabs__item.is-top {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.el-tabs[fixed] {
+  .el-tabs__header.is-top {
+    z-index: 10;
+    height: 40px;
+  }
+  .el-tabs__nav-wrap {
+    position: fixed;
+    height: 40px;
+    // width: 250px;
+    background: #fff;
+  }
+  .el-tabs__nav-wrap::after {
+    top: 38px; // 40 - 2
+    bottom: auto;
+  }
+}
