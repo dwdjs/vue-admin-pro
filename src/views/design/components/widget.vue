@@ -98,17 +98,20 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.widget-group {
+  font-size: 14px;
+}
+
 .widget-list {
   font-size: 12px;
 }
 
 .widget-item {
   display: inline-block;
-  width: 48%;
-  margin: 0 4px 4px 0;
-  padding: 0 4px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  width: 46%;
+  margin: 0 8px 8px 0;
+  padding: 0 8px;
+  border: 1px solid #e4e7ed;
 
   &:hover {
     color: red;

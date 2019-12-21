@@ -3,7 +3,7 @@ export default {
     type: 'object',
     properties: {
       base: {
-        title: '基础功能',
+        title: '通用字段',
         type: 'object',
         properties: {
           input: {

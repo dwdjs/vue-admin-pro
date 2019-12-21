@@ -3,42 +3,33 @@
     <el-header class="design-header flex-middle">设计器</el-header>
     <el-main class="design-main">
       <el-container class="design-container h100">
-        <el-aside class="design-left" style="width: 250px;">
-          <el-tabs
-            v-model="tabAside"
-            @tab-click="handleClick"
-            class="p-tabs"
-            stretch
-            fixed
-          >
-            <el-tab-pane class="p-item" label="组件" name="widget">
-              <d-widget
-                :widget="widget"
-              />
-            </el-tab-pane>
-            <el-tab-pane class="p-item" label="页面" name="page">
-              页面
-            </el-tab-pane>
-          </el-tabs>
+        <el-aside class="design-activity flex-items-v" width="50px" direction="vertical">
+          <div class="activity-item widget">组件库</div>
+          <div class="activity-item tree">组件树</div>
+          <div class="activity-item schema">Schema</div>
         </el-aside>
-        <el-main class="design-center">main</el-main>
-        <el-aside class="design-right" style="width: 300px;">
-          <el-tabs
-            v-model="tabProperty"
-            @tab-click="handleClick"
-            class="p-tabs"
-            stretch
-            fixed
-          >
-            <el-tab-pane class="p-item" label="属性" name="property">
+        <el-aside class="design-left" width="290px">
+          <element :is="`d-${activity}`" :widget="widget" />
+        </el-aside>
+        <el-main class="design-center">
+          <div class="canvas-container">
+            画布
+          </div>
+        </el-main>
+        <el-aside class="design-right" width="290px">
+          <el-container class="h100">
+            <el-header class="p-tabs" height="40px">
+              <div :class="{active: tabRightPanel=='property'}" @click="tabRightPanel='property'" class="p-tab">属性</div>
+              <div :class="{active: tabRightPanel=='layout'}" @click="tabRightPanel='layout'" class="p-tab">布局</div>
+              <div :class="{active: tabRightPanel=='script'}" @click="tabRightPanel='script'" class="p-tab">脚本</div>
+              <div :class="{active: tabRightPanel=='data'}" @click="tabRightPanel='data'" class="p-tab">数据</div>
+            </el-header>
+            <el-main class="p-tabs-items">
               <d-property
-                :schema="schema"
+                :property="property"
               />
-            </el-tab-pane>
-            <el-tab-pane class="p-item" label="脚本" name="script">
-              脚本
-            </el-tab-pane>
-          </el-tabs>
+            </el-main>
+          </el-container>
         </el-aside>
       </el-container>
     </el-main>
@@ -46,6 +37,11 @@
 </template>
 
 <script>
+// 活动栏
+// 侧边栏
+// 编辑栏
+// 面板栏
+// 状态栏
 import schema from './schema'
 import DWidget from './components/widget'
 import DProperty from './components/property'
@@ -56,6 +52,7 @@ import DProperty from './components/property'
 //   })
 // }
 
+/* eslint vue/no-unused-components: 0 */
 export default {
   components: {
     DWidget,
@@ -64,9 +61,14 @@ export default {
   data() {
     return {
       widget: schema.propsSchema,
-      schema: {},
-      tabAside: 'widget',
-      tabProperty: 'script',
+      page: [],
+      activity: 'widget',
+      property: {},
+      script: {},
+      layout: {},
+      data: {},
+      // tabAside: 'widget',
+      tabRightPanel: 'property',
     }
   },
 
@@ -83,7 +85,7 @@ export default {
 // $designAsideWidth = 250px;
 
 .design-header {
-  background-color: #1278f6;
+  background-color: #2a6bcd;
   color: #fff;
 }
 
@@ -92,30 +94,74 @@ export default {
   height: calc(100% - 60px);
 }
 
+.design-activity {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: #3482f7;
+  border-right: 1px solid #999;
+}
+
+.activity-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  // background: ;
+  border-bottom: 1px solid #aaa;
+}
+
 .design-left,
 .design-right {
   margin: 0;
   padding: 0;
-  overflow-y: scroll;
   background: none;
 }
 
 .design-left {
+  padding: 8px 0 16px 16px;
   box-shadow: 1px 0 0 #ccc;
 }
 
 .design-right {
   box-shadow: -1px 0 0 #ccc;
+  font-size: 14px;
 }
 
-.p-tabs[fixed] {
-  background: #fff;
-  >>> .el-tabs__nav-wrap {
-    width: 250px;
+.p-tabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  height: 40px;
+}
+
+.p-tab {
+  border-bottom: 2px solid #E4E7ED;
+  width: 50%;
+  text-align: center;
+
+  &.active {
+    border-color: #409EFF;
+    color: #409EFF;
   }
 }
 
-.p-item {
-  padding: 0 8px;
+.p-tabs-items {
+  padding: 8px 0 12px 12px;
 }
+
+// .p-tabs[fixed] {
+//   background: #fff;
+//   >>> .el-tabs__nav-wrap {
+//     width: 250px;
+//   }
+// }
+
+// .p-item {
+//   padding: 0 8px;
+// }
 </style>
