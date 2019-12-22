@@ -1,6 +1,6 @@
 <template>
   <div class="design-widget">
-    <template v-for="(item, key) in widget.properties">
+    <template v-for="(item, key) in schema.properties">
       <div :key="key" class="widget-group">
         <div class="widget-group-title">{{ item.title }}</div>
         <draggable
@@ -28,7 +28,7 @@ export default {
     Draggable,
   },
   props: {
-    widget: {
+    schema: {
       type: Object,
       default: () => {},
     },
@@ -112,6 +112,7 @@ export default {
   margin: 0 8px 8px 0;
   padding: 0 8px;
   border: 1px solid #e4e7ed;
+  cursor: move;
 
   &:hover {
     color: red;

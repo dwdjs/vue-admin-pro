@@ -100,25 +100,25 @@ a {
 }
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
-::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-  background-color: transparent;
-}
+// ::-webkit-scrollbar {
+//   width: 4px;
+//   height: 4px;
+//   background-color: transparent;
+// }
 
 /*定义滚动条轨道 内阴影+圆角*/
-::-webkit-scrollbar-track {
-  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  // border-radius: 4px;
-  background-color: transparent;
-}
+// ::-webkit-scrollbar-track {
+//   // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+//   // border-radius: 4px;
+//   background-color: transparent;
+// }
 
 /*定义滑块 内阴影+圆角*/
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: rgba(193, 193, 193, 0.5);
-}
+// ::-webkit-scrollbar-thumb {
+//   border-radius: 4px;
+//   // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+//   background-color: rgba(193, 193, 193, 0.5);
+// }
 
 // img,
 // a,
@@ -316,9 +316,20 @@ body.kit-app-body {
 // flex-align-center：子元素垂直居中
 // flex-pack-center：子元素水平居中
 // flex-pack-justify：子元素两端对齐
-.flex { display: flex; }
-.flex-v { display: flex; flex-direction: column; }
-.flex-1 { flex: 1; }
+.flex {
+  display: flex;
+}
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.flex-v {
+  display: flex;
+  flex-direction: column;
+}
+.flex-1 {
+  flex: 1;
+}
 .flex-inline {
   flex: 1;
   display: inline-flex;

@@ -1,6 +1,6 @@
 <template>
   <el-container class="design-layout h100">
-    <el-header class="design-header flex-middle">设计器</el-header>
+    <el-header class="design-header flex-middle" height="60px">设计器</el-header>
     <el-main class="design-main">
       <el-container class="design-container h100">
         <el-aside class="design-activity flex-items-v" width="50px" direction="vertical">
@@ -8,14 +8,19 @@
           <div class="activity-item tree">组件树</div>
           <div class="activity-item schema">Schema</div>
         </el-aside>
-        <el-aside class="design-left" width="290px">
-          <element :is="`d-${activity}`" :widget="widget" />
+        <el-aside class="design-left" width="250px">
+          <element :is="`d-${activity}`" :schema="widgetSchema" />
         </el-aside>
-        <el-main class="design-center">
-          <div class="canvas-container">
+        <el-container class="design-center">
+          <el-header class="center-bar" height="40px" direction="vertical">
+            <el-button @click="handleReset" type="text" class="btn">重置</el-button>
+            <el-button @click="handlePreview" type="text" class="btn">预览</el-button>
+            <el-button @click="handleSave" type="text" class="btn">保存</el-button>
+          </el-header>
+          <el-main class="canvas-container">
             画布
-          </div>
-        </el-main>
+          </el-main>
+        </el-container>
         <el-aside class="design-right" width="290px">
           <el-container class="h100">
             <el-header class="p-tabs" height="40px">
@@ -60,7 +65,7 @@ export default {
   },
   data() {
     return {
-      widget: schema.propsSchema,
+      widgetSchema: schema.propsSchema,
       page: [],
       activity: 'widget',
       property: {},
@@ -85,7 +90,7 @@ export default {
 // $designAsideWidth = 250px;
 
 .design-header {
-  background-color: #2a6bcd;
+  background-color: #2176f5;
   color: #fff;
 }
 
@@ -104,6 +109,7 @@ export default {
 }
 
 .activity-item {
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -122,13 +128,23 @@ export default {
 }
 
 .design-left {
-  padding: 8px 0 16px 16px;
-  box-shadow: 1px 0 0 #ccc;
+  padding: 8px 0 12px 12px;
+  box-shadow: 2px 2px 4px 0 rgba(34,34,34,0.1);
 }
 
 .design-right {
   box-shadow: -1px 0 0 #ccc;
   font-size: 14px;
+}
+
+.center-bar {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #ccc;
+
+  .btn {
+    padding: 0 8px;
+  }
 }
 
 .p-tabs {
@@ -137,6 +153,8 @@ export default {
   align-items: center;
   padding: 0;
   height: 40px;
+
+  cursor: pointer;
 }
 
 .p-tab {
