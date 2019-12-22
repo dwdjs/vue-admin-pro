@@ -8,9 +8,9 @@
 - 侧边栏 left-panel
 - 编辑栏 画布 center-area
 - 面板栏 right-panel
-  - 样式 style
   - 属性 property
-  - 事件 event
+  - 样式/布局/主题 layout
+  - 脚本 script
   - 数据 data
 - 状态栏
 

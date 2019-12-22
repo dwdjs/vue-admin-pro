@@ -9,7 +9,7 @@
           <div class="activity-item schema">Schema</div>
         </el-aside>
         <el-aside class="design-left" width="250px">
-          <element :is="`d-${activity}`" :schema="widgetSchema" />
+          <element :is="`d-${activity}`" :schema="asideSchema" />
         </el-aside>
         <el-container class="design-center">
           <el-header class="center-bar" height="40px" direction="vertical">
@@ -30,9 +30,7 @@
               <div :class="{active: tabRightPanel=='data'}" @click="tabRightPanel='data'" class="p-tab">数据</div>
             </el-header>
             <el-main class="p-tabs-items">
-              <d-property
-                :property="property"
-              />
+              <element :is="`d-${tabRightPanel}`" :schema="rightSchema" />
             </el-main>
           </el-container>
         </el-aside>
@@ -50,6 +48,10 @@
 import schema from './schema'
 import DWidget from './components/widget'
 import DProperty from './components/property'
+import DScript from './components/script'
+import DLayout from './components/layout'
+import DData from './components/data'
+import DPage from './components/page'
 
 // function humanSchema(schema) {
 //   return Object.entries(schema).map((a, b) => {
@@ -61,7 +63,11 @@ import DProperty from './components/property'
 export default {
   components: {
     DWidget,
+    DPage,
     DProperty,
+    DLayout,
+    DScript,
+    DData,
   },
   data() {
     return {
@@ -75,6 +81,15 @@ export default {
       // tabAside: 'widget',
       tabRightPanel: 'property',
     }
+  },
+
+  computed: {
+    asideSchema() {
+      return this[`${this.activity}Schema`]
+    },
+    rightSchema() {
+      return this[`${this.tabRightPanel}Schema`]
+    },
   },
 
   methods: {
