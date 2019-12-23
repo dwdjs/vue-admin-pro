@@ -17,14 +17,16 @@ export const modelApis = {
   // 初始化配置
   // test: 'https://easy-mock.com/mock/5aa79bf26701e17a67bde1d7/',
   // 登录相关
-  login: 'POST /user/login', // 手机号 邮箱 第三方
+  // login: 'POST /user/login', // 手机号 邮箱 第三方
+  login: 'POST /admin/login', // 手机号 邮箱 第三方
   // register: 'POST /user/register',
   // forgot: 'POST /user/forgot',
-  logout: 'POST /user/logout',
-  loginCheck: '/user/check',
+  logout: 'POST /admin/logout',
+  loginCheck: '/admin/check',
 
   // 菜单
-  getMenu: '/sys/menu',
+  // getMenu: '/sys/menu',
+  getMenu: '/admin/menu',
   // 权限管理
   getAuth: '/sys/permission/list',
   addAuth: 'POST /sys/permission/save',

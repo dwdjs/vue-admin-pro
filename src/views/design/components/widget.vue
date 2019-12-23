@@ -46,7 +46,7 @@ export default {
         // animation: 0,
         // disabled: !this.editable,
         group: {
-          name: 'form',
+          name: 'widget',
           pull: 'clone',
           put: false,
         },

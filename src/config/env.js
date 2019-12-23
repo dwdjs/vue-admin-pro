@@ -76,7 +76,7 @@ export const ENV = {
     baseUrl: location.host, // localhost
     // apiBaseUrl: 'm.devapi.haoshiqi.net',
     // apiBaseUrl: 'open.dev.mishifeng.com',
-    apiBaseUrl: '10.0.6.29:8080',
+    apiBaseUrl: '10.0.4.195:8085',
   },
 }
 
@@ -192,7 +192,7 @@ const baseEnv = {
 }
 
 const regLocal = /^(localhost|127\.)/i
-const regLocalIp = /^(10\.|192\.)/i
+const regLocalIp = /^(10\.|192\.|0\.0\.)/i
 // const { protocol, host = ENV.prod.host, origin = ENV.prod.baseUrl } = location
 
 function createEnv(opts = {}) {
@@ -231,7 +231,7 @@ const currentEnv = createEnv({
   // env,
 })
 
-console.log(currentEnv)
+console.log('currentEnv', currentEnv)
 
 // 默认会有个 api 配置，之后会读取 store
 export default currentEnv

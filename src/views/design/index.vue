@@ -1,8 +1,8 @@
 <template>
-  <el-container class="design-layout h100">
+  <el-container class="design-layout h-100">
     <el-header class="design-header flex-middle" height="60px">设计器</el-header>
     <el-main class="design-main">
-      <el-container class="design-container h100">
+      <el-container class="design-container h-100">
         <el-aside class="design-activity flex-items-v" width="50px" direction="vertical">
           <div class="activity-item widget">组件库</div>
           <div class="activity-item tree">组件树</div>
@@ -18,11 +18,11 @@
             <el-button @click="handleSave" type="text" class="btn">保存</el-button>
           </el-header>
           <el-main class="canvas-container">
-            画布
+            <d-canvas :schema="canvasSchema" />
           </el-main>
         </el-container>
         <el-aside class="design-right" width="290px">
-          <el-container class="h100">
+          <el-container class="h-100">
             <el-header class="p-tabs" height="40px">
               <div :class="{active: tabRightPanel=='property'}" @click="tabRightPanel='property'" class="p-tab">属性</div>
               <div :class="{active: tabRightPanel=='layout'}" @click="tabRightPanel='layout'" class="p-tab">布局</div>
@@ -45,13 +45,14 @@
 // 编辑栏
 // 面板栏
 // 状态栏
-import schema from './schema'
+import { widgetSchema } from './data'
 import DWidget from './components/widget'
 import DProperty from './components/property'
 import DScript from './components/script'
 import DLayout from './components/layout'
 import DData from './components/data'
 import DPage from './components/page'
+import DCanvas from './components/canvas'
 
 // function humanSchema(schema) {
 //   return Object.entries(schema).map((a, b) => {
@@ -68,10 +69,12 @@ export default {
     DLayout,
     DScript,
     DData,
+    DCanvas,
   },
   data() {
     return {
-      widgetSchema: schema.propsSchema,
+      widgetSchema: widgetSchema.propsSchema,
+      canvasSchema: {},
       page: [],
       activity: 'widget',
       property: {},
@@ -132,7 +135,7 @@ export default {
   height: 50px;
   color: #fff;
   // background: ;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #e4e7ed;
 }
 
 .design-left,
@@ -144,18 +147,18 @@ export default {
 
 .design-left {
   padding: 8px 0 12px 12px;
-  box-shadow: 2px 2px 4px 0 rgba(34,34,34,0.1);
+  box-shadow: 2px 2px 4px 0 #e4e7ed;
 }
 
 .design-right {
-  box-shadow: -1px 0 0 #ccc;
+  box-shadow: -2px 2px 4px 0 #e4e7ed;
   font-size: 14px;
 }
 
 .center-bar {
   display: flex;
   justify-content: flex-end;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #e4e7ed;
 
   .btn {
     padding: 0 8px;
@@ -168,13 +171,16 @@ export default {
   align-items: center;
   padding: 0;
   height: 40px;
-
   cursor: pointer;
 }
 
 .p-tab {
+  height: 100%;
   border-bottom: 2px solid #E4E7ED;
   width: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 
   &.active {

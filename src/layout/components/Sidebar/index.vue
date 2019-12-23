@@ -25,6 +25,9 @@
 </template>
 
 <script>
+
+// <div class="sidebar scrollbar">
+
 import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
@@ -70,6 +73,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+// .sidebar {
+//   height: 100%;
+//   overflow-x: hidden;
+//   overflow-y: scroll;
+// }
+
+// .sidebar.scrollbar {
+//   // width: ($sideBarWidth + 4px);
+// }
+
 /*
 background-color="#304156"
 text-color="#bfcbd9"

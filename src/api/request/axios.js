@@ -97,8 +97,8 @@ export default function request({
 
   function log(res) {
     console.log(`api: ${method} ${res.status} ${url}`)
-    if (!res.errno) res.errno = res.statusCode
-    if (!res.errmsg) res.errmsg = res.message
+    if (res.data && !res.data.errno) res.data.errno = res.data.statusCode
+    if (res.data && !res.data.errmsg) res.data.errmsg = res.data.message
     return res
   }
 
@@ -106,6 +106,7 @@ export default function request({
     .then(log)
     .then(checkStatus)
     .then((res = {}) => {
+      console.log(opts)
       // console.log(JSON.stringify(res));
       const data = res.data
       const errno = data.errno
