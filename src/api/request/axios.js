@@ -3,6 +3,7 @@ import axios from 'axios'
 import { clone } from '@/utils'
 import mini from '@/utils/mini'
 import store from '@/store'
+import { Message } from 'element-ui'
 // import router from '@/router';
 
 // 创建axios实例
@@ -50,7 +51,7 @@ export default function request({
   // let hasLoading = false;
   // if (options.showLoading) {
   //   hasLoading = true;
-  //   mini.showLoading();
+  //   Loading.service
   // }
   // delete options.showLoading; // 删除loading
   if (method === 'GET') {
@@ -72,13 +73,11 @@ export default function request({
   }
 
   const successCallBack = data => {
-    // hasLoading && mini.hideLoading();
     if (typeof success === 'function') {
       success(data)
     }
   }
   const errorCallBack = (err = {}) => {
-    // hasLoading && mini.hideLoading();
     if (typeof fail === 'function' && fail(err)) {
       return
     }
@@ -90,15 +89,17 @@ export default function request({
       mini.forward('/login')
     } else {
       const message = `${errno}: ${errmsg}`
-      console.log('errmsg:', message)
-      mini.showToast(message)
+      Message.error(message)
     }
   }
 
   function log(res) {
     console.log(`api: ${method} ${res.status} ${url}`)
-    if (res.data && !res.data.errno) res.data.errno = res.data.statusCode
-    if (res.data && !res.data.errmsg) res.data.errmsg = res.data.message
+    const { data } = res
+    if (data) {
+      if (!data.errno) data.errno = data.statusCode || 0
+      if (!data.errmsg) data.errmsg = data.message
+    }
     return res
   }
 

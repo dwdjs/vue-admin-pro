@@ -73,7 +73,6 @@ const apiList = Object.keys(modelApis).reduce((api, key) => {
   // if (__DEV__ && regLocalMock.test(url)) {
   //   api[key] = function postRequest(params, success, fail) {
   //     const res = require(`../${url}.json`)
-  //     mini.hideLoading()
   //     res.errno === 0 ? success(res) : fail(res)
   //   }
   //   return api

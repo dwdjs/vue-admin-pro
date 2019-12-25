@@ -5,9 +5,8 @@
         <div class="widget-group-title">{{ item.title }}</div>
         <draggable
           v-bind="dragOptions"
-          @start="isDragging=true"
-          @end="isDragging=false"
           :move="handleMove"
+          :clone="cloneData"
           tag="div"
           class="widget-list flex-items"
         >
@@ -22,6 +21,7 @@
 
 <script>
 import Draggable from 'vuedraggable'
+import { deepClone } from '@/utils'
 
 export default {
   components: {
@@ -83,13 +83,17 @@ export default {
   // },
 
   methods: {
-    handleMove({relatedContext, draggedContext}) {
-      const relatedElement = relatedContext.element
-      const draggedElement = draggedContext.element
-      return (
-        (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
-      )
+    cloneData(obj) {
+      const newObj = deepClone(obj)
+      return newObj
     },
+    // handleMove({relatedContext, draggedContext}) {
+    //   const relatedElement = relatedContext.element
+    //   const draggedElement = draggedContext.element
+    //   return (
+    //     (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
+    //   )
+    // },
     handlePreview() {},
     handleSave() {},
     handleLoadData() {},
@@ -98,6 +102,14 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.design-widget {
+  .widget-item {
+    width: 46%;
+    margin: 0 8px 8px 0;
+    padding: 0 8px;
+  }
+}
+
 .widget-group {
   font-size: 14px;
 }
@@ -107,12 +119,10 @@ export default {
 }
 
 .widget-item {
-  display: inline-block;
-  width: 46%;
-  margin: 0 8px 8px 0;
-  padding: 0 8px;
+  display: flex;
   border: 1px solid #e4e7ed;
   cursor: move;
+  user-select: none;
 
   &:hover {
     color: red;
@@ -120,8 +130,8 @@ export default {
     border: 1px dashed red;
   }
 
-  &.ghost {
-    opacity: 0.3;
-  }
+  // &.ghost {
+  //   opacity: 0.3;
+  // }
 }
 </style>

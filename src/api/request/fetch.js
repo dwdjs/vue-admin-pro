@@ -7,12 +7,7 @@ import fetch from 'kit-request/fetch'
 // import { stringify } from '@dwdjs/utils';
 import mini from '@/utils/mini'
 import router from '@/router'
-// Toast
-
-// const mini = {
-//   hideLoading() {},
-//   showToast() {},
-// }
+import { Message } from 'element-ui'
 
 function noop() {
   console.error('异常流程，不应该进入这里')
@@ -74,7 +69,7 @@ function checkStatus(res = {}) {
     // throw res.data
   }
   // if (errCode[status]) {
-  //   mini.showToast(`${status}: ${errCode[status]}`)
+  //
   // }
   // const error = new Error(status)
   // error.res = res
@@ -118,13 +113,11 @@ export default function request(
   }
 
   const resolve = data => {
-    mini.hideLoading()
     if (typeof success === 'function') {
       success(data)
     }
   }
   const reject = (err = {}) => {
-    mini.hideLoading()
     if (typeof fail === 'function' && fail(err)) {
       return
     }
@@ -139,7 +132,7 @@ export default function request(
     } else {
       const message = `${errno}: ${errmsg}`
       console.log('errmsg:', message)
-      mini.showToast(message)
+      Message.error(message)
     }
   }
 
@@ -181,9 +174,7 @@ export default function request(
         //   error: 12,
         //   errorMessage: '',
         // }
-        // mini.alert({
-        //   title: 'err: ' + JSON.stringify(err),
-        // });
+        // Message.error('xxx')
         reject({
           errno: err.statusCode,
           errmsg: err.message,
@@ -228,7 +219,6 @@ export default function request(
   //       reject(err);
   //     },
   //     complete: () => {
-  //       mini.hideLoading();
   //     },
   //   }));
   // })
@@ -240,7 +230,7 @@ export default function request(
   // //   if (errno === 510010) {
   // //     mini.goPage("login");
   // //   } else {
-  // //     mini.showToast(`${errno}: ${errmsg}`);
+  // //     Message.error('xxx')
   // //   }
   // //   const error = new Error(errno);
   // //   error.message = errmsg;
@@ -251,7 +241,7 @@ export default function request(
   //   if (errno === 510010) {
   //     mini.goPage("login");
   //   } else {
-  //     mini.showToast(`${errno}: ${errmsg}`);
+  //     Message.error('xxx')
   //   }
   //   const error = new Error() || {};
   //   throw {

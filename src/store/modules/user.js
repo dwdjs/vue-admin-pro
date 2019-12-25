@@ -32,21 +32,21 @@ const user = {
         storage.remove('userInfo')
         return
       }
-      data = {
+      const newData = {
         ...state.userInfo,
         ...data,
       }
-      state.userInfo = data
-      state.logged = getLoginStatus(data)
+      state.userInfo = newData
+      state.logged = getLoginStatus(newData)
       api.setHeader({
-        token: data.token || '',
-        userId: data.id || '',
+        token: newData.token || '',
+        userId: newData.id || '',
       })
       api.setCommonParams({
-        token: data.token || '',
-        user_id: data.id || '',
+        token: newData.token || '',
+        user_id: newData.id || '',
       })
-      storage.set('userInfo', data, 86400 * 30)
+      storage.set('userInfo', newData, 86400 * 30)
     },
     SET_SETTING: (state, setting) => {
       state.setting = setting
@@ -62,10 +62,10 @@ const user = {
       })
     },
     CLEAR_LOCK: (state, action) => {
-        state.isLock = false
-        state.lockPasswd = ''
-        storage.remove('lockPasswd')
-        storage.remove('isLock')
+      state.isLock = false
+      state.lockPasswd = ''
+      storage.remove('lockPasswd')
+      storage.remove('isLock')
     },
   },
 

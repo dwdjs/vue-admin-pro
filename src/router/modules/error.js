@@ -19,6 +19,7 @@ export default [
     component: Layout,
     redirect: 'noRedirect',
     name: 'error',
+    // hidden: true,
     meta: {
       title: '错误页',
       icon: '404',

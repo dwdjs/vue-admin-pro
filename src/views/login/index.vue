@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container">
+  <div class="login-container flex-center">
     <el-form
       ref="loginForm"
       :model="loginForm"
@@ -17,7 +17,7 @@
           <icon-svg icon-class="user" />
         </span>
         <el-input
-          v-model="loginForm.username"
+          v-model.trim="loginForm.username"
           name="username"
           type="text"
           auto-complete="on"
@@ -30,7 +30,7 @@
           <icon-svg icon-class="password" />
         </span>
         <el-input
-          v-model="loginForm.password"
+          v-model.trim="loginForm.password"
           :type="passwordType"
           @keyup.enter.native="handleLogin"
           name="password"
@@ -148,7 +148,7 @@ export default {
             .dispatch('user/Login', userInfo)
             .then(() => {
               this.loading = false
-              debugger
+              // debugger
               this.$router.push({ path: '/' })
             })
             .catch(() => {
@@ -257,12 +257,12 @@ $light_gray = #eee;
   background-size: cover;
   overflow: hidden;
   .login-form {
-    position: absolute;
-    left: 0;
-    right: 0;
+    position: relative;
+    // left: 0;
+    // right: 0;
     width: 420px;
     padding: 40px;
-    margin: 130px auto 0;
+    // margin: 130px auto 0;
     background-color: #fff;
     border-radius: 4px;
     animation-duration: 0.3s;

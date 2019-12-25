@@ -175,6 +175,11 @@ export const widgetSchema = {
             title: '栅格布局',
             icon: '',
           },
+          container: {
+            type: '',
+            title: '容器',
+            icon: '',
+          },
           tabs: {
             type: '',
             title: 'Tabs 标签',

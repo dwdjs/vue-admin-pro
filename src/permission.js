@@ -38,11 +38,11 @@ router.beforeEach((to, from, next) => {
           // note: roles must be a array! such as: ['editor','develop']
           const { roles } = res.data
           // 根据roles权限生成可访问的路由表
-          // GenerateRoutes or GenerateLocalRoutes
+          // generateRoutes or generateLocalRoutes
           // 使用api控制路由
-          store.dispatch('permission/GenerateRoutes', { roles }).then(() => {
+          // store.dispatch('permission/generateRoutes', { roles }).then(() => {
           // 使用本地控制路由
-          // store.dispatch('permission/GenerateLocalRoutes', { roles }).then(() => {
+          store.dispatch('permission/generateLocalRoutes', { roles }).then(() => {
             // 动态添加可访问路由表
             console.log('addRoutes: ', store.getters.addRouters)
             router.addRoutes(store.getters.addRouters)

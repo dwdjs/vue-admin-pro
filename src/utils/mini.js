@@ -4,56 +4,18 @@ import router from '@/router'
 // import env from '@/config/env';
 // import device from '@/utils/device';
 
-import { compactObject, stringify } from '@dwdjs/utils'
+import { compactObject, stringify, storage } from '@dwdjs/utils'
 import eventSub from '@/utils/eventSub'
 
 // 透传参数白名单
 const passRoutes = ['d_debug', 'd_host', 'd_console', 'spm', 'channel']
 const mini = {
+  storage,
   // log: tongji.event,
-  showToast(msg, callback) {
-    // Toast(msg);
-  },
-  // showAlert: MessageBox.alert,
-  showAlert(title, msg, callback) {
-    // MessageBox.alert(msg, title)
-    //   .then(res => {
-    //     callback && callback('confirm');
-    //   })
-    //   .catch(err => {
-    //     callback && callback('error');
-    //   });
-  },
-  showConfirm(title, msg, callback) {
-    // MessageBox.confirm(msg, title)
-    //   .then(res => {
-    //     callback && callback('confirm');
-    //   })
-    //   .catch(err => {
-    //     callback && callback('cancel');
-    //   });
-  },
-  showLoading(opts = {}) {
-    let op = {
-      content: '',
-      type: 'fading-circle',
-    }
-    if (typeof opts === 'string') {
-      op.content = opts
-    }
-    if (typeof opts === 'object') {
-      Object.assign(op, opts)
-    }
-    // type = fading-circle snake triple-bounce double-bounce
-    // Indicator.open(
-    //   compact({ text: op.content, spinnerType: op.type || 'fading-circle' })
-    // );
-  },
-  hideLoading(times = 0) {
-    setTimeout(() => {
-      // Indicator.close();
-    }, times)
-  },
+  // showToast Message
+  // showAlert MessageBox
+  // showConfirm MessageBox
+  // showLoading Loading
   // forward仅用于站内跳转
   forward(url, query = {}) {
     if (!url) return

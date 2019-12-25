@@ -143,7 +143,7 @@ const permission = {
   },
   actions: {
     // 生成对应的路由表，结构同 asyncRoutes
-    GenerateRoutes({ commit }, data) {
+    generateRoutes({ commit }, data) {
       return new Promise((resolve, reject) => {
         // const { roles } = data
         api.getMenu(
@@ -176,7 +176,7 @@ const permission = {
         )
       })
     },
-    GenerateLocalRoutes({ commit }, data) {
+    generateLocalRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
         let accessedRouters
