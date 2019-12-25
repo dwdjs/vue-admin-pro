@@ -6,15 +6,21 @@
       @add="handleWidgetAdd"
       class="drag-container"
     >
-      <!-- <div key="empty" v-if="!pageData.list.length" class="empty-field">
-        <div class="empty-field-hint">请从左侧拖拽或点击添加字段</div>
-        <div class="add-new-field-ontheleft" />
-      </div> -->
       <transition-group :name="fade" tag="div" class="canvas-list preview">
-        <template v-for="(item, key) in pageData.list">
-          <d-field :widgets="widgets" :schema="item" :key="key" />
+        <template v-for="(item, index) in pageData.list">
+          <d-field
+            :widgets="widgets"
+            :index="index"
+            :item="item"
+            :schema="pageData.list"
+            :key="item.typeKey"
+          />
         </template>
       </transition-group>
+      <div slot="footer" class="empty-field">
+        <div class="empty-field-hint">请从左侧拖拽或点击添加字段</div>
+        <div class="add-new-field-ontheleft" />
+      </div>
     </draggable>
     <!-- <div class="submit-field">提交</div> -->
     <div class="ask-to-pay">
@@ -33,6 +39,7 @@
 import { mapState } from 'vuex'
 import Draggable from 'vuedraggable'
 import DField from './field'
+import { widgets } from '../widgets'
 
 export default {
   components: {
@@ -51,9 +58,7 @@ export default {
   data() {
     return {
       drag: false,
-      widgets: {
-
-      },
+      widgets,
       // selectWidget: this.select,
     }
   },
@@ -128,6 +133,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100px;
 }
 
 .flip-list-move {

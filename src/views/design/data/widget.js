@@ -7,7 +7,7 @@ export const widgetSchema = {
         title: '通用字段',
         properties: {
           text: {
-            type: 'string',
+            type: 'input',
             title: '单行文本',
             icon: '',
           },
@@ -75,7 +75,7 @@ export const widgetSchema = {
             icon: '',
           },
           select: {
-            type: '',
+            type: 'select',
             title: '下拉选择器',
             icon: '',
           },

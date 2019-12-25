@@ -43,6 +43,9 @@ const mutations = {
   // ADD_CANVAS_SCHEMA: (state, payload) => {
   //   state.setSelectWidget.push(payload)
   // },
+  SET_PAGE_DATA: (state, payload) => {
+
+  },
   RESET_CANVAS_SCHEMA: (state) => {
     state.canvasSchema.splice(0)
   },
@@ -58,6 +61,9 @@ const actions = {
   // addCanvasSchema({ commit }, payload) {
   //   commit('ADD_CANVAS_SCHEMA', payload)
   // },
+  setPageData({ commit }, payload) {
+    commit('SET_PAGE_DATA', null)
+  },
   resetCanvasSchema({ commit }) {
     commit('RESET_CANVAS_SCHEMA')
   },

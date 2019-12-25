@@ -16,6 +16,17 @@ clearfix() {
   }
 }
 
+fullAbsolute() {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  // z-index: 1;
+}
+
 scrollBar() {
   &::-webkit-scrollbar-track-piece {
     background: #d3dce6;

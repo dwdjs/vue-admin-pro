@@ -1,17 +1,18 @@
 <template>
   <div class="design-widget">
-    <template v-for="(item, key) in schema.properties">
-      <div :key="key" class="widget-group">
+    <template v-for="item in dragWidget">
+      <div :key="item.typeKey" class="widget-group">
         <div class="widget-group-title">{{ item.title }}</div>
         <draggable
           v-bind="dragOptions"
+          :list="item.children"
           :move="handleMove"
           :clone="cloneData"
           tag="div"
           class="widget-list flex-items"
         >
-          <template v-for="(it, k) in item.properties">
-            <div :key="k" class="widget-item">{{ it.title }}</div>
+          <template v-for="it in item.children">
+            <div :key="it.typeKey" class="widget-item">{{ it.title }}</div>
           </template>
         </draggable>
       </div>
@@ -22,6 +23,8 @@
 <script>
 import Draggable from 'vuedraggable'
 import { deepClone } from '@/utils'
+import { schemaToList } from '../utils'
+// import { widgets } from '../widgets'
 
 export default {
   components: {
@@ -41,6 +44,10 @@ export default {
   },
 
   computed: {
+    dragWidget() {
+      console.log(schemaToList(this.schema, 2))
+      return schemaToList(this.schema, 2)
+    },
     dragOptions() {
       return {
         // animation: 0,
@@ -84,8 +91,8 @@ export default {
 
   methods: {
     cloneData(obj) {
-      const newObj = deepClone(obj)
-      return newObj
+      // const newObj = deepClone(obj)
+      return obj // newObj
     },
     // handleMove({relatedContext, draggedContext}) {
     //   const relatedElement = relatedContext.element

@@ -126,9 +126,8 @@ export default {
     handleReset() {
       // 重置默认
       this.$store.dispatch('design/setSelectWidget', [])
-      const { theme, themes } = this.pageData
-      const defaultData = theme ? deepClone(themes[theme]) : []
-      this.$store.dispatch('design/setPageData', defaultData)
+      // const { theme, themes } = this.pageData
+      this.$store.dispatch('design/setPageData', null)
     },
     handlePreview() {
       this.$alert('预览', { showClose: false })
