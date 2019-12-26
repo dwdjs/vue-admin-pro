@@ -29,6 +29,7 @@ if (env.isMode('dev')) {
   Mock.mock(/\/admin\/register/, 'post', loginAPI.logout)
   Mock.mock(/\/admin\/forgot/, 'post', loginAPI.logout)
   Mock.mock(/\/admin\/info\.*/, 'get', loginAPI.getUserInfo)
+  Mock.mock(/\/sys\/user\/info\.*/, 'get', loginAPI.getUserInfo)
 
   Mock.mock(/\/admin\/menu/, 'get', require('./json/menu'))
   // Mock.mock(/\/user\/login/, 'post', loginAPI.login)

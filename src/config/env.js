@@ -76,7 +76,7 @@ export const ENV = {
     baseUrl: location.host, // localhost
     // apiBaseUrl: 'm.devapi.haoshiqi.net',
     // apiBaseUrl: 'open.dev.mishifeng.com',
-    apiBaseUrl: '10.0.4.195:8085',
+    apiBaseUrl: '0.0.0.0:8085',
   },
 }
 
@@ -191,8 +191,8 @@ const baseEnv = {
   // },
 }
 
-const regLocal = /^(localhost|127\.)/i
-const regLocalIp = /^(10\.|192\.|0\.0\.)/i
+const regLocal = /^(localhost|127\.|0\.0\.)/i
+const regLocalIp = /^(10\.|192\.)/i
 // const { protocol, host = ENV.prod.host, origin = ENV.prod.baseUrl } = location
 
 function createEnv(opts = {}) {

@@ -10,6 +10,9 @@ export const widgetSchema = {
             type: 'input',
             title: '单行文本',
             icon: '',
+            options: {
+
+            },
           },
           textarea: {
             type: '',

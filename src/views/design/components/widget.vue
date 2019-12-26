@@ -26,6 +26,9 @@ import { deepClone } from '@/utils'
 import { schemaToList } from '../utils'
 // import { widgets } from '../widgets'
 
+// 调整数据结构 此处不必使用 schema 格式
+// json schema 格式是作为组件自动生成的描述
+
 export default {
   components: {
     Draggable,
