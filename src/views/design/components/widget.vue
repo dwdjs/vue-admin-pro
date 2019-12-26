@@ -1,22 +1,33 @@
 <template>
-  <div class="design-widget">
-    <template v-for="item in dragWidget">
-      <div :key="item.typeKey" class="widget-group">
-        <div class="widget-group-title">{{ item.title }}</div>
-        <draggable
-          v-bind="dragOptions"
-          :list="item.children"
-          :move="handleMove"
-          :clone="cloneData"
-          tag="div"
-          class="widget-list flex-items"
-        >
-          <template v-for="it in item.children">
-            <div :key="it.typeKey" class="widget-item">{{ it.title }}</div>
-          </template>
-        </draggable>
-      </div>
-    </template>
+  <div class="design-widget h-100">
+    <el-container class="h-100">
+      <el-header class="p-tabs" height="40px">
+        <div :class="{active: widgetTab=='component'}" @click="widgetTab = 'component'" class="p-tab">组件</div>
+        <div :class="{active: widgetTab=='tree'}" @click="widgetTab = 'tree'" class="p-tab">组件树</div>
+      </el-header>
+      <el-main class="p-tabs-main">
+        <template v-if="widgetTab=='component'">
+          <div v-for="item in dragWidget" :key="item.typeKey" class="widget-group">
+            <div class="widget-group-title">{{ item.title }}</div>
+            <draggable
+              v-bind="dragOptions"
+              :list="item.children"
+              :move="handleMove"
+              :clone="cloneData"
+              tag="div"
+              class="widget-list flex-items"
+            >
+              <template v-for="it in item.children">
+                <div :key="it.typeKey" class="widget-item">{{ it.title }}</div>
+              </template>
+            </draggable>
+          </div>
+        </template>
+        <template v-else>
+          tree
+        </template>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -42,6 +53,7 @@ export default {
 
   data() {
     return {
+      widgetTab: 'component',
       isDragging: false,
     }
   },

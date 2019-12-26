@@ -4,9 +4,9 @@
     <el-main class="design-main">
       <el-container class="design-container h-100">
         <el-aside class="design-activity flex-items-v" width="50px" direction="vertical">
-          <div class="activity-item widget">组件库</div>
-          <div class="activity-item tree">组件树</div>
-          <div class="activity-item schema">Schema</div>
+          <div @click="activityTab='widget'" :class="{active: activityTab=='widget'}" class="activity-item widget">组件</div>
+          <div @click="activityTab='template'" :class="{active: activityTab=='template'}" class="activity-item template">模板</div>
+          <div @click="activityTab='schema'" :class="{active: activityTab=='schema'}" class="activity-item schema">Schema</div>
         </el-aside>
         <el-aside class="design-left" width="250px">
           <element :is="`d-${activityTab}`" :schema="asideSchema" />
@@ -48,7 +48,7 @@
               <div :class="{active: configTab=='script'}" @click="handleConfigTab('script')" class="p-tab">脚本</div>
               <div :class="{active: configTab=='data'}" @click="handleConfigTab('data')" class="p-tab">数据</div>
             </el-header>
-            <el-main class="p-tabs-items">
+            <el-main class="p-tabs-main">
               <element :is="`d-${configTab}`" :schema="configSchema" />
             </el-main>
           </el-container>
@@ -73,6 +73,8 @@ import DLayout from './components/layout'
 import DData from './components/data'
 import DPage from './components/page'
 import DCanvas from './components/canvas'
+import DTemplate from './components/template'
+import DSchema from './components/schema'
 import { deepClone } from '../../utils'
 
 // function humanSchema(schema) {
@@ -91,6 +93,8 @@ export default {
     DScript,
     DData,
     DCanvas,
+    DTemplate,
+    DSchema,
   },
   data() {
     return {
@@ -152,6 +156,37 @@ export default {
 }
 </script>
 
+<style lang="stylus">
+.p-tabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  height: 40px;
+  cursor: pointer;
+}
+
+.p-tab {
+  height: 100%;
+  border-bottom: 2px solid #E4E7ED;
+  width: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  &.active {
+    border-color: #409EFF;
+    color: #409EFF;
+  }
+}
+
+.p-tabs-main {
+  padding: 8px 0 12px 12px;
+  overflow-y: scroll;
+}
+</style>
+
 <style lang="stylus" scoped>
 
 // $designAsideWidth = 250px;
@@ -184,7 +219,12 @@ export default {
   height: 50px;
   color: #fff;
   // background: ;
-  border-bottom: 1px solid #e4e7ed;
+  // border-bottom: 1px solid #e4e7ed;
+  opacity: 0.5;
+
+  &.active {
+    opacity: 1;
+  }
 }
 
 .design-left,
@@ -195,7 +235,6 @@ export default {
 }
 
 .design-left {
-  padding: 8px 0 12px 12px;
   // box-shadow: 2px 2px 4px 0 #e4e7ed;
   box-shadow: 2px 2px 4px 0 rgba(34,34,34,0.1);
 }
@@ -220,34 +259,6 @@ export default {
     padding: 0 8px;
     margin-left: 10px;
   }
-}
-
-.p-tabs {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0;
-  height: 40px;
-  cursor: pointer;
-}
-
-.p-tab {
-  height: 100%;
-  border-bottom: 2px solid #E4E7ED;
-  width: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  &.active {
-    border-color: #409EFF;
-    color: #409EFF;
-  }
-}
-
-.p-tabs-items {
-  padding: 8px 0 12px 12px;
 }
 
 // .p-tabs[fixed] {
