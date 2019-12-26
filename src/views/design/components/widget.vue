@@ -147,9 +147,9 @@ export default {
   user-select: none;
 
   &:hover {
-    color: red;
+    color: #5584ff;
     background: rgba(255, 255, 255, 1);
-    border: 1px dashed red;
+    border: 1px dashed #5584ff;
   }
 
   // &.ghost {

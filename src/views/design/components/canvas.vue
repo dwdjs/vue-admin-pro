@@ -17,7 +17,7 @@
           />
         </template>
       </transition-group>
-      <div slot="footer" class="empty-field">
+      <div v-if="!pageData.list.length" class="empty-field">
         <div class="empty-field-hint">请从左侧拖拽或点击添加字段</div>
         <div class="add-new-field-ontheleft" />
       </div>

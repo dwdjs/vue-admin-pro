@@ -1,12 +1,14 @@
 <template>
   <el-container class="design-layout h-100">
-    <el-header class="design-header flex-middle" height="60px">设计器</el-header>
+    <el-header class="design-header flex-middle" hidden height="60px">设计器</el-header>
     <el-main class="design-main">
       <el-container class="design-container h-100">
         <el-aside class="design-activity flex-items-v" width="50px" direction="vertical">
+          <div @click="$router.back()" class="activity-item"><icon-svg icon-class="icon" /></div>
           <div @click="activityTab='widget'" :class="{active: activityTab=='widget'}" class="activity-item widget">组件</div>
           <div @click="activityTab='template'" :class="{active: activityTab=='template'}" class="activity-item template">模板</div>
           <div @click="activityTab='schema'" :class="{active: activityTab=='schema'}" class="activity-item schema">Schema</div>
+          <div class="activity-item setting" style="font-size: 32px;"><icon-svg icon-class="setting" /></div>
         </el-aside>
         <el-aside class="design-left" width="250px">
           <element :is="`d-${activityTab}`" :schema="asideSchema" />
@@ -192,7 +194,7 @@ export default {
 // $designAsideWidth = 250px;
 
 .design-header {
-  background-color: #2176f5;
+  background-color: #5584ff;
   color: #fff;
 }
 
@@ -206,15 +208,19 @@ export default {
   padding: 0;
   border-radius: 0;
   overflow: hidden;
-  background: #3482f7;
+  background: #5584ff;
   border-right: 1px solid #999;
+  flex-wrap: nowrap;
 }
 
 .activity-item {
+  position: relative;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  // margin: 8px 0;
   width: 50px;
   height: 50px;
   color: #fff;
@@ -224,11 +230,23 @@ export default {
 
   &.active {
     opacity: 1;
+
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   height: 80%;
+    //   width: 2px;
+    //   left: 0;
+    //   top: 50%;
+    //   transform: translateY(-50%);
+    //   background-color: #fff;
+    // }
   }
 }
 
 .design-left,
 .design-right {
+  position: relative;
   margin: 0;
   padding: 0;
   background: none;
@@ -246,7 +264,8 @@ export default {
 }
 
 .canvas-container {
-  background: #85c8c5;
+  // background: #85c8c5;
+  background: #f2f3f7;
 }
 
 .center-bar {
