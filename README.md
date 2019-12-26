@@ -169,4 +169,5 @@ deploy branch gh-pages
 - https://gitee.com/ZhongBangKeJi/CRMEB
 - https://gitee.com/naan1993/guns/tree/master
   - http://demo.stylefeng.cn 👍
-
+- https://github.com/zhangdaiscott/jeecg-boot
+  - http://boot.jeecg.com/ 👍
