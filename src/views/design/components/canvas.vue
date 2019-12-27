@@ -6,7 +6,7 @@
       @add="handleWidgetAdd"
       class="drag-container"
     >
-      <transition-group :name="fade" tag="div" class="canvas-list preview">
+      <transition-group name="fade" tag="div" class="drag-list preview">
         <template v-for="(item, index) in pageData.list">
           <d-field
             :widgets="widgets"
@@ -14,13 +14,14 @@
             :item="item"
             :schema="pageData.list"
             :key="item.typeKey"
+            class="drag-widget"
           />
         </template>
+        <div key="empty" class="empty-field">
+          <div class="empty-field-hint">请从左侧拖拽或点击添加字段</div>
+          <div class="add-new-field-ontheleft" />
+        </div>
       </transition-group>
-      <div v-if="!pageData.list.length" class="empty-field">
-        <div class="empty-field-hint">请从左侧拖拽或点击添加字段</div>
-        <div class="add-new-field-ontheleft" />
-      </div>
     </draggable>
     <!-- <div class="submit-field">提交</div> -->
     <div class="ask-to-pay">
@@ -51,33 +52,29 @@ export default {
     //   type: Object,
     //   default: () => {},
     // },
-    // data: Object,
-    // select: Object,
   },
 
   data() {
     return {
       drag: false,
       widgets,
-      // selectWidget: this.select,
     }
   },
 
   computed: {
     ...mapState({
-      // canvasSchema: state => state.design.canvasSchema,
       pageData: state => state.design.pageData,
     }),
     dragOptions() {
       return {
-        animation: 200,
-        // handle: '.drag-widget',
-        // disabled: !this.editable,
         group: {
           name: 'widget',
           put: true,
         },
         ghostClass: 'ghost',
+        animation: 200,
+        handle: '.drag-widget',
+        // disabled: !this.editable,
       }
     },
   },
@@ -92,16 +89,6 @@ export default {
       }
     }
   },
-
-  // created() {
-  //   this.ttt = setInterval(() => {
-  //     console.log(this.pageData.list)
-  //   }, 1000)
-  // },
-
-  // beforeDestroy() {
-  //   clearInterval(this.ttt)
-  // },
 
   methods: {
     handleWidgetAdd(e) {
@@ -134,31 +121,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100px;
-}
-
-.flip-list-move {
-  transition: transform 0.5s;
-}
-
-.field {
-  // width: 700px;
-  cursor: pointer;
-  border-top: 1px dashed transparent;
-  border-bottom: 1px dashed transparent;
-
-  &.edit {
-    border-color: #4db8ff;
-    background-color: #e0f2ff;
-  }
-}
-
-.no-move {
-  transition: transform 0s;
-}
-
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
 }
 
 .ask-to-pay {

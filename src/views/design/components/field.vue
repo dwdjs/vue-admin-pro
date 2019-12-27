@@ -1,5 +1,5 @@
 <template>
-  <div @click.stop="handleSelectWidget" class="widget-field">
+  <div @click.stop="handleSelectWidget" :class="{active: item.key === selectWidget.key}" class="widget-field">
     <element :is="getWidget" :item="item" />
     <div class="actions">
       <el-tooltip effect="dark" content="复制" placement="bottom">
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { widgets } from '../widgets'
 
 export default {
@@ -44,6 +45,9 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      selectWidget: state => state.design.selectWidget,
+    }),
     getWidget() {
       const { item: { type } } = this
       if (['input', 'select'].includes(type)) {
@@ -61,8 +65,10 @@ export default {
   },
 
   methods: {
-    handleSelectWidget() {
+    handleSelectWidget(e) {
       console.log('select')
+      this.$store.dispatch('design/setSelectWidget', this.item)
+      this.$store.dispatch('design/setConfigTab', 'property')
     },
     handleWidgetClone() {
       console.log('clone')
@@ -74,35 +80,62 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .widget-field {
   position: relative;
+  margin-bottom: -1px;
   padding: 5px 30px;
   min-height: 80px;
   cursor: pointer;
-  border-top: 1px dashed transparent;
-  border-bottom: 1px dashed transparent;
+  border: 1px dashed transparent;
+  // border-color:
 
   &:hover {
     background: #e0f2ff;
   }
 
+  &::after {
+    fullAbsolute()
+  }
+
+  &.ghost,
   &.active {
     z-index: 1;
     border-color: #4db8ff;
+  }
+
+  &.active {
     background: #e0f2ff;
 
     .actions,
     .position-actions {
       display: flex;
     }
+
+    &::after {
+      cursor: move;
+    }
   }
 
-  &::after {
-    fullAbsolute()
+  &.ghost {
+    overflow: hidden;
+  //   margin: 1px;
+  //   padding: 0;
+  //   min-height: auto;
+  //   height: 3px;
+  //   overflow: hidden;
+  //   border: none;
+  //   border-radius: 3px;
+  //   opacity: 0.5;
+
+    &::after {
+      z-index: 2;
+      background: #fff;
+    }
   }
 }
-
+</style>
+<style lang="stylus" scoped>
 .actions {
   display: none;
   position: absolute;
@@ -117,7 +150,7 @@ export default {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin-left: 4px;
+  margin-left: 8px;
   width: 24px;
   height: 24px;
   border-radius: 2px;

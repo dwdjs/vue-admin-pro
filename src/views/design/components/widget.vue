@@ -18,7 +18,7 @@
               class="widget-list flex-items"
             >
               <template v-for="it in item.children">
-                <div :key="it.typeKey" class="widget-item">{{ it.title }}</div>
+                <div :key="it.typeKey" class="widget-item widget-field">{{ it.title }}</div>
               </template>
             </draggable>
           </div>
@@ -106,8 +106,9 @@ export default {
 
   methods: {
     cloneData(obj) {
-      // const newObj = deepClone(obj)
-      return obj // newObj
+      const newObj = deepClone(obj)
+      newObj.key = newObj.typeKey + '_' + Math.ceil(Math.random() * 1000000)
+      return newObj
     },
     // handleMove({relatedContext, draggedContext}) {
     //   const relatedElement = relatedContext.element
@@ -126,6 +127,7 @@ export default {
 <style lang="stylus" scoped>
 .design-widget {
   .widget-item {
+    min-height: auto;
     width: 46%;
     margin: 0 8px 8px 0;
     padding: 0 8px;
@@ -142,7 +144,7 @@ export default {
 
 .widget-item {
   display: flex;
-  border: 1px solid #e4e7ed;
+  border: 1px dashed #e4e7ed;
   cursor: move;
   user-select: none;
 

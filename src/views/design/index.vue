@@ -3,12 +3,14 @@
     <el-header class="design-header flex-middle" hidden height="60px">设计器</el-header>
     <el-main class="design-main">
       <el-container class="design-container h-100">
-        <el-aside class="design-activity flex-items-v" width="50px" direction="vertical">
-          <div @click="$router.back()" class="activity-item"><icon-svg icon-class="icon" /></div>
+        <el-aside class="design-activity flex-items-v" width="64px" direction="vertical">
+          <div @click="$router.back()" class="activity-item back"><em class="el-icon-back" /></div>
           <div @click="activityTab='widget'" :class="{active: activityTab=='widget'}" class="activity-item widget">组件</div>
           <div @click="activityTab='template'" :class="{active: activityTab=='template'}" class="activity-item template">模板</div>
           <div @click="activityTab='schema'" :class="{active: activityTab=='schema'}" class="activity-item schema">Schema</div>
-          <div class="activity-item setting" style="font-size: 32px;"><icon-svg icon-class="setting" /></div>
+          <div class="bottom">
+            <div class="activity-item setting" style="font-size: 32px;"><icon-svg icon-class="setting" /></div>
+          </div>
         </el-aside>
         <el-aside class="design-left" width="250px">
           <element :is="`d-${activityTab}`" :schema="asideSchema" />
@@ -100,7 +102,7 @@ export default {
   },
   data() {
     return {
-      widgetSchema: widgetSchema.propsSchema,
+      widgetSchema,
       page: [],
       activityTab: 'widget',
       property: {},
@@ -204,6 +206,7 @@ export default {
 }
 
 .design-activity {
+  position: relative;
   margin: 0;
   padding: 0;
   border-radius: 0;
@@ -211,6 +214,12 @@ export default {
   background: #5584ff;
   border-right: 1px solid #999;
   flex-wrap: nowrap;
+  user-select: none;
+
+  .bottom {
+    position: absolute;
+    bottom: 0;
+  }
 }
 
 .activity-item {
@@ -221,26 +230,30 @@ export default {
   justify-content: center;
   flex-shrink: 0;
   // margin: 8px 0;
-  width: 50px;
-  height: 50px;
+  width: 64px;
+  height: 64px;
   color: #fff;
   // background: ;
   // border-bottom: 1px solid #e4e7ed;
   opacity: 0.5;
 
+  &.back {
+    font-size: 24px;
+    opacity: 1;
+  }
   &.active {
     opacity: 1;
 
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   height: 80%;
-    //   width: 2px;
-    //   left: 0;
-    //   top: 50%;
-    //   transform: translateY(-50%);
-    //   background-color: #fff;
-    // }
+    &::after {
+      content: '';
+      position: absolute;
+      height: 90%;
+      width: 2px;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #fff;
+    }
   }
 }
 

@@ -35,7 +35,7 @@ const state = {
     list: [],
   },
   canvasSchema: [],
-  selectWidget: [],
+  selectWidget: {},
   configTab: 'property',
 }
 
@@ -50,7 +50,7 @@ const mutations = {
     state.canvasSchema.splice(0)
   },
   SET_SELECT_WIDGET: (state, payload) => {
-    state.setSelectWidget = payload
+    state.selectWidget = payload
   },
   SET_CONFIG_TAB: (state, payload) => {
     state.configTab = payload
