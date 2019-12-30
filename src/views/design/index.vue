@@ -13,7 +13,7 @@
           </div>
         </el-aside>
         <el-aside class="design-left" width="250px">
-          <element :is="`d-${activityTab}`" :schema="asideSchema" />
+          <component :is="`d-${activityTab}`" :schema="asideSchema" />
         </el-aside>
         <el-container class="design-center">
           <el-header class="center-bar" height="40px" direction="vertical">
@@ -53,7 +53,7 @@
               <div :class="{active: configTab=='data'}" @click="handleConfigTab('data')" class="p-tab">数据</div>
             </el-header>
             <el-main class="p-tabs-main">
-              <element :is="`d-${configTab}`" :schema="configSchema" />
+              <component :is="`d-${configTab}`" :schema="configSchema" />
             </el-main>
           </el-container>
         </el-aside>
@@ -117,7 +117,7 @@ export default {
   computed: {
     ...mapState({
       pageData: state => state.design.pageData,
-      canvasSchema: state => state.design.canvasSchema,
+      selectWidget: state => state.design.selectWidget,
       configTab: state => state.design.configTab,
     }),
     asideSchema() {
@@ -142,6 +142,7 @@ export default {
     },
     handleSave() {
       // api.save
+      console.log('data', this.pageData)
       this.$alert('保存成功', { showClose: false })
     },
     handleClick(tab, event) {

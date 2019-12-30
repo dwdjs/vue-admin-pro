@@ -13,11 +13,11 @@
             :index="index"
             :item="item"
             :schema="pageData.list"
-            :key="item.typeKey"
+            :key="index"
             class="drag-widget"
           />
         </template>
-        <div key="empty" class="empty-field">
+        <div key="empty" solt="footer" class="empty-field">
           <div class="empty-field-hint">请从左侧拖拽或点击添加字段</div>
           <div class="add-new-field-ontheleft" />
         </div>

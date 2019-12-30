@@ -1,5 +1,5 @@
 <template>
-  <div @click.stop="handleSelectWidget" :class="{active: item.key === selectWidget.key}" class="widget-field">
+  <div @click.stop="handleSelectWidget" :class="isActive" class="widget-field">
     <auto-render :vname="item.widget" :schema="item" />
     <div class="actions">
       <el-tooltip effect="dark" content="复制" placement="bottom">
@@ -50,8 +50,10 @@ export default {
   computed: {
     ...mapState({
       selectWidget: state => state.design.selectWidget,
-      pageData: state => state.design.pageData,
     }),
+    isActive() {
+      return {active: this.item.key === this.selectWidget.key}
+    },
   },
 
   methods: {

@@ -12,6 +12,7 @@ const WidgetDefault = {
   },
 }
 
+// 如果是容器, 则变量属性
 export default {
   name: 'AutoRender',
   components: {
@@ -28,8 +29,12 @@ export default {
   },
 
   computed: {
-    getWidget() {
-      const { schema: { widget } } = this
+
+  },
+
+  methods: {
+    getWidget(schema) {
+      const { widget } = schema
       if (['input', 'select'].includes(widget)) {
         return `d-${widget}`
       } else {
@@ -51,7 +56,24 @@ export default {
       formData = {},
     } = this.$props
 
-    const node = h(this.getWidget, { props: { schema } })
+    let node = null
+
+    if (['object', 'array'].includes(schema.type)) {
+      const temp = schema.properties
+      const nodes = Object.keys(temp).map(key => {
+        return (
+          <auto-render schema={temp[key]} />
+        )
+      })
+
+      return (
+        <div class="container map-field">
+          {nodes}
+        </div>
+      )
+    } else {
+      node = h(this.getWidget(schema), { props: { schema } })
+    }
 
     return (
       <div class="auto-field">

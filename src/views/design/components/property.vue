@@ -1,20 +1,57 @@
 <template>
   <el-container class="design-property">
-    属性编辑
+    <auto-render :schema="schema" />
   </el-container>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import AutoRender from '../widgets/auto-render'
+import Convert from '@mind029/json2schema'
+
+// 生成规则自定义
+// 如 default 默认值
+// readonly 只读
+// placeholder 占位符
+// disabled 禁用
+// title 标题
+const json2Schema = new Convert()
+// 字段编辑
+// 校验规则
+// 排版
 export default {
+  components: {
+    AutoRender,
+  },
+  props: {
+    // schema: {
+    //   type: Object,
+    //   required: true,
+    // },
+  },
   data() {
     return {
-      activeName: 'second',
+
     }
   },
-  methods: {
-    handleClick(tab, event) {
-      console.log(tab, event)
+  computed: {
+    ...mapState({
+      selectWidget: state => state.design.selectWidget,
+    }),
+    schema() {
+      const { selectWidget = {} } = this
+      const { options = {} } = selectWidget
+      const schema = json2Schema.format({
+        title: selectWidget.title,
+        description: selectWidget.description,
+        ...options,
+      })
+      console.log(schema)
+      return schema
     },
+  },
+
+  methods: {
   },
 }
 </script>
