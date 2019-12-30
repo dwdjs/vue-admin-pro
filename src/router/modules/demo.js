@@ -148,6 +148,12 @@ export default [
             meta: { title: 'json' },
           },
           {
+            path: 'json2schema',
+            component: lazyLoad('demo/editor/json-schema'),
+            name: 'json2schema',
+            meta: { title: 'json2schema' },
+          },
+          {
             path: 'json2',
             component: lazyLoad('demo/editor/json2'),
             name: 'JSON2',

@@ -60,6 +60,7 @@
     "vuex-router-sync": "5.0.0"
   },
   "devDependencies": {
+    "@mind029/json2schema": "^1.0.1",
     "@vue/cli-plugin-babel": "3.12.1",
     "@vue/cli-plugin-e2e-cypress": "3.12.1",
     "@vue/cli-plugin-eslint": "3.12.1",
