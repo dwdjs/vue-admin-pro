@@ -33,6 +33,7 @@ Object.keys(filters).forEach(key => {
 
 
 // import Page from '@/layout/Page';
+import api from '@/api'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
@@ -46,6 +47,8 @@ Vue.prototype.isAuth = isAuth
 Object.keys(mini).forEach(key => {
   Vue.prototype[`$${key}`] = mini[key]
 })
+
+Vue.prototype[`$api`] = api
 
 Vue.config.productionTip = false
 

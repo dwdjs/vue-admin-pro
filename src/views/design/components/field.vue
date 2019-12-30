@@ -202,7 +202,7 @@ export default {
   }
 
   &:hover {
-    color: #2875e8;
+    color: #5584ff;
   }
 }
 </style>

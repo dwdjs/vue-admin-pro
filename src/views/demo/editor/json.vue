@@ -1,5 +1,5 @@
 <template>
-  <div class="components-container">
+  <div class="app-container">
     <aside>Json-Editor is base on <a rel="noopener noreferrer" href="https://github.com/codemirror/CodeMirror" target="_blank">CodeMirrorr</a>. Lint
       base on <a
         rel="noopener noreferrer"
@@ -18,7 +18,7 @@
 <script>
 import JsonEditor from '@/components/JsonEditor'
 
-const jsonData = '[{"items":[{"market_type":"forexdata","symbol":"XAUUSD"},{"market_type":"forexdata","symbol":"UKOIL"},{"market_type":"forexdata","symbol":"CORN"}],"name":""},{"items":[{"market_type":"forexdata","symbol":"XAUUSD"},{"market_type":"forexdata","symbol":"XAGUSD"},{"market_type":"forexdata","symbol":"AUTD"},{"market_type":"forexdata","symbol":"AGTD"}],"name":"贵金属"},{"items":[{"market_type":"forexdata","symbol":"CORN"},{"market_type":"forexdata","symbol":"WHEAT"},{"market_type":"forexdata","symbol":"SOYBEAN"},{"market_type":"forexdata","symbol":"SUGAR"}],"name":"农产品"},{"items":[{"market_type":"forexdata","symbol":"UKOIL"},{"market_type":"forexdata","symbol":"USOIL"},{"market_type":"forexdata","symbol":"NGAS"}],"name":"能源化工"}]'
+const jsonData = '{"firstName":"John","gender":null,"age":"28","availableToHire":true,"job":{"company":"freelance","role":"developer","salary":100}}'
 
 export default {
   name: 'JsonEditorDemo',
@@ -28,14 +28,39 @@ export default {
       json: JSON.parse(jsonData),
     }
   },
+  created() {
+    // this.$api.getJson(
+    //   {},
+    //   res => {
+    //     this.json = res.result
+    //   }
+    // )
+  },
   methods: {
     handleSave() {
+      const { marked = [] } = this.$refs.jsonEditor.jsonEditor.state.lint || {}
+      if (marked.length) {
+        this.$message.error('JSON 格式有误, 请先处理')
+        return
+      }
+      // this.$api.saveJson(
+      //   {
+      //     config: this.json,
+      //   },
+      //   res => {
+      //     this.json = res.data
+      //   }
+      // )
     },
   },
 }
 </script>
 
 <style scoped>
+.header-container {
+  margin-bottom: 20px;
+}
+
 .editor-container {
   position: relative;
   height: 100%;

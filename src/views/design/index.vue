@@ -180,8 +180,8 @@ export default {
   text-align: center;
 
   &.active {
-    border-color: #409EFF;
-    color: #409EFF;
+    border-color: #5584ff;
+    color: #5584ff;
   }
 }
 
@@ -288,6 +288,7 @@ export default {
   border-bottom: 1px solid #e4e7ed;
 
   .btn {
+    color: #5584ff;
     padding: 0 8px;
     margin-left: 10px;
   }

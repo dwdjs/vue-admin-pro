@@ -97,15 +97,19 @@ export const constantRoutes = [
   ...demoRouter,
   ...designRouter,
   ...errorRouter,
-  { path: '*', redirect: '/404', hidden: true },
 ]
 
-// export default new Router({
-//   mode: env.routerMode,
-//   base: env.routerBase,
-//   scrollBehavior: () => ({ y: 0 }),
-//   routes: constantRoutes,
-// })
+// 通过路径配置过滤来动态加载路由
+// 动态路由在 store 中接口控制
+export const asyncRoutes = [
+  ...sysRouter,
+  ...ossRouter,
+  ...orgRouter,
+  ...projectRouter,
+  ...toolRouter,
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true },
+]
 
 const createRouter = () => new Router({
   mode: env.routerMode,
@@ -124,16 +128,6 @@ export function resetRouter() {
 }
 
 export default router
-
-// 通过路径配置过滤来动态加载路由
-// 动态路由在 store 中接口控制
-export const asyncRoutes = [
-  ...sysRouter,
-  ...ossRouter,
-  ...orgRouter,
-  ...projectRouter,
-  ...toolRouter,
-]
 
 /**
  * 添加动态(菜单)路由
