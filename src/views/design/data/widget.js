@@ -32,7 +32,9 @@ export const widgetSchema = {
           widget: 'input',
           icon: '',
           options: {
-
+            readonly: false,
+            default: '',
+            placeholder: 'xxx',
           },
         },
         textarea: {
@@ -41,6 +43,9 @@ export const widgetSchema = {
           format: 'textarea',
           widget: 'textarea',
           icon: '',
+          options: {
+            placeholder: 'xxx',
+          },
         },
         number: {
           title: '数字',
@@ -138,6 +143,16 @@ export const widgetSchema = {
             showSearch: true,
             optionFilterProp: 'children',
           },
+          items: [
+            {
+              label: '选项 1',
+              value: 1,
+            },
+            {
+              label: '选项 2',
+              value: 2,
+            },
+          ],
         },
         cascader: {
           title: '级联选择器',
@@ -208,7 +223,6 @@ export const widgetSchema = {
         password: {
           title: '密码',
           type: 'string',
-          format: '',
           widget: 'password',
           icon: '',
         },

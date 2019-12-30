@@ -1,16 +1,35 @@
 <template>
-  <div class="fr-field">
-    <el-input v-model="item.value" :placeholder="item.placeholder" class="d-input" />
-  </div>
+  <el-input v-model="schema.value" :placeholder="options.placeholder" class="d-input" />
 </template>
 
 <script>
 export default {
   props: {
-    item: {
+    schema: {
       type: Object,
       required: true,
     },
   },
+
+  computed: {
+    options() {
+      return this.schema.options || {}
+    },
+  },
+
+  // render(h) {
+  //   const {
+  //     schema,
+  //   } = this.$props
+
+  //   const { options = {} } = schema
+
+  //   return (
+  //     <div class="fr-field">
+  //       <el-input v-model={schema.value} placeholder={options.placeholder} class="d-input" />
+  //     </div>
+  //   )
+  // },
 }
+
 </script>

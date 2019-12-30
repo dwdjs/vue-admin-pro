@@ -1,6 +1,6 @@
 <template>
   <div @click.stop="handleSelectWidget" :class="{active: item.key === selectWidget.key}" class="widget-field">
-    <element :is="getWidget" :item="item" />
+    <auto-render :vname="item.widget" :schema="item" />
     <div class="actions">
       <el-tooltip effect="dark" content="复制" placement="bottom">
         <a @click.stop="handleWidgetClone" class="d-action-copy"><icon-svg icon-class="copy" /></a>
@@ -23,12 +23,15 @@
 <script>
 import { mapState } from 'vuex'
 import { widgets } from '../widgets'
+import AutoRender from '../widgets/auto-render'
+// <component :is="getWidget" :item="item" />
+// <auto-render :vname="item.widget" :schema="item" />
 
 export default {
   components: {
-    ...widgets,
+    // ...widgets,
+    AutoRender,
   },
-
   props: {
     widgets: {
       type: Object,
@@ -48,20 +51,6 @@ export default {
     ...mapState({
       selectWidget: state => state.design.selectWidget,
     }),
-    getWidget() {
-      const { item: { type } } = this
-      if (['input', 'select'].includes(type)) {
-        return `d-${type}`
-      } else {
-        return 'd-input'
-      }
-      // const widget = widgets[type]
-      // if (widget && ['input', 'select'].includes(type)) {
-      //   return widget
-      // } else {
-      //   return widgets['input']
-      // }
-    },
   },
 
   methods: {

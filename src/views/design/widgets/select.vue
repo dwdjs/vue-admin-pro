@@ -1,28 +1,31 @@
 <template>
-  <div class="fr-field">
-    <el-select v-model="item.value" :placeholder="item.placeholder" class="d-input" />
-    <el-select
-      v-model="item.value"
-      :placeholder="item.placeholder"
-      @change="handleChange"
-      class="d-select"
-    >
-      <el-option
-        v-for="(v, key) in item.options"
-        :key="key"
-        :value="v"
-        :label="item.showLabel ? item.label : v"
-      />
-    </el-select>
-  </div>
+  <el-select
+    v-model="schema.value"
+    :placeholder="options.placeholder"
+    @change="handleChange"
+    class="d-select"
+  >
+    <el-option
+      v-for="(item, key) in schema.items"
+      :key="key"
+      :value="item"
+      :label="options.showLabel ? item.label : item"
+    />
+  </el-select>
 </template>
 
 <script>
 export default {
   props: {
-    item: {
+    schema: {
       type: Object,
       required: true,
+    },
+  },
+
+  computed: {
+    options() {
+      return this.schema.options || {}
     },
   },
 
