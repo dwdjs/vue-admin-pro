@@ -133,9 +133,9 @@ export default {
   methods: {
     handleReset() {
       // 重置默认
-      this.$store.dispatch('design/setSelectWidget', [])
+      // this.$store.dispatch('design/setSelectWidget', {})
       // const { theme, themes } = this.pageData
-      this.$store.dispatch('design/setPageData', null)
+      this.$store.dispatch('design/resetPageData', null)
     },
     handlePreview() {
       this.$alert('预览', { showClose: false })

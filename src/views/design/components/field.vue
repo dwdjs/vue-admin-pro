@@ -50,6 +50,7 @@ export default {
   computed: {
     ...mapState({
       selectWidget: state => state.design.selectWidget,
+      pageData: state => state.design.pageData,
     }),
   },
 
@@ -61,9 +62,11 @@ export default {
     },
     handleWidgetClone() {
       console.log('clone')
+      this.$store.dispatch('design/cloneSelectWidget', this.item)
+      this.$store.dispatch('design/setConfigTab', 'property')
     },
     handleWidgetDelete() {
-      console.log('delete')
+      this.$store.dispatch('design/deleteSelectWidget', this.item)
     },
   },
 }

@@ -93,7 +93,7 @@ export default {
   methods: {
     handleWidgetAdd(e) {
       console.log('add', e)
-      this.$store.commit('design/setSelectWidget', this.pageData.list[e.newIndex])
+      this.$store.dispatch('design/setSelectWidget', this.pageData.list[e.newIndex])
       this.$store.dispatch('design/setConfigTab', 'property')
     },
   },

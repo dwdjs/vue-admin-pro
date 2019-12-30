@@ -18,7 +18,7 @@
               class="widget-list flex-items"
             >
               <template v-for="it in item.children">
-                <div :key="it.typeKey" class="widget-item widget-field">{{ it.title }}</div>
+                <div @click="handleWidgetAdd(it)" :key="it.typeKey" class="widget-item widget-field">{{ it.title }}</div>
               </template>
             </draggable>
           </div>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Draggable from 'vuedraggable'
 import { deepClone } from '@/utils'
 import { schemaToList } from '../utils'
@@ -59,6 +60,10 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      pageData: state => state.design.pageData,
+      selectWidget: state => state.design.selectWidget,
+    }),
     dragWidget() {
       console.log(schemaToList(this.schema, 2))
       return schemaToList(this.schema, 2)
@@ -109,6 +114,10 @@ export default {
       const newObj = deepClone(obj)
       newObj.key = newObj.typeKey + '_' + Math.ceil(Math.random() * 1000000)
       return newObj
+    },
+    handleWidgetAdd(item) {
+      this.$store.dispatch('design/cloneSelectWidget', item)
+      this.$store.dispatch('design/setConfigTab', 'property')
     },
     // handleMove({relatedContext, draggedContext}) {
     //   const relatedElement = relatedContext.element

@@ -1,3 +1,11 @@
+import { deepClone } from '@/utils'
+
+function cloneData(obj) {
+  const newObj = deepClone(obj)
+  newObj.key = newObj.typeKey + '_' + Math.ceil(Math.random() * 1000000)
+  return newObj
+}
+
 // 海量模板 多了要支持搜索
 const templates = [
   {
@@ -46,11 +54,23 @@ const mutations = {
   SET_PAGE_DATA: (state, payload) => {
 
   },
-  RESET_CANVAS_SCHEMA: (state) => {
-    state.canvasSchema.splice(0)
+  RESET_PAGE_DATA: (state) => {
+    state.pageData.list.splice(0)
+    state.selectWidget = {}
   },
   SET_SELECT_WIDGET: (state, payload) => {
     state.selectWidget = payload
+  },
+  CLONE_SELECT_WIDGET: (state, payload) => {
+    const currentIndex = state.pageData.list.indexOf(state.selectWidget) + 1
+    const newObj = cloneData(payload)
+    state.pageData.list.splice(currentIndex, 0, newObj)
+    state.selectWidget = newObj
+  },
+  DELETE_SELECT_WIDGET: (state, payload) => {
+    const currentIndex = state.pageData.list.indexOf(state.selectWidget)
+    state.pageData.list.splice(currentIndex, 1)
+    state.selectWidget = state.pageData.list[currentIndex] || state.pageData.list[currentIndex-1] || {}
   },
   SET_CONFIG_TAB: (state, payload) => {
     state.configTab = payload
@@ -64,11 +84,17 @@ const actions = {
   setPageData({ commit }, payload) {
     commit('SET_PAGE_DATA', null)
   },
-  resetCanvasSchema({ commit }) {
-    commit('RESET_CANVAS_SCHEMA')
+  resetPageData({ commit }) {
+    commit('RESET_PAGE_DATA')
   },
   setSelectWidget({ commit }, payload) {
     commit('SET_SELECT_WIDGET', payload)
+  },
+  cloneSelectWidget({ commit }, payload) {
+    commit('CLONE_SELECT_WIDGET', payload)
+  },
+  deleteSelectWidget({ commit }, payload) {
+    commit('DELETE_SELECT_WIDGET', payload)
   },
   setConfigTab({ commit }, payload) {
     commit('SET_CONFIG_TAB', payload)
