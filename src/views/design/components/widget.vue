@@ -24,7 +24,20 @@
           </div>
         </template>
         <template v-else>
-          tree
+          <draggable
+            v-if="pageData.list.length"
+            v-bind="dragTreeOptions"
+            :list="pageData.list"
+            tag="div"
+            class="widget-tree"
+          >
+            <template v-for="item in pageData.list">
+              <div @click="handleWidgetSelect(item)" :key="item.typeKey" class="widget-item"><icon-svg icon-class="drag2" class="drag-widget" /> {{ item.title }}</div>
+            </template>
+          </draggable>
+          <div v-else>
+            请从左侧拖拽或点击添加字段
+          </div>
         </template>
       </el-main>
     </el-container>
@@ -81,6 +94,20 @@ export default {
         ghostClass: 'ghost',
       }
     },
+    dragTreeOptions() {
+      return {
+        animation: 200,
+        // disabled: !this.editable,
+        group: {
+          name: 'tree',
+          // pull: 'clone',
+          // put: false,
+        },
+        // sort: false,
+        ghostClass: 'ghost',
+        handle: '.drag-widget',
+      }
+    },
   },
 
   // render(h) {
@@ -119,6 +146,10 @@ export default {
       this.$store.dispatch('design/cloneSelectWidget', item)
       this.$store.dispatch('design/setConfigTab', 'property')
     },
+    handleWidgetSelect(item) {
+      this.$store.dispatch('design/setSelectWidget', item)
+      this.$store.dispatch('design/setConfigTab', 'property')
+    },
     // handleMove({relatedContext, draggedContext}) {
     //   const relatedElement = relatedContext.element
     //   const draggedElement = draggedContext.element
@@ -135,36 +166,41 @@ export default {
 
 <style lang="stylus" scoped>
 .design-widget {
+  user-select: none;
+}
+
+.widget-list {
+  font-size: 12px;
+
+  .widget-group {
+    font-size: 14px;
+  }
+
   .widget-item {
     min-height: auto;
     width: 46%;
     margin: 0 8px 8px 0;
     padding: 0 8px;
+    display: flex;
+    border: 1px dashed #e4e7ed;
+    cursor: move;
+    user-select: none;
+
+    &:hover {
+      color: #5584ff;
+      background: rgba(255, 255, 255, 1);
+      border: 1px dashed #5584ff;
+    }
   }
 }
 
-.widget-group {
-  font-size: 14px;
-}
-
-.widget-list {
-  font-size: 12px;
-}
-
-.widget-item {
-  display: flex;
-  border: 1px dashed #e4e7ed;
-  cursor: move;
-  user-select: none;
-
-  &:hover {
-    color: #5584ff;
-    background: rgba(255, 255, 255, 1);
-    border: 1px dashed #5584ff;
+.widget-tree {
+  .drap-widget {
+    cursor: move;
   }
 
-  // &.ghost {
-  //   opacity: 0.3;
-  // }
+  .widget-item {
+    cursor: pointer;
+  }
 }
 </style>

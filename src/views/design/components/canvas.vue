@@ -67,12 +67,12 @@ export default {
     }),
     dragOptions() {
       return {
+        animation: 200,
         group: {
           name: 'widget',
           put: true,
         },
         ghostClass: 'ghost',
-        animation: 200,
         handle: '.drag-widget',
         // disabled: !this.editable,
       }

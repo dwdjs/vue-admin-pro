@@ -50,10 +50,10 @@ export default {
   },
   methods: {
     generateIconCode(symbol) {
-      return `<svg-icon icon-class="${symbol}" />`
+      return `<icon-svg icon-class="${symbol}" />`
     },
     generateElementIconCode(symbol) {
-      return `<i class="el-icon-${symbol}" />`
+      return `<em class="el-icon-${symbol}" />`
     },
     handleClipboard(text, event) {
       clipboard(text, event)

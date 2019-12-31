@@ -1,5 +1,5 @@
 <template>
-  <div @click.stop="handleSelectWidget" :class="isActive" class="widget-field">
+  <div @click.stop="handleWidgetSelect" :class="isActive" class="widget-field">
     <auto-render :vname="item.widget" :schema="item" />
     <div class="actions">
       <el-tooltip effect="dark" content="复制" placement="bottom">
@@ -57,7 +57,7 @@ export default {
   },
 
   methods: {
-    handleSelectWidget(e) {
+    handleWidgetSelect(e) {
       console.log('select')
       this.$store.dispatch('design/setSelectWidget', this.item)
       this.$store.dispatch('design/setConfigTab', 'property')
