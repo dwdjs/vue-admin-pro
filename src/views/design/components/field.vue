@@ -16,7 +16,7 @@
 <script>
 import { mapState } from 'vuex'
 import DActions from './actions'
-import AutoRender from '../widgets/auto-render'
+import AutoRender from '../auto-render'
 // <component :is="getWidget" :item="item" />
 // <auto-render :vname="item.widget" :schema="item" />
 
@@ -65,7 +65,7 @@ export default {
 .widget-field {
   position: relative;
   margin-bottom: -1px;
-  padding: 5px 30px;
+  padding: 4px 30px;
   min-height: 80px;
   cursor: pointer;
   border: 1px dashed transparent;
@@ -98,21 +98,23 @@ export default {
     }
   }
 
+  // 如果区块比较大, 拖拽不方便, 所以设置 ghost 时很小高度, 方便拖拽
   &.ghost {
+    // overflow: hidden;
+    margin: 1px;
+    padding: 0;
+    min-height: auto;
+    height: 3px;
     overflow: hidden;
-  //   margin: 1px;
-  //   padding: 0;
-  //   min-height: auto;
-  //   height: 3px;
-  //   overflow: hidden;
-  //   border: none;
-  //   border-radius: 3px;
-  //   opacity: 0.5;
+    border: none;
+    border-radius: 3px;
+    background: #5584ff;
+    // opacity: 0.5;
 
-    &::after {
-      z-index: 2;
-      background: #fff;
-    }
+    // &::after {
+    //   z-index: 2;
+    //   background: #fff;
+    // }
   }
 }
 </style>

@@ -1,13 +1,16 @@
+<script>
 
-import { widgets, mapping } from './index'
+import { widgets, mapping } from './widgets'
 
-const WidgetDefault = {
+const Doing = {
   props: {
-    vname: String,
+    schema: {
+      type: Object,
+    },
   },
   render(h) {
     return (
-      <div style="display: none;">此组件不存在 {this.vname}</div>
+      <div class="doing">🆘『{this.schema.title}』组件开发中...</div>
     )
   },
 }
@@ -16,7 +19,7 @@ const WidgetDefault = {
 export default {
   name: 'AutoRender',
   components: {
-    WidgetDefault,
+    Doing,
     ...widgets,
   },
   props: {
@@ -35,10 +38,10 @@ export default {
   methods: {
     getWidget(schema) {
       const { widget } = schema
-      if (['input', 'select'].includes(widget)) {
+      if (mapping[widget]) {
         return `d-${widget}`
       } else {
-        return 'd-input'
+        return 'doing'
       }
       // const widget = widgets[type]
       // if (widget && ['input', 'select'].includes(type)) {
@@ -67,7 +70,7 @@ export default {
       })
 
       return (
-        <div class="container map-field">
+        <div class="container field-map">
           {nodes}
         </div>
       )
@@ -76,10 +79,26 @@ export default {
     }
 
     return (
-      <div class="auto-field">
-        <div>{schema.title}</div>
-        <div class="field-item">{node}</div>
+      <div class="field-item">
+        <div class="field-title">{schema.title}</div>
+        <div class="field-content">{node}</div>
       </div>
     )
   },
 }
+</script>
+
+<style lang="stylus" scoped>
+.field-item {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.field-title {
+  margin: 0 0 8px;
+}
+
+.doing {
+  color: gray;
+}
+</style>

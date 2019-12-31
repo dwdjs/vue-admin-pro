@@ -4,8 +4,9 @@ vue-admin-pro 开箱即用
 
 参考开源demo示例, 汇集业务场景, 提炼交互体验, 集成动态生成
 
-1. 基于 [kit-admin](https://github.com/jskit/kit-admin/) 做初始化
-2. 合并最新的 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 设计
+1. 基于 [kit-admin](https://github.com/jskit/kit-admin/)(此项目本身也是基于下面项目开发) 做初始化
+2. 合并最新版 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 设计
+3. 抽离 demo 到 labs, 此处只保留 admin-pro 场景应用
 
 ## 业务场景
 

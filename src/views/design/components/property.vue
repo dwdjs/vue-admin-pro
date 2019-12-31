@@ -6,7 +6,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import AutoRender from '../widgets/auto-render'
+import AutoRender from '../auto-render'
 import Convert from '@mind029/json2schema'
 
 // 生成规则自定义
@@ -47,6 +47,21 @@ export default {
         ...options,
       })
       console.log(schema)
+
+      schema.properties = schema.properties || {}
+
+      if (schema.properties) {
+        schema.properties = {
+          title: {
+            title: '标题',
+            type: 'string',
+            widget: 'input',
+            default: selectWidget.title,
+            placeholder: '',
+          },
+          ...schema.properties,
+        }
+      }
       return schema
     },
   },

@@ -40,7 +40,6 @@
 import { mapState } from 'vuex'
 import Draggable from 'vuedraggable'
 import DField from './field'
-import { widgets } from '../widgets'
 
 export default {
   components: {
@@ -57,7 +56,6 @@ export default {
   data() {
     return {
       drag: false,
-      widgets,
       componentData: {
         props: {
           type: 'transition',
