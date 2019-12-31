@@ -3,25 +3,25 @@
     <draggable
       v-model="pageData.list"
       v-bind="dragOptions"
+      :componentData="componentData"
       @add="handleWidgetAdd"
-      class="drag-container"
+      class="drag-container drag-list preview"
+      tag="transition-group"
     >
-      <transition-group name="fade" tag="div" class="drag-list preview">
-        <template v-for="(item, index) in pageData.list">
-          <d-field
-            :widgets="widgets"
-            :index="index"
-            :item="item"
-            :schema="pageData.list"
-            :key="index"
-            class="drag-widget"
-          />
-        </template>
-        <div key="empty" solt="footer" class="empty-field">
-          <div class="empty-field-hint">请从左侧拖拽或点击添加字段</div>
-          <div class="add-new-field-ontheleft" />
-        </div>
-      </transition-group>
+      <template v-for="(item, index) in pageData.list">
+        <d-field
+          :widgets="widgets"
+          :index="index"
+          :item="item"
+          :schema="pageData.list"
+          :key="index"
+          class="drag-widget"
+        />
+      </template>
+      <div key="empty" slot="footer" class="empty-field">
+        <div class="empty-field-hint">请从左侧拖拽或点击添加字段</div>
+        <div class="add-new-field-ontheleft" />
+      </div>
     </draggable>
     <!-- <div class="submit-field">提交</div> -->
     <div class="ask-to-pay">
@@ -58,6 +58,12 @@ export default {
     return {
       drag: false,
       widgets,
+      componentData: {
+        props: {
+          type: 'transition',
+          name: 'fade', // fade flip-list
+        },
+      },
     }
   },
 
@@ -125,5 +131,13 @@ export default {
 
 .ask-to-pay {
   display: none;
+}
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+
+.no-move {
+  transition: transform 0s;
 }
 </style>
