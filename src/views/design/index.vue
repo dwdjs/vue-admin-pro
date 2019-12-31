@@ -6,6 +6,7 @@
         <el-aside class="design-activity flex-items-v" width="64px" direction="vertical">
           <div @click="$router.back()" class="activity-item back"><em class="el-icon-back" /></div>
           <div @click="activityTab='widget'" :class="{active: activityTab=='widget'}" class="activity-item widget">组件</div>
+          <div @click="activityTab='block'" :class="{active: activityTab=='block'}" class="activity-item block">区块</div>
           <div @click="activityTab='template'" :class="{active: activityTab=='template'}" class="activity-item template">模板</div>
           <div @click="activityTab='schema'" :class="{active: activityTab=='schema'}" class="activity-item schema">Schema</div>
           <div class="bottom">
@@ -71,13 +72,14 @@
 import { mapState } from 'vuex'
 import { widgetSchema } from './data'
 import DWidget from './components/widget'
+import DBlock from './components/block'
+import DTemplate from './components/template'
 import DProperty from './components/property'
 import DScript from './components/script'
 import DLayout from './components/layout'
 import DData from './components/data'
 import DPage from './components/page'
 import DCanvas from './components/canvas'
-import DTemplate from './components/template'
 import DSchema from './components/schema'
 import { deepClone } from '../../utils'
 
@@ -91,13 +93,14 @@ import { deepClone } from '../../utils'
 export default {
   components: {
     DWidget,
+    DBlock,
+    DTemplate,
     DPage,
     DProperty,
     DLayout,
     DScript,
     DData,
     DCanvas,
-    DTemplate,
     DSchema,
   },
   data() {

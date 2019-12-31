@@ -205,9 +205,19 @@ export default {
     cursor: pointer;
   }
 
+  .ghost {
+    background: #e0f2ff;
+  }
+
   .drag-widget {
     cursor: move;
-    margin-right: 6px;
+    padding-right: 6px;
+    width: 22px;
+    color: #ccc;
+
+    &:hover {
+      color: #333;
+    }
   }
 }
 </style>

@@ -36,6 +36,36 @@ export const widgetSchema = {
             default: '',
             placeholder: 'xxx',
           },
+          property: {
+            title: '属性字段',
+            type: 'object',
+            properties: {
+              title: {
+                title: '标题',
+                type: 'string',
+                widget: 'input',
+                default: '单行文本',
+              },
+              placeholder: {
+                title: '占位符',
+                type: 'string',
+                widget: 'input',
+                default: '',
+              },
+              required: {
+                title: '是否必选',
+                type: 'boolean',
+                widget: 'checkbox',
+                default: false,
+              },
+              readonly: {
+                title: '只读',
+                type: 'boolean',
+                widget: 'checkbox',
+                default: false,
+              },
+            },
+          },
         },
         textarea: {
           title: '多行文本',

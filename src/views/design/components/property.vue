@@ -41,7 +41,7 @@ export default {
     schema() {
       const { selectWidget = {} } = this
       const { options = {} } = selectWidget
-      const schema = json2Schema.format({
+      const schema = selectWidget.property || json2Schema.format({
         title: selectWidget.title,
         description: selectWidget.description,
         ...options,
