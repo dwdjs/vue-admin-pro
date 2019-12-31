@@ -32,7 +32,11 @@
             class="widget-tree"
           >
             <template v-for="item in pageData.list">
-              <div @click="handleWidgetSelect(item)" :key="item.typeKey" class="widget-item"><icon-svg icon-class="drag2" class="drag-widget" /> {{ item.title }}</div>
+              <div @click="handleWidgetSelect(item)" :key="item.typeKey" class="widget-item flex-items">
+                <icon-svg icon-class="drag2" class="drag-widget" />
+                <div class="widget-title">{{ item.title }}</div>
+                <d-actions :item="item" />
+              </div>
             </template>
           </draggable>
           <div v-else>
@@ -49,6 +53,7 @@ import { mapState } from 'vuex'
 import Draggable from 'vuedraggable'
 import { deepClone } from '@/utils'
 import { schemaToList } from '../utils'
+import DActions from './actions'
 // import { widgets } from '../widgets'
 
 // 调整数据结构 此处不必使用 schema 格式
@@ -57,6 +62,7 @@ import { schemaToList } from '../utils'
 export default {
   components: {
     Draggable,
+    DActions,
   },
   props: {
     schema: {
@@ -195,12 +201,13 @@ export default {
 }
 
 .widget-tree {
-  .drap-widget {
-    cursor: move;
+  .widget-title {
+    cursor: pointer;
   }
 
-  .widget-item {
-    cursor: pointer;
+  .drag-widget {
+    cursor: move;
+    margin-right: 6px;
   }
 }
 </style>
