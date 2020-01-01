@@ -1,32 +1,38 @@
 <template>
   <div class="app-container">
-    <h2>表单设计器</h2>
-    <form-render
-      :propsSchema="propsSchema"
-      :formData="formData"
-    />
+    <h2>表单</h2>
+    <el-container>
+      <el-aside class="schema-editor" width="50%">schema editor</el-aside>
+      <el-main class="form-preview">
+        <auto-render
+          :schema="schema"
+          :formData="formData"
+        />
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script>
-import FormRender from '@/components/FormRender/form-render'
-import SCHEMA from './json/simplest.json'
+import AutoRender from './auto-render'
+import { tabbar } from './data/form'
+import { deepClone } from '@/utils'
 
 export default {
   name: 'PageForm',
   components: {
-    FormRender,
+    AutoRender,
   },
   data() {
     return {
-      propsSchema: SCHEMA.propsSchema,
-      formData: SCHEMA.formData || {},
+      schema: tabbar,
+      formData: deepClone(tabbar.options),
     }
   },
 }
 </script>
 
-<style>
+<style lang="stylus" scoped>
 
 </style>
 

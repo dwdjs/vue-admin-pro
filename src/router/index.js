@@ -94,6 +94,14 @@ export const constantRoutes = [
       },
     ],
   },
+  {
+    path: '/playground',
+    component: lazyLoad('design/form'),
+    name: 'playground',
+    meta: {
+      title: '试验场',
+    },
+  },
   ...demoRouter,
   ...designRouter,
   ...errorRouter,

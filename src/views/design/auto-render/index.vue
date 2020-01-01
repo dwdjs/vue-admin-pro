@@ -61,6 +61,8 @@ export default {
 
     let node = null
 
+    console.log('auto-render', schema)
+
     if (['object', 'array'].includes(schema.type)) {
       const temp = schema.properties
       const nodes = Object.keys(temp).map(key => {
