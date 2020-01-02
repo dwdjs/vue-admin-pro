@@ -21,6 +21,12 @@ export default [
         name: 'design',
         meta: { title: '设计器' },
       },
+      {
+        path: 'form',
+        component: lazyLoad('design/form'),
+        name: 'form',
+        meta: { title: '表单' },
+      },
       // {
       //     path: 'generator',
       //     name: '表单生成器',

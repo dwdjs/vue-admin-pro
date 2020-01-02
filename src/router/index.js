@@ -100,6 +100,7 @@ export const constantRoutes = [
     name: 'playground',
     meta: {
       title: '试验场',
+      icon: 'playground',
     },
   },
   ...demoRouter,

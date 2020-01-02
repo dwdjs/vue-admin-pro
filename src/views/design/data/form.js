@@ -13,6 +13,7 @@ export const tabbar = {
     text_color_normal: '#333333',
     text_color_selected: '#FF0000',
   },
+  // required: [],
   properties: {
     text: {
       title: 'Icon 文字',
