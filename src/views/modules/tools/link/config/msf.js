@@ -4,8 +4,8 @@ export const msf = [
     value: 'index',
   },
   {
-    label: '城市选择 city',
-    value: 'city',
+    label: 'H5通用 webview(或topic专题)',
+    value: 'webview',
   },
   {
     label: '探店 product',
@@ -50,6 +50,10 @@ export const msf = [
   {
     label: '商圈搜索 search-shop',
     value: 'search-shop',
+  },
+  {
+    label: '城市选择 city',
+    value: 'city',
   },
   {
     label: '地图 map',

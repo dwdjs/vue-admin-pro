@@ -256,6 +256,8 @@ function isValidUrl(url) {
   return !!pattern.test(url)
 }
 
+const webviewList = ['topic', 'webview']
+
 export default {
   data() {
     return {
@@ -439,7 +441,7 @@ export default {
           pathname = `pages/${val}/${val}`
         } else if (
           this.form.toAppId === 'https://m.haoshiqi.net' &&
-          val !== 'topic'
+          !webviewList.includes(val)
         ) {
           pathname = `v2/${val}`
         } else {
@@ -453,11 +455,11 @@ export default {
           ...this.form,
           pathname,
         }
-        if (val === 'topic') {
+        if (webviewList.includes(val)) {
           newForm.pageQueryString = defaultData.pageQueryString
           // 需要校验输入的 httpsUrl
         }
-        if (oldVal === 'topic') {
+        if (webviewList.includes(oldVal)) {
           newForm.httpsUrl = defaultData.httpsUrl
         }
         this.form = newForm
@@ -509,10 +511,10 @@ export default {
           // }
           break
         case 'httpsUrl':
-          bool = form.pageName === 'topic' || minitype === 'short'
+          bool = webviewList.includes(form.pageName) || minitype === 'short'
           break
         case 'pageQuery':
-          bool = form.pageName !== 'topic'
+          bool = !webviewList.includes(form.pageName)
           break
         case 'bizParams':
           bool = true
@@ -525,10 +527,10 @@ export default {
           if (minitype === 'short') {
             bool = true
           } else if (minitype === 'h5') {
-            if (form.pageName === 'topic' && isValidUrl(form.httpsUrl)) {
+            if (webviewList.includes(form.pageName) && isValidUrl(form.httpsUrl)) {
               bool = true
             }
-            if (form.pathname && form.pageName !== 'topic') {
+            if (form.pathname && !webviewList.includes(form.pageName)) {
               bool = true
             }
           } else if (minitype !== 'h5') {
@@ -536,7 +538,7 @@ export default {
             // 否则使用 alipays 时，可以生成短链接
             if (
               minitype === 'wxapp' &&
-              form.pageName === 'topic' &&
+              webviewList.includes(form.pageName) &&
               form.httpsUrl
             ) {
               bool = true
@@ -574,7 +576,7 @@ export default {
         const query = { ...pageQuery, ...bizParams }
         let domain = toApp.value || ''
         let path = pathname
-        if (pathname === 'topic') {
+        if (webviewList.includes(pathname)) {
           domain = webviewUrl
           path = ''
         }
@@ -738,7 +740,7 @@ export default {
         // 否则使用 alipays 时，可以生成短链接
         if (
           minitype === 'wxapp' &&
-          form.pageName === 'topic' &&
+          webviewList.includes(form.pageName) &&
           form.httpsUrl
         ) {
           this.shortTargetUrl = form.httpsUrl
