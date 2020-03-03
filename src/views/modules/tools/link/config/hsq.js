@@ -18,11 +18,11 @@ export const hsq = [
     value: 'shopping-cart',
   },
   {
-    label: '拼团详情 couple-detail',
+    label: '拼团详情 couple-detail(非小程序)',
     value: 'couple-detail',
   },
   {
-    label: '积分详情 point-detail',
+    label: '积分详情 point-detail(非小程序)',
     value: 'point-detail',
   },
   {

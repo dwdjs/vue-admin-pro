@@ -32,12 +32,10 @@
         <!-- <h4>链接种类太多，不知道怎么配置，怎么办？</h4> -->
         <p>
           以下功能支持自动生成 <b>场景A</b> -> <b>场景B</b> 的跳转链接
-          <b> 要使用spm配置</b>
           <a
-            class="red"
+            class="red underline"
             href="http://bi.doweidu.com/#/manage/spm?show_add=1&is_miniapp=1"
-          >去新站点
-          </a>
+          >配置spm</a>
         </p>
       </el-form-item>
       <!--
@@ -860,6 +858,9 @@ export default {
   position: relative;
   top: 1px;
 }
+.underline {
+  text-decoration: underline;
+}
 .line{
   text-align: center;
 }
@@ -884,6 +885,10 @@ export default {
   z-index: 1;
   top: 0px;
   left: 520px;
+
+  .el-form-item__content {
+    margin-left: 20px !important;
+  }
 }
 .output {
   max-width: 600px;

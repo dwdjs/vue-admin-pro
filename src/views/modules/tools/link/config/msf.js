@@ -8,7 +8,7 @@ export const msf = [
     value: 'city',
   },
   {
-    label: '探店 old product',
+    label: '探店 product',
     value: 'product',
   },
   {

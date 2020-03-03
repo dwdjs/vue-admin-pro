@@ -111,7 +111,15 @@ const aliappList = [
     value: '2017112000051610',
     biz: 'hsq',
     type: 'mini',
-    children: [...pages.mini],
+    children: [...pages.hsq],
+  },
+  {
+    label: 'msf-觅食蜂小程序',
+    terminal: 'aliapp',
+    value: '2021001108636832',
+    biz: 'msf',
+    type: 'mini',
+    children: [...pages.msf],
   },
   {
     label: 'hsq-积分小程序',
@@ -127,6 +135,7 @@ const aliappList = [
     value: '2018121062522053',
     biz: 'hsq',
     type: 'mini',
+    disabled: true,
     children: [...pages.mini],
   },
   {
