@@ -15,10 +15,10 @@ export const msf = [
     label: '大家都在看 product-tab-list',
     value: 'product-tab-list',
   },
-  {
-    label: '探店 shop',
-    value: 'shop',
-  },
+  // {
+  //   label: '探店 shop',
+  //   value: 'shop',
+  // },
   {
     label: '店铺详情 shop-detail',
     value: 'shop-detail',
